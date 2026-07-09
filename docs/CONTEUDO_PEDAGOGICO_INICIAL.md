@@ -16,9 +16,11 @@ As perguntas precisam ser classificadas para que o sistema consiga:
 - Misturar habilidades no treino.
 - Mostrar relatórios úteis para professores.
 - Calcular domínio por habilidade.
+- Mostrar ao aluno o que o Bloo está aprendendo.
 - Conceder títulos futuros, como `Grammar Guardian` ou `Vocabulary Explorer`.
+- Desbloquear poderes futuros a partir de habilidades ensinadas ao Bloo.
 
-Sem classificação, o app vira apenas um quiz genérico. Com classificação, o conhecimento do aluno começa a virar progressão.
+Sem classificação, o app vira apenas um quiz genérico. Com classificação, o conhecimento do aluno começa a virar progressão e aprendizado visível do Bloo.
 
 ## 3. Classificação obrigatória da pergunta
 
@@ -31,6 +33,7 @@ Cada pergunta deve ter:
 - Dificuldade.
 - Tipo de pergunta.
 - Status.
+- Tema associado, quando fizer parte de uma missão do professor.
 
 Exemplo:
 
@@ -150,7 +153,38 @@ Thanks -> Obrigado
 
 Matching pode entrar depois de MultipleChoice se a interface ficar mais trabalhosa.
 
-## 8. Banco mínimo para o piloto
+## 8. Temas iniciais
+
+Depois do nascimento do Bloo, os treinos devem ser organizados por temas liberados pelo professor. Um tema agrupa perguntas de um conteúdo trabalhado em aula e funciona como uma missão para ensinar algo novo ao Bloo.
+
+Temas iniciais recomendados para seed do MVP:
+
+- `Verb To Be`
+- `Greetings`
+- `Colors`
+- `Simple Present`
+- `Restaurant Vocabulary`
+- `Classroom Objects`
+
+Cada tema deve ter perguntas classificadas por:
+
+- Idioma.
+- Nível.
+- Categoria.
+- Habilidade.
+- Dificuldade.
+- Tipo.
+
+Distribuição de dificuldade recomendada por tema:
+
+- `Easy`: reconhecimento e aplicação muito direta.
+- `Medium`: aplicação em frases simples ou contexto curto.
+- `Hard`: aplicação com mais leitura, contraste ou escolha menos óbvia.
+- `VeryHard`: desafio opcional, usado com cuidado e preferencialmente após domínio inicial.
+
+O professor pode liberar um tema com dificuldade máxima definida para a turma. Por exemplo, uma turma iniciante pode receber apenas `Easy` e `Medium`, enquanto uma turma mais confiante pode receber também `Hard`.
+
+## 9. Banco mínimo para o piloto
 
 Para não travar o desenvolvimento, o MVP deve começar com:
 
@@ -164,7 +198,7 @@ Para o primeiro treino, separar um conjunto prioritário de 12 a 18 perguntas, d
 
 O primeiro banco sugerido está em [Banco de perguntas inicial](BANCO_DE_PERGUNTAS_INICIAL.md). Ele contém 60 perguntas publicadas e 18 perguntas marcadas como prioritárias para o treino `FirstHatch`.
 
-## 9. Regras de qualidade da pergunta
+## 10. Regras de qualidade da pergunta
 
 Toda pergunta deve:
 
@@ -183,7 +217,7 @@ Evitar:
 - Perguntas que humilhem o erro.
 - Conteúdo sensível ou pessoal.
 
-## 10. Padrão de explicação
+## 11. Padrão de explicação
 
 Explicações devem ter no máximo 2 frases no MVP.
 
@@ -199,7 +233,7 @@ Para erro:
 Quase! Usamos "are" com you, we e they.
 ```
 
-## 11. Domínio de habilidade
+## 12. Domínio de habilidade
 
 O domínio não deve ser concedido por uma única pergunta. Regra inicial sugerida:
 
@@ -219,7 +253,9 @@ Um aluno pode receber o título futuro `Grammar Guardian` quando dominar um conj
 
 No MVP, os títulos avançados podem ficar bloqueados ou aparecer como "em breve". O importante é já registrar os dados corretamente.
 
-## 12. Conteúdo do primeiro treino
+Na experiência do aluno, o domínio deve ser traduzido como aprendizado do Bloo. Uma habilidade em prática pode aparecer como "Bloo está aprendendo", enquanto uma habilidade dominada pode aparecer como "Bloo aprendeu". Essa camada não substitui o critério pedagógico; ela torna o progresso mais emocional e prepara o caminho para poderes e desafios futuros.
+
+## 13. Conteúdo do primeiro treino
 
 O primeiro treino deve usar:
 
@@ -234,7 +270,7 @@ Distribuição:
 - 2 médias.
 - 0 difíceis.
 
-## 13. Publicação e revisão no MVP
+## 14. Publicação, revisão e IA no MVP
 
 Estados:
 
@@ -243,3 +279,5 @@ Estados:
 - `Archived`: pergunta removida de novos treinos, mas preservada no histórico.
 
 No MVP, administradores podem publicar diretamente. Antes do piloto real, a escola deve revisar manualmente as perguntas publicadas.
+
+Quando perguntas forem geradas por IA, elas devem entrar como rascunho gerado e exigir aprovação humana antes de serem publicadas. O professor pode editar, aprovar ou recusar cada pergunta. A IA deve ajudar a criar variações, mas não deve substituir revisão pedagógica.

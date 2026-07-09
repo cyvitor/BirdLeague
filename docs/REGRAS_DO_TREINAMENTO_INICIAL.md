@@ -1,12 +1,12 @@
 # Regras do Treinamento Inicial — BirdLeague
 
-Este documento define a primeira versão das regras do treino que transforma o Egg em Hatchling.
+Este documento define a primeira versão das regras do treino que transforma o Egg em Hatchling e apresenta a fantasia de ensinar o Bloo.
 
 ## 1. Objetivo
 
-O treinamento inicial deve apresentar a proposta do BirdLeague, observar o nível inicial do aluno e criar uma primeira conquista emocional. Ele não é uma prova.
+O treinamento inicial deve apresentar a proposta do BirdLeague, observar o nível inicial do aluno e criar uma primeira conquista emocional. Ele não é uma prova: é o primeiro momento em que o aluno ensina algo ao Bloo.
 
-O aluno deve conseguir fazer o Bloo nascer mesmo errando todas as respostas, desde que conclua o treino.
+O aluno deve conseguir fazer o Bloo nascer mesmo errando todas as respostas, desde que conclua o treino. Mesmo com erros, o Bloo deve reagir como alguém que está aprendendo junto.
 
 ## 2. Idioma inicial
 
@@ -100,7 +100,7 @@ O feedback deve ser curto e positivo:
 - "Isso mesmo."
 - "Mandou bem."
 
-Depois mostrar uma explicação curta quando fizer sentido.
+Depois mostrar uma explicação curta quando fizer sentido e, quando couber, uma reação breve do Bloo.
 
 ### Erro
 
@@ -110,7 +110,7 @@ O erro deve orientar sem punir:
 - "Boa tentativa. Repara nesta dica..."
 - "Essa pegadinha aparece bastante em Inglês."
 
-Sempre mostrar a resposta correta e uma explicação simples.
+Sempre mostrar a resposta correta e uma explicação simples. A reação do Bloo deve ser curiosa ou pensativa, nunca culpada ou frustrada com o aluno.
 
 ## 10. XP e progresso
 
@@ -123,6 +123,8 @@ Regra inicial:
 O nascimento do Hatchling depende apenas da conclusão, não do XP.
 
 Essa regra valoriza acertos, mas não faz o aluno sentir que fracassou se errar.
+
+Na interface, o XP pode ser narrado como energia de crescimento ou aprendizado do Bloo. A regra numérica continua simples, mas a experiência deve reforçar que o aluno está ajudando o Bloo a aprender.
 
 ## 11. Repetição do treino inicial
 
@@ -162,8 +164,8 @@ Resultado:
 Após o nascimento, a home deve mostrar:
 
 - "Seu Bloo nasceu."
-- "Próximo objetivo: ajudar seu Bloo a crescer."
+- "Seu Bloo aprendeu suas primeiras palavras."
+- "Próximo objetivo: continuar ensinando seu Bloo."
 - Botão para novo treino, mesmo que no MVP ele leve a uma tela simples de "em breve" ou a outro treino básico.
 
 Se possível, o MVP deve ter pelo menos um treino repetível simples depois do nascimento para testar retorno.
-

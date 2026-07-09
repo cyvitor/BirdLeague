@@ -44,14 +44,14 @@ O BirdLeague não deve ser apresentado como prova, tarefa ou sistema escolar tra
 
 Mensagem principal:
 
-> Treine por alguns minutos, ajude o ovo a rachar e conheça seu Bloo.
+> Treine por alguns minutos, ensine suas primeiras palavras ao Bloo e descubra quem está dentro do ovo.
 
 Mensagens de apoio:
 
-- Cada resposta ajuda o ovo a rachar.
+- Cada resposta ensina um pouco ao seu Bloo.
 - Errar também faz parte do treino.
 - No final do primeiro treino, seu Bloo nasce.
-- Depois disso, você continua treinando para ajudar seu Bloo a crescer.
+- Depois disso, você continua ensinando para ajudar seu Bloo a crescer.
 
 ## 5. Nomenclatura
 
@@ -70,9 +70,9 @@ Objetivo: criar vontade imediata de entrar.
 Conteúdo sugerido:
 
 ```txt
-Seu Bloo está pronto para nascer
+Seu Bloo está pronto para aprender
 
-Entre na BirdLeague, complete seu primeiro treino de Inglês e descubra quem está dentro do ovo.
+Entre na BirdLeague, complete seu primeiro treino de Inglês e ensine suas primeiras palavras ao Bloo.
 ```
 
 CTA principal:
@@ -100,9 +100,9 @@ Objetivo: reduzir ansiedade e explicar o fluxo em poucas etapas.
 Itens:
 
 1. Entre com o usuário e senha da Bluebird.
-2. Comece o primeiro treino.
+2. Comece o primeiro treino com seu Bloo.
 3. Responda 6 desafios rápidos.
-4. Veja o ovo rachar a cada etapa.
+4. Veja o ovo rachar enquanto o Bloo aprende.
 5. Conheça seu Bloo.
 
 Não incluir "escolha Inglês" no fluxo principal do MVP.
@@ -129,7 +129,7 @@ Mockups prioritários:
 - Pergunta do treino: enunciado curto, alternativas grandes e progresso da sessão.
 - Feedback de acerto ou erro: mensagem gentil e explicação curta.
 - Ovo rachando: progresso visual após uma resposta.
-- Nascimento: Bloo filhote, título `New Hatchling` e campo para nome.
+- Nascimento: Bloo filhote, título `New Hatchling`, campo para nome e resumo do que ele aprendeu.
 
 ### 6.5 Sua primeira conquista
 
@@ -138,14 +138,15 @@ Objetivo: mostrar recompensa clara.
 Elementos:
 
 - Título `New Hatchling`.
-- XP do primeiro treino.
+- XP ou energia de crescimento do primeiro treino.
 - Nome do Bloo.
-- Próximo objetivo: ajudar o Bloo a crescer.
+- Habilidades que o Bloo começou a aprender.
+- Próximo objetivo: continuar ensinando o Bloo.
 
 Texto sugerido:
 
 ```txt
-Concluiu o treino? Seu Bloo nasce e você recebe seu primeiro título.
+Concluiu o treino? Seu Bloo nasce, aprende suas primeiras palavras e você recebe seu primeiro título.
 ```
 
 ### 6.6 O que vem depois
@@ -167,7 +168,7 @@ Usar linguagem de futuro quando o recurso não fizer parte do MVP.
 Texto sugerido:
 
 ```txt
-O ovo não vai rachar sozinho.
+Seu Bloo não aprende sozinho.
 ```
 
 Botão:

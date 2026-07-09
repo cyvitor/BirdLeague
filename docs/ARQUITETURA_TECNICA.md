@@ -72,9 +72,9 @@ Módulos iniciais:
 
 - **Identidade:** login, credenciais, papéis e sessões.
 - **Organização escolar:** escola, idiomas, turmas, matrículas e períodos.
-- **Conteúdo:** banco de questões, alternativas, explicações e assets.
-- **Treinamento:** sessões, seleção de questões, respostas e feedback.
-- **Progressão:** Bloos, XP, estágios, domínio e conquistas.
+- **Conteúdo:** temas, banco de questões, alternativas, explicações, geração assistida por IA e assets.
+- **Treinamento:** sessões, seleção de questões, respostas, feedback e reações do Bloo.
+- **Progressão:** Bloos, XP, estágios, domínio, aprendizado do Bloo e conquistas.
 - **Relatórios:** visões de progresso para professor e aluno.
 
 Módulos futuros:
@@ -135,9 +135,12 @@ Um aluno poderá possuir várias matrículas. O vínculo do Bloo será com aluno
 - **Question:** enunciado, tipo, dificuldade e explicação.
 - **QuestionOption:** alternativas quando aplicável.
 - **QuestionAsset:** áudio, imagem ou outro material.
+- **Theme:** tema ou missão pedagógica criada pelo professor.
+- **ThemeClass:** associação do tema com turmas e datas de liberação.
+- **ThemeQuestion:** associação entre tema e perguntas.
 - **TrainingSession:** início, fim, objetivo e estado de um treino.
 - **TrainingAnswer:** resposta, resultado, tempo e feedback apresentado.
-- **SkillMastery:** progresso do aluno em determinada habilidade.
+- **SkillMastery:** progresso do aluno em determinada habilidade, apresentado na experiência como aprendizado do Bloo.
 
 ### Entidades de progressão
 
@@ -201,6 +204,7 @@ Cada questão deve registrar, no mínimo:
 
 - Idioma.
 - Nível de proficiência.
+- Tema associado, quando fizer parte de uma missão.
 - Tema e habilidade.
 - Tipo de questão.
 - Dificuldade.
@@ -208,6 +212,8 @@ Cada questão deve registrar, no mínimo:
 - Resposta correta ou critérios de correção.
 - Explicação pedagógica.
 - Estado editorial: rascunho, em revisão, publicada ou arquivada.
+- Origem: manual ou gerada por IA.
+- Modelo e versão de prompt quando gerada por IA.
 - Autor e revisor.
 - Data de criação e alteração.
 
@@ -233,7 +239,9 @@ O motor inicial pode usar regras determinísticas e compreensíveis:
 5. Registrar respostas e apresentar feedback.
 6. Atualizar progresso ao concluir a sessão.
 
-No treinamento de nascimento, a sequência pode ser predefinida por nível e idioma. A evolução para Hatchling ocorre pela conclusão. O desempenho é armazenado para orientar treinos seguintes, mas não bloqueia o nascimento.
+No treinamento de nascimento, a sequência pode ser predefinida por nível e idioma. A evolução para Hatchling ocorre pela conclusão. O desempenho é armazenado para orientar treinos seguintes e alimentar a narrativa do que o Bloo está aprendendo, mas não bloqueia o nascimento.
+
+Depois do nascimento, o motor deve priorizar missões de tema liberadas pelo professor para a turma do aluno. Se não houver tema novo, o aluno pode revisar temas já liberados, sem acessar conteúdos que a turma ainda não recebeu.
 
 Uma adaptação mais sofisticada deve ser introduzida apenas depois de haver volume de respostas suficiente para avaliar suas decisões.
 
@@ -254,6 +262,7 @@ Para o MVP:
 - Acertos podem conceder um bônus pequeno.
 - O estágio Egg evolui para Hatchling ao concluir o primeiro treino.
 - O aluno visualiza o progresso para o próximo objetivo, ainda que a próxima evolução não esteja implementada.
+- A interface apresenta habilidades praticadas como aprendizados do Bloo, sem duplicar a regra pedagógica no banco.
 
 ## 11. Interface administrativa
 
@@ -296,6 +305,27 @@ O portal será desenhado para uso em desktop e tablet, com navegação lateral.
 - Pré-visualização como aluno.
 - Fluxo simples de revisão e publicação.
 - Arquivamento sem apagar o histórico de respostas.
+- Geração de perguntas por IA a partir de um tema, sempre com aprovação humana.
+
+### Temas
+
+- Criar e editar tema.
+- Definir idioma, nível, habilidade principal e categorias envolvidas.
+- Associar tema a uma ou mais turmas.
+- Liberar imediatamente ou agendar data de liberação.
+- Definir dificuldade máxima para a turma quando necessário.
+- Associar perguntas existentes.
+- Gerar lotes de 5 perguntas por IA, revisar, editar, aprovar ou recusar.
+
+### Configurações de IA
+
+- Provedor, inicialmente DeepInfra.
+- Chave da API armazenada como segredo.
+- Modelo.
+- Temperatura.
+- Limite de tokens.
+- Status ativo/inativo.
+- Versão do prompt de geração de perguntas.
 
 ### Relatórios
 
@@ -330,6 +360,8 @@ A interface será mobile-first, com botões grandes, textos curtos e foco em uma
 - Progresso para o próximo objetivo.
 - Botão principal de treinamento.
 - Missão ou orientação atual.
+- Temas liberados pelo professor.
+- Revisões de temas já liberados.
 - Resumo curto de sequência e habilidades.
 
 ### Treinamento
@@ -339,6 +371,7 @@ A interface será mobile-first, com botões grandes, textos curtos e foco em uma
 - Controles acessíveis para áudio.
 - Feedback imediato após responder.
 - Explicação simples para resposta incorreta.
+- Reação breve do Bloo ao acerto, erro ou conclusão da etapa.
 - Possibilidade de continuar sem telas intermediárias excessivas.
 
 ### Nascimento do Bloo
@@ -347,13 +380,14 @@ A interface será mobile-first, com botões grandes, textos curtos e foco em uma
 - Cena de nascimento ao concluir.
 - Escolha do nome do Bloo.
 - Exibição do título New Hatchling.
+- Resumo do que o Bloo aprendeu no primeiro treino.
 - Convite claro para o próximo treinamento.
 
 ### Perfil e progresso
 
 - Bloos por idioma.
 - Estágio atual.
-- Habilidades em desenvolvimento.
+- Habilidades em desenvolvimento, apresentadas como aprendizados do Bloo.
 - Títulos e conquistas.
 - Histórico resumido, sem excesso de métricas escolares.
 

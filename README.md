@@ -1,8 +1,8 @@
 # BirdLeague
 
-BirdLeague é uma plataforma gamificada de aprendizagem de idiomas criada para a escola Bluebird. Cada aluno é representado por um Bloo que nasce, aprende e evolui conforme o estudante pratica e demonstra domínio do idioma.
+BirdLeague é uma plataforma gamificada de aprendizagem de idiomas criada para a escola Bluebird. Cada aluno ensina e treina seu Bloo, um companheiro que nasce, aprende e evolui conforme o estudante pratica e demonstra domínio do idioma.
 
-O propósito do projeto é transformar o estudo frequente em uma jornada de evolução, coleção e cooperação. No futuro, o conhecimento adquirido também poderá ser convertido em poderes usados em batalhas individuais, guerras entre turmas e eventos cooperativos.
+O propósito do projeto é transformar o estudo frequente em uma jornada de cuidado, evolução, coleção e cooperação. No futuro, o conhecimento que o aluno ensina ao Bloo também poderá ser convertido em poderes usados em desafios, batalhas individuais, guerras entre turmas e eventos cooperativos.
 
 ## Estado do projeto
 
@@ -20,6 +20,8 @@ O projeto está na fase de concepção e planejamento do MVP. A primeira versão
 - [Banco de perguntas inicial](docs/BANCO_DE_PERGUNTAS_INICIAL.md) — 60 perguntas de Inglês classificadas para o piloto e primeiro treino.
 - [Tom de voz e UI](docs/TOM_DE_VOZ_E_UI.md) — linguagem, mensagens, paleta e política visual mínima.
 - [Landing page dos alunos](docs/LANDINGPAGE_ALUNOS.md) — página de incentivo para alunos acessarem o BirdLeague e iniciarem o primeiro treino.
+- [Landing page da escola](docs/LANDINGPAGE_ESCOLA.md) — página institucional/comercial para apresentar proposta, funcionamento e diferenciais do BirdLeague.
+- [BlueVerse](docs/BLUEVERSE.md) — visão futura de mundo compartilhado seguro para Bloos, eventos e conquistas coletivas.
 
 ## Primeiro objetivo do produto
 
@@ -27,7 +29,7 @@ Validar se a evolução visual do Bloo cria no aluno a vontade de voltar e reali
 
 O primeiro ciclo jogável será:
 
-> Entrar → conhecer o ovo → treinar → receber feedback → quebrar o ovo → conhecer o Bloo filhote → desejar continuar evoluindo.
+> Entrar → conhecer o ovo → treinar ensinando o Bloo → receber feedback → quebrar o ovo → conhecer o Bloo filhote → desejar continuar ensinando e evoluindo junto.
 
 ## Princípios
 

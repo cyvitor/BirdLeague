@@ -53,7 +53,7 @@ Validar a clareza e o apelo do ciclo Egg → treinamento → Hatchling antes da 
 
 ### Critérios de conclusão
 
-- Alunos entendem que estudar faz o Bloo evoluir.
+- Alunos entendem que estudar ensina o Bloo e faz o Bloo evoluir.
 - Alunos reconhecem o Bloo como parte do universo Bluebird.
 - Alunos conseguem completar o fluxo sem explicação externa constante.
 - Professores entendem como criar e acompanhar uma turma.
@@ -125,12 +125,15 @@ Disponibilizar questões revisadas e organizadas para o treinamento inicial.
 - Estados de rascunho, revisão, publicação e arquivamento.
 - Pré-visualização como aluno.
 - Conjunto inicial de questões revisado pedagogicamente.
+- Criação de temas pedagógicos e associação com perguntas.
+- Geração assistida por IA para rascunhos de perguntas, com revisão humana obrigatória.
 
 ### Critérios de conclusão
 
 - Nenhuma questão chega ao aluno sem estar publicada.
 - Questões arquivadas permanecem no histórico.
 - O conjunto inicial cobre todos os caminhos do primeiro treinamento.
+- Os temas iniciais possuem perguntas de `Easy` até `VeryHard`, mesmo que a turma piloto use apenas parte dessas dificuldades.
 - Explicações são compreensíveis pela faixa etária piloto.
 
 ## 7. Fase 5 — Jornada do aluno e nascimento do Bloo
@@ -150,9 +153,11 @@ Entregar o primeiro ciclo completo e emocionalmente satisfatório.
 - Assets finais do MVP para Egg, rachaduras e Hatchling.
 - Treinamento inicial.
 - Feedback de acerto e erro.
+- Reações leves do Bloo durante o treino.
 - Progresso visual das rachaduras.
 - Evolução Egg → Hatchling pela conclusão.
 - Escolha do nome do Bloo.
+- Resumo do que o Bloo aprendeu no primeiro treino.
 - Título New Hatchling.
 - Próximo objetivo visível.
 
@@ -175,6 +180,7 @@ Dar significado ao uso para aluno e professor e medir o piloto.
 - Perfil do aluno com seus Bloos.
 - Estágio e progresso atual.
 - Histórico resumido de treinamentos.
+- Habilidades em desenvolvimento apresentadas como aprendizados do Bloo.
 - Painel do professor por turma.
 - Indicadores de primeiro acesso e conclusão.
 - Participação recente.
@@ -187,6 +193,32 @@ Dar significado ao uso para aluno e professor e medir o piloto.
 - Aluno visualiza claramente seu progresso.
 - A equipe mede início, abandono, conclusão e retorno.
 - Relatórios respeitam as permissões e não expõem dados indevidos.
+
+### Último passo antes do piloto
+
+Antes de iniciar o piloto, o MVP deve receber seeds revisadas de temas, perguntas e conquistas.
+
+Temas iniciais:
+
+- `Verb To Be`
+- `Greetings`
+- `Colors`
+- `Simple Present`
+- `Restaurant Vocabulary`
+- `Classroom Objects`
+
+Cada tema deve ter perguntas seedadas de `Easy` até `VeryHard`, ainda que a liberação para a turma piloto possa limitar a dificuldade máxima.
+
+Conquistas iniciais:
+
+- `New Hatchling`
+- `First Lesson`
+- `First Theme`
+- `Theme Explorer`
+- `Bloo Is Learning`
+- `Skill Learned`
+- `Grammar Guardian`
+- `Vocabulary Explorer`
 
 ## 9. Fase 7 — Piloto do MVP
 
@@ -242,9 +274,10 @@ Transformar a primeira experiência em hábito de estudo.
 Transformar conhecimento demonstrado em coleção estratégica.
 
 - Progresso de domínio por habilidade.
+- Aprendizados do Bloo derivados do domínio por habilidade.
 - Variações de questões para comprovar domínio.
 - Desafios comuns, raros, épicos e lendários.
-- Primeiras cartas ou poderes.
+- Primeiras cartas ou poderes desbloqueados por habilidades ensinadas ao Bloo.
 - Deck simples e limites de uso.
 - Tela de coleção.
 - Testes de compreensão e balanceamento.

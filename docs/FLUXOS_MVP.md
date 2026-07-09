@@ -4,7 +4,7 @@ Este documento define os fluxos iniciais que serão construídos no MVP. As deci
 
 ## 1. Princípio dos fluxos
 
-O MVP deve provar uma coisa principal: o aluno entende que estudar faz o Bloo nascer e sente vontade de continuar evoluindo.
+O MVP deve provar uma coisa principal: o aluno entende que estudar ensina o Bloo, faz o Bloo nascer e cria vontade de continuar evoluindo junto.
 
 Por isso, os fluxos devem ser curtos, guiados e com uma ação principal por tela. O aluno não deve precisar entender todas as regras do BirdLeague no primeiro acesso.
 
@@ -93,6 +93,44 @@ Fluxos mínimos:
 - Ver alunos da turma.
 - Ver quem iniciou, quem concluiu o primeiro treino e quem fez o Bloo nascer.
 - Cadastrar perguntas se tiver permissão.
+- Criar temas de treino.
+- Associar temas a turmas.
+- Liberar temas imediatamente ou agendar uma data de liberação.
+- Revisar perguntas geradas por IA antes da publicação, quando a geração estiver ativa.
+
+### 3.1 Criação e liberação de tema
+
+1. Professor abre "Temas".
+2. Clica em criar tema.
+3. Informa nome, idioma, nível, descrição, habilidade principal e categorias envolvidas.
+4. Associa o tema a uma ou mais turmas.
+5. Escolhe liberação imediata ou data de liberação.
+6. Cria perguntas manualmente, seleciona perguntas existentes ou solicita geração por IA.
+7. Revisa as perguntas do tema.
+8. Publica ou agenda o tema.
+
+Dados mínimos do tema:
+
+- Nome.
+- Idioma.
+- Nível.
+- Habilidade principal.
+- Categorias envolvidas.
+- Turmas associadas.
+- Data de liberação.
+- Status: rascunho, agendado, publicado, encerrado ou arquivado.
+
+### 3.2 Geração de perguntas por IA
+
+1. Professor abre um tema.
+2. Clica em "Gerar 5 perguntas".
+3. Sistema envia ao provedor de IA o contexto do tema, nível, habilidade, categorias, dificuldades desejadas e formato esperado.
+4. Sistema recebe perguntas estruturadas.
+5. Perguntas entram como rascunho gerado por IA.
+6. Professor aprova, edita ou recusa cada pergunta.
+7. Professor pode gerar mais 5 perguntas até ter volume suficiente.
+
+Perguntas geradas por IA nunca devem ser publicadas automaticamente.
 
 ## 4. Fluxo do aluno
 
@@ -119,8 +157,8 @@ Elementos principais:
 
 - Ovo em destaque.
 - Nome provisório: "Seu Bloo".
-- Texto curto: "Complete o primeiro treino para conhecer seu Bloo."
-- Botão principal: "Começar treino".
+- Texto curto: "Complete o primeiro treino para ensinar seu Bloo e descobrir quem está no ovo."
+- Botão principal: "Ensinar meu Bloo".
 - Indicador de progresso: 0/6 etapas.
 
 ### 4.4 Tutorial curto
@@ -128,8 +166,8 @@ Elementos principais:
 O tutorial acontece antes ou dentro do primeiro treino. Deve ter no máximo três telas curtas:
 
 1. "Este ovo guarda seu Bloo de Inglês."
-2. "Cada resposta ajuda o ovo a rachar."
-3. "Erros trazem dicas. O importante é completar o treino."
+2. "Cada resposta ensina um pouco ao seu Bloo."
+3. "Erros trazem dicas. Vocês aprendem juntos."
 
 Depois disso, o aluno começa a responder.
 
@@ -138,9 +176,11 @@ Depois disso, o aluno começa a responder.
 1. Sistema apresenta uma pergunta por tela.
 2. Aluno escolhe uma resposta.
 3. Sistema mostra feedback imediato.
-4. Ovo ganha uma rachadura ou avança a animação.
-5. Aluno toca em continuar.
-6. Ao terminar, o ovo se abre.
+4. Bloo reage ao feedback, mesmo ainda dentro do ovo.
+5. Ovo ganha uma rachadura ou avança a animação.
+6. Sistema registra a habilidade praticada como aprendizado em andamento do Bloo.
+7. Aluno toca em continuar.
+8. Ao terminar, o ovo se abre.
 
 ### 4.6 Nascimento do Bloo
 
@@ -149,7 +189,8 @@ Depois disso, o aluno começa a responder.
 3. Mensagem de conquista.
 4. Aluno escolhe o nome do Bloo.
 5. Sistema concede o título inicial `New Hatchling`.
-6. Aluno vai para a home do idioma.
+6. Tela mostra o que o Bloo aprendeu no primeiro treino.
+7. Aluno vai para a home do idioma.
 
 ### 4.7 Home do idioma depois do nascimento
 
@@ -160,7 +201,9 @@ Elementos principais:
 - Estágio: Hatchling.
 - Progresso para o próximo estágio, mesmo que ainda seja simbólico.
 - Botão principal: "Fazer novo treino" ou "Continuar estudando".
-- Resumo: último treino, acertos e habilidades praticadas.
+- Resumo: último treino, acertos, habilidades praticadas e o que o Bloo está aprendendo.
+- Missões/temas disponíveis liberados pelo professor.
+- Revisões de temas já liberados.
 
 ## 5. Fluxo de abandono e retorno
 

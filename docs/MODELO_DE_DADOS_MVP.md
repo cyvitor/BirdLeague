@@ -253,7 +253,77 @@ Exemplos:
 - `Verb To Be`
 - `Classroom Objects`
 
-## 14. Question
+## 14. Theme
+
+Representa um tema ou missão pedagógica criada pelo professor para uma ou mais turmas.
+
+Campos mínimos:
+
+- `Id`
+- `SchoolId`
+- `LanguageId`
+- `CourseLevelId`
+- `Title`
+- `Description`
+- `PrimarySkillId`
+- `Status`
+- `CreatedByUserId`
+- `CreatedAt`
+- `UpdatedAt`
+
+Status:
+
+- `Draft`
+- `Scheduled`
+- `Published`
+- `Closed`
+- `Archived`
+
+Seeds iniciais:
+
+- `Verb To Be`
+- `Greetings`
+- `Colors`
+- `Simple Present`
+- `Restaurant Vocabulary`
+- `Classroom Objects`
+
+## 15. ThemeClass
+
+Associa um tema a uma turma e controla sua liberação.
+
+Campos mínimos:
+
+- `Id`
+- `SchoolId`
+- `ThemeId`
+- `ClassId`
+- `ReleaseMode`
+- `ReleaseAt`
+- `DueAt`
+- `IsActive`
+- `CreatedAt`
+- `UpdatedAt`
+
+`ReleaseMode`:
+
+- `Immediate`
+- `Scheduled`
+
+## 16. ThemeQuestion
+
+Associa perguntas a um tema.
+
+Campos mínimos:
+
+- `Id`
+- `ThemeId`
+- `QuestionId`
+- `Order`
+- `IsRequired`
+- `CreatedAt`
+
+## 17. Question
 
 Campos mínimos:
 
@@ -263,11 +333,15 @@ Campos mínimos:
 - `CourseLevelId`
 - `SkillCategoryId`
 - `SkillId`
+- `ThemeId`
 - `Type`
 - `Difficulty`
 - `Prompt`
 - `Explanation`
 - `Status`
+- `GenerationSource`
+- `AiModel`
+- `AiPromptVersion`
 - `CreatedByUserId`
 - `PublishedAt`
 - `CreatedAt`
@@ -284,14 +358,22 @@ Dificuldades:
 - `Easy`
 - `Medium`
 - `Hard`
+- `VeryHard`
 
 Status:
 
 - `Draft`
+- `AiGenerated`
 - `Published`
+- `Rejected`
 - `Archived`
 
-## 15. QuestionOption
+Origem da geração:
+
+- `Manual`
+- `AiGenerated`
+
+## 18. QuestionOption
 
 Campos mínimos:
 
@@ -303,7 +385,7 @@ Campos mínimos:
 
 No MVP, perguntas objetivas devem ter uma única opção correta.
 
-## 16. TrainingSession
+## 19. TrainingSession
 
 Campos mínimos:
 
@@ -312,6 +394,7 @@ Campos mínimos:
 - `StudentProfileId`
 - `BlooId`
 - `LanguageId`
+- `ThemeId`
 - `Type`
 - `Status`
 - `StartedAt`
@@ -326,7 +409,9 @@ Campos mínimos:
 Tipos:
 
 - `FirstHatch`
+- `ThemeMission`
 - `Practice`
+- `Review`
 
 Status:
 
@@ -334,7 +419,7 @@ Status:
 - `Completed`
 - `Abandoned`
 
-## 17. TrainingQuestion
+## 20. TrainingQuestion
 
 Guarda quais perguntas entraram na sessão.
 
@@ -346,7 +431,7 @@ Campos mínimos:
 - `Order`
 - `AnsweredAt`
 
-## 18. TrainingAnswer
+## 21. TrainingAnswer
 
 Campos mínimos:
 
@@ -359,7 +444,7 @@ Campos mínimos:
 - `AnsweredAt`
 - `TimeSpentSeconds`
 
-## 19. ProgressEvent
+## 22. ProgressEvent
 
 Registra mudanças de progresso.
 
@@ -380,15 +465,17 @@ Tipos iniciais:
 - `FirstTrainingCompleted`
 - `QuestionAnsweredCorrectly`
 - `BlooHatched`
+- `BlooPracticedSkill`
+- `BlooLearnedSkill`
 - `TitleUnlocked`
 
 Regra:
 
 - Eventos derivados de uma mesma sessão devem ser idempotentes.
 
-## 20. SkillMastery
+## 23. SkillMastery
 
-Guarda progresso do aluno por habilidade.
+Guarda progresso do aluno por habilidade. Na interface do aluno, esse progresso também representa o que o Bloo está aprendendo.
 
 Campos mínimos:
 
@@ -413,7 +500,13 @@ Regra inicial:
 
 - Uma habilidade só pode virar `Mastered` após pelo menos 5 respostas em pelo menos 2 sessões diferentes e acerto mínimo de 80%.
 
-## 21. Title
+Apresentação no app:
+
+- `Practicing` pode aparecer para o aluno como "Bloo está aprendendo".
+- `Mastered` pode aparecer como "Bloo aprendeu" ou "Bloo dominou", conforme a idade e tom escolhido.
+- O modelo não deve criar uma segunda verdade separada para aluno e Bloo no MVP. O aprendizado do Bloo é uma camada narrativa sobre o domínio pedagógico.
+
+## 24. Title
 
 Campos mínimos:
 
@@ -431,7 +524,33 @@ Títulos iniciais:
 - `Grammar Guardian`: futuro, por domínio de gramática.
 - `Vocabulary Explorer`: futuro, por domínio de vocabulário.
 
-## 22. StudentTitle
+## 25. Achievement
+
+Representa conquistas que podem ser liberadas por nascimento, tema, constância ou domínio.
+
+Campos mínimos:
+
+- `Id`
+- `LanguageId`
+- `Name`
+- `Code`
+- `Description`
+- `RequirementType`
+- `RequirementJson`
+- `IsActive`
+
+Seeds iniciais recomendadas:
+
+- `New Hatchling`: Bloo nasceu.
+- `First Lesson`: primeiro treino concluído.
+- `First Theme`: primeiro tema iniciado.
+- `Theme Explorer`: etapa fácil de um tema concluída.
+- `Bloo Is Learning`: habilidade praticada em um tema.
+- `Skill Learned`: habilidade dominada.
+- `Grammar Guardian`: conjunto de habilidades de gramática dominado.
+- `Vocabulary Explorer`: conjunto de habilidades de vocabulário dominado.
+
+## 26. StudentTitle
 
 Campos mínimos:
 
@@ -442,7 +561,17 @@ Campos mínimos:
 - `UnlockedAt`
 - `IsEquipped`
 
-## 23. Asset
+## 27. StudentAchievement
+
+Campos mínimos:
+
+- `Id`
+- `StudentProfileId`
+- `BlooId`
+- `AchievementId`
+- `UnlockedAt`
+
+## 28. Asset
 
 Campos mínimos:
 
@@ -463,7 +592,50 @@ Tipos:
 - `QuestionImage`
 - `Audio`
 
-## 24. AnalyticsEvent
+## 29. AiProviderSettings
+
+Configuração administrativa do provedor de IA.
+
+Campos mínimos:
+
+- `Id`
+- `SchoolId`
+- `Provider`
+- `ApiKeySecretRef`
+- `Model`
+- `Temperature`
+- `MaxTokens`
+- `IsEnabled`
+- `CreatedAt`
+- `UpdatedAt`
+
+A chave da API não deve ser exposta ao professor.
+
+## 30. AiQuestionGenerationBatch
+
+Registra um lote de perguntas geradas por IA.
+
+Campos mínimos:
+
+- `Id`
+- `SchoolId`
+- `ThemeId`
+- `RequestedByUserId`
+- `Provider`
+- `Model`
+- `PromptVersion`
+- `RequestedCount`
+- `Status`
+- `CreatedAt`
+
+Status:
+
+- `Requested`
+- `Completed`
+- `Failed`
+- `Reviewed`
+
+## 31. AnalyticsEvent
 
 Campos mínimos:
 

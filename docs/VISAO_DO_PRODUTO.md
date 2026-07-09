@@ -2,9 +2,9 @@
 
 ## 1. O que é o BirdLeague
 
-BirdLeague é uma experiência gamificada de aprendizagem de idiomas para os alunos da Bluebird. Dentro dela, cada estudante recebe um Bloo que representa sua jornada naquele idioma. O Bloo começa como um ovo e evolui conforme o aluno estuda, pratica, mantém constância e demonstra domínio de novas habilidades.
+BirdLeague é uma experiência gamificada de aprendizagem de idiomas para os alunos da Bluebird. Dentro dela, cada estudante recebe um Bloo que representa sua jornada naquele idioma. O Bloo começa como um ovo e evolui conforme o aluno estuda, pratica, ensina novas habilidades ao personagem e demonstra domínio do idioma.
 
-O Bloo não é apenas uma imagem de perfil. Ele é a representação visível da dedicação do aluno, das habilidades que desenvolveu e da história que construiu dentro da escola.
+O Bloo não é apenas uma imagem de perfil. Ele é um companheiro de treino: a representação visível da dedicação do aluno, das habilidades que desenvolveu, do conhecimento que ensinou ao Bloo e da história que construiu dentro da escola.
 
 Cada idioma possui sua própria jornada. Um aluno matriculado em inglês e espanhol, por exemplo, terá um Bloo de inglês e outro de espanhol. Eles podem estar em níveis diferentes, possuir conquistas diferentes e seguir progressões próprias.
 
@@ -20,6 +20,16 @@ Essa separação evita que "Bird" signifique ao mesmo tempo aluno, comunidade e 
 ## 2. Visão
 
 Transformar o estudo de idiomas em uma jornada que o aluno queira continuar todos os dias, unindo evolução pessoal, pertencimento, estratégia, cooperação e competição saudável.
+
+### 2.1 Fantasia central
+
+A fantasia central do BirdLeague deve ser:
+
+> "Eu estudo para ensinar meu Bloo. Meu Bloo cresce comigo. Depois, usamos o que aprendemos em desafios."
+
+Essa visão coloca o Bloo como um companheiro de treino, não apenas como um indicador visual de progresso. O aluno aprende o idioma e, dentro da narrativa do jogo, também ensina esse conhecimento ao Bloo. Com isso, treinar deixa de parecer apenas uma tarefa individual e passa a ser uma relação de cuidado, evolução conjunta e preparação para desafios futuros.
+
+No MVP, essa fantasia aparece principalmente no nascimento do Bloo, nas reações ao treino e na sensação de que cada resposta ajuda o Bloo a crescer. Nas fases posteriores, ela deve sustentar habilidades, poderes, eventos cooperativos e batalhas: o Bloo usa em desafios aquilo que o aluno praticou e dominou.
 
 O BirdLeague deve provocar um pensamento simples:
 
@@ -105,12 +115,13 @@ O produto deve evitar comunicação aberta sem supervisão, exposição de dados
 O ciclo de engajamento do BirdLeague será:
 
 1. O aluno recebe uma missão ou escolhe um treinamento.
-2. Responde a perguntas adequadas ao seu nível.
-3. Recebe feedback imediato e explicações.
+2. Treina com o Bloo e responde a perguntas adequadas ao seu nível.
+3. Recebe feedback imediato, explicações e reações do Bloo.
 4. Ganha progresso, XP e domínio em habilidades.
-5. Evolui seu Bloo ou desbloqueia uma recompensa.
-6. Usa suas conquistas em atividades pessoais ou coletivas.
-7. Enxerga um próximo objetivo alcançável e retorna para estudar.
+5. Ensina habilidades ao Bloo e acompanha o que ele aprendeu.
+6. Evolui seu Bloo ou desbloqueia uma recompensa.
+7. Usa com o Bloo suas conquistas em atividades pessoais ou coletivas.
+8. Enxerga um próximo objetivo alcançável e retorna para estudar.
 
 O jogo não deve depender de recompensas constantes e imprevisíveis. O aluno precisa compreender o que está buscando, quanto falta e por que conquistou determinada recompensa.
 
@@ -125,9 +136,9 @@ O professor ou administrador cria o aluno, fornece suas credenciais e associa es
 No primeiro acesso ao idioma da sua turma, o aluno conhece um ovo e recebe uma explicação curta:
 
 - Esse ovo guarda seu Bloo daquele idioma.
-- Treinos ajudam o Bloo a nascer e evoluir.
-- Acertos fortalecem habilidades.
-- Erros trazem explicações e novas tentativas.
+- Treinos ajudam o Bloo a nascer, aprender e evoluir.
+- Acertos mostram que o Bloo aprendeu com você.
+- Erros trazem explicações e novas tentativas para vocês treinarem juntos.
 - A constância é parte da evolução.
 
 O tutorial deve ensinar por meio da ação, evitando telas longas de texto.
@@ -290,13 +301,44 @@ Os treinamentos devem ser curtos, claros e adaptados ao aluno. Eles poderão tra
 
 Cada questão pertence a um idioma, nível, tema, habilidade e dificuldade. O sistema começa com perguntas acessíveis e ajusta gradualmente o desafio conforme o desempenho.
 
-### 9.1 Dificuldade adaptativa
+### 9.1 Temas liberados pelo professor
+
+Depois do nascimento do Bloo, a principal unidade de treino deve ser o **tema**. Um tema representa um conteúdo pedagógico que o professor quer trabalhar com uma ou mais turmas, como `Verb To Be`, `Greetings`, `Colors`, `Simple Present`, `Restaurant Vocabulary` ou `Classroom Objects`.
+
+O professor pode criar temas, associá-los a turmas e escolher se a liberação será imediata ou agendada para uma data futura. Quando o tema fica disponível, ele aparece para o aluno como uma missão para ensinar algo novo ao Bloo.
+
+Um tema pode conter perguntas de diferentes categorias, habilidades e dificuldades. Ele funciona como uma trilha:
+
+1. **Explorar:** perguntas mais simples para apresentar o conteúdo.
+2. **Praticar:** perguntas fáceis e médias para ganhar confiança.
+3. **Dominar:** perguntas mais exigentes para demonstrar consistência.
+4. **Desafio:** aplicação do conteúdo em contextos mais difíceis ou misturados.
+
+O professor mantém controle pedagógico sobre o que é liberado. O aluno pode revisar temas já liberados, mas não deve avançar livremente para temas que a turma ainda não recebeu.
+
+### 9.2 Autoria de perguntas e apoio de IA
+
+Ao criar um tema, o professor pode escrever perguntas manualmente, selecionar perguntas existentes ou pedir que o sistema gere sugestões com IA. Perguntas geradas por IA devem sempre passar por revisão humana antes de serem publicadas.
+
+O fluxo recomendado é:
+
+1. Professor cria ou abre um tema.
+2. Clica em gerar perguntas.
+3. Sistema gera um lote pequeno, inicialmente 5 perguntas.
+4. Professor revisa cada pergunta.
+5. Professor aprova, edita ou recusa.
+6. Professor pode gerar mais 5 perguntas enquanto precisar.
+7. Somente perguntas aprovadas entram no banco publicado.
+
+A IA deve ser tratada como assistente de autoria, não como substituta do professor. Ela ajuda a acelerar criação de conteúdo, mas a decisão pedagógica final continua com a escola.
+
+### 9.3 Dificuldade adaptativa
 
 Quando o aluno demonstra consistência, recebe questões mais desafiadoras. Quando encontra dificuldade, o sistema oferece explicações, exemplos e exercícios de reforço.
 
 O objetivo não é tornar tudo cada vez mais difícil. É manter o aluno em uma zona em que precise pensar, mas ainda perceba que consegue avançar.
 
-### 9.2 Raridade
+### 9.4 Raridade
 
 As perguntas ou desafios podem ser apresentados como:
 
@@ -307,7 +349,7 @@ As perguntas ou desafios podem ser apresentados como:
 
 A raridade deve ser relativa ao nível do estudante. Uma construção gramatical pode ser lendária para um iniciante e comum para um aluno avançado.
 
-### 9.3 Domínio de habilidades
+### 9.5 Domínio de habilidades e aprendizado do Bloo
 
 O progresso será organizado por habilidades específicas, como:
 
@@ -319,9 +361,11 @@ O progresso será organizado por habilidades específicas, como:
 
 Para dominar uma habilidade, o aluno precisa responder corretamente a variações do conceito em momentos diferentes. Isso reduz recompensas por sorte ou memorização de uma única questão.
 
+Na experiência do aluno, esse domínio também deve aparecer como aprendizado do Bloo. O sistema pode registrar e apresentar mensagens como "Seu Bloo está aprendendo Verb To Be", "Seu Bloo ganhou confiança em Greetings" ou "Seu Bloo dominou suas primeiras expressões". Por baixo, a regra continua pedagógica; na interface, ela reforça a fantasia de que o aluno está ensinando o Bloo.
+
 ## 10. Conhecimento transformado em poder
 
-O grande diferencial do BirdLeague é permitir que o conhecimento conquistado tenha função estratégica.
+O grande diferencial do BirdLeague é permitir que o conhecimento ensinado ao Bloo tenha função estratégica.
 
 Uma questão difícil não deve virar automaticamente uma carta. Ela inicia ou avança uma trilha de domínio. Depois que o aluno comprova conhecimento em diferentes variações, recebe uma habilidade relacionada ao tema.
 
@@ -330,8 +374,9 @@ Exemplo:
 1. O aluno acerta uma pergunta difícil sobre particípios.
 2. O sistema marca progresso em **Irregular Verbs**.
 3. Em outros treinamentos, ele responde a novas variações.
-4. Ao demonstrar domínio, desbloqueia **Grammar Strike**.
-5. Em uma batalha, essa habilidade aumenta o desafio da próxima rodada do adversário.
+4. Ao demonstrar domínio, o Bloo aprende aquela habilidade.
+5. A habilidade pode desbloquear **Grammar Strike**.
+6. Em um desafio ou batalha, o Bloo usa essa habilidade para alterar uma condição da rodada.
 
 Possíveis títulos ou habilidades:
 
@@ -343,7 +388,7 @@ Possíveis títulos ou habilidades:
 
 ### 10.1 Regras para poderes saudáveis
 
-- O poder é conquistado por domínio, não por compra.
+- O poder é conquistado por domínio e pelo aprendizado do Bloo, não por compra.
 - Seu efeito deve ser previsível e fácil de entender.
 - Nenhum poder pode garantir vitória sozinho.
 - Efeitos devem ser limitados por partida.
@@ -527,6 +572,12 @@ O primeiro MVP incluirá:
 - Feedback das respostas.
 - Progresso visual do ovo.
 - Evolução de Egg para Hatchling.
+- Criação de temas pelo professor.
+- Associação de temas a turmas.
+- Liberação imediata ou agendada de temas.
+- Perguntas associadas aos temas.
+- Geração assistida por IA como rascunho, com revisão humana obrigatória.
+- Seeds dos temas iniciais e conquistas iniciais.
 - Visão básica de progresso para professor e aluno.
 
 Não fará parte do primeiro MVP:

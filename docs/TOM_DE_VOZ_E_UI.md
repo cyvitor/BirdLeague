@@ -37,8 +37,9 @@ Princípios:
 ### Início
 
 - "Seu Bloo está quase pronto para nascer."
+- "Ensine suas primeiras palavras ao Bloo."
 - "Complete este treino para conhecer seu Bloo."
-- "Cada resposta ajuda o ovo a rachar."
+- "Cada resposta ensina um pouco ao seu Bloo."
 
 ### Acerto
 
@@ -46,6 +47,8 @@ Princípios:
 - "Isso mesmo."
 - "Mandou bem."
 - "Seu Bloo sentiu esse progresso."
+- "Seu Bloo aprendeu essa."
+- "O Bloo ficou mais confiante."
 
 ### Erro
 
@@ -53,17 +56,19 @@ Princípios:
 - "Boa tentativa. A resposta correta é..."
 - "Essa é uma parte importante do Inglês."
 - "Errar também treina seu Bloo."
+- "Seu Bloo ficou pensando nessa. Vamos ver a dica."
 
 ### Conclusão
 
 - "Você concluiu o treino."
 - "O ovo está abrindo."
 - "Seu Bloo nasceu."
+- "Seu Bloo aprendeu suas primeiras palavras."
 - "Bem-vindo à BirdLeague."
 
 ### Próximo passo
 
-- "Agora continue treinando para ajudar seu Bloo a crescer."
+- "Agora continue ensinando seu Bloo."
 - "Próximo objetivo: fortalecer suas primeiras habilidades."
 - "Volte para mais um treino quando quiser continuar."
 
@@ -203,6 +208,7 @@ O MVP deve parecer um jogo educacional leve, não um game de batalha completo.
 Direção:
 
 - Mais "mascote evolutivo" do que "arena competitiva".
+- Mais "companheiro de treino" do que "pet que cobra cuidado".
 - Competição fica sugerida no nome BirdLeague, mas não domina o primeiro uso.
 - O nascimento do Bloo é o momento emocional principal.
 
@@ -220,4 +226,3 @@ Para a primeira versão:
 - Bloo pensando ou concentrado.
 
 Acessórios completos entram depois. Porém, os assets devem ser criados pensando em camadas desde o início.
-
