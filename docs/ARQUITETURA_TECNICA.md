@@ -1,22 +1,22 @@
-﻿# Arquitetura TÃ©cnica â€” BirdLeague
+# Arquitetura Técnica — BirdLeague
 
 ## 1. Objetivo
 
-Este documento define uma direÃ§Ã£o tÃ©cnica inicial para o BirdLeague. A prioridade Ã© entregar o MVP rapidamente sem criar uma base descartÃ¡vel, mantendo espaÃ§o para competiÃ§Ãµes, eventos e aplicativos mÃ³veis no futuro.
+Este documento define uma direção técnica inicial para o BirdLeague. A prioridade é entregar o MVP rapidamente sem criar uma base descartável, mantendo espaço para competições, eventos e aplicativos móveis no futuro.
 
-As decisÃµes podem ser revistas com dados reais, mas mudanÃ§as devem ser registradas para que a arquitetura continue compreensÃ­vel.
+As decisões podem ser revistas com dados reais, mas mudanças devem ser registradas para que a arquitetura continue compreensível.
 
-## 2. DireÃ§Ã£o recomendada
+## 2. Direção recomendada
 
-O MVP serÃ¡ uma aplicaÃ§Ã£o web responsiva composta por:
+O MVP será uma aplicação web responsiva composta por:
 
 - Um portal administrativo para professores e administradores.
-- Uma experiÃªncia de aluno otimizada para celular.
-- Uma API central responsÃ¡vel pelas regras e pelos dados.
+- Uma experiência de aluno otimizada para celular.
+- Uma API central responsável pelas regras e pelos dados.
 - Um banco de dados relacional.
-- Armazenamento de imagens e Ã¡udios.
+- Armazenamento de imagens e áudios.
 
-Uma aplicaÃ§Ã£o web responsiva reduz o custo inicial, funciona em computadores e celulares e permite validar o produto antes de manter aplicativos nativos. Futuramente, o aplicativo do aluno poderÃ¡ ser distribuÃ­do como PWA ou criado com tecnologia mÃ³vel consumindo a mesma API.
+Uma aplicação web responsiva reduz o custo inicial, funciona em computadores e celulares e permite validar o produto antes de manter aplicativos nativos. Futuramente, o aplicativo do aluno poderá ser distribuído como PWA ou criado com tecnologia móvel consumindo a mesma API.
 
 ## 3. Tecnologias
 
@@ -26,138 +26,138 @@ Uma aplicaÃ§Ã£o web responsiva reduz o custo inicial, funciona em computador
 - **Linguagem:** C#.
 - **Acesso a dados:** Entity Framework Core.
 - **Banco de dados:** MySQL.
-- **AutenticaÃ§Ã£o:** ASP.NET Core Identity com tokens de acesso e renovaÃ§Ã£o.
-- **ValidaÃ§Ã£o:** validaÃ§Ã£o explÃ­cita na camada de aplicaÃ§Ã£o.
-- **DocumentaÃ§Ã£o da API:** OpenAPI.
-- **Tarefas em segundo plano:** comeÃ§ar com serviÃ§os internos simples; adotar uma fila somente quando houver necessidade comprovada.
-- **Testes:** xUnit para testes unitÃ¡rios e de integraÃ§Ã£o.
+- **Autenticação:** ASP.NET Core Identity com tokens de acesso e renovação.
+- **Validação:** validação explícita na camada de aplicação.
+- **Documentação da API:** OpenAPI.
+- **Tarefas em segundo plano:** começar com serviços internos simples; adotar uma fila somente quando houver necessidade comprovada.
+- **Testes:** xUnit para testes unitários e de integração.
 
-.NET oferece boa seguranÃ§a de tipos, ferramentas maduras para autenticaÃ§Ã£o e dados e uma evoluÃ§Ã£o natural para recursos em tempo real por meio de SignalR quando as batalhas chegarem.
+.NET oferece boa segurança de tipos, ferramentas maduras para autenticação e dados e uma evolução natural para recursos em tempo real por meio de SignalR quando as batalhas chegarem.
 
 ### 3.2 Frontend web
 
 - **Framework:** Next.js com React e TypeScript.
-- **Estilos:** Tailwind CSS com componentes prÃ³prios do BirdLeague.
-- **FormulÃ¡rios:** React Hook Form e validaÃ§Ã£o por esquema.
-- **ComunicaÃ§Ã£o com a API:** cliente tipado gerado ou mantido a partir do contrato OpenAPI.
+- **Estilos:** Tailwind CSS com componentes próprios do BirdLeague.
+- **Formulários:** React Hook Form e validação por esquema.
+- **Comunicação com a API:** cliente tipado gerado ou mantido a partir do contrato OpenAPI.
 - **Estado remoto:** TanStack Query.
 - **Testes de componentes:** Vitest e Testing Library.
 - **Testes ponta a ponta:** Playwright.
 
-O portal administrativo e a interface do aluno podem comeÃ§ar na mesma aplicaÃ§Ã£o Next.js, com Ã¡reas e layouts separados. Isso reduz duplicaÃ§Ã£o no MVP sem impedir uma separaÃ§Ã£o futura.
+O portal administrativo e a interface do aluno podem começar na mesma aplicação Next.js, com áreas e layouts separados. Isso reduz duplicação no MVP sem impedir uma separação futura.
 
-### 3.3 Aplicativo mÃ³vel
+### 3.3 Aplicativo móvel
 
-NÃ£o haverÃ¡ aplicativo nativo no primeiro MVP. A experiÃªncia do aluno serÃ¡ responsiva e preparada para instalaÃ§Ã£o como PWA em uma etapa posterior.
+Não haverá aplicativo nativo no primeiro MVP. A experiência do aluno será responsiva e preparada para instalação como PWA em uma etapa posterior.
 
-Se notificaÃ§Ãµes, uso offline ou recursos nativos se tornarem essenciais, a direÃ§Ã£o sugerida Ã© React Native com Expo, reutilizando TypeScript, contratos da API e parte do conhecimento da equipe.
+Se notificações, uso offline ou recursos nativos se tornarem essenciais, a direção sugerida é React Native com Expo, reutilizando TypeScript, contratos da API e parte do conhecimento da equipe.
 
 ### 3.4 Infraestrutura
 
-- ContÃªineres Docker para desenvolvimento e implantaÃ§Ã£o.
-- MySQL gerenciado em produÃ§Ã£o.
-- Armazenamento compatÃ­vel com S3 para imagens, Ã¡udios e futuros assets.
+- Contêineres Docker para desenvolvimento e implantação.
+- MySQL gerenciado em produção.
+- Armazenamento compatível com S3 para imagens, áudios e futuros assets.
 - CDN para entrega dos assets do Bloo.
-- CI/CD para testes, build e implantaÃ§Ã£o.
-- Ambientes separados de desenvolvimento, homologaÃ§Ã£o e produÃ§Ã£o.
-- Monitoramento de erros, logs estruturados e mÃ©tricas bÃ¡sicas desde o MVP.
+- CI/CD para testes, build e implantação.
+- Ambientes separados de desenvolvimento, homologação e produção.
+- Monitoramento de erros, logs estruturados e métricas básicas desde o MVP.
 
-O provedor de nuvem nÃ£o precisa ser definido antes de conhecer orÃ§amento, regiÃ£o dos usuÃ¡rios e experiÃªncia da equipe.
+O provedor de nuvem não precisa ser definido antes de conhecer orçamento, região dos usuários e experiência da equipe.
 
-## 4. OrganizaÃ§Ã£o da soluÃ§Ã£o
+## 4. Organização da solução
 
-O backend comeÃ§arÃ¡ como um monÃ³lito modular. Um Ãºnico deploy Ã© mais simples para o MVP, enquanto mÃ³dulos bem definidos evitam que as regras se misturem.
+O backend começará como um monólito modular. Um único deploy é mais simples para o MVP, enquanto módulos bem definidos evitam que as regras se misturem.
 
-MÃ³dulos iniciais:
+Módulos iniciais:
 
-- **Identidade:** login, credenciais, papÃ©is e sessÃµes.
-- **OrganizaÃ§Ã£o escolar:** escola, idiomas, turmas, matrÃ­culas e perÃ­odos.
-- **ConteÃºdo:** banco de questÃµes, alternativas, explicaÃ§Ãµes e assets.
-- **Treinamento:** sessÃµes, seleÃ§Ã£o de questÃµes, respostas e feedback.
-- **ProgressÃ£o:** Bloos, XP, estÃ¡gios, domÃ­nio e conquistas.
-- **RelatÃ³rios:** visÃµes de progresso para professor e aluno.
+- **Identidade:** login, credenciais, papéis e sessões.
+- **Organização escolar:** escola, idiomas, turmas, matrículas e períodos.
+- **Conteúdo:** banco de questões, alternativas, explicações e assets.
+- **Treinamento:** sessões, seleção de questões, respostas e feedback.
+- **Progressão:** Bloos, XP, estágios, domínio e conquistas.
+- **Relatórios:** visões de progresso para professor e aluno.
 
-MÃ³dulos futuros:
+Módulos futuros:
 
 - Cartas e poderes.
 - Batalhas.
 - Guerras entre turmas.
 - Eventos e bosses.
 - Rankings e ligas.
-- NotificaÃ§Ãµes.
+- Notificações.
 
-MicroserviÃ§os nÃ£o sÃ£o recomendados no inÃ­cio. Partes especÃ­ficas podem ser extraÃ­das quando escala, isolamento operacional ou ritmo de desenvolvimento justificarem a complexidade.
+Microserviços não são recomendados no início. Partes específicas podem ser extraídas quando escala, isolamento operacional ou ritmo de desenvolvimento justificarem a complexidade.
 
-## 5. PapÃ©is e permissÃµes
+## 5. Papéis e permissões
 
 ### Administrador
 
 - Configura a escola.
 - Gerencia professores, idiomas, turmas e alunos.
-- Acessa relatÃ³rios gerais.
-- Gerencia regras e perÃ­odos.
+- Acessa relatórios gerais.
+- Gerencia regras e períodos.
 - Pode importar e exportar dados autorizados.
 
 ### Professor
 
 - Visualiza e gerencia suas turmas.
-- Cadastra ou recomenda conteÃºdos conforme permissÃ£o.
+- Cadastra ou recomenda conteúdos conforme permissão.
 - Acompanha alunos matriculados em suas turmas.
 - Registra ou valida atividades autorizadas.
 
 ### Aluno
 
-- Acessa somente o prÃ³prio perfil.
-- Acessa diretamente o idioma associado Ã  sua turma principal no MVP.
-- Pode visualizar mÃºltiplos idiomas e Bloos associados quando tiver mais de uma matrÃ­cula ativa.
+- Acessa somente o próprio perfil.
+- Acessa diretamente o idioma associado à sua turma principal no MVP.
+- Pode visualizar múltiplos idiomas e Bloos associados quando tiver mais de uma matrícula ativa.
 - Realiza treinamentos.
-- Consulta progresso, conquistas e histÃ³rico permitido.
+- Consulta progresso, conquistas e histórico permitido.
 
-PermissÃµes devem ser verificadas no backend. Ocultar um botÃ£o no frontend nÃ£o Ã© controle de acesso.
+Permissões devem ser verificadas no backend. Ocultar um botão no frontend não é controle de acesso.
 
 ## 6. Modelo conceitual de dados
 
 ### Entidades escolares
 
-- **School:** organizaÃ§Ã£o proprietÃ¡ria dos dados.
-- **User:** identidade usada para autenticaÃ§Ã£o.
-- **StudentProfile:** informaÃ§Ãµes do aluno associadas ao usuÃ¡rio.
-- **TeacherProfile:** informaÃ§Ãµes do professor associadas ao usuÃ¡rio.
+- **School:** organização proprietária dos dados.
+- **User:** identidade usada para autenticação.
+- **StudentProfile:** informações do aluno associadas ao usuário.
+- **TeacherProfile:** informações do professor associadas ao usuário.
 - **Language:** idioma oferecido pela escola.
-- **Class:** turma, perÃ­odo, professor e idioma principal.
-- **Enrollment:** associaÃ§Ã£o entre aluno e turma.
+- **Class:** turma, período, professor e idioma principal.
+- **Enrollment:** associação entre aluno e turma.
 
-Um aluno poderÃ¡ possuir vÃ¡rias matrÃ­culas. O vÃ­nculo do Bloo serÃ¡ com aluno e idioma, nÃ£o apenas com a turma. Assim, uma troca de turma nÃ£o apaga a evoluÃ§Ã£o conquistada naquele idioma.
+Um aluno poderá possuir várias matrículas. O vínculo do Bloo será com aluno e idioma, não apenas com a turma. Assim, uma troca de turma não apaga a evolução conquistada naquele idioma.
 
-### Entidades pedagÃ³gicas
+### Entidades pedagógicas
 
-- **Skill:** habilidade especÃ­fica dentro de um idioma e nÃ­vel.
-- **Question:** enunciado, tipo, dificuldade e explicaÃ§Ã£o.
-- **QuestionOption:** alternativas quando aplicÃ¡vel.
-- **QuestionAsset:** Ã¡udio, imagem ou outro material.
-- **TrainingSession:** inÃ­cio, fim, objetivo e estado de um treino.
+- **Skill:** habilidade específica dentro de um idioma e nível.
+- **Question:** enunciado, tipo, dificuldade e explicação.
+- **QuestionOption:** alternativas quando aplicável.
+- **QuestionAsset:** áudio, imagem ou outro material.
+- **TrainingSession:** início, fim, objetivo e estado de um treino.
 - **TrainingAnswer:** resposta, resultado, tempo e feedback apresentado.
 - **SkillMastery:** progresso do aluno em determinada habilidade.
 
-### Entidades de progressÃ£o
+### Entidades de progressão
 
 - **Bloo:** avatar do aluno em um idioma.
-- **BlooStage:** estÃ¡gio visual e requisitos de evoluÃ§Ã£o.
+- **BlooStage:** estágio visual e requisitos de evolução.
 - **ProgressEvent:** registro de XP ou progresso, sua origem e data.
-- **Achievement:** definiÃ§Ã£o de uma conquista.
+- **Achievement:** definição de uma conquista.
 - **StudentAchievement:** conquista recebida pelo aluno.
-- **Title:** tÃ­tulo que pode ser exibido no perfil.
+- **Title:** título que pode ser exibido no perfil.
 
-O histÃ³rico de progresso deve registrar a origem de cada alteraÃ§Ã£o. Isso permite auditoria e evita valores de XP impossÃ­veis de explicar.
+O histórico de progresso deve registrar a origem de cada alteração. Isso permite auditoria e evita valores de XP impossíveis de explicar.
 
-## 7. Assets do Bloo e acessÃ³rios
+## 7. Assets do Bloo e acessórios
 
-Os assets do Bloo devem ser organizados para permitir evoluÃ§Ã£o visual e personalizaÃ§Ã£o sem gerar uma imagem final para cada combinaÃ§Ã£o possÃ­vel. A direÃ§Ã£o tÃ©cnica recomendada Ã© tratar o personagem como uma composiÃ§Ã£o em camadas:
+Os assets do Bloo devem ser organizados para permitir evolução visual e personalização sem gerar uma imagem final para cada combinação possível. A direção técnica recomendada é tratar o personagem como uma composição em camadas:
 
 1. Base do Bloo.
-2. Roupa ou variaÃ§Ã£o corporal.
-3. AcessÃ³rios, como Ã³culos, chapÃ©us e medalhas.
-4. Efeitos visuais temporÃ¡rios, como brilho de conquista.
+2. Roupa ou variação corporal.
+3. Acessórios, como óculos, chapéus e medalhas.
+4. Efeitos visuais temporários, como brilho de conquista.
 
 Uma estrutura inicial de pastas pode seguir este formato:
 
@@ -172,9 +172,9 @@ assets/accessories/medals/
 assets/effects/
 ```
 
-Cada fase do Bloo deve ter poses nomeadas de forma consistente, por exemplo `idle`, `happy`, `thinking`, `celebrate`, `run`, `victory` e `defeat`. Os acessÃ³rios devem ter fundo transparente e, quando necessÃ¡rio, variaÃ§Ãµes por Ã¢ngulo, como `front`, `right-3q` e `left-3q`.
+Cada fase do Bloo deve ter poses nomeadas de forma consistente, por exemplo `idle`, `happy`, `thinking`, `celebrate`, `run`, `victory` e `defeat`. Os acessórios devem ter fundo transparente e, quando necessário, variações por ângulo, como `front`, `right-3q` e `left-3q`.
 
-Para que Ã³culos e outros acessÃ³rios encaixem corretamente em cada fase, o app deve manter metadados de pontos de encaixe. Esses dados podem ficar em JSON ou no banco, dependendo do volume e da necessidade de ediÃ§Ã£o administrativa:
+Para que óculos e outros acessórios encaixem corretamente em cada fase, o app deve manter metadados de pontos de encaixe. Esses dados podem ficar em JSON ou no banco, dependendo do volume e da necessidade de edição administrativa:
 
 ```json
 {
@@ -193,267 +193,267 @@ Para que Ã³culos e outros acessÃ³rios encaixem corretamente em cada fase, o 
 }
 ```
 
-No MVP, ainda Ã© aceitÃ¡vel usar imagens fixas para Egg, rachaduras e Hatchling. Mesmo assim, os nomes de arquivos, dimensÃµes e enquadramentos jÃ¡ devem ser definidos pensando na futura composiÃ§Ã£o em camadas. Isso evita retrabalho quando a personalizaÃ§Ã£o cosmÃ©tica entrar no produto.
+No MVP, ainda é aceitável usar imagens fixas para Egg, rachaduras e Hatchling. Mesmo assim, os nomes de arquivos, dimensões e enquadramentos já devem ser definidos pensando na futura composição em camadas. Isso evita retrabalho quando a personalização cosmética entrar no produto.
 
-## 8. Banco de questÃµes
+## 8. Banco de questões
 
-Cada questÃ£o deve registrar, no mÃ­nimo:
+Cada questão deve registrar, no mínimo:
 
 - Idioma.
-- NÃ­vel de proficiÃªncia.
+- Nível de proficiência.
 - Tema e habilidade.
-- Tipo de questÃ£o.
+- Tipo de questão.
 - Dificuldade.
 - Enunciado.
-- Resposta correta ou critÃ©rios de correÃ§Ã£o.
-- ExplicaÃ§Ã£o pedagÃ³gica.
-- Estado editorial: rascunho, em revisÃ£o, publicada ou arquivada.
+- Resposta correta ou critérios de correção.
+- Explicação pedagógica.
+- Estado editorial: rascunho, em revisão, publicada ou arquivada.
 - Autor e revisor.
-- Data de criaÃ§Ã£o e alteraÃ§Ã£o.
+- Data de criação e alteração.
 
 Tipos iniciais recomendados:
 
-- MÃºltipla escolha.
-- Completar lacuna com opÃ§Ãµes.
-- AssociaÃ§Ã£o simples.
-- CompreensÃ£o de Ã¡udio com mÃºltipla escolha.
+- Múltipla escolha.
+- Completar lacuna com opções.
+- Associação simples.
+- Compreensão de áudio com múltipla escolha.
 
-Respostas abertas, pronÃºncia avaliada automaticamente e correÃ§Ã£o por inteligÃªncia artificial devem vir depois. Elas exigem critÃ©rios de avaliaÃ§Ã£o, tratamento de incerteza, custo e revisÃ£o de privacidade.
+Respostas abertas, pronúncia avaliada automaticamente e correção por inteligência artificial devem vir depois. Elas exigem critérios de avaliação, tratamento de incerteza, custo e revisão de privacidade.
 
-QuestÃµes jÃ¡ respondidas podem reaparecer em variaÃ§Ãµes e revisÃµes espaÃ§adas. O sistema nÃ£o deve considerar domÃ­nio a partir de uma Ãºnica resposta.
+Questões já respondidas podem reaparecer em variações e revisões espaçadas. O sistema não deve considerar domínio a partir de uma única resposta.
 
 ## 9. Motor de treinamento do MVP
 
-O motor inicial pode usar regras determinÃ­sticas e compreensÃ­veis:
+O motor inicial pode usar regras determinísticas e compreensíveis:
 
-1. Selecionar o idioma e o objetivo da sessÃ£o.
-2. Priorizar questÃµes adequadas ao nÃ­vel atribuÃ­do ao aluno.
-3. Misturar conteÃºdo novo com revisÃ£o.
-4. Evitar repetiÃ§Ã£o imediata da mesma questÃ£o.
+1. Selecionar o idioma e o objetivo da sessão.
+2. Priorizar questões adequadas ao nível atribuído ao aluno.
+3. Misturar conteúdo novo com revisão.
+4. Evitar repetição imediata da mesma questão.
 5. Registrar respostas e apresentar feedback.
-6. Atualizar progresso ao concluir a sessÃ£o.
+6. Atualizar progresso ao concluir a sessão.
 
-No treinamento de nascimento, a sequÃªncia pode ser predefinida por nÃ­vel e idioma. A evoluÃ§Ã£o para Hatchling ocorre pela conclusÃ£o. O desempenho Ã© armazenado para orientar treinos seguintes, mas nÃ£o bloqueia o nascimento.
+No treinamento de nascimento, a sequência pode ser predefinida por nível e idioma. A evolução para Hatchling ocorre pela conclusão. O desempenho é armazenado para orientar treinos seguintes, mas não bloqueia o nascimento.
 
-Uma adaptaÃ§Ã£o mais sofisticada deve ser introduzida apenas depois de haver volume de respostas suficiente para avaliar suas decisÃµes.
+Uma adaptação mais sofisticada deve ser introduzida apenas depois de haver volume de respostas suficiente para avaliar suas decisões.
 
-## 10. ProgressÃ£o e consistÃªncia
+## 10. Progressão e consistência
 
-Regras de XP e evoluÃ§Ã£o devem residir no backend. O cliente apenas apresenta o resultado.
+Regras de XP e evolução devem residir no backend. O cliente apenas apresenta o resultado.
 
 Todo evento de progresso deve ser:
 
-- IdentificÃ¡vel por origem.
-- Idempotente, para evitar pontuaÃ§Ã£o duplicada em reenvios.
+- Identificável por origem.
+- Idempotente, para evitar pontuação duplicada em reenvios.
 - Registrado com data e aluno.
 - Limitado conforme as regras da atividade.
 
 Para o MVP:
 
-- A sessÃ£o concluÃ­da concede progresso base.
-- Acertos podem conceder um bÃ´nus pequeno.
-- O estÃ¡gio Egg evolui para Hatchling ao concluir o primeiro treino.
-- O aluno visualiza o progresso para o prÃ³ximo objetivo, ainda que a prÃ³xima evoluÃ§Ã£o nÃ£o esteja implementada.
+- A sessão concluída concede progresso base.
+- Acertos podem conceder um bônus pequeno.
+- O estágio Egg evolui para Hatchling ao concluir o primeiro treino.
+- O aluno visualiza o progresso para o próximo objetivo, ainda que a próxima evolução não esteja implementada.
 
 ## 11. Interface administrativa
 
-O portal serÃ¡ desenhado para uso em desktop e tablet, com navegaÃ§Ã£o lateral.
+O portal será desenhado para uso em desktop e tablet, com navegação lateral.
 
 ### Painel inicial
 
 - Quantidade de alunos ativos.
 - Turmas ativas.
-- ParticipaÃ§Ã£o nos Ãºltimos dias.
-- Alunos que ainda nÃ£o iniciaram.
+- Participação nos últimos dias.
+- Alunos que ainda não iniciaram.
 - Atalhos para criar turma e cadastrar alunos.
 
 ### Idiomas
 
 - Listagem de idiomas oferecidos.
-- AtivaÃ§Ã£o e desativaÃ§Ã£o.
-- ConfiguraÃ§Ã£o de nÃ­veis disponÃ­veis.
+- Ativação e desativação.
+- Configuração de níveis disponíveis.
 
 ### Turmas
 
 - Criar e editar turma.
-- Definir idioma, nÃ­vel, perÃ­odo e professores.
+- Definir idioma, nível, período e professores.
 - Matricular ou remover alunos.
 - Visualizar progresso agregado.
 
 ### Alunos
 
 - Cadastro individual.
-- ImportaÃ§Ã£o por planilha em fase posterior ou ainda no MVP se o volume exigir.
-- AssociaÃ§Ã£o a mÃºltiplas turmas.
-- GeraÃ§Ã£o e redefiniÃ§Ã£o de senha temporÃ¡ria.
+- Importação por planilha em fase posterior ou ainda no MVP se o volume exigir.
+- Associação a múltiplas turmas.
+- Geração e redefinição de senha temporária.
 - Estado do primeiro acesso.
-- VisÃ£o resumida de Bloos e progresso.
+- Visão resumida de Bloos e progresso.
 
-### Banco de questÃµes
+### Banco de questões
 
-- Filtros por idioma, nÃ­vel, tema, habilidade e estado.
-- CriaÃ§Ã£o e ediÃ§Ã£o de questÃµes.
-- PrÃ©-visualizaÃ§Ã£o como aluno.
-- Fluxo simples de revisÃ£o e publicaÃ§Ã£o.
-- Arquivamento sem apagar o histÃ³rico de respostas.
+- Filtros por idioma, nível, tema, habilidade e estado.
+- Criação e edição de questões.
+- Pré-visualização como aluno.
+- Fluxo simples de revisão e publicação.
+- Arquivamento sem apagar o histórico de respostas.
 
-### RelatÃ³rios
+### Relatórios
 
-- ParticipaÃ§Ã£o por turma.
-- ConclusÃ£o do tutorial e primeiro treino.
+- Participação por turma.
+- Conclusão do tutorial e primeiro treino.
 - Acertos por habilidade.
 - Alunos que podem precisar de acompanhamento.
 
-RelatÃ³rios nÃ£o devem rotular alunos como fracos. A linguagem deve destacar comportamentos observÃ¡veis, como â€œnÃ£o realizou treinamento nos Ãºltimos sete diasâ€.
+Relatórios não devem rotular alunos como fracos. A linguagem deve destacar comportamentos observáveis, como “não realizou treinamento nos últimos sete dias”.
 
 ## 12. Interface do aluno
 
-A interface serÃ¡ mobile-first, com botÃµes grandes, textos curtos e foco em uma aÃ§Ã£o principal por tela.
+A interface será mobile-first, com botões grandes, textos curtos e foco em uma ação principal por tela.
 
 ### Login
 
-- IdentificaÃ§Ã£o e senha temporÃ¡ria fornecidas pela escola.
-- Troca de senha no primeiro acesso quando apropriado Ã  faixa etÃ¡ria.
-- RecuperaÃ§Ã£o ou redefiniÃ§Ã£o mediada pela escola no MVP.
+- Identificação e senha temporária fornecidas pela escola.
+- Troca de senha no primeiro acesso quando apropriado à faixa etária.
+- Recuperação ou redefinição mediada pela escola no MVP.
 
 ### Entrada no idioma da turma
 
-- ApÃ³s o login, o sistema identifica a matrÃ­cula ativa do aluno.
-- No MVP, abre diretamente a home do idioma associado Ã  turma principal.
-- Se houver mais de uma matrÃ­cula ativa em idiomas diferentes, uma seleÃ§Ã£o de idioma pode ser exibida.
-- Cada idioma mantÃ©m Bloo, estÃ¡gio e progresso prÃ³prios.
+- Após o login, o sistema identifica a matrícula ativa do aluno.
+- No MVP, abre diretamente a home do idioma associado à turma principal.
+- Se houver mais de uma matrícula ativa em idiomas diferentes, uma seleção de idioma pode ser exibida.
+- Cada idioma mantém Bloo, estágio e progresso próprios.
 
 ### Home do idioma
 
 - Bloo em destaque.
-- Nome e estÃ¡gio.
-- Progresso para o prÃ³ximo objetivo.
-- BotÃ£o principal de treinamento.
-- MissÃ£o ou orientaÃ§Ã£o atual.
-- Resumo curto de sequÃªncia e habilidades.
+- Nome e estágio.
+- Progresso para o próximo objetivo.
+- Botão principal de treinamento.
+- Missão ou orientação atual.
+- Resumo curto de sequência e habilidades.
 
 ### Treinamento
 
 - Uma pergunta por tela.
-- IndicaÃ§Ã£o clara de progresso da sessÃ£o.
-- Controles acessÃ­veis para Ã¡udio.
-- Feedback imediato apÃ³s responder.
-- ExplicaÃ§Ã£o simples para resposta incorreta.
-- Possibilidade de continuar sem telas intermediÃ¡rias excessivas.
+- Indicação clara de progresso da sessão.
+- Controles acessíveis para áudio.
+- Feedback imediato após responder.
+- Explicação simples para resposta incorreta.
+- Possibilidade de continuar sem telas intermediárias excessivas.
 
 ### Nascimento do Bloo
 
-- Rachaduras no ovo ao longo da sessÃ£o.
+- Rachaduras no ovo ao longo da sessão.
 - Cena de nascimento ao concluir.
 - Escolha do nome do Bloo.
-- ExibiÃ§Ã£o do tÃ­tulo New Hatchling.
-- Convite claro para o prÃ³ximo treinamento.
+- Exibição do título New Hatchling.
+- Convite claro para o próximo treinamento.
 
 ### Perfil e progresso
 
 - Bloos por idioma.
-- EstÃ¡gio atual.
+- Estágio atual.
 - Habilidades em desenvolvimento.
-- TÃ­tulos e conquistas.
-- HistÃ³rico resumido, sem excesso de mÃ©tricas escolares.
+- Títulos e conquistas.
+- Histórico resumido, sem excesso de métricas escolares.
 
-## 13. AutenticaÃ§Ã£o e seguranÃ§a
+## 13. Autenticação e segurança
 
 - Senhas armazenadas apenas por hash seguro.
-- Senhas temporÃ¡rias expiram ou exigem troca quando adequado.
-- Tokens curtos com renovaÃ§Ã£o segura.
-- RevogaÃ§Ã£o de sessÃµes em redefiniÃ§Ã£o de senha.
-- LimitaÃ§Ã£o de tentativas de login.
-- Auditoria de aÃ§Ãµes administrativas sensÃ­veis.
-- SeparaÃ§Ã£o dos dados por escola desde o inÃ­cio.
-- ValidaÃ§Ã£o de autorizaÃ§Ã£o em todas as consultas.
-- Backups automÃ¡ticos e restauraÃ§Ã£o testada.
-- Criptografia em trÃ¢nsito e, quando disponÃ­vel, em repouso.
+- Senhas temporárias expiram ou exigem troca quando adequado.
+- Tokens curtos com renovação segura.
+- Revogação de sessões em redefinição de senha.
+- Limitação de tentativas de login.
+- Auditoria de ações administrativas sensíveis.
+- Separação dos dados por escola desde o início.
+- Validação de autorização em todas as consultas.
+- Backups automáticos e restauração testada.
+- Criptografia em trânsito e, quando disponível, em repouso.
 
-Como o sistema pode tratar dados de menores, a escola precisarÃ¡ definir bases legais, termos, consentimentos aplicÃ¡veis, retenÃ§Ã£o e atendimento Ã  LGPD antes do uso em produÃ§Ã£o.
+Como o sistema pode tratar dados de menores, a escola precisará definir bases legais, termos, consentimentos aplicáveis, retenção e atendimento à LGPD antes do uso em produção.
 
-O MVP nÃ£o deve incluir chat livre entre alunos. Nomes pÃºblicos podem ser substituÃ­dos por apelidos controlados quando houver rankings ou batalhas.
+O MVP não deve incluir chat livre entre alunos. Nomes públicos podem ser substituídos por apelidos controlados quando houver rankings ou batalhas.
 
-## 14. Acessibilidade e experiÃªncia
+## 14. Acessibilidade e experiência
 
 - Contraste e tamanho de fonte adequados.
-- NavegaÃ§Ã£o por teclado no portal web.
+- Navegação por teclado no portal web.
 - Textos alternativos para imagens informativas.
-- NÃ£o depender apenas de cor para indicar acerto ou erro.
-- Legendas ou transcriÃ§Ãµes quando pedagogicamente apropriado.
-- ReduÃ§Ã£o de animaÃ§Ãµes para usuÃ¡rios que solicitarem.
-- Tempo suficiente para leitura; velocidade nÃ£o serÃ¡ requisito no MVP.
-- Testes em aparelhos mÃ³veis de entrada e conexÃµes lentas.
+- Não depender apenas de cor para indicar acerto ou erro.
+- Legendas ou transcrições quando pedagogicamente apropriado.
+- Redução de animações para usuários que solicitarem.
+- Tempo suficiente para leitura; velocidade não será requisito no MVP.
+- Testes em aparelhos móveis de entrada e conexões lentas.
 
-## 15. Observabilidade e mÃ©tricas
+## 15. Observabilidade e métricas
 
-O sistema deve registrar eventos de produto sem armazenar conteÃºdo sensÃ­vel desnecessÃ¡rio:
+O sistema deve registrar eventos de produto sem armazenar conteúdo sensível desnecessário:
 
-- Primeiro acesso concluÃ­do.
-- Tutorial iniciado e concluÃ­do.
-- Treinamento iniciado, concluÃ­do ou abandonado.
+- Primeiro acesso concluído.
+- Tutorial iniciado e concluído.
+- Treinamento iniciado, concluído ou abandonado.
 - Bloo desbloqueado.
 - Retorno em dias posteriores.
-- Erros tÃ©cnicos por tela e endpoint.
+- Erros técnicos por tela e endpoint.
 
-Logs nÃ£o devem conter senhas, tokens ou respostas pessoais sensÃ­veis. MÃ©tricas pedagÃ³gicas e mÃ©tricas tÃ©cnicas devem ser distinguÃ­veis.
+Logs não devem conter senhas, tokens ou respostas pessoais sensíveis. Métricas pedagógicas e métricas técnicas devem ser distinguíveis.
 
 ## 16. Testes
 
 ### Backend
 
-- Regras de matrÃ­culas e mÃºltiplos idiomas.
-- AutorizaÃ§Ã£o e isolamento entre escolas.
-- SeleÃ§Ã£o e conclusÃ£o do treinamento.
-- IdempotÃªncia da progressÃ£o.
-- EvoluÃ§Ã£o Egg para Hatchling.
+- Regras de matrículas e múltiplos idiomas.
+- Autorização e isolamento entre escolas.
+- Seleção e conclusão do treinamento.
+- Idempotência da progressão.
+- Evolução Egg para Hatchling.
 
 ### Frontend
 
-- FormulÃ¡rios administrativos.
+- Formulários administrativos.
 - Estados de carregamento e erro.
 - Fluxo de login.
 - Entrada direta no idioma da turma.
-- SeleÃ§Ã£o de idioma apenas quando houver mÃºltiplas matrÃ­culas ativas em idiomas diferentes.
+- Seleção de idioma apenas quando houver múltiplas matrículas ativas em idiomas diferentes.
 - Resposta e feedback.
 
 ### Ponta a ponta
 
-O fluxo crÃ­tico automatizado serÃ¡:
+O fluxo crítico automatizado será:
 
 1. Administrador cria idioma, turma e aluno.
 2. Aluno entra com a credencial.
-3. Sistema abre o idioma associado Ã  turma do aluno.
+3. Sistema abre o idioma associado à turma do aluno.
 4. Aluno conclui tutorial e treinamento.
 5. O ovo se transforma em Hatchling.
-6. Professor visualiza a conclusÃ£o.
+6. Professor visualiza a conclusão.
 
-## 17. PreparaÃ§Ã£o para funcionalidades futuras
+## 17. Preparação para funcionalidades futuras
 
 ### Tempo real
 
-SignalR poderÃ¡ suportar presenÃ§a, estado de partida e eventos de batalha. Isso sÃ³ deve ser introduzido com regras de jogo maduras e protÃ³tipos validados.
+SignalR poderá suportar presença, estado de partida e eventos de batalha. Isso só deve ser introduzido com regras de jogo maduras e protótipos validados.
 
 ### Eventos e filas
 
-Boss raids e guerras entre turmas podem exigir processamento assÃ­ncrono e agregaÃ§Ã£o de pontuaÃ§Ã£o. Uma fila serÃ¡ adotada quando tarefas em segundo plano comeÃ§arem a competir com requisiÃ§Ãµes de usuÃ¡rio.
+Boss raids e guerras entre turmas podem exigir processamento assíncrono e agregação de pontuação. Uma fila será adotada quando tarefas em segundo plano começarem a competir com requisições de usuário.
 
-### ConteÃºdo adaptativo
+### Conteúdo adaptativo
 
-O histÃ³rico de respostas jÃ¡ serÃ¡ armazenado de forma estruturada. Isso permitirÃ¡ revisar algoritmos sem perder dados, mas decisÃµes automÃ¡ticas relevantes deverÃ£o permanecer explicÃ¡veis para professores.
+O histórico de respostas já será armazenado de forma estruturada. Isso permitirá revisar algoritmos sem perder dados, mas decisões automáticas relevantes deverão permanecer explicáveis para professores.
 
 ### Escala
 
-O monÃ³lito modular poderÃ¡ ter mÃºltiplas instÃ¢ncias. Cache, filas e serviÃ§os especializados serÃ£o adicionados com base em gargalos medidos, nÃ£o antecipados.
+O monólito modular poderá ter múltiplas instâncias. Cache, filas e serviços especializados serão adicionados com base em gargalos medidos, não antecipados.
 
-## 18. DecisÃµes pendentes antes da implementaÃ§Ã£o
+## 18. Decisões pendentes antes da implementação
 
-- Provedor de hospedagem e orÃ§amento mensal.
-- Faixa etÃ¡ria inicial e regras de credencial.
-- Primeiro idioma e nÃ­veis atendidos.
-- Origem, autoria e volume inicial das questÃµes.
-- Necessidade de importaÃ§Ã£o de alunos por planilha no MVP.
-- Identidade visual e arquivos dos estÃ¡gios Egg e Hatchling.
+- Provedor de hospedagem e orçamento mensal.
+- Faixa etária inicial e regras de credencial.
+- Primeiro idioma e níveis atendidos.
+- Origem, autoria e volume inicial das questões.
+- Necessidade de importação de alunos por planilha no MVP.
+- Identidade visual e arquivos dos estágios Egg e Hatchling.
 - Regras exatas de XP.
-- PolÃ­tica de privacidade e retenÃ§Ã£o.
+- Política de privacidade e retenção.
 - Requisitos de acessibilidade definidos pela escola.

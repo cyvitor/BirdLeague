@@ -1,12 +1,12 @@
-﻿# Fluxos do MVP â€” BirdLeague
+# Fluxos do MVP — BirdLeague
 
-Este documento define os fluxos iniciais que serÃ£o construÃ­dos no MVP. As decisÃµes abaixo sÃ£o hipÃ³teses de produto para levar uma primeira versÃ£o funcional Ã  escola, validar com uso real e ajustar depois.
+Este documento define os fluxos iniciais que serão construídos no MVP. As decisões abaixo são hipóteses de produto para levar uma primeira versão funcional à escola, validar com uso real e ajustar depois.
 
-## 1. PrincÃ­pio dos fluxos
+## 1. Princípio dos fluxos
 
 O MVP deve provar uma coisa principal: o aluno entende que estudar faz o Bloo nascer e sente vontade de continuar evoluindo.
 
-Por isso, os fluxos devem ser curtos, guiados e com uma aÃ§Ã£o principal por tela. O aluno nÃ£o deve precisar entender todas as regras do BirdLeague no primeiro acesso.
+Por isso, os fluxos devem ser curtos, guiados e com uma ação principal por tela. O aluno não deve precisar entender todas as regras do BirdLeague no primeiro acesso.
 
 ## 2. Fluxo do administrador
 
@@ -16,129 +16,129 @@ Por isso, os fluxos devem ser curtos, guiados e com uma aÃ§Ã£o principal por
 2. Informa e-mail e senha.
 3. Entra no painel administrativo.
 
-Estados necessÃ¡rios:
+Estados necessários:
 
-- Credenciais invÃ¡lidas.
-- UsuÃ¡rio sem permissÃ£o administrativa.
-- Esqueci minha senha pode ficar fora do MVP se a redefiniÃ§Ã£o for manual.
+- Credenciais inválidas.
+- Usuário sem permissão administrativa.
+- Esqueci minha senha pode ficar fora do MVP se a redefinição for manual.
 
-### 2.2 ConfiguraÃ§Ã£o mÃ­nima da escola
+### 2.2 Configuração mínima da escola
 
-No MVP, a escola pode ser criada previamente no banco ou em uma tela simples de configuraÃ§Ã£o. A prioridade Ã© nÃ£o travar o piloto.
+No MVP, a escola pode ser criada previamente no banco ou em uma tela simples de configuração. A prioridade é não travar o piloto.
 
-Dados mÃ­nimos:
+Dados mínimos:
 
 - Nome da escola.
-- Idioma inicial: InglÃªs.
-- NÃ­veis disponÃ­veis.
+- Idioma inicial: Inglês.
+- Níveis disponíveis.
 
 ### 2.3 Cadastro de turma
 
 1. Administrador abre "Turmas".
 2. Clica em criar turma.
-3. Informa nome, idioma, nÃ­vel, perÃ­odo e professor responsÃ¡vel quando houver.
+3. Informa nome, idioma, nível, período e professor responsável quando houver.
 4. Salva.
 
-Dados mÃ­nimos:
+Dados mínimos:
 
 - Nome da turma.
 - Idioma.
-- NÃ­vel inicial.
-- PerÃ­odo ou ano letivo.
+- Nível inicial.
+- Período ou ano letivo.
 - Status ativo/inativo.
 
 ### 2.4 Cadastro de aluno
 
 1. Administrador abre "Alunos".
 2. Clica em criar aluno.
-3. Informa nome, usuÃ¡rio de acesso, senha temporÃ¡ria e turma.
-4. Sistema cria o aluno e sua matrÃ­cula.
+3. Informa nome, usuário de acesso, senha temporária e turma.
+4. Sistema cria o aluno e sua matrícula.
 5. Sistema usa o idioma da turma para criar ou localizar o Bloo correspondente.
-6. Se o aluno ainda nÃ£o tiver Bloo naquele idioma, o sistema cria automaticamente um Bloo em estÃ¡gio Egg.
+6. Se o aluno ainda não tiver Bloo naquele idioma, o sistema cria automaticamente um Bloo em estágio Egg.
 
-Dados mÃ­nimos:
+Dados mínimos:
 
 - Nome.
 - Apelido opcional.
 - Identificador de login.
-- Senha temporÃ¡ria.
+- Senha temporária.
 - Turma.
 
-O idioma nÃ£o deve ser escolhido diretamente no cadastro do aluno quando a matrÃ­cula estiver ligada a uma turma. O idioma vem da prÃ³pria turma.
+O idioma não deve ser escolhido diretamente no cadastro do aluno quando a matrícula estiver ligada a uma turma. O idioma vem da própria turma.
 
-Regra para mÃºltiplos idiomas:
+Regra para múltiplos idiomas:
 
 - Um aluno pode estar em mais de uma turma.
-- Se as turmas forem de idiomas diferentes, o aluno terÃ¡ um Bloo para cada idioma.
+- Se as turmas forem de idiomas diferentes, o aluno terá um Bloo para cada idioma.
 - Se o aluno entrar em duas turmas do mesmo idioma, continua tendo apenas um Bloo daquele idioma.
-- O vÃ­nculo do Bloo Ã© sempre `Aluno + Idioma`, nÃ£o `Aluno + Turma`.
+- O vínculo do Bloo é sempre `Aluno + Idioma`, não `Aluno + Turma`.
 
 ### 2.5 Cadastro de perguntas
 
-1. Administrador abre "Banco de questÃµes".
-2. Clica em criar questÃ£o.
-3. Escolhe idioma, nÃ­vel, categoria, habilidade, dificuldade e tipo.
-4. Escreve enunciado, alternativas, resposta correta e explicaÃ§Ã£o.
+1. Administrador abre "Banco de questões".
+2. Clica em criar questão.
+3. Escolhe idioma, nível, categoria, habilidade, dificuldade e tipo.
+4. Escreve enunciado, alternativas, resposta correta e explicação.
 5. Salva como rascunho ou publica.
 
-No MVP, usuÃ¡rios administradores podem cadastrar e publicar perguntas. Um fluxo de revisÃ£o formal pode entrar depois.
+No MVP, usuários administradores podem cadastrar e publicar perguntas. Um fluxo de revisão formal pode entrar depois.
 
 ## 3. Fluxo do professor
 
-No MVP, o professor pode usar as mesmas telas administrativas com permissÃµes reduzidas. Se a escola ainda nÃ£o definir professores, o papel pode existir tecnicamente, mas o piloto pode operar sÃ³ com administradores.
+No MVP, o professor pode usar as mesmas telas administrativas com permissões reduzidas. Se a escola ainda não definir professores, o papel pode existir tecnicamente, mas o piloto pode operar só com administradores.
 
-Fluxos mÃ­nimos:
+Fluxos mínimos:
 
 - Ver turmas.
 - Ver alunos da turma.
 - Ver quem iniciou, quem concluiu o primeiro treino e quem fez o Bloo nascer.
-- Cadastrar perguntas se tiver permissÃ£o.
+- Cadastrar perguntas se tiver permissão.
 
 ## 4. Fluxo do aluno
 
 ### 4.1 Login
 
 1. Aluno acessa a plataforma.
-2. Informa usuÃ¡rio e senha temporÃ¡ria.
-3. Entra diretamente na home do idioma associado Ã  sua turma principal.
+2. Informa usuário e senha temporária.
+3. Entra diretamente na home do idioma associado à sua turma principal.
 
-No MVP, a troca obrigatÃ³ria de senha pode ser adiada se a escola controlar as credenciais. Para turmas com alunos mais velhos, pode ser adicionada depois.
+No MVP, a troca obrigatória de senha pode ser adiada se a escola controlar as credenciais. Para turmas com alunos mais velhos, pode ser adicionada depois.
 
 ### 4.2 Entrada no idioma da turma
 
-1. O sistema identifica a matrÃ­cula ativa do aluno.
+1. O sistema identifica a matrícula ativa do aluno.
 2. Usa o idioma da turma para abrir o Bloo correspondente.
-3. Se o aluno ainda nÃ£o tiver Bloo naquele idioma, o sistema cria automaticamente um Bloo em estÃ¡gio Egg.
-4. O aluno vÃª diretamente a home daquele idioma.
+3. Se o aluno ainda não tiver Bloo naquele idioma, o sistema cria automaticamente um Bloo em estágio Egg.
+4. O aluno vê diretamente a home daquele idioma.
 
-No primeiro MVP, o idioma principal serÃ¡ InglÃªs e o aluno nÃ£o precisa escolher o idioma manualmente. Uma seleÃ§Ã£o entre idiomas sÃ³ serÃ¡ necessÃ¡ria quando o aluno tiver matrÃ­culas ativas em mais de um idioma ou quando a escola quiser oferecer essa navegaÃ§Ã£o explicitamente.
+No primeiro MVP, o idioma principal será Inglês e o aluno não precisa escolher o idioma manualmente. Uma seleção entre idiomas só será necessária quando o aluno tiver matrículas ativas em mais de um idioma ou quando a escola quiser oferecer essa navegação explicitamente.
 
 ### 4.3 Home do idioma antes do nascimento
 
 Elementos principais:
 
 - Ovo em destaque.
-- Nome provisÃ³rio: "Seu Bloo".
+- Nome provisório: "Seu Bloo".
 - Texto curto: "Complete o primeiro treino para conhecer seu Bloo."
-- BotÃ£o principal: "ComeÃ§ar treino".
+- Botão principal: "Começar treino".
 - Indicador de progresso: 0/6 etapas.
 
 ### 4.4 Tutorial curto
 
-O tutorial acontece antes ou dentro do primeiro treino. Deve ter no mÃ¡ximo trÃªs telas curtas:
+O tutorial acontece antes ou dentro do primeiro treino. Deve ter no máximo três telas curtas:
 
-1. "Este ovo guarda seu Bloo de InglÃªs."
+1. "Este ovo guarda seu Bloo de Inglês."
 2. "Cada resposta ajuda o ovo a rachar."
-3. "Erros trazem dicas. O importante Ã© completar o treino."
+3. "Erros trazem dicas. O importante é completar o treino."
 
-Depois disso, o aluno comeÃ§a a responder.
+Depois disso, o aluno começa a responder.
 
 ### 4.5 Primeiro treino
 
 1. Sistema apresenta uma pergunta por tela.
 2. Aluno escolhe uma resposta.
 3. Sistema mostra feedback imediato.
-4. Ovo ganha uma rachadura ou avanÃ§a a animaÃ§Ã£o.
+4. Ovo ganha uma rachadura ou avança a animação.
 5. Aluno toca em continuar.
 6. Ao terminar, o ovo se abre.
 
@@ -148,7 +148,7 @@ Depois disso, o aluno comeÃ§a a responder.
 2. Bloo filhote aparece.
 3. Mensagem de conquista.
 4. Aluno escolhe o nome do Bloo.
-5. Sistema concede o tÃ­tulo inicial `New Hatchling`.
+5. Sistema concede o título inicial `New Hatchling`.
 6. Aluno vai para a home do idioma.
 
 ### 4.7 Home do idioma depois do nascimento
@@ -157,34 +157,34 @@ Elementos principais:
 
 - Bloo filhote em destaque.
 - Nome escolhido.
-- EstÃ¡gio: Hatchling.
-- Progresso para o prÃ³ximo estÃ¡gio, mesmo que ainda seja simbÃ³lico.
-- BotÃ£o principal: "Fazer novo treino" ou "Continuar estudando".
-- Resumo: Ãºltimo treino, acertos e habilidades praticadas.
+- Estágio: Hatchling.
+- Progresso para o próximo estágio, mesmo que ainda seja simbólico.
+- Botão principal: "Fazer novo treino" ou "Continuar estudando".
+- Resumo: último treino, acertos e habilidades praticadas.
 
 ## 5. Fluxo de abandono e retorno
 
 Se o aluno sair antes de concluir o primeiro treino:
 
-- A sessÃ£o fica como abandonada ou em andamento.
+- A sessão fica como abandonada ou em andamento.
 - Ao voltar, o sistema oferece "Continuar treino".
 - O progresso visual das rachaduras pode ser retomado.
-- Se houver dÃºvida tÃ©cnica, Ã© aceitÃ¡vel reiniciar o treino, mas sem duplicar XP.
+- Se houver dúvida técnica, é aceitável reiniciar o treino, mas sem duplicar XP.
 
-## 6. Fluxo mÃ­nimo de relatÃ³rios
+## 6. Fluxo mínimo de relatórios
 
 O painel do professor/administrador deve mostrar:
 
 - Total de alunos da turma.
 - Quantos fizeram primeiro acesso.
 - Quantos iniciaram o treino.
-- Quantos concluÃ­ram o treino.
+- Quantos concluíram o treino.
 - Quantos fizeram o Bloo nascer.
 - Lista de alunos com status simples.
 
 Status sugeridos:
 
-- NÃ£o acessou.
+- Não acessou.
 - Acessou.
 - Treino iniciado.
 - Bloo nasceu.
@@ -196,5 +196,5 @@ Status sugeridos:
 - Ranking entre alunos.
 - Boss raids.
 - Chat.
-- CustomizaÃ§Ã£o avanÃ§ada.
+- Customização avançada.
 - Aplicativo nativo.

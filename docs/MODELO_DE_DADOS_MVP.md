@@ -1,19 +1,19 @@
-﻿# Modelo de Dados do MVP â€” BirdLeague
+# Modelo de Dados do MVP — BirdLeague
 
-Este documento detalha os dados mÃ­nimos para construir o MVP. Ele complementa a arquitetura tÃ©cnica e deve orientar as primeiras entidades, migrations e contratos da API.
+Este documento detalha os dados mínimos para construir o MVP. Ele complementa a arquitetura técnica e deve orientar as primeiras entidades, migrations e contratos da API.
 
-## 1. ConvenÃ§Ãµes
+## 1. Convenções
 
 - Todas as entidades principais devem ter `Id`, `CreatedAt`, `UpdatedAt` e, quando fizer sentido, `IsActive`.
 - Datas devem ser salvas em UTC.
-- ExclusÃµes devem ser lÃ³gicas quando houver histÃ³rico pedagÃ³gico ou progresso.
-- Regras de permissÃ£o devem considerar a escola (`School`) como limite de dados.
+- Exclusões devem ser lógicas quando houver histórico pedagógico ou progresso.
+- Regras de permissão devem considerar a escola (`School`) como limite de dados.
 
 ## 2. School
 
 Representa a escola ou unidade dona dos dados.
 
-Campos mÃ­nimos:
+Campos mínimos:
 
 - `Id`
 - `Name`
@@ -26,7 +26,7 @@ Campos mÃ­nimos:
 
 Representa a identidade de login.
 
-Campos mÃ­nimos:
+Campos mínimos:
 
 - `Id`
 - `SchoolId`
@@ -41,17 +41,17 @@ Campos mÃ­nimos:
 - `CreatedAt`
 - `UpdatedAt`
 
-PapÃ©is iniciais:
+Papéis iniciais:
 
 - `Admin`
 - `Teacher`
 - `Student`
 
-No MVP, administradores podem cadastrar perguntas e publicar conteÃºdo.
+No MVP, administradores podem cadastrar perguntas e publicar conteúdo.
 
 ## 4. StudentProfile
 
-Campos mÃ­nimos:
+Campos mínimos:
 
 - `Id`
 - `UserId`
@@ -64,11 +64,11 @@ Campos mÃ­nimos:
 - `CreatedAt`
 - `UpdatedAt`
 
-Dados de responsÃ¡vel podem ser opcionais no MVP se a escola controlar fora da plataforma.
+Dados de responsável podem ser opcionais no MVP se a escola controlar fora da plataforma.
 
 ## 5. TeacherProfile
 
-Campos mÃ­nimos:
+Campos mínimos:
 
 - `Id`
 - `UserId`
@@ -79,7 +79,7 @@ Campos mÃ­nimos:
 
 ## 6. Language
 
-Campos mÃ­nimos:
+Campos mínimos:
 
 - `Id`
 - `SchoolId`
@@ -89,13 +89,13 @@ Campos mÃ­nimos:
 
 Registro inicial:
 
-- `English`, cÃ³digo `en`.
+- `English`, código `en`.
 
 ## 7. CourseLevel
 
-Representa o nÃ­vel usado pela escola ou uma aproximaÃ§Ã£o CEFR.
+Representa o nível usado pela escola ou uma aproximação CEFR.
 
-Campos mÃ­nimos:
+Campos mínimos:
 
 - `Id`
 - `SchoolId`
@@ -105,7 +105,7 @@ Campos mÃ­nimos:
 - `Order`
 - `IsActive`
 
-NÃ­veis iniciais sugeridos:
+Níveis iniciais sugeridos:
 
 - `Starter`
 - `A1`
@@ -114,11 +114,11 @@ NÃ­veis iniciais sugeridos:
 - `B2`
 - `C1`
 
-Se a escola usar nomes prÃ³prios, eles podem ser cadastrados depois.
+Se a escola usar nomes próprios, eles podem ser cadastrados depois.
 
 ## 8. Class
 
-Campos mÃ­nimos:
+Campos mínimos:
 
 - `Id`
 - `SchoolId`
@@ -135,7 +135,7 @@ Campos mÃ­nimos:
 
 Liga aluno e turma.
 
-Campos mÃ­nimos:
+Campos mínimos:
 
 - `Id`
 - `SchoolId`
@@ -145,7 +145,7 @@ Campos mÃ­nimos:
 - `StartedAt`
 - `EndedAt`
 
-O idioma e o nÃ­vel da matrÃ­cula vÃªm da turma (`Class`). No MVP, nÃ£o devem ser duplicados diretamente em `Enrollment`, para evitar inconsistÃªncia entre aluno, turma e idioma.
+O idioma e o nível da matrícula vêm da turma (`Class`). No MVP, não devem ser duplicados diretamente em `Enrollment`, para evitar inconsistência entre aluno, turma e idioma.
 
 Status:
 
@@ -158,7 +158,7 @@ Status:
 
 Representa o avatar do aluno em um idioma.
 
-Campos mÃ­nimos:
+Campos mínimos:
 
 - `Id`
 - `SchoolId`
@@ -171,12 +171,12 @@ Campos mÃ­nimos:
 - `UpdatedAt`
 - `HatchedAt`
 
-EstÃ¡gios iniciais:
+Estágios iniciais:
 
 - `Egg`
 - `Hatchling`
 
-EstÃ¡gios futuros:
+Estágios futuros:
 
 - `BabyBloo`
 - `YoungBloo`
@@ -190,9 +190,9 @@ Regra:
 
 ## 11. BlooStageDefinition
 
-Define estÃ¡gios e requisitos.
+Define estágios e requisitos.
 
-Campos mÃ­nimos:
+Campos mínimos:
 
 - `Id`
 - `LanguageId`
@@ -203,13 +203,13 @@ Campos mÃ­nimos:
 - `AssetKey`
 - `IsActive`
 
-No MVP, `Egg` e `Hatchling` sÃ£o obrigatÃ³rios.
+No MVP, `Egg` e `Hatchling` são obrigatórios.
 
 ## 12. SkillCategory
 
 Categoria ampla da pergunta.
 
-Campos mÃ­nimos:
+Campos mínimos:
 
 - `Id`
 - `LanguageId`
@@ -227,13 +227,13 @@ Categorias iniciais:
 - `Speaking`
 - `Writing`
 
-No MVP, `Speaking` e `Writing` podem existir no cadastro, mas nÃ£o precisam aparecer no treino inicial.
+No MVP, `Speaking` e `Writing` podem existir no cadastro, mas não precisam aparecer no treino inicial.
 
 ## 13. Skill
 
-Habilidade especÃ­fica dentro de uma categoria.
+Habilidade específica dentro de uma categoria.
 
-Campos mÃ­nimos:
+Campos mínimos:
 
 - `Id`
 - `LanguageId`
@@ -255,7 +255,7 @@ Exemplos:
 
 ## 14. Question
 
-Campos mÃ­nimos:
+Campos mínimos:
 
 - `Id`
 - `SchoolId`
@@ -293,7 +293,7 @@ Status:
 
 ## 15. QuestionOption
 
-Campos mÃ­nimos:
+Campos mínimos:
 
 - `Id`
 - `QuestionId`
@@ -301,11 +301,11 @@ Campos mÃ­nimos:
 - `IsCorrect`
 - `Order`
 
-No MVP, perguntas objetivas devem ter uma Ãºnica opÃ§Ã£o correta.
+No MVP, perguntas objetivas devem ter uma única opção correta.
 
 ## 16. TrainingSession
 
-Campos mÃ­nimos:
+Campos mínimos:
 
 - `Id`
 - `SchoolId`
@@ -336,9 +336,9 @@ Status:
 
 ## 17. TrainingQuestion
 
-Guarda quais perguntas entraram na sessÃ£o.
+Guarda quais perguntas entraram na sessão.
 
-Campos mÃ­nimos:
+Campos mínimos:
 
 - `Id`
 - `TrainingSessionId`
@@ -348,7 +348,7 @@ Campos mÃ­nimos:
 
 ## 18. TrainingAnswer
 
-Campos mÃ­nimos:
+Campos mínimos:
 
 - `Id`
 - `TrainingSessionId`
@@ -361,9 +361,9 @@ Campos mÃ­nimos:
 
 ## 19. ProgressEvent
 
-Registra mudanÃ§as de progresso.
+Registra mudanças de progresso.
 
-Campos mÃ­nimos:
+Campos mínimos:
 
 - `Id`
 - `SchoolId`
@@ -384,13 +384,13 @@ Tipos iniciais:
 
 Regra:
 
-- Eventos derivados de uma mesma sessÃ£o devem ser idempotentes.
+- Eventos derivados de uma mesma sessão devem ser idempotentes.
 
 ## 20. SkillMastery
 
 Guarda progresso do aluno por habilidade.
 
-Campos mÃ­nimos:
+Campos mínimos:
 
 - `Id`
 - `SchoolId`
@@ -411,11 +411,11 @@ Status:
 
 Regra inicial:
 
-- Uma habilidade sÃ³ pode virar `Mastered` apÃ³s pelo menos 5 respostas em pelo menos 2 sessÃµes diferentes e acerto mÃ­nimo de 80%.
+- Uma habilidade só pode virar `Mastered` após pelo menos 5 respostas em pelo menos 2 sessões diferentes e acerto mínimo de 80%.
 
 ## 21. Title
 
-Campos mÃ­nimos:
+Campos mínimos:
 
 - `Id`
 - `LanguageId`
@@ -425,15 +425,15 @@ Campos mÃ­nimos:
 - `RequirementType`
 - `IsActive`
 
-TÃ­tulos iniciais:
+Títulos iniciais:
 
 - `New Hatchling`: concedido ao nascer o primeiro Bloo.
-- `Grammar Guardian`: futuro, por domÃ­nio de gramÃ¡tica.
-- `Vocabulary Explorer`: futuro, por domÃ­nio de vocabulÃ¡rio.
+- `Grammar Guardian`: futuro, por domínio de gramática.
+- `Vocabulary Explorer`: futuro, por domínio de vocabulário.
 
 ## 22. StudentTitle
 
-Campos mÃ­nimos:
+Campos mínimos:
 
 - `Id`
 - `StudentProfileId`
@@ -444,7 +444,7 @@ Campos mÃ­nimos:
 
 ## 23. Asset
 
-Campos mÃ­nimos:
+Campos mínimos:
 
 - `Id`
 - `Key`
@@ -465,7 +465,7 @@ Tipos:
 
 ## 24. AnalyticsEvent
 
-Campos mÃ­nimos:
+Campos mínimos:
 
 - `Id`
 - `SchoolId`

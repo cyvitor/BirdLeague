@@ -1,170 +1,170 @@
-﻿# Roadmap â€” BirdLeague
+# Roadmap — BirdLeague
 
 ## 1. Como usar este roadmap
 
-O roadmap estÃ¡ organizado por resultados, nÃ£o apenas por funcionalidades. Cada fase deve ser validada antes da prÃ³xima. Datas serÃ£o adicionadas depois que equipe, disponibilidade e volume de conteÃºdo forem conhecidos.
+O roadmap está organizado por resultados, não apenas por funcionalidades. Cada fase deve ser validada antes da próxima. Datas serão adicionadas depois que equipe, disponibilidade e volume de conteúdo forem conhecidos.
 
-O MVP termina quando a escola consegue cadastrar uma turma e um aluno consegue transformar seu ovo em Hatchling em um fluxo utilizÃ¡vel, mensurÃ¡vel e seguro.
+O MVP termina quando a escola consegue cadastrar uma turma e um aluno consegue transformar seu ovo em Hatchling em um fluxo utilizável, mensurável e seguro.
 
-## 2. Fase 0 â€” Descoberta e decisÃµes fundamentais
+## 2. Fase 0 — Descoberta e decisões fundamentais
 
 ### Objetivo
 
-Eliminar dÃºvidas que mudariam significativamente o produto ou a implementaÃ§Ã£o.
+Eliminar dúvidas que mudariam significativamente o produto ou a implementação.
 
 ### Atividades
 
-- Definir a faixa etÃ¡ria do primeiro grupo piloto.
-- Escolher o primeiro idioma e os nÃ­veis atendidos.
-- Entrevistar professores e observar o processo atual de exercÃ­cios.
+- Definir a faixa etária do primeiro grupo piloto.
+- Escolher o primeiro idioma e os níveis atendidos.
+- Entrevistar professores e observar o processo atual de exercícios.
 - Conversar com alunos sobre avatares, recompensas e linguagem.
-- Definir quem cria e quem revisa questÃµes.
-- Definir critÃ©rios pedagÃ³gicos de dificuldade e domÃ­nio.
+- Definir quem cria e quem revisa questões.
+- Definir critérios pedagógicos de dificuldade e domínio.
 - Mapear requisitos de LGPD para dados de menores.
-- Confirmar orÃ§amento, equipe e ambiente de hospedagem.
-- Reunir a imagem original do Bloo da Bluebird como referÃªncia visual.
-- Definir a direÃ§Ã£o de arte do Bloo: estilo, proporÃ§Ã£o, enquadramento, paleta e nÃ­vel de detalhe.
+- Confirmar orçamento, equipe e ambiente de hospedagem.
+- Reunir a imagem original do Bloo da Bluebird como referência visual.
+- Definir a direção de arte do Bloo: estilo, proporção, enquadramento, paleta e nível de detalhe.
 - Produzir os primeiros conceitos visuais de Egg, ovo rachando e Hatchling.
 
-### CritÃ©rios de conclusÃ£o
+### Critérios de conclusão
 
-- PÃºblico piloto e primeiro idioma definidos.
-- ResponsÃ¡vel pedagÃ³gico identificado.
+- Público piloto e primeiro idioma definidos.
+- Responsável pedagógico identificado.
 - Fluxo do primeiro acesso aprovado por professores.
-- PolÃ­tica inicial de dados e acesso definida.
+- Política inicial de dados e acesso definida.
 - Escopo do MVP aceito pela escola.
 
-## 3. Fase 1 â€” ProtÃ³tipo da experiÃªncia
+## 3. Fase 1 — Protótipo da experiência
 
 ### Objetivo
 
-Validar a clareza e o apelo do ciclo Egg â†’ treinamento â†’ Hatchling antes da construÃ§Ã£o completa.
+Validar a clareza e o apelo do ciclo Egg → treinamento → Hatchling antes da construção completa.
 
 ### Atividades
 
-- Criar protÃ³tipo navegÃ¡vel da interface do aluno.
-- Criar protÃ³tipo do cadastro de turma e aluno.
-- Testar o uso do Bloo original como referÃªncia para um pequeno asset pack inicial.
-- Validar se Egg, rachaduras e Hatchling mantÃªm a identidade visual da Bluebird.
+- Criar protótipo navegável da interface do aluno.
+- Criar protótipo do cadastro de turma e aluno.
+- Testar o uso do Bloo original como referência para um pequeno asset pack inicial.
+- Validar se Egg, rachaduras e Hatchling mantêm a identidade visual da Bluebird.
 - Testar o tutorial com um pequeno grupo.
-- Testar quantidade e duraÃ§Ã£o das perguntas iniciais.
+- Testar quantidade e duração das perguntas iniciais.
 - Avaliar a cena de quebra do ovo.
 - Ajustar linguagem, contraste, tamanho de controles e feedback.
 
-### CritÃ©rios de conclusÃ£o
+### Critérios de conclusão
 
 - Alunos entendem que estudar faz o Bloo evoluir.
 - Alunos reconhecem o Bloo como parte do universo Bluebird.
-- Alunos conseguem completar o fluxo sem explicaÃ§Ã£o externa constante.
+- Alunos conseguem completar o fluxo sem explicação externa constante.
 - Professores entendem como criar e acompanhar uma turma.
-- Principais problemas de usabilidade estÃ£o registrados e corrigidos no protÃ³tipo.
+- Principais problemas de usabilidade estão registrados e corrigidos no protótipo.
 
-## 4. Fase 2 â€” FundaÃ§Ã£o tÃ©cnica
+## 4. Fase 2 — Fundação técnica
 
 ### Objetivo
 
-Criar a base segura e testÃ¡vel do produto.
+Criar a base segura e testável do produto.
 
 ### Entregas
 
 - Estrutura do backend e frontend.
-- Banco MySQL e migraÃ§Ãµes.
-- Ambientes de desenvolvimento e homologaÃ§Ã£o.
-- IntegraÃ§Ã£o contÃ­nua com testes e build.
-- AutenticaÃ§Ã£o e papÃ©is iniciais.
-- SeparaÃ§Ã£o de dados por escola.
+- Banco MySQL e migrações.
+- Ambientes de desenvolvimento e homologação.
+- Integração contínua com testes e build.
+- Autenticação e papéis iniciais.
+- Separação de dados por escola.
 - Logs, monitoramento de erros e backups.
 - Contrato OpenAPI e cliente do frontend.
 
-### CritÃ©rios de conclusÃ£o
+### Critérios de conclusão
 
-- AplicaÃ§Ãµes podem ser implantadas automaticamente em homologaÃ§Ã£o.
+- Aplicações podem ser implantadas automaticamente em homologação.
 - Login funciona para administrador, professor e aluno.
-- Testes confirmam isolamento bÃ¡sico de permissÃµes.
-- Erros crÃ­ticos podem ser identificados nos registros.
+- Testes confirmam isolamento básico de permissões.
+- Erros críticos podem ser identificados nos registros.
 
-## 5. Fase 3 â€” AdministraÃ§Ã£o escolar
+## 5. Fase 3 — Administração escolar
 
 ### Objetivo
 
-Permitir que a Bluebird prepare o primeiro grupo sem intervenÃ§Ã£o tÃ©cnica.
+Permitir que a Bluebird prepare o primeiro grupo sem intervenção técnica.
 
 ### Entregas
 
-- Cadastro e ediÃ§Ã£o de idiomas.
-- Cadastro de turmas, nÃ­veis, perÃ­odos e professores.
+- Cadastro e edição de idiomas.
+- Cadastro de turmas, níveis, períodos e professores.
 - Cadastro individual de alunos.
-- AssociaÃ§Ã£o de aluno a mÃºltiplas turmas e idiomas.
-- GeraÃ§Ã£o e redefiniÃ§Ã£o de credenciais temporÃ¡rias.
+- Associação de aluno a múltiplas turmas e idiomas.
+- Geração e redefinição de credenciais temporárias.
 - Listagem, busca e filtros.
-- Registro de aÃ§Ãµes administrativas relevantes.
+- Registro de ações administrativas relevantes.
 
-### PossÃ­vel ampliaÃ§Ã£o do MVP
+### Possível ampliação do MVP
 
-- ImportaÃ§Ã£o de alunos por planilha, caso o piloto torne o cadastro individual inviÃ¡vel.
+- Importação de alunos por planilha, caso o piloto torne o cadastro individual inviável.
 
-### CritÃ©rios de conclusÃ£o
+### Critérios de conclusão
 
 - Um administrador cria sozinho idioma, turma e alunos.
-- Um aluno pode estar em mais de uma turma sem duplicaÃ§Ã£o de perfil.
+- Um aluno pode estar em mais de uma turma sem duplicação de perfil.
 - Professores veem somente as turmas autorizadas.
-- Credenciais podem ser redefinidas com seguranÃ§a.
+- Credenciais podem ser redefinidas com segurança.
 
-## 6. Fase 4 â€” ConteÃºdo pedagÃ³gico
+## 6. Fase 4 — Conteúdo pedagógico
 
 ### Objetivo
 
-Disponibilizar questÃµes revisadas e organizadas para o treinamento inicial.
+Disponibilizar questões revisadas e organizadas para o treinamento inicial.
 
 ### Entregas
 
-- Cadastro e ediÃ§Ã£o de questÃµes.
-- ClassificaÃ§Ã£o por idioma, nÃ­vel, tema, habilidade e dificuldade.
-- QuestÃµes de mÃºltipla escolha e completar com opÃ§Ãµes.
-- ExplicaÃ§Ãµes para respostas.
-- Estados de rascunho, revisÃ£o, publicaÃ§Ã£o e arquivamento.
-- PrÃ©-visualizaÃ§Ã£o como aluno.
-- Conjunto inicial de questÃµes revisado pedagogicamente.
+- Cadastro e edição de questões.
+- Classificação por idioma, nível, tema, habilidade e dificuldade.
+- Questões de múltipla escolha e completar com opções.
+- Explicações para respostas.
+- Estados de rascunho, revisão, publicação e arquivamento.
+- Pré-visualização como aluno.
+- Conjunto inicial de questões revisado pedagogicamente.
 
-### CritÃ©rios de conclusÃ£o
+### Critérios de conclusão
 
-- Nenhuma questÃ£o chega ao aluno sem estar publicada.
-- QuestÃµes arquivadas permanecem no histÃ³rico.
+- Nenhuma questão chega ao aluno sem estar publicada.
+- Questões arquivadas permanecem no histórico.
 - O conjunto inicial cobre todos os caminhos do primeiro treinamento.
-- ExplicaÃ§Ãµes sÃ£o compreensÃ­veis pela faixa etÃ¡ria piloto.
+- Explicações são compreensíveis pela faixa etária piloto.
 
-## 7. Fase 5 â€” Jornada do aluno e nascimento do Bloo
+## 7. Fase 5 — Jornada do aluno e nascimento do Bloo
 
 ### Objetivo
 
-Entregar o primeiro ciclo completo e emocionalmente satisfatÃ³rio.
+Entregar o primeiro ciclo completo e emocionalmente satisfatório.
 
 ### Entregas
 
 - Login e primeiro acesso.
-- Entrada direta no idioma associado Ã  turma do aluno.
-- SeleÃ§Ã£o entre idiomas matriculados apenas quando houver mÃºltiplas matrÃ­culas ativas em idiomas diferentes.
-- CriaÃ§Ã£o automÃ¡tica de um Bloo por aluno e idioma.
+- Entrada direta no idioma associado à turma do aluno.
+- Seleção entre idiomas matriculados apenas quando houver múltiplas matrículas ativas em idiomas diferentes.
+- Criação automática de um Bloo por aluno e idioma.
 - Tutorial interativo.
 - Home do idioma com Egg.
 - Assets finais do MVP para Egg, rachaduras e Hatchling.
 - Treinamento inicial.
 - Feedback de acerto e erro.
 - Progresso visual das rachaduras.
-- EvoluÃ§Ã£o Egg â†’ Hatchling pela conclusÃ£o.
+- Evolução Egg → Hatchling pela conclusão.
 - Escolha do nome do Bloo.
-- TÃ­tulo New Hatchling.
-- PrÃ³ximo objetivo visÃ­vel.
+- Título New Hatchling.
+- Próximo objetivo visível.
 
-### CritÃ©rios de conclusÃ£o
+### Critérios de conclusão
 
 - O fluxo funciona bem em celular e desktop.
-- Erros de resposta nÃ£o impedem o nascimento.
-- Recarregar ou reenviar uma aÃ§Ã£o nÃ£o duplica XP ou evoluÃ§Ã£o.
-- Um Bloo de um idioma nÃ£o interfere em outro.
+- Erros de resposta não impedem o nascimento.
+- Recarregar ou reenviar uma ação não duplica XP ou evolução.
+- Um Bloo de um idioma não interfere em outro.
 - O aluno entende o que fazer depois do nascimento.
 
-## 8. Fase 6 â€” Progresso e acompanhamento
+## 8. Fase 6 — Progresso e acompanhamento
 
 ### Objetivo
 
@@ -173,38 +173,38 @@ Dar significado ao uso para aluno e professor e medir o piloto.
 ### Entregas
 
 - Perfil do aluno com seus Bloos.
-- EstÃ¡gio e progresso atual.
-- HistÃ³rico resumido de treinamentos.
+- Estágio e progresso atual.
+- Histórico resumido de treinamentos.
 - Painel do professor por turma.
-- Indicadores de primeiro acesso e conclusÃ£o.
-- ParticipaÃ§Ã£o recente.
+- Indicadores de primeiro acesso e conclusão.
+- Participação recente.
 - Desempenho inicial por habilidade.
-- Eventos analÃ­ticos do funil principal.
+- Eventos analíticos do funil principal.
 
-### CritÃ©rios de conclusÃ£o
+### Critérios de conclusão
 
 - Professor identifica quem iniciou e quem concluiu.
 - Aluno visualiza claramente seu progresso.
-- A equipe mede inÃ­cio, abandono, conclusÃ£o e retorno.
-- RelatÃ³rios respeitam as permissÃµes e nÃ£o expÃµem dados indevidos.
+- A equipe mede início, abandono, conclusão e retorno.
+- Relatórios respeitam as permissões e não expõem dados indevidos.
 
-## 9. Fase 7 â€” Piloto do MVP
+## 9. Fase 7 — Piloto do MVP
 
 ### Objetivo
 
 Validar o produto com uso real antes de ampliar o escopo.
 
-### PreparaÃ§Ã£o
+### Preparação
 
 - Selecionar uma ou poucas turmas.
 - Treinar professores e preparar suporte.
-- Confirmar conteÃºdo e contas.
+- Confirmar conteúdo e contas.
 - Realizar teste de carga proporcional ao piloto.
 - Preparar canal de feedback e plano de incidentes.
 
 ### Indicadores principais
 
-- Taxa de conclusÃ£o do primeiro treinamento.
+- Taxa de conclusão do primeiro treinamento.
 - Taxa de nascimento do Bloo.
 - Retorno no dia seguinte e em sete dias.
 - Treinamentos por aluno por semana.
@@ -212,116 +212,116 @@ Validar o produto com uso real antes de ampliar o escopo.
 - Dificuldades relatadas por professores.
 - Interesse declarado em continuar evoluindo o Bloo.
 
-### DecisÃ£o ao final
+### Decisão ao final
 
-O MVP serÃ¡ considerado validado se o fluxo for utilizÃ¡vel, os professores conseguirem operÃ¡-lo e houver evidÃªncia de que uma parcela relevante dos alunos retorna voluntariamente para continuar a jornada.
+O MVP será considerado validado se o fluxo for utilizável, os professores conseguirem operá-lo e houver evidência de que uma parcela relevante dos alunos retorna voluntariamente para continuar a jornada.
 
-Os nÃºmeros-alvo devem ser definidos antes do piloto, depois que tamanho da amostra, idade e rotina escolar forem conhecidos.
+Os números-alvo devem ser definidos antes do piloto, depois que tamanho da amostra, idade e rotina escolar forem conhecidos.
 
-## 10. PÃ³s-MVP 1 â€” Rotina de treinamento
-
-### Objetivo
-
-Transformar a primeira experiÃªncia em hÃ¡bito de estudo.
-
-- Novas sessÃµes de treinamento.
-- Mistura de conteÃºdo novo e revisÃ£o espaÃ§ada.
-- Mais estÃ¡gios de evoluÃ§Ã£o do Bloo.
-- MissÃµes diÃ¡rias e semanais.
-- Metas flexÃ­veis de constÃ¢ncia.
-- Conquistas e tÃ­tulos.
-- PersonalizaÃ§Ãµes cosmÃ©ticas simples, comeÃ§ando por acessÃ³rios separados com fundo transparente.
-- Primeira coleÃ§Ã£o de itens: Ã³culos, chapÃ©us, medalhas, fones, livros ou capas.
-- NotificaÃ§Ãµes controladas e apropriadas Ã  idade.
-- ImportaÃ§Ã£o de alunos e questÃµes em lote.
-
-## 11. PÃ³s-MVP 2 â€” DomÃ­nio, raridade e poderes
+## 10. Pós-MVP 1 — Rotina de treinamento
 
 ### Objetivo
 
-Transformar conhecimento demonstrado em coleÃ§Ã£o estratÃ©gica.
+Transformar a primeira experiência em hábito de estudo.
 
-- Progresso de domÃ­nio por habilidade.
-- VariaÃ§Ãµes de questÃµes para comprovar domÃ­nio.
-- Desafios comuns, raros, Ã©picos e lendÃ¡rios.
+- Novas sessões de treinamento.
+- Mistura de conteúdo novo e revisão espaçada.
+- Mais estágios de evolução do Bloo.
+- Missões diárias e semanais.
+- Metas flexíveis de constância.
+- Conquistas e títulos.
+- Personalizações cosméticas simples, começando por acessórios separados com fundo transparente.
+- Primeira coleção de itens: óculos, chapéus, medalhas, fones, livros ou capas.
+- Notificações controladas e apropriadas à idade.
+- Importação de alunos e questões em lote.
+
+## 11. Pós-MVP 2 — Domínio, raridade e poderes
+
+### Objetivo
+
+Transformar conhecimento demonstrado em coleção estratégica.
+
+- Progresso de domínio por habilidade.
+- Variações de questões para comprovar domínio.
+- Desafios comuns, raros, épicos e lendários.
 - Primeiras cartas ou poderes.
 - Deck simples e limites de uso.
-- Tela de coleÃ§Ã£o.
-- Testes de compreensÃ£o e balanceamento.
+- Tela de coleção.
+- Testes de compreensão e balanceamento.
 
-Antes de criar batalhas, os poderes podem ser usados em desafios individuais. Isso permite validar se sÃ£o compreensÃ­veis e desejados.
+Antes de criar batalhas, os poderes podem ser usados em desafios individuais. Isso permite validar se são compreensíveis e desejados.
 
-## 12. PÃ³s-MVP 3 â€” CompetiÃ§Ãµes entre turmas
+## 12. Pós-MVP 3 — Competições entre turmas
 
 ### Objetivo
 
-Criar pertencimento e cooperaÃ§Ã£o com menor complexidade que o PvP em tempo real.
+Criar pertencimento e cooperação com menor complexidade que o PvP em tempo real.
 
 - Temporadas semanais.
-- PontuaÃ§Ã£o normalizada pelo tamanho da turma.
-- Limite de contribuiÃ§Ã£o diÃ¡ria.
-- Pontos por participaÃ§Ã£o, constÃ¢ncia, domÃ­nio e atividades validadas.
+- Pontuação normalizada pelo tamanho da turma.
+- Limite de contribuição diária.
+- Pontos por participação, constância, domínio e atividades validadas.
 - Painel de andamento.
-- TrofÃ©us e banners coletivos.
-- Ferramentas de configuraÃ§Ã£o e moderaÃ§Ã£o para professores.
-- AvaliaÃ§Ã£o do impacto sobre alunos menos ativos.
+- Troféus e banners coletivos.
+- Ferramentas de configuração e moderação para professores.
+- Avaliação do impacto sobre alunos menos ativos.
 
-## 13. PÃ³s-MVP 4 â€” Boss raids e eventos
+## 13. Pós-MVP 4 — Boss raids e eventos
 
 ### Objetivo
 
 Criar eventos cooperativos que envolvam turmas ou toda a escola.
 
-- Primeiro boss temÃ¡tico.
+- Primeiro boss temático.
 - Energia coletiva e fases.
-- Perguntas ligadas Ã s fraquezas do boss.
-- Recompensas coletivas e cosmÃ©ticas.
-- CalendÃ¡rio de eventos.
-- MÃ©tricas de participaÃ§Ã£o e equilÃ­brio.
+- Perguntas ligadas às fraquezas do boss.
+- Recompensas coletivas e cosméticas.
+- Calendário de eventos.
+- Métricas de participação e equilíbrio.
 - Ferramentas para professores acompanharem habilidades com maior dificuldade.
 
-## 14. PÃ³s-MVP 5 â€” Batalhas assÃ­ncronas
+## 14. Pós-MVP 5 — Batalhas assíncronas
 
 ### Objetivo
 
 Validar regras competitivas sem exigir que dois alunos estejam conectados simultaneamente.
 
-- Desafios entre alunos de nÃ­vel semelhante.
-- SequÃªncias equivalentes, mas nÃ£o necessariamente idÃªnticas.
+- Desafios entre alunos de nível semelhante.
+- Sequências equivalentes, mas não necessariamente idênticas.
 - Uso limitado de poderes.
 - Resultado e replay resumido.
-- Matchmaking por idioma, nÃ­vel e histÃ³rico.
-- DenÃºncia, abandono e regras de conduta.
+- Matchmaking por idioma, nível e histórico.
+- Denúncia, abandono e regras de conduta.
 - Ligas e temporadas curtas.
 
-## 15. PÃ³s-MVP 6 â€” PvP em tempo real
+## 15. Pós-MVP 6 — PvP em tempo real
 
 ### Objetivo
 
-Entregar batalhas 1x1 justas, estÃ¡veis e pedagogicamente Ãºteis.
+Entregar batalhas 1x1 justas, estáveis e pedagogicamente úteis.
 
 - Infraestrutura em tempo real.
-- Matchmaking e presenÃ§a.
-- ReconexÃ£o e tratamento de abandono.
-- SincronizaÃ§Ã£o segura da partida.
+- Matchmaking e presença.
+- Reconexão e tratamento de abandono.
+- Sincronização segura da partida.
 - Poderes como Shield, Freeze, Reverse e Hard Mode balanceados.
-- ProteÃ§Ãµes contra trapaÃ§a.
-- ModeraÃ§Ã£o e apelidos seguros.
-- Testes de acessibilidade e impacto da pressÃ£o de tempo.
+- Proteções contra trapaça.
+- Moderação e apelidos seguros.
+- Testes de acessibilidade e impacto da pressão de tempo.
 
-O PvP somente deve avanÃ§ar se as batalhas assÃ­ncronas mostrarem que a competiÃ§Ã£o aumenta estudo sem aumentar ansiedade, conflito ou desistÃªncia.
+O PvP somente deve avançar se as batalhas assíncronas mostrarem que a competição aumenta estudo sem aumentar ansiedade, conflito ou desistência.
 
-## 16. PÃ³s-MVP 7 â€” ExpansÃ£o da plataforma
+## 16. Pós-MVP 7 — Expansão da plataforma
 
-- PWA instalÃ¡vel e suporte limitado a conexÃ£o instÃ¡vel.
-- Aplicativo mÃ³vel, se os dados justificarem.
-- Listening avanÃ§ado.
-- Speaking e pronÃºncia com critÃ©rios transparentes.
+- PWA instalável e suporte limitado a conexão instável.
+- Aplicativo móvel, se os dados justificarem.
+- Listening avançado.
+- Speaking e pronúncia com critérios transparentes.
 - Atividades de escrita.
-- Portal resumido para responsÃ¡veis.
+- Portal resumido para responsáveis.
 - Novos idiomas.
 - Campanhas narrativas e eventos sazonais.
-- Ferramentas avanÃ§adas de autoria e revisÃ£o pedagÃ³gica.
+- Ferramentas avançadas de autoria e revisão pedagógica.
 
 ## 17. Prioridades permanentes
 
@@ -330,23 +330,23 @@ Em todas as fases:
 - Testar com alunos e professores.
 - Revisar acessibilidade.
 - Proteger dados pessoais e de menores.
-- Medir aprendizado e retorno, nÃ£o apenas tempo de tela.
+- Medir aprendizado e retorno, não apenas tempo de tela.
 - Evitar rankings humilhantes.
-- Manter regras de progresso explicÃ¡veis.
-- NÃ£o permitir compra de vantagem pedagÃ³gica ou competitiva.
-- Registrar decisÃµes importantes na documentaÃ§Ã£o.
+- Manter regras de progresso explicáveis.
+- Não permitir compra de vantagem pedagógica ou competitiva.
+- Registrar decisões importantes na documentação.
 
-## 18. Fora de escopo atÃ© validaÃ§Ã£o
+## 18. Fora de escopo até validação
 
-As ideias abaixo nÃ£o devem desviar o MVP:
+As ideias abaixo não devem desviar o MVP:
 
-- Mundo aberto ou exploraÃ§Ã£o 3D.
+- Mundo aberto ou exploração 3D.
 - Chat livre entre alunos.
 - Mercado de troca de itens.
 - Criptomoedas ou NFTs.
 - Loja de poderes.
 - PvP em tempo real antes das etapas anteriores.
-- CorreÃ§Ã£o automÃ¡tica de fala sem validaÃ§Ã£o pedagÃ³gica.
-- Algoritmos complexos de adaptaÃ§Ã£o sem dados suficientes.
+- Correção automática de fala sem validação pedagógica.
+- Algoritmos complexos de adaptação sem dados suficientes.
 
-O BirdLeague pode crescer bastante. A disciplina do roadmap Ã© garantir que ele cresÃ§a a partir de um ciclo pequeno que os alunos realmente amem usar.
+O BirdLeague pode crescer bastante. A disciplina do roadmap é garantir que ele cresça a partir de um ciclo pequeno que os alunos realmente amem usar.

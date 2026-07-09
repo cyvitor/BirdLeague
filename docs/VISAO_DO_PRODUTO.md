@@ -1,12 +1,12 @@
-﻿# VisÃ£o do Produto â€” BirdLeague
+# Visão do Produto — BirdLeague
 
-## 1. O que Ã© o BirdLeague
+## 1. O que é o BirdLeague
 
-BirdLeague Ã© uma experiÃªncia gamificada de aprendizagem de idiomas para os alunos da Bluebird. Dentro dela, cada estudante recebe um Bloo que representa sua jornada naquele idioma. O Bloo comeÃ§a como um ovo e evolui conforme o aluno estuda, pratica, mantÃ©m constÃ¢ncia e demonstra domÃ­nio de novas habilidades.
+BirdLeague é uma experiência gamificada de aprendizagem de idiomas para os alunos da Bluebird. Dentro dela, cada estudante recebe um Bloo que representa sua jornada naquele idioma. O Bloo começa como um ovo e evolui conforme o aluno estuda, pratica, mantém constância e demonstra domínio de novas habilidades.
 
-O Bloo nÃ£o Ã© apenas uma imagem de perfil. Ele Ã© a representaÃ§Ã£o visÃ­vel da dedicaÃ§Ã£o do aluno, das habilidades que desenvolveu e da histÃ³ria que construiu dentro da escola.
+O Bloo não é apenas uma imagem de perfil. Ele é a representação visível da dedicação do aluno, das habilidades que desenvolveu e da história que construiu dentro da escola.
 
-Cada idioma possui sua prÃ³pria jornada. Um aluno matriculado em inglÃªs e espanhol, por exemplo, terÃ¡ um Bloo de inglÃªs e outro de espanhol. Eles podem estar em nÃ­veis diferentes, possuir conquistas diferentes e seguir progressÃµes prÃ³prias.
+Cada idioma possui sua própria jornada. Um aluno matriculado em inglês e espanhol, por exemplo, terá um Bloo de inglês e outro de espanhol. Eles podem estar em níveis diferentes, possuir conquistas diferentes e seguir progressões próprias.
 
 
 ### 1.1 Nomenclatura
@@ -17,198 +17,198 @@ Cada idioma possui sua prÃ³pria jornada. Um aluno matriculado em inglÃªs e e
 
 Essa separação evita que "Bird" signifique ao mesmo tempo aluno, comunidade e personagem do jogo.
 
-## 2. VisÃ£o
+## 2. Visão
 
-Transformar o estudo de idiomas em uma jornada que o aluno queira continuar todos os dias, unindo evoluÃ§Ã£o pessoal, pertencimento, estratÃ©gia, cooperaÃ§Ã£o e competiÃ§Ã£o saudÃ¡vel.
+Transformar o estudo de idiomas em uma jornada que o aluno queira continuar todos os dias, unindo evolução pessoal, pertencimento, estratégia, cooperação e competição saudável.
 
 O BirdLeague deve provocar um pensamento simples:
 
-> â€œQuero fazer mais um treino para ver meu Bloo evoluir.â€
+> “Quero fazer mais um treino para ver meu Bloo evoluir.”
 
-Com o amadurecimento do produto, essa motivaÃ§Ã£o tambÃ©m deverÃ¡ se transformar em:
+Com o amadurecimento do produto, essa motivação também deverá se transformar em:
 
-> â€œQuero aprender essa habilidade para fortalecer meu Bloo e ajudar minha turma.â€
+> “Quero aprender essa habilidade para fortalecer meu Bloo e ajudar minha turma.”
 
 ## 3. Proposta de valor
 
 ### Para o aluno
 
-- Ver seu esforÃ§o transformado em evoluÃ§Ã£o visÃ­vel.
-- Estudar em sessÃµes curtas e com objetivos claros.
-- Colecionar habilidades, tÃ­tulos, itens e conquistas.
-- Competir com pessoas de nÃ­vel semelhante.
+- Ver seu esforço transformado em evolução visível.
+- Estudar em sessões curtas e com objetivos claros.
+- Colecionar habilidades, títulos, itens e conquistas.
+- Competir com pessoas de nível semelhante.
 - Contribuir para sua turma mesmo sem ser o aluno com mais acertos.
-- Receber explicaÃ§Ãµes que transformam erros em aprendizado.
+- Receber explicações que transformam erros em aprendizado.
 
 ### Para o professor
 
 - Engajar a turma entre as aulas.
-- Identificar conteÃºdos que precisam ser retomados.
-- Acompanhar constÃ¢ncia, participaÃ§Ã£o e domÃ­nio.
+- Identificar conteúdos que precisam ser retomados.
+- Acompanhar constância, participação e domínio.
 - Criar objetivos coletivos sem depender apenas de notas.
-- Celebrar esforÃ§o e progresso, alÃ©m de desempenho absoluto.
+- Celebrar esforço e progresso, além de desempenho absoluto.
 
 ### Para a escola
 
 - Fortalecer a identidade da comunidade Bluebird.
-- Aumentar a frequÃªncia de estudo fora da sala de aula.
+- Aumentar a frequência de estudo fora da sala de aula.
 - Criar eventos e narrativas que conectam diferentes turmas.
-- Tornar o progresso do aluno mais perceptÃ­vel para ele, professores e responsÃ¡veis.
+- Tornar o progresso do aluno mais perceptível para ele, professores e responsáveis.
 
-## 4. PÃºblico
+## 4. Público
 
 O produto atende quatro grupos principais:
 
 1. **Alunos**, que treinam, evoluem seus Bloos e participam das atividades.
-2. **Professores**, que acompanham turmas, conteÃºdos e evoluÃ§Ã£o.
-3. **Administradores**, que organizam idiomas, turmas, usuÃ¡rios, perÃ­odos e regras gerais.
-4. **ResponsÃ¡veis**, que poderÃ£o receber uma visÃ£o positiva e resumida do progresso em uma etapa futura.
+2. **Professores**, que acompanham turmas, conteúdos e evolução.
+3. **Administradores**, que organizam idiomas, turmas, usuários, períodos e regras gerais.
+4. **Responsáveis**, que poderão receber uma visão positiva e resumida do progresso em uma etapa futura.
 
-A idade dos alunos precisa ser considerada na linguagem, quantidade de leitura, desenho dos avatares e complexidade das batalhas. A experiÃªncia poderÃ¡ possuir apresentaÃ§Ãµes visuais diferentes por faixa etÃ¡ria, mantendo as mesmas regras centrais.
+A idade dos alunos precisa ser considerada na linguagem, quantidade de leitura, desenho dos avatares e complexidade das batalhas. A experiência poderá possuir apresentações visuais diferentes por faixa etária, mantendo as mesmas regras centrais.
 
-## 5. PrincÃ­pios de produto
+## 5. Princípios de produto
 
-### 5.1 Aprendizado antes da competiÃ§Ã£o
+### 5.1 Aprendizado antes da competição
 
-As mecÃ¢nicas existem para estimular estudo e domÃ­nio. Uma atividade nunca deve ser pedagogicamente pior apenas para parecer mais divertida.
+As mecânicas existem para estimular estudo e domínio. Uma atividade nunca deve ser pedagogicamente pior apenas para parecer mais divertida.
 
-### 5.2 DomÃ­nio antes da recompensa rara
+### 5.2 Domínio antes da recompensa rara
 
-Uma resposta isolada pode acontecer por sorte. Habilidades relevantes devem ser concedidas quando o aluno demonstra domÃ­nio em perguntas variadas sobre o mesmo conceito.
+Uma resposta isolada pode acontecer por sorte. Habilidades relevantes devem ser concedidas quando o aluno demonstra domínio em perguntas variadas sobre o mesmo conceito.
 
 ### 5.3 O erro faz parte da jornada
 
-O erro deve gerar feedback, nova oportunidade e orientaÃ§Ã£o. No primeiro contato, especialmente, ele nÃ£o pode impedir o aluno de avanÃ§ar ou fazer seu Bloo nascer.
+O erro deve gerar feedback, nova oportunidade e orientação. No primeiro contato, especialmente, ele não pode impedir o aluno de avançar ou fazer seu Bloo nascer.
 
-### 5.4 ConstÃ¢ncia vale tanto quanto intensidade
+### 5.4 Constância vale tanto quanto intensidade
 
-O BirdLeague deve incentivar pequenas sessÃµes frequentes. Estudar dez minutos em vÃ¡rios dias tende a ser mais valioso do que concentrar tudo em uma Ãºnica sessÃ£o.
+O BirdLeague deve incentivar pequenas sessões frequentes. Estudar dez minutos em vários dias tende a ser mais valioso do que concentrar tudo em uma única sessão.
 
-### 5.5 CompetiÃ§Ã£o sem humilhaÃ§Ã£o
+### 5.5 Competição sem humilhação
 
-O sistema nÃ£o exibirÃ¡ rankings de piores alunos. A comparaÃ§Ã£o serÃ¡ organizada por ligas, nÃ­veis e perÃ­odos curtos. TambÃ©m haverÃ¡ metas pessoais e coletivas.
+O sistema não exibirá rankings de piores alunos. A comparação será organizada por ligas, níveis e períodos curtos. Também haverá metas pessoais e coletivas.
 
-### 5.6 JustiÃ§a entre nÃ­veis
+### 5.6 Justiça entre níveis
 
-Um iniciante deve conseguir contribuir tanto quanto um aluno avanÃ§ado. As perguntas e metas serÃ£o ajustadas Ã  capacidade de cada participante.
+Um iniciante deve conseguir contribuir tanto quanto um aluno avançado. As perguntas e metas serão ajustadas à capacidade de cada participante.
 
 ### 5.7 Sem vantagem comprada
 
-Itens visuais podem ser oferecidos como recompensa ou benefÃ­cio, mas dinheiro nunca deve comprar conhecimento, poder competitivo ou posiÃ§Ã£o no ranking.
+Itens visuais podem ser oferecidos como recompensa ou benefício, mas dinheiro nunca deve comprar conhecimento, poder competitivo ou posição no ranking.
 
-### 5.8 SeguranÃ§a e bem-estar
+### 5.8 Segurança e bem-estar
 
-O produto deve evitar comunicaÃ§Ã£o aberta sem supervisÃ£o, exposiÃ§Ã£o de dados pessoais, puniÃ§Ãµes excessivas por ausÃªncia e mecÃ¢nicas que estimulem uso compulsivo.
+O produto deve evitar comunicação aberta sem supervisão, exposição de dados pessoais, punições excessivas por ausência e mecânicas que estimulem uso compulsivo.
 
 ## 6. O ciclo principal
 
-O ciclo de engajamento do BirdLeague serÃ¡:
+O ciclo de engajamento do BirdLeague será:
 
-1. O aluno recebe uma missÃ£o ou escolhe um treinamento.
-2. Responde a perguntas adequadas ao seu nÃ­vel.
-3. Recebe feedback imediato e explicaÃ§Ãµes.
-4. Ganha progresso, XP e domÃ­nio em habilidades.
+1. O aluno recebe uma missão ou escolhe um treinamento.
+2. Responde a perguntas adequadas ao seu nível.
+3. Recebe feedback imediato e explicações.
+4. Ganha progresso, XP e domínio em habilidades.
 5. Evolui seu Bloo ou desbloqueia uma recompensa.
 6. Usa suas conquistas em atividades pessoais ou coletivas.
-7. Enxerga um prÃ³ximo objetivo alcanÃ§Ã¡vel e retorna para estudar.
+7. Enxerga um próximo objetivo alcançável e retorna para estudar.
 
-O jogo nÃ£o deve depender de recompensas constantes e imprevisÃ­veis. O aluno precisa compreender o que estÃ¡ buscando, quanto falta e por que conquistou determinada recompensa.
+O jogo não deve depender de recompensas constantes e imprevisíveis. O aluno precisa compreender o que está buscando, quanto falta e por que conquistou determinada recompensa.
 
-## 7. A primeira experiÃªncia
+## 7. A primeira experiência
 
 ### 7.1 Entrada
 
-O professor ou administrador cria o aluno, fornece suas credenciais e associa esse aluno a uma turma. Como a turma jÃ¡ possui um idioma definido, no MVP o estudante entra diretamente na experiÃªncia daquele idioma, sem precisar escolher InglÃªs manualmente. Se no futuro o aluno tiver matrÃ­culas ativas em mais de um idioma, cada idioma poderÃ¡ ter seu prÃ³prio espaÃ§o e seu prÃ³prio Bloo independente.
+O professor ou administrador cria o aluno, fornece suas credenciais e associa esse aluno a uma turma. Como a turma já possui um idioma definido, no MVP o estudante entra diretamente na experiência daquele idioma, sem precisar escolher Inglês manualmente. Se no futuro o aluno tiver matrículas ativas em mais de um idioma, cada idioma poderá ter seu próprio espaço e seu próprio Bloo independente.
 
 ### 7.2 Tutorial
 
-No primeiro acesso ao idioma da sua turma, o aluno conhece um ovo e recebe uma explicaÃ§Ã£o curta:
+No primeiro acesso ao idioma da sua turma, o aluno conhece um ovo e recebe uma explicação curta:
 
 - Esse ovo guarda seu Bloo daquele idioma.
 - Treinos ajudam o Bloo a nascer e evoluir.
 - Acertos fortalecem habilidades.
-- Erros trazem explicaÃ§Ãµes e novas tentativas.
-- A constÃ¢ncia Ã© parte da evoluÃ§Ã£o.
+- Erros trazem explicações e novas tentativas.
+- A constância é parte da evolução.
 
-O tutorial deve ensinar por meio da aÃ§Ã£o, evitando telas longas de texto.
+O tutorial deve ensinar por meio da ação, evitando telas longas de texto.
 
 ### 7.3 Quebra do ovo
 
-O primeiro treinamento terÃ¡ poucas perguntas e funcionarÃ¡ como apresentaÃ§Ã£o e observaÃ§Ã£o inicial. Cada resposta ou etapa concluÃ­da produz uma nova rachadura no ovo.
+O primeiro treinamento terá poucas perguntas e funcionará como apresentação e observação inicial. Cada resposta ou etapa concluída produz uma nova rachadura no ovo.
 
 Ao final:
 
 - O ovo se abre independentemente da quantidade de acertos.
 - O aluno conhece o Bloo filhote.
 - Pode dar um nome ao Bloo.
-- Recebe o tÃ­tulo inicial **New Hatchling**.
-- Visualiza qual serÃ¡ sua prÃ³xima evoluÃ§Ã£o.
+- Recebe o título inicial **New Hatchling**.
+- Visualiza qual será sua próxima evolução.
 
-Garantir o nascimento pela conclusÃ£o evita que um aluno iniciante comece a jornada sentindo que fracassou. Os acertos podem conceder progresso adicional, mas nunca impedir esse primeiro marco.
+Garantir o nascimento pela conclusão evita que um aluno iniciante comece a jornada sentindo que fracassou. Os acertos podem conceder progresso adicional, mas nunca impedir esse primeiro marco.
 
 ## 8. O Bloo evolutivo
 
-No inÃ­cio, cada estÃ¡gio serÃ¡ representado por imagens fixas. Isso permite validar a mecÃ¢nica antes de investir em personalizaÃ§Ã£o complexa ou animaÃ§Ãµes.
+No início, cada estágio será representado por imagens fixas. Isso permite validar a mecânica antes de investir em personalização complexa ou animações.
 
-Uma progressÃ£o possÃ­vel:
+Uma progressão possível:
 
-1. **Egg** â€” primeiro acesso e treinamento inicial.
-2. **Hatchling** â€” primeiros estudos e criaÃ§Ã£o de rotina.
-3. **Young Bloo** â€” desenvolvimento das habilidades fundamentais.
-4. **Flying Bloo** â€” maior autonomia e participaÃ§Ã£o competitiva.
-5. **Elite Bloo** â€” domÃ­nio consistente e coleÃ§Ã£o avanÃ§ada.
-6. **Legendary Bloo** â€” grandes conquistas no idioma.
+1. **Egg** — primeiro acesso e treinamento inicial.
+2. **Hatchling** — primeiros estudos e criação de rotina.
+3. **Young Bloo** — desenvolvimento das habilidades fundamentais.
+4. **Flying Bloo** — maior autonomia e participação competitiva.
+5. **Elite Bloo** — domínio consistente e coleção avançada.
+6. **Legendary Bloo** — grandes conquistas no idioma.
 
-Os nomes finais e requisitos devem ser testados com alunos. Cada evoluÃ§Ã£o deverÃ¡ combinar diferentes sinais, como XP, constÃ¢ncia e habilidades dominadas. Apenas repetir exercÃ­cios fÃ¡ceis nÃ£o deve ser suficiente para alcanÃ§ar os nÃ­veis mais altos.
+Os nomes finais e requisitos devem ser testados com alunos. Cada evolução deverá combinar diferentes sinais, como XP, constância e habilidades dominadas. Apenas repetir exercícios fáceis não deve ser suficiente para alcançar os níveis mais altos.
 
-### 8.1 PersonalizaÃ§Ã£o futura
+### 8.1 Personalização futura
 
-O aluno poderÃ¡ conquistar:
+O aluno poderá conquistar:
 
-- Cores e padrÃµes de plumagem.
-- ChapÃ©us, Ã³culos e acessÃ³rios.
+- Cores e padrões de plumagem.
+- Chapéus, óculos e acessórios.
 - Fundos de perfil.
 - Molduras e efeitos.
 - Emblemas de eventos.
-- TÃ­tulos ligados a habilidades.
+- Títulos ligados a habilidades.
 
-As personalizaÃ§Ãµes serÃ£o cosmÃ©ticas. Elas celebram identidade e conquistas sem alterar o equilÃ­brio pedagÃ³gico ou competitivo.
+As personalizações serão cosméticas. Elas celebram identidade e conquistas sem alterar o equilíbrio pedagógico ou competitivo.
 
-### 8.2 DireÃ§Ã£o de arte e asset pack do Bloo
+### 8.2 Direção de arte e asset pack do Bloo
 
-O Bloo serÃ¡ um dos elementos mais importantes da identidade emocional do BirdLeague. Ele nÃ£o Ã© apenas um Ã­cone de perfil; ele representa o progresso do aluno, a relaÃ§Ã£o com o idioma e a sensaÃ§Ã£o de pertencimento Ã  Bluebird.
+O Bloo será um dos elementos mais importantes da identidade emocional do BirdLeague. Ele não é apenas um ícone de perfil; ele representa o progresso do aluno, a relação com o idioma e a sensação de pertencimento à Bluebird.
 
-A referÃªncia visual principal deve combinar dois materiais jÃ¡ existentes no projeto:
+A referência visual principal deve combinar dois materiais já existentes no projeto:
 
-- A logo original da Bluebird, que usa um pÃ¡ssaro estilizado com dorso azul e peito alaranjado, provavelmente inspirado em um **bluebird** como o Eastern Bluebird.
-- O personagem `BIRD.png`, que jÃ¡ possui personalidade de mascote, com Ã³culos, camiseta, tÃªnis e expressÃ£o animada.
+- A logo original da Bluebird, que usa um pássaro estilizado com dorso azul e peito alaranjado, provavelmente inspirado em um **bluebird** como o Eastern Bluebird.
+- O personagem `BIRD.png`, que já possui personalidade de mascote, com óculos, camiseta, tênis e expressão animada.
 
-A decisÃ£o inicial Ã© **usar o personagem jÃ¡ criado pela escola como base principal**, ajustando suas formas, cores e proporÃ§Ãµes para se aproximar mais da logo original. Criar um personagem totalmente novo sÃ³ deve ser considerado se a escola decidir reposicionar a identidade visual. Para o BirdLeague, a melhor direÃ§Ã£o Ã© evoluir o mascote existente para uma versÃ£o "game-ready": mais consistente, modular, legÃ­vel em tamanhos pequenos e fÃ¡cil de animar.
+A decisão inicial é **usar o personagem já criado pela escola como base principal**, ajustando suas formas, cores e proporções para se aproximar mais da logo original. Criar um personagem totalmente novo só deve ser considerado se a escola decidir reposicionar a identidade visual. Para o BirdLeague, a melhor direção é evoluir o mascote existente para uma versão "game-ready": mais consistente, modular, legível em tamanhos pequenos e fácil de animar.
 
-Quando os assets forem produzidos, a melhor abordagem serÃ¡ criar um **asset pack completo**, mantendo a identidade visual do personagem. Esse pacote deve evitar imagens soltas e inconsistentes. O ideal Ã© que todos os estÃ¡gios usem a mesma proporÃ§Ã£o, enquadramento e estilo, para que o aplicativo consiga trocar o visual do Bloo sem quebrar a interface.
+Quando os assets forem produzidos, a melhor abordagem será criar um **asset pack completo**, mantendo a identidade visual do personagem. Esse pacote deve evitar imagens soltas e inconsistentes. O ideal é que todos os estágios usem a mesma proporção, enquadramento e estilo, para que o aplicativo consiga trocar o visual do Bloo sem quebrar a interface.
 
 O pacote inicial recomendado inclui:
 
 - **Egg:** ovo inicial do aluno.
 - **Cracking Egg:** ovo rachando durante o treinamento inicial.
 - **Hatchling:** filhote saindo do ovo.
-- **Baby Bloo:** bebÃª, ainda pequeno e carismÃ¡tico.
+- **Baby Bloo:** bebê, ainda pequeno e carismático.
 - **Young Bloo:** jovem, mais confiante.
-- **Adult Bloo:** adulto, com aparÃªncia de domÃ­nio.
-- **Master Bloo:** versÃ£o mestre ou lendÃ¡ria para conquistas avanÃ§adas.
+- **Adult Bloo:** adulto, com aparência de domínio.
+- **Master Bloo:** versão mestre ou lendária para conquistas avançadas.
 
-TambÃ©m Ã© recomendÃ¡vel criar expressÃµes do Bloo:
+Também é recomendável criar expressões do Bloo:
 
 - Feliz.
 - Concentrado.
 - Pensando.
 - Comemorando.
 - Surpreso.
-- Triste ou frustrado de forma leve, sem parecer puniÃ§Ã£o.
+- Triste ou frustrado de forma leve, sem parecer punição.
 
-Essas expressÃµes ajudam a interface a parecer viva. O Bloo pode comemorar acertos, demonstrar esforÃ§o em perguntas difÃ­ceis e reagir com incentivo quando o aluno erra.
+Essas expressões ajudam a interface a parecer viva. O Bloo pode comemorar acertos, demonstrar esforço em perguntas difíceis e reagir com incentivo quando o aluno erra.
 
-Para a construÃ§Ã£o do app, o personagem deve ser tratado como um **sistema de personagem**, nÃ£o como uma coleÃ§Ã£o de imagens independentes. A recomendaÃ§Ã£o Ã© criar fases principais, como bebÃª, crianÃ§a, adolescente e adulto, cada uma com um conjunto pequeno de poses essenciais:
+Para a construção do app, o personagem deve ser tratado como um **sistema de personagem**, não como uma coleção de imagens independentes. A recomendação é criar fases principais, como bebê, criança, adolescente e adulto, cada uma com um conjunto pequeno de poses essenciais:
 
 - Parado.
 - Feliz.
@@ -217,54 +217,54 @@ Para a construÃ§Ã£o do app, o personagem deve ser tratado como um **sistema 
 - Correndo ou voando.
 - Pensando.
 - Usando item ou power-up.
-- VitÃ³ria.
+- Vitória.
 - Derrota.
 
-Essas fases e poses devem manter a mesma identidade: o Bloo pode crescer e amadurecer, mas precisa continuar reconhecÃ­vel como o mesmo personagem.
+Essas fases e poses devem manter a mesma identidade: o Bloo pode crescer e amadurecer, mas precisa continuar reconhecível como o mesmo personagem.
 
-### 8.3 AcessÃ³rios e itens cosmÃ©ticos
+### 8.3 Acessórios e itens cosméticos
 
-Os acessÃ³rios devem ser criados como itens separados, preferencialmente com fundo transparente, para que possam ser sobrepostos ao Bloo. Isso permite criar muitas combinaÃ§Ãµes sem redesenhar o personagem inteiro.
+Os acessórios devem ser criados como itens separados, preferencialmente com fundo transparente, para que possam ser sobrepostos ao Bloo. Isso permite criar muitas combinações sem redesenhar o personagem inteiro.
 
-No app, Ã³culos, chapÃ©us, medalhas e outros itens devem funcionar em camadas: primeiro o corpo/base do Bloo, depois roupas, depois acessÃ³rios, depois efeitos. Assim, o mesmo Bloo pode trocar de visual sem exigir uma imagem nova para cada combinaÃ§Ã£o.
+No app, óculos, chapéus, medalhas e outros itens devem funcionar em camadas: primeiro o corpo/base do Bloo, depois roupas, depois acessórios, depois efeitos. Assim, o mesmo Bloo pode trocar de visual sem exigir uma imagem nova para cada combinação.
 
-Para os Ã³culos especificamente, nÃ£o Ã© necessÃ¡rio criar um par novo para cada fase de crescimento. A regra recomendada Ã©:
+Para os óculos especificamente, não é necessário criar um par novo para cada fase de crescimento. A regra recomendada é:
 
-- Criar poucos modelos de Ã³culos em arquivos separados.
-- Criar variaÃ§Ãµes por Ã¢ngulo importante, como frontal, 3/4 para a direita e 3/4 para a esquerda.
-- Ajustar posiÃ§Ã£o, escala e rotaÃ§Ã£o conforme a fase do Bloo.
-- Criar uma versÃ£o especial apenas quando o formato da cabeÃ§a ou da pose tornar o reaproveitamento visualmente ruim.
+- Criar poucos modelos de óculos em arquivos separados.
+- Criar variações por ângulo importante, como frontal, 3/4 para a direita e 3/4 para a esquerda.
+- Ajustar posição, escala e rotação conforme a fase do Bloo.
+- Criar uma versão especial apenas quando o formato da cabeça ou da pose tornar o reaproveitamento visualmente ruim.
 
-Isso permite que o Bloo bebÃª use Ã³culos menores, o Bloo adulto use o mesmo modelo em escala maior e poses diferentes recebam o Ã¢ngulo correto do acessÃ³rio.
+Isso permite que o Bloo bebê use óculos menores, o Bloo adulto use o mesmo modelo em escala maior e poses diferentes recebam o ângulo correto do acessório.
 
-Exemplos de acessÃ³rios:
+Exemplos de acessórios:
 
-- Ã“culos comuns, Ã³culos estilosos e Ã³culos de professor.
-- BonÃ©s, chapÃ©us, coroas e tiaras.
+- Óculos comuns, óculos estilosos e óculos de professor.
+- Bonés, chapéus, coroas e tiaras.
 - Mochilas.
-- Gravatas e laÃ§os.
+- Gravatas e laços.
 - Capas.
 - Fones de ouvido.
-- Livros, pergaminhos e penas mÃ¡gicas.
-- Medalhas, escudos e pequenos trofÃ©us.
-- Itens temÃ¡ticos de eventos, como Halloween, inverno, fÃ©rias ou torneios.
+- Livros, pergaminhos e penas mágicas.
+- Medalhas, escudos e pequenos troféus.
+- Itens temáticos de eventos, como Halloween, inverno, férias ou torneios.
 
-Os itens cosmÃ©ticos podem ser desbloqueados por:
+Os itens cosméticos podem ser desbloqueados por:
 
-- EvoluÃ§Ã£o do Bloo.
-- SequÃªncia de estudos.
-- ParticipaÃ§Ã£o em eventos.
-- VitÃ³rias em desafios.
+- Evolução do Bloo.
+- Sequência de estudos.
+- Participação em eventos.
+- Vitórias em desafios.
 - Conquistas por habilidade.
-- ParticipaÃ§Ã£o positiva da turma.
+- Participação positiva da turma.
 
-No MVP, a prioridade Ã© ter poucos assets muito bons, principalmente Egg, rachaduras e Hatchling. A personalizaÃ§Ã£o completa pode vir depois, mas a documentaÃ§Ã£o visual jÃ¡ deve prever esse caminho.
+No MVP, a prioridade é ter poucos assets muito bons, principalmente Egg, rachaduras e Hatchling. A personalização completa pode vir depois, mas a documentação visual já deve prever esse caminho.
 
-### 8.4 EvoluÃ§Ã£o visual ligada ao nÃ­vel de idioma
+### 8.4 Evolução visual ligada ao nível de idioma
 
-Uma possibilidade forte para o futuro Ã© conectar os estÃ¡gios do Bloo aos nÃ­veis de proficiÃªncia do idioma:
+Uma possibilidade forte para o futuro é conectar os estágios do Bloo aos níveis de proficiência do idioma:
 
-- **Egg:** inÃ­cio da jornada.
+- **Egg:** início da jornada.
 - **Hatchling:** A1.
 - **Baby Bloo:** A2.
 - **Young Bloo:** B1.
@@ -272,29 +272,29 @@ Uma possibilidade forte para o futuro Ã© conectar os estÃ¡gios do Bloo aos n
 - **Master Bloo:** C1.
 - **Legendary Bloo:** C2.
 
-Essa relaÃ§Ã£o torna o progresso fÃ¡cil de entender visualmente. Quando um aluno vÃª outro Bloo no ranking, na turma ou em uma competiÃ§Ã£o, ele percebe rapidamente o estÃ¡gio de avanÃ§o daquele colega.
+Essa relação torna o progresso fácil de entender visualmente. Quando um aluno vê outro Bloo no ranking, na turma ou em uma competição, ele percebe rapidamente o estágio de avanço daquele colega.
 
-Mesmo assim, essa conexÃ£o deve ser usada com cuidado. O visual pode indicar progresso, mas nÃ£o deve expor publicamente fraquezas ou gerar vergonha. Para alunos mais novos ou iniciantes, Ã© melhor apresentar o estÃ¡gio como uma conquista pessoal, nÃ£o como um rÃ³tulo rÃ­gido de capacidade.
+Mesmo assim, essa conexão deve ser usada com cuidado. O visual pode indicar progresso, mas não deve expor publicamente fraquezas ou gerar vergonha. Para alunos mais novos ou iniciantes, é melhor apresentar o estágio como uma conquista pessoal, não como um rótulo rígido de capacidade.
 
-## 9. Treinamentos e progressÃ£o pedagÃ³gica
+## 9. Treinamentos e progressão pedagógica
 
-Os treinamentos devem ser curtos, claros e adaptados ao aluno. Eles poderÃ£o trabalhar:
+Os treinamentos devem ser curtos, claros e adaptados ao aluno. Eles poderão trabalhar:
 
-- VocabulÃ¡rio.
-- GramÃ¡tica.
+- Vocabulário.
+- Gramática.
 - Leitura.
 - Listening.
-- PronÃºncia e speaking.
+- Pronúncia e speaking.
 - Escrita.
-- RevisÃ£o espaÃ§ada.
+- Revisão espaçada.
 
-Cada questÃ£o pertence a um idioma, nÃ­vel, tema, habilidade e dificuldade. O sistema comeÃ§a com perguntas acessÃ­veis e ajusta gradualmente o desafio conforme o desempenho.
+Cada questão pertence a um idioma, nível, tema, habilidade e dificuldade. O sistema começa com perguntas acessíveis e ajusta gradualmente o desafio conforme o desempenho.
 
 ### 9.1 Dificuldade adaptativa
 
-Quando o aluno demonstra consistÃªncia, recebe questÃµes mais desafiadoras. Quando encontra dificuldade, o sistema oferece explicaÃ§Ãµes, exemplos e exercÃ­cios de reforÃ§o.
+Quando o aluno demonstra consistência, recebe questões mais desafiadoras. Quando encontra dificuldade, o sistema oferece explicações, exemplos e exercícios de reforço.
 
-O objetivo nÃ£o Ã© tornar tudo cada vez mais difÃ­cil. Ã‰ manter o aluno em uma zona em que precise pensar, mas ainda perceba que consegue avanÃ§ar.
+O objetivo não é tornar tudo cada vez mais difícil. É manter o aluno em uma zona em que precise pensar, mas ainda perceba que consegue avançar.
 
 ### 9.2 Raridade
 
@@ -302,14 +302,14 @@ As perguntas ou desafios podem ser apresentados como:
 
 - Comuns.
 - Raros.
-- Ã‰picos.
-- LendÃ¡rios.
+- Épicos.
+- Lendários.
 
-A raridade deve ser relativa ao nÃ­vel do estudante. Uma construÃ§Ã£o gramatical pode ser lendÃ¡ria para um iniciante e comum para um aluno avanÃ§ado.
+A raridade deve ser relativa ao nível do estudante. Uma construção gramatical pode ser lendária para um iniciante e comum para um aluno avançado.
 
-### 9.3 DomÃ­nio de habilidades
+### 9.3 Domínio de habilidades
 
-O progresso serÃ¡ organizado por habilidades especÃ­ficas, como:
+O progresso será organizado por habilidades específicas, como:
 
 - Simple Past.
 - Irregular Verbs.
@@ -317,23 +317,23 @@ O progresso serÃ¡ organizado por habilidades especÃ­ficas, como:
 - Restaurant Vocabulary.
 - Listening for Details.
 
-Para dominar uma habilidade, o aluno precisa responder corretamente a variaÃ§Ãµes do conceito em momentos diferentes. Isso reduz recompensas por sorte ou memorizaÃ§Ã£o de uma Ãºnica questÃ£o.
+Para dominar uma habilidade, o aluno precisa responder corretamente a variações do conceito em momentos diferentes. Isso reduz recompensas por sorte ou memorização de uma única questão.
 
 ## 10. Conhecimento transformado em poder
 
-O grande diferencial do BirdLeague Ã© permitir que o conhecimento conquistado tenha funÃ§Ã£o estratÃ©gica.
+O grande diferencial do BirdLeague é permitir que o conhecimento conquistado tenha função estratégica.
 
-Uma questÃ£o difÃ­cil nÃ£o deve virar automaticamente uma carta. Ela inicia ou avanÃ§a uma trilha de domÃ­nio. Depois que o aluno comprova conhecimento em diferentes variaÃ§Ãµes, recebe uma habilidade relacionada ao tema.
+Uma questão difícil não deve virar automaticamente uma carta. Ela inicia ou avança uma trilha de domínio. Depois que o aluno comprova conhecimento em diferentes variações, recebe uma habilidade relacionada ao tema.
 
 Exemplo:
 
-1. O aluno acerta uma pergunta difÃ­cil sobre particÃ­pios.
+1. O aluno acerta uma pergunta difícil sobre particípios.
 2. O sistema marca progresso em **Irregular Verbs**.
-3. Em outros treinamentos, ele responde a novas variaÃ§Ãµes.
-4. Ao demonstrar domÃ­nio, desbloqueia **Grammar Strike**.
-5. Em uma batalha, essa habilidade aumenta o desafio da prÃ³xima rodada do adversÃ¡rio.
+3. Em outros treinamentos, ele responde a novas variações.
+4. Ao demonstrar domínio, desbloqueia **Grammar Strike**.
+5. Em uma batalha, essa habilidade aumenta o desafio da próxima rodada do adversário.
 
-PossÃ­veis tÃ­tulos ou habilidades:
+Possíveis títulos ou habilidades:
 
 - Master of Phrasal Verbs.
 - Listening Hunter.
@@ -341,69 +341,69 @@ PossÃ­veis tÃ­tulos ou habilidades:
 - Vocabulary Explorer.
 - Pronunciation Ace.
 
-### 10.1 Regras para poderes saudÃ¡veis
+### 10.1 Regras para poderes saudáveis
 
-- O poder Ã© conquistado por domÃ­nio, nÃ£o por compra.
-- Seu efeito deve ser previsÃ­vel e fÃ¡cil de entender.
-- Nenhum poder pode garantir vitÃ³ria sozinho.
+- O poder é conquistado por domínio, não por compra.
+- Seu efeito deve ser previsível e fácil de entender.
+- Nenhum poder pode garantir vitória sozinho.
 - Efeitos devem ser limitados por partida.
-- O conteÃºdo recebido pelo adversÃ¡rio deve continuar adequado ao nÃ­vel dele.
-- O balanceamento deve favorecer decisÃµes estratÃ©gicas, nÃ£o apenas coleÃ§Ãµes antigas.
+- O conteúdo recebido pelo adversário deve continuar adequado ao nível dele.
+- O balanceamento deve favorecer decisões estratégicas, não apenas coleções antigas.
 
 ## 11. Batalhas individuais
 
-O PvP em tempo real Ã© uma visÃ£o futura, nÃ£o parte do primeiro MVP.
+O PvP em tempo real é uma visão futura, não parte do primeiro MVP.
 
 Em uma batalha 1x1:
 
-- Os participantes recebem perguntas ajustadas aos respectivos nÃ­veis.
-- Acertos causam avanÃ§o ou dano simbÃ³lico.
-- Respostas rÃ¡pidas podem gerar bÃ´nus moderado.
-- Poderes alteram condiÃ§Ãµes especÃ­ficas da rodada.
-- A vitÃ³ria considera conhecimento e estratÃ©gia.
+- Os participantes recebem perguntas ajustadas aos respectivos níveis.
+- Acertos causam avanço ou dano simbólico.
+- Respostas rápidas podem gerar bônus moderado.
+- Poderes alteram condições específicas da rodada.
+- A vitória considera conhecimento e estratégia.
 
-A velocidade nÃ£o deve dominar a pontuaÃ§Ã£o, pois isso prejudicaria alunos ansiosos, estudantes com dificuldades de leitura e pessoas usando conexÃµes ou aparelhos mais lentos.
+A velocidade não deve dominar a pontuação, pois isso prejudicaria alunos ansiosos, estudantes com dificuldades de leitura e pessoas usando conexões ou aparelhos mais lentos.
 
-PossÃ­veis poderes, sujeitos a testes e balanceamento:
+Possíveis poderes, sujeitos a testes e balanceamento:
 
-- **Shield:** reduz o efeito do prÃ³ximo ataque.
-- **Freeze:** reduz brevemente o tempo de aÃ§Ã£o do oponente, sem impedir uma resposta justa.
-- **Hard Mode:** eleva a dificuldade da prÃ³xima questÃ£o dentro do nÃ­vel adequado.
-- **Time Bonus:** concede alguns segundos ao prÃ³prio jogador.
+- **Shield:** reduz o efeito do próximo ataque.
+- **Freeze:** reduz brevemente o tempo de ação do oponente, sem impedir uma resposta justa.
+- **Hard Mode:** eleva a dificuldade da próxima questão dentro do nível adequado.
+- **Time Bonus:** concede alguns segundos ao próprio jogador.
 - **Second Chance:** permite corrigir uma resposta.
-- **Reverse:** devolve um efeito ofensivo ao adversÃ¡rio.
+- **Reverse:** devolve um efeito ofensivo ao adversário.
 
-Poderes como Silence e Time Bomb precisam de cuidado para nÃ£o gerar frustraÃ§Ã£o ou transformar o aprendizado em puniÃ§Ã£o.
+Poderes como Silence e Time Bomb precisam de cuidado para não gerar frustração ou transformar o aprendizado em punição.
 
-Antes do tempo real, o sistema poderÃ¡ oferecer batalhas assÃ­ncronas: cada aluno completa uma sequÃªncia em seu prÃ³prio momento, e os resultados sÃ£o comparados de forma justa.
+Antes do tempo real, o sistema poderá oferecer batalhas assíncronas: cada aluno completa uma sequência em seu próprio momento, e os resultados são comparados de forma justa.
 
 ## 12. Guerras entre turmas
 
-As competiÃ§Ãµes entre turmas criam pertencimento e pressÃ£o social positiva. Elas devem premiar a participaÃ§Ã£o coletiva, sem permitir que poucos alunos carreguem toda a equipe.
+As competições entre turmas criam pertencimento e pressão social positiva. Elas devem premiar a participação coletiva, sem permitir que poucos alunos carreguem toda a equipe.
 
-Uma guerra poderÃ¡ durar uma semana. Cada aluno contribui por meio de:
+Uma guerra poderá durar uma semana. Cada aluno contribui por meio de:
 
-- ExercÃ­cios concluÃ­dos.
-- Metas de constÃ¢ncia.
+- Exercícios concluídos.
+- Metas de constância.
 - Habilidades dominadas.
 - Batalhas vencidas.
-- PresenÃ§a registrada pela escola.
+- Presença registrada pela escola.
 - Atividades de speaking validadas.
 
-### 12.1 Regras de equilÃ­brio
+### 12.1 Regras de equilíbrio
 
-- Normalizar a pontuaÃ§Ã£o pelo nÃºmero de alunos ativos.
-- Limitar a contribuiÃ§Ã£o diÃ¡ria individual.
-- Ajustar objetivos ao nÃ­vel de cada participante.
-- Pontuar participaÃ§Ã£o e evoluÃ§Ã£o, alÃ©m de acertos.
-- NÃ£o divulgar quem menos contribuiu.
-- Permitir missÃµes de recuperaÃ§Ã£o durante a semana.
+- Normalizar a pontuação pelo número de alunos ativos.
+- Limitar a contribuição diária individual.
+- Ajustar objetivos ao nível de cada participante.
+- Pontuar participação e evolução, além de acertos.
+- Não divulgar quem menos contribuiu.
+- Permitir missões de recuperação durante a semana.
 
-Ao final, a turma pode receber um trofÃ©u, banner temporÃ¡rio, item visual coletivo ou destaque no espaÃ§o da escola.
+Ao final, a turma pode receber um troféu, banner temporário, item visual coletivo ou destaque no espaço da escola.
 
 ## 13. Bosses e eventos
 
-Boss raids podem se tornar uma assinatura do BirdLeague. Em vez de competir, toda a escola coopera contra uma criatura que representa um conjunto de conteÃºdos.
+Boss raids podem se tornar uma assinatura do BirdLeague. Em vez de competir, toda a escola coopera contra uma criatura que representa um conjunto de conteúdos.
 
 Exemplos:
 
@@ -413,9 +413,9 @@ Exemplos:
 - Vocabulary Hydra.
 - Pronunciation Ghost.
 
-Cada resposta correta reduz a energia do boss. Diferentes partes da criatura podem representar habilidades especÃ­ficas, e professores podem acompanhar quais Ã¡reas estÃ£o resistindo mais.
+Cada resposta correta reduz a energia do boss. Diferentes partes da criatura podem representar habilidades específicas, e professores podem acompanhar quais áreas estão resistindo mais.
 
-Eventos temporÃ¡rios possÃ­veis:
+Eventos temporários possíveis:
 
 - Halloween English Event.
 - Verb Boss Week.
@@ -423,146 +423,146 @@ Eventos temporÃ¡rios possÃ­veis:
 - Grammar Boss Raid.
 - Summer Vocabulary Hunt.
 
-Eventos devem ser anunciados com antecedÃªncia, durar o suficiente para diferentes rotinas e evitar recompensas essenciais que nunca mais possam ser obtidas.
+Eventos devem ser anunciados com antecedência, durar o suficiente para diferentes rotinas e evitar recompensas essenciais que nunca mais possam ser obtidas.
 
 ## 14. Rankings, ligas e reconhecimento
 
-O sistema poderÃ¡ oferecer:
+O sistema poderá oferecer:
 
 - Ranking semanal da turma.
-- Ligas por faixa de nÃ­vel.
-- Ranking de evoluÃ§Ã£o pessoal.
-- Destaque de constÃ¢ncia.
-- ContribuiÃ§Ã£o para eventos.
-- Taxa de domÃ­nio por habilidade.
+- Ligas por faixa de nível.
+- Ranking de evolução pessoal.
+- Destaque de constância.
+- Contribuição para eventos.
+- Taxa de domínio por habilidade.
 - Conquistas cooperativas.
 
-O ranking global nÃ£o deve ser o centro da experiÃªncia. Ele tende a favorecer alunos antigos ou com mais tempo disponÃ­vel. Temporadas curtas, divisÃµes por nÃ­vel e metas pessoais criam mais oportunidades de sucesso.
+O ranking global não deve ser o centro da experiência. Ele tende a favorecer alunos antigos ou com mais tempo disponível. Temporadas curtas, divisões por nível e metas pessoais criam mais oportunidades de sucesso.
 
 Reconhecimentos podem incluir categorias diferentes:
 
-- Maior evoluÃ§Ã£o da semana.
-- Melhor sequÃªncia saudÃ¡vel.
-- Maior contribuiÃ§Ã£o coletiva.
+- Maior evolução da semana.
+- Melhor sequência saudável.
+- Maior contribuição coletiva.
 - Nova habilidade dominada.
 - Retorno da semana.
 
-## 15. MotivaÃ§Ã£o e retenÃ§Ã£o
+## 15. Motivação e retenção
 
-### 15.1 MissÃµes
+### 15.1 Missões
 
-MissÃµes devem ser pequenas e concretas:
+Missões devem ser pequenas e concretas:
 
-- Complete um treino de vocabulÃ¡rio.
+- Complete um treino de vocabulário.
 - Revise uma habilidade antiga.
-- Estude em trÃªs dias nesta semana.
+- Estude em três dias nesta semana.
 - Ajude sua turma a causar 50 pontos no boss.
 
-### 15.2 Streaks saudÃ¡veis
+### 15.2 Streaks saudáveis
 
-A sequÃªncia diÃ¡ria pode motivar, mas nÃ£o deve punir excessivamente. O produto poderÃ¡ usar:
+A sequência diária pode motivar, mas não deve punir excessivamente. O produto poderá usar:
 
-- Meta de dias por semana em vez de obrigaÃ§Ã£o diÃ¡ria.
-- ProteÃ§Ãµes de sequÃªncia conquistadas pelo estudo.
+- Meta de dias por semana em vez de obrigação diária.
+- Proteções de sequência conquistadas pelo estudo.
 - Pausas escolares e feriados.
 - Mensagens de retorno sem culpa.
 
-### 15.3 PrÃ³ximo objetivo visÃ­vel
+### 15.3 Próximo objetivo visível
 
 O aluno sempre deve saber:
 
-- O que estÃ¡ treinando.
+- O que está treinando.
 - O que conquistou.
-- Quanto falta para a prÃ³xima evoluÃ§Ã£o.
-- Qual aÃ§Ã£o pode realizar agora.
+- Quanto falta para a próxima evolução.
+- Qual ação pode realizar agora.
 
-### 15.4 CelebraÃ§Ã£o
+### 15.4 Celebração
 
-Marcos importantes merecem animaÃ§Ãµes e mensagens especiais, mas aÃ§Ãµes rotineiras nÃ£o precisam interromper a experiÃªncia com excesso de telas, moedas e efeitos.
+Marcos importantes merecem animações e mensagens especiais, mas ações rotineiras não precisam interromper a experiência com excesso de telas, moedas e efeitos.
 
 ## 16. Papel do professor
 
-O BirdLeague deve ampliar o trabalho pedagÃ³gico, nÃ£o substituÃ­-lo. O professor poderÃ¡:
+O BirdLeague deve ampliar o trabalho pedagógico, não substituí-lo. O professor poderá:
 
-- Acompanhar participaÃ§Ã£o e progresso.
-- Identificar habilidades com maior Ã­ndice de erro.
+- Acompanhar participação e progresso.
+- Identificar habilidades com maior índice de erro.
 - Recomendar treinamentos.
 - Criar desafios para sua turma.
 - Validar atividades presenciais e de speaking.
-- Celebrar evoluÃ§Ã£o individual e coletiva.
+- Celebrar evolução individual e coletiva.
 
-Os dados devem ser apresentados como sinais para intervenÃ§Ã£o, nÃ£o como diagnÃ³sticos definitivos sobre capacidade ou esforÃ§o.
+Os dados devem ser apresentados como sinais para intervenção, não como diagnósticos definitivos sobre capacidade ou esforço.
 
 ## 17. Indicadores de sucesso
 
-No MVP, as perguntas mais importantes sÃ£o:
+No MVP, as perguntas mais importantes são:
 
 - Quantos alunos concluem o primeiro treinamento?
 - Quantos chegam ao nascimento do Bloo?
 - Quantos retornam no dia seguinte e na semana seguinte?
 - Quantos treinamentos realizam por semana?
-- Em quais etapas abandonam a experiÃªncia?
+- Em quais etapas abandonam a experiência?
 - Professores conseguem criar turmas e alunos sem ajuda?
 - Professores consultam o progresso depois de cadastrar a turma?
 
 Indicadores de longo prazo incluem:
 
-- FrequÃªncia de estudo por aluno.
-- RetenÃ§Ã£o em 7 e 30 dias.
-- EvoluÃ§Ã£o de domÃ­nio por habilidade.
-- ParticipaÃ§Ã£o equilibrada em eventos coletivos.
-- PercepÃ§Ã£o de motivaÃ§Ã£o por alunos e professores.
-- RelaÃ§Ã£o entre uso da plataforma e objetivos pedagÃ³gicos da escola.
+- Frequência de estudo por aluno.
+- Retenção em 7 e 30 dias.
+- Evolução de domínio por habilidade.
+- Participação equilibrada em eventos coletivos.
+- Percepção de motivação por alunos e professores.
+- Relação entre uso da plataforma e objetivos pedagógicos da escola.
 
 ## 18. Limites do MVP
 
-O primeiro MVP incluirÃ¡:
+O primeiro MVP incluirá:
 
-- AdministraÃ§Ã£o de idiomas, turmas e alunos.
-- AssociaÃ§Ã£o de um aluno a mÃºltiplos idiomas e turmas.
+- Administração de idiomas, turmas e alunos.
+- Associação de um aluno a múltiplos idiomas e turmas.
 - Login do aluno.
 - Um Bloo independente por idioma.
 - Tutorial inicial.
 - Primeiro treinamento.
 - Feedback das respostas.
 - Progresso visual do ovo.
-- EvoluÃ§Ã£o de Egg para Hatchling.
-- VisÃ£o bÃ¡sica de progresso para professor e aluno.
+- Evolução de Egg para Hatchling.
+- Visão básica de progresso para professor e aluno.
 
-NÃ£o farÃ¡ parte do primeiro MVP:
+Não fará parte do primeiro MVP:
 
 - PvP em tempo real.
 - Guerras entre turmas.
 - Boss raids.
 - Loja ou economia complexa.
-- PersonalizaÃ§Ã£o avanÃ§ada.
+- Personalização avançada.
 - Aplicativos nativos separados.
-- InteligÃªncia adaptativa sofisticada.
+- Inteligência adaptativa sofisticada.
 - Ranking global.
 
-Esses recursos permanecem na visÃ£o, mas sÃ³ serÃ£o construÃ­dos depois que o ciclo bÃ¡sico provar que gera retorno e desejo de evoluÃ§Ã£o.
+Esses recursos permanecem na visão, mas só serão construídos depois que o ciclo básico provar que gera retorno e desejo de evolução.
 
-## 19. DecisÃµes que ainda precisarÃ£o ser validadas
+## 19. Decisões que ainda precisarão ser validadas
 
-- Faixas etÃ¡rias atendidas inicialmente.
-- Primeiro idioma lanÃ§ado.
+- Faixas etárias atendidas inicialmente.
+- Primeiro idioma lançado.
 - Quantidade de perguntas do treinamento inicial.
-- CritÃ©rios exatos de XP e evoluÃ§Ã£o.
-- Identidade visual de cada estÃ¡gio do Bloo.
-- Forma de autoria e revisÃ£o pedagÃ³gica das questÃµes.
-- Regras para alunos que mudam de turma ou nÃ­vel.
-- PolÃ­tica de privacidade e participaÃ§Ã£o de responsÃ¡veis.
-- Necessidade de funcionamento com conexÃ£o instÃ¡vel.
+- Critérios exatos de XP e evolução.
+- Identidade visual de cada estágio do Bloo.
+- Forma de autoria e revisão pedagógica das questões.
+- Regras para alunos que mudam de turma ou nível.
+- Política de privacidade e participação de responsáveis.
+- Necessidade de funcionamento com conexão instável.
 
 ## 20. Farol do projeto
 
 Ao avaliar uma nova funcionalidade, a equipe deve perguntar:
 
 1. Ela incentiva aprendizado real ou apenas uso da plataforma?
-2. Ela torna o progresso compreensÃ­vel e visÃ­vel?
-3. Ela Ã© justa com alunos de nÃ­veis e ritmos diferentes?
+2. Ela torna o progresso compreensível e visível?
+3. Ela é justa com alunos de níveis e ritmos diferentes?
 4. Ela ajuda professores ou cria mais trabalho?
 5. Ela fortalece a identidade de comunidade da Bluebird?
-6. Ela Ã© necessÃ¡ria agora ou pertence a uma fase posterior?
+6. Ela é necessária agora ou pertence a uma fase posterior?
 
-Se uma ideia nÃ£o melhorar aprendizado, constÃ¢ncia, pertencimento ou capacidade pedagÃ³gica, provavelmente nÃ£o deve ser prioridade.
+Se uma ideia não melhorar aprendizado, constância, pertencimento ou capacidade pedagógica, provavelmente não deve ser prioridade.

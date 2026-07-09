@@ -1,76 +1,76 @@
-﻿# Regras do Treinamento Inicial â€” BirdLeague
+# Regras do Treinamento Inicial — BirdLeague
 
-Este documento define a primeira versÃ£o das regras do treino que transforma o Egg em Hatchling.
+Este documento define a primeira versão das regras do treino que transforma o Egg em Hatchling.
 
 ## 1. Objetivo
 
-O treinamento inicial deve apresentar a proposta do BirdLeague, observar o nÃ­vel inicial do aluno e criar uma primeira conquista emocional. Ele nÃ£o Ã© uma prova.
+O treinamento inicial deve apresentar a proposta do BirdLeague, observar o nível inicial do aluno e criar uma primeira conquista emocional. Ele não é uma prova.
 
 O aluno deve conseguir fazer o Bloo nascer mesmo errando todas as respostas, desde que conclua o treino.
 
 ## 2. Idioma inicial
 
-O primeiro idioma do MVP serÃ¡ **InglÃªs**, por ser o idioma com mais alunos na escola.
+O primeiro idioma do MVP será **Inglês**, por ser o idioma com mais alunos na escola.
 
 ## 3. Quantidade de perguntas
 
-O primeiro treino terÃ¡ **6 perguntas**.
+O primeiro treino terá **6 perguntas**.
 
 Motivos:
 
-- Ã‰ curto o bastante para celular.
-- Permite mostrar progresso visÃ­vel no ovo.
-- DÃ¡ sinais iniciais de nÃ­vel sem parecer prova longa.
+- É curto o bastante para celular.
+- Permite mostrar progresso visível no ovo.
+- Dá sinais iniciais de nível sem parecer prova longa.
 - Funciona bem para alunos novos ou ansiosos.
 
 Se os testes mostrarem que o fluxo ficou longo, reduzir para 5. Se ficar raso demais, aumentar para 8.
 
-## 4. DuraÃ§Ã£o esperada
+## 4. Duração esperada
 
-Meta de duraÃ§Ã£o:
+Meta de duração:
 
-- Aluno rÃ¡pido: 3 a 4 minutos.
-- Aluno mÃ©dio: 5 a 7 minutos.
-- Limite desejado: atÃ© 10 minutos.
+- Aluno rápido: 3 a 4 minutos.
+- Aluno médio: 5 a 7 minutos.
+- Limite desejado: até 10 minutos.
 
-O MVP nÃ£o deve ter contagem regressiva. Tempo pode ser registrado para anÃ¡lise, mas nÃ£o deve pressionar o aluno.
+O MVP não deve ter contagem regressiva. Tempo pode ser registrado para análise, mas não deve pressionar o aluno.
 
 ## 5. Tipos de pergunta no treino inicial
 
 Tipos permitidos no MVP:
 
-- MÃºltipla escolha.
-- Completar lacuna com opÃ§Ãµes.
-- AssociaÃ§Ã£o simples.
+- Múltipla escolha.
+- Completar lacuna com opções.
+- Associação simples.
 
-Listening pode entrar depois do primeiro teste se a escola tiver Ã¡udio pronto. Speaking e escrita aberta ficam fora do MVP.
+Listening pode entrar depois do primeiro teste se a escola tiver áudio pronto. Speaking e escrita aberta ficam fora do MVP.
 
-## 6. ComposiÃ§Ã£o recomendada
+## 6. Composição recomendada
 
-Para o primeiro treino de InglÃªs:
+Para o primeiro treino de Inglês:
 
-1. VocabulÃ¡rio simples.
-2. GramÃ¡tica simples.
+1. Vocabulário simples.
+2. Gramática simples.
 3. Leitura curta.
-4. VocabulÃ¡rio em contexto.
-5. GramÃ¡tica em contexto.
-6. RevisÃ£o ou pergunta de confianÃ§a.
+4. Vocabulário em contexto.
+5. Gramática em contexto.
+6. Revisão ou pergunta de confiança.
 
-Essa composiÃ§Ã£o permite observar diferentes habilidades sem transformar a experiÃªncia em avaliaÃ§Ã£o formal.
+Essa composição permite observar diferentes habilidades sem transformar a experiência em avaliação formal.
 
 ## 7. Dificuldade
 
-O treino inicial deve usar dificuldade baixa a mÃ©dia:
+O treino inicial deve usar dificuldade baixa a média:
 
-- 4 perguntas fÃ¡ceis.
-- 2 perguntas mÃ©dias.
-- 0 perguntas difÃ­ceis.
+- 4 perguntas fáceis.
+- 2 perguntas médias.
+- 0 perguntas difíceis.
 
-Perguntas difÃ­ceis nÃ£o devem aparecer antes de o aluno entender a dinÃ¢mica do produto.
+Perguntas difíceis não devem aparecer antes de o aluno entender a dinâmica do produto.
 
 ## 8. Rachaduras do ovo
 
-Cada pergunta concluÃ­da avanÃ§a o ovo, independentemente de acerto ou erro.
+Cada pergunta concluída avança o ovo, independentemente de acerto ou erro.
 
 Progresso visual sugerido:
 
@@ -82,7 +82,7 @@ Progresso visual sugerido:
 6. Ovo quase abrindo.
 7. Nascimento do Hatchling.
 
-Se o app tiver apenas imagens fixas no MVP, usar 4 estados jÃ¡ Ã© suficiente:
+Se o app tiver apenas imagens fixas no MVP, usar 4 estados já é suficiente:
 
 - Egg.
 - Cracking 1.
@@ -96,21 +96,21 @@ Se o app tiver apenas imagens fixas no MVP, usar 4 estados jÃ¡ Ã© suficiente
 
 O feedback deve ser curto e positivo:
 
-- "Boa! VocÃª acertou."
+- "Boa! Você acertou."
 - "Isso mesmo."
 - "Mandou bem."
 
-Depois mostrar uma explicaÃ§Ã£o curta quando fizer sentido.
+Depois mostrar uma explicação curta quando fizer sentido.
 
 ### Erro
 
 O erro deve orientar sem punir:
 
-- "Quase! A resposta correta Ã©..."
+- "Quase! A resposta correta é..."
 - "Boa tentativa. Repara nesta dica..."
-- "Essa pegadinha aparece bastante em InglÃªs."
+- "Essa pegadinha aparece bastante em Inglês."
 
-Sempre mostrar a resposta correta e uma explicaÃ§Ã£o simples.
+Sempre mostrar a resposta correta e uma explicação simples.
 
 ## 10. XP e progresso
 
@@ -118,52 +118,52 @@ Regra inicial:
 
 - Concluir o treino: 60 XP.
 - Cada acerto: 5 XP extras.
-- XP mÃ¡ximo do primeiro treino: 90 XP.
+- XP máximo do primeiro treino: 90 XP.
 
-O nascimento do Hatchling depende apenas da conclusÃ£o, nÃ£o do XP.
+O nascimento do Hatchling depende apenas da conclusão, não do XP.
 
-Essa regra valoriza acertos, mas nÃ£o faz o aluno sentir que fracassou se errar.
+Essa regra valoriza acertos, mas não faz o aluno sentir que fracassou se errar.
 
-## 11. RepetiÃ§Ã£o do treino inicial
+## 11. Repetição do treino inicial
 
 Depois que o Bloo nasce:
 
-- O treino inicial nÃ£o deve gerar novo nascimento.
-- Pode ser repetido como revisÃ£o se necessÃ¡rio.
-- RepetiÃ§Ãµes nÃ£o devem conceder novamente o XP de nascimento.
-- Acertos em repetiÃ§Ã£o podem gerar XP reduzido ou nenhum XP no MVP.
+- O treino inicial não deve gerar novo nascimento.
+- Pode ser repetido como revisão se necessário.
+- Repetições não devem conceder novamente o XP de nascimento.
+- Acertos em repetição podem gerar XP reduzido ou nenhum XP no MVP.
 
 ## 12. Abandono
 
 Se o aluno sair no meio:
 
-- A sessÃ£o registra status `abandoned` se passar muito tempo sem retorno.
+- A sessão registra status `abandoned` se passar muito tempo sem retorno.
 - Ao voltar no mesmo dia, pode continuar de onde parou.
-- Se a implementaÃ§Ã£o ficar mais simples, pode reiniciar a sessÃ£o sem prejuÃ­zo.
+- Se a implementação ficar mais simples, pode reiniciar a sessão sem prejuízo.
 
 O sistema deve evitar duplicar XP ao reenviar respostas ou recarregar a tela.
 
-## 13. CritÃ©rio de nascimento
+## 13. Critério de nascimento
 
 O Bloo nasce quando:
 
 - O aluno conclui todas as 6 perguntas.
-- A sessÃ£o Ã© marcada como concluÃ­da.
-- O Bloo ainda estÃ¡ em estÃ¡gio Egg.
+- A sessão é marcada como concluída.
+- O Bloo ainda está em estágio Egg.
 
 Resultado:
 
 - Bloo muda para Hatchling.
-- Aluno recebe o tÃ­tulo `New Hatchling`.
+- Aluno recebe o título `New Hatchling`.
 - Sistema registra um evento de progresso `FirstTrainingCompleted`.
 
-## 14. PrÃ³ximo objetivo apÃ³s o nascimento
+## 14. Próximo objetivo após o nascimento
 
-ApÃ³s o nascimento, a home deve mostrar:
+Após o nascimento, a home deve mostrar:
 
 - "Seu Bloo nasceu."
-- "PrÃ³ximo objetivo: ajudar seu Bloo a crescer."
-- BotÃ£o para novo treino, mesmo que no MVP ele leve a uma tela simples de "em breve" ou a outro treino bÃ¡sico.
+- "Próximo objetivo: ajudar seu Bloo a crescer."
+- Botão para novo treino, mesmo que no MVP ele leve a uma tela simples de "em breve" ou a outro treino básico.
 
-Se possÃ­vel, o MVP deve ter pelo menos um treino repetÃ­vel simples depois do nascimento para testar retorno.
+Se possível, o MVP deve ter pelo menos um treino repetível simples depois do nascimento para testar retorno.
 
