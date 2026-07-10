@@ -263,6 +263,7 @@ Futuras evoluções:
 - Habilidades dominadas virando poderes.
 - Desafios individuais.
 - Eventos cooperativos.
+- Campanhas temáticas, como `Halloween English Week`.
 - Competições saudáveis entre turmas.
 - Portal resumido para responsáveis.
 
@@ -271,6 +272,8 @@ Mensagem:
 ```txt
 O MVP valida o ciclo emocional. As próximas fases transformam domínio em estratégia, cooperação e pertencimento.
 ```
+
+Campanhas temáticas podem transformar conteúdos da escola em eventos leves para alunos e turmas. Em fases futuras, a Bluebird poderá criar ações sazonais dentro do BirdLeague, como `Halloween English Week`, `Summer Vocabulary Hunt` ou `Grammar Challenge Week`. Os alunos participam treinando conteúdos ligados ao evento, desbloqueando conquistas visuais e celebrando progresso coletivo, sem transformar a experiência em competição pesada.
 
 ### 7.8 Diferenciais Bluebird
 
