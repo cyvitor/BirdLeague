@@ -6,6 +6,8 @@ O roadmap está organizado por resultados, não apenas por funcionalidades. Cada
 
 O MVP termina quando a escola consegue cadastrar uma turma e um aluno consegue transformar seu ovo em Hatchling em um fluxo utilizável, mensurável e seguro.
 
+No recorte atual, apenas administradores e alunos são operacionais. Professor e geração por IA permanecem no projeto, mas entram após o MVP.
+
 ## 2. Fase 0 — Descoberta e decisões fundamentais
 
 ### Objetivo
@@ -56,7 +58,7 @@ Validar a clareza e o apelo do ciclo Egg → treinamento → Hatchling antes da 
 - Alunos entendem que estudar ensina o Bloo e faz o Bloo evoluir.
 - Alunos reconhecem o Bloo como parte do universo Bluebird.
 - Alunos conseguem completar o fluxo sem explicação externa constante.
-- Professores entendem como criar e acompanhar uma turma.
+- Administradores entendem como criar e acompanhar uma turma.
 - Principais problemas de usabilidade estão registrados e corrigidos no protótipo.
 
 ## 4. Fase 2 — Fundação técnica
@@ -79,7 +81,7 @@ Criar a base segura e testável do produto.
 ### Critérios de conclusão
 
 - Aplicações podem ser implantadas automaticamente em homologação.
-- Login funciona para administrador, professor e aluno.
+- Login funciona para administrador e aluno.
 - Testes confirmam isolamento básico de permissões.
 - Erros críticos podem ser identificados nos registros.
 
@@ -91,8 +93,8 @@ Permitir que a Bluebird prepare o primeiro grupo sem intervenção técnica.
 
 ### Entregas
 
-- Cadastro e edição de idiomas.
-- Cadastro de turmas, níveis, períodos e professores.
+- Idioma Inglês criado por seed.
+- Cadastro de turmas, identificação de nível usada pela escola e períodos.
 - Cadastro individual de alunos.
 - Associação de aluno a múltiplas turmas e idiomas.
 - Geração e redefinição de credenciais temporárias.
@@ -107,7 +109,7 @@ Permitir que a Bluebird prepare o primeiro grupo sem intervenção técnica.
 
 - Um administrador cria sozinho idioma, turma e alunos.
 - Um aluno pode estar em mais de uma turma sem duplicação de perfil.
-- Professores veem somente as turmas autorizadas.
+- Administradores veem somente os dados da própria escola.
 - Credenciais podem ser redefinidas com segurança.
 
 ## 6. Fase 4 — Conteúdo pedagógico
@@ -126,7 +128,7 @@ Disponibilizar questões revisadas e organizadas para o treinamento inicial.
 - Pré-visualização como aluno.
 - Conjunto inicial de questões revisado pedagogicamente.
 - Criação de temas pedagógicos e associação com perguntas.
-- Geração assistida por IA para rascunhos de perguntas, com revisão humana obrigatória.
+- Versionamento de perguntas publicadas com preservação do histórico.
 
 ### Critérios de conclusão
 
@@ -173,7 +175,7 @@ Entregar o primeiro ciclo completo e emocionalmente satisfatório.
 
 ### Objetivo
 
-Dar significado ao uso para aluno e professor e medir o piloto.
+Dar significado ao uso para aluno e administrador e medir o piloto.
 
 ### Entregas
 
@@ -181,7 +183,7 @@ Dar significado ao uso para aluno e professor e medir o piloto.
 - Estágio e progresso atual.
 - Histórico resumido de treinamentos.
 - Habilidades em desenvolvimento apresentadas como aprendizados do Bloo.
-- Painel do professor por turma.
+- Painel do administrador por turma.
 - Indicadores de primeiro acesso e conclusão.
 - Participação recente.
 - Desempenho inicial por habilidade.
@@ -189,7 +191,7 @@ Dar significado ao uso para aluno e professor e medir o piloto.
 
 ### Critérios de conclusão
 
-- Professor identifica quem iniciou e quem concluiu.
+- Administrador identifica quem iniciou e quem concluiu.
 - Aluno visualiza claramente seu progresso.
 - A equipe mede início, abandono, conclusão e retorno.
 - Relatórios respeitam as permissões e não expõem dados indevidos.
@@ -198,16 +200,11 @@ Dar significado ao uso para aluno e professor e medir o piloto.
 
 Antes de iniciar o piloto, o MVP deve receber seeds revisadas de temas, perguntas e conquistas.
 
-Temas iniciais:
+Tema jogável obrigatório no MVP:
 
-- `Verb To Be`
 - `Greetings`
-- `Colors`
-- `Simple Present`
-- `Restaurant Vocabulary`
-- `Classroom Objects`
 
-Cada tema deve ter perguntas seedadas de `Easy` até `VeryHard`, ainda que a liberação para a turma piloto possa limitar a dificuldade máxima.
+`Greetings` deve ter dez perguntas de cada dificuldade. Os demais temas podem existir como catálogo futuro, mas não bloqueiam o MVP.
 
 Conquistas iniciais:
 
@@ -219,6 +216,8 @@ Conquistas iniciais:
 - `Skill Learned`
 - `Grammar Guardian`
 - `Vocabulary Explorer`
+- `Greetings Climber`
+- `Greetings Master`
 
 ## 9. Fase 7 — Piloto do MVP
 
@@ -246,7 +245,7 @@ Validar o produto com uso real antes de ampliar o escopo.
 
 ### Decisão ao final
 
-O MVP será considerado validado se o fluxo for utilizável, os professores conseguirem operá-lo e houver evidência de que uma parcela relevante dos alunos retorna voluntariamente para continuar a jornada.
+O MVP será considerado validado se o fluxo for utilizável, os administradores conseguirem operá-lo e houver evidência de que uma parcela relevante dos alunos retorna voluntariamente para continuar a jornada.
 
 Os números-alvo devem ser definidos antes do piloto, depois que tamanho da amostra, idade e rotina escolar forem conhecidos.
 

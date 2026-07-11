@@ -228,11 +228,11 @@ O primeiro MVP inclui:
 
 - Cadastro de turmas e alunos.
 - Associação de aluno à turma e idioma.
-- Criação de temas pelo professor.
+- Criação de temas pelo administrador.
 - Associação de temas a turmas.
 - Liberação imediata ou agendada de temas.
 - Perguntas associadas a temas.
-- Geração assistida por IA como rascunho, com aprovação humana.
+- Versionamento e publicação manual de perguntas.
 - Login do aluno.
 - Primeiro treino de Inglês.
 - Feedback das respostas.
@@ -241,7 +241,7 @@ O primeiro MVP inclui:
 - Nome do Bloo.
 - Título `New Hatchling`.
 - Resumo do que o Bloo aprendeu.
-- Visão básica de acompanhamento para professor/admin.
+- Visão básica de acompanhamento para administrador.
 
 Não prometer como pronto:
 

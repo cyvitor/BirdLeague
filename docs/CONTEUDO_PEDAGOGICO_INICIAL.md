@@ -27,7 +27,7 @@ Sem classificação, o app vira apenas um quiz genérico. Com classificação, o
 Cada pergunta deve ter:
 
 - Idioma.
-- Nível.
+- Referência de nível opcional para curadoria; ela não bloqueia a pergunta no tema do MVP.
 - Categoria.
 - Habilidade.
 - Dificuldade.
@@ -138,7 +138,7 @@ C) are
 D) be
 ```
 
-### Matching
+### Matching — pós-MVP
 
 Associação simples.
 
@@ -151,20 +151,17 @@ Goodbye -> Tchau
 Thanks -> Obrigado
 ```
 
-Matching pode entrar depois de MultipleChoice se a interface ficar mais trabalhosa.
+`Matching` não entra no modelo nem na interface do MVP. Pode ser adicionado depois com uma estrutura própria de pares.
 
 ## 8. Temas iniciais
 
-Depois do nascimento do Bloo, os treinos devem ser organizados por temas liberados pelo professor. Um tema agrupa perguntas de um conteúdo trabalhado em aula e funciona como uma missão para ensinar algo novo ao Bloo.
+Depois do nascimento, os treinos são organizados por temas associados à turma e liberados pelo administrador. O papel de professor fica para uma evolução posterior ao MVP.
 
-Temas iniciais recomendados para seed do MVP:
+Tema jogável do seed do MVP:
 
-- `Verb To Be`
 - `Greetings`
-- `Colors`
-- `Simple Present`
-- `Restaurant Vocabulary`
-- `Classroom Objects`
+
+`Verb To Be`, `Colors`, `Simple Present`, `Restaurant Vocabulary` e `Classroom Objects` permanecem como catálogo planejado, sem bloquear o MVP.
 
 Cada tema deve ter perguntas classificadas por:
 
@@ -182,21 +179,21 @@ Distribuição de dificuldade recomendada por tema:
 - `Hard`: aplicação com mais leitura, contraste ou escolha menos óbvia.
 - `VeryHard`: desafio opcional, usado com cuidado e preferencialmente após domínio inicial.
 
-O professor pode liberar um tema com dificuldade máxima definida para a turma. Por exemplo, uma turma iniciante pode receber apenas `Easy` e `Medium`, enquanto uma turma mais confiante pode receber também `Hard`.
+O administrador pode liberar um tema com dificuldade máxima definida para a turma. No seed inicial, `Greetings` contém e permite a progressão por todas as dificuldades.
 
 ## 9. Banco mínimo para o piloto
 
 Para não travar o desenvolvimento, o MVP deve começar com:
 
-- 60 perguntas publicadas de Inglês.
+- 100 perguntas publicadas de Inglês: as 60 iniciais e 40 da missão `Greetings`.
 - Pelo menos 30 perguntas Starter/A1.
 - Pelo menos 20 perguntas de Vocabulary.
 - Pelo menos 20 perguntas de Grammar.
 - Pelo menos 10 perguntas de Reading.
 
-Para o primeiro treino, separar um conjunto prioritário de 12 a 18 perguntas, das quais o sistema seleciona 6.
+Para o primeiro treino, usar as 24 perguntas prioritárias: 18 `Easy` e 6 `Medium`. O sistema seleciona quatro fáceis e duas médias.
 
-O primeiro banco sugerido está em [Banco de perguntas inicial](BANCO_DE_PERGUNTAS_INICIAL.md). Ele contém 60 perguntas publicadas e 18 perguntas marcadas como prioritárias para o treino `FirstHatch`.
+O primeiro banco está em [Banco de perguntas inicial](BANCO_DE_PERGUNTAS_INICIAL.md). Ele contém 100 perguntas publicadas, sendo 24 prioritárias para `FirstHatch` e 40 específicas de `Greetings`.
 
 ## 10. Regras de qualidade da pergunta
 
@@ -278,6 +275,6 @@ Estados:
 - `Published`: pergunta disponível para treino.
 - `Archived`: pergunta removida de novos treinos, mas preservada no histórico.
 
-No MVP, administradores podem publicar diretamente. Antes do piloto real, a escola deve revisar manualmente as perguntas publicadas.
+No MVP, administradores podem publicar diretamente. As perguntas do banco inicial e da missão `Greetings` são consideradas aprovadas para o seed de desenvolvimento.
 
-Quando perguntas forem geradas por IA, elas devem entrar como rascunho gerado e exigir aprovação humana antes de serem publicadas. O professor pode editar, aprovar ou recusar cada pergunta. A IA deve ajudar a criar variações, mas não deve substituir revisão pedagógica.
+A geração de perguntas por IA fica fora do MVP. Quando implementada posteriormente, deverá criar apenas rascunhos sujeitos à aprovação humana.

@@ -19,6 +19,14 @@ O projeto está na fase de concepção e planejamento do MVP. A primeira versão
 - [Conteúdo pedagógico inicial](docs/CONTEUDO_PEDAGOGICO_INICIAL.md) — classificação das perguntas, habilidades, níveis e banco mínimo.
 - [Banco de perguntas inicial](docs/BANCO_DE_PERGUNTAS_INICIAL.md) — 60 perguntas de Inglês classificadas para o piloto e primeiro treino.
 - [Tom de voz e UI](docs/TOM_DE_VOZ_E_UI.md) — linguagem, mensagens, paleta e política visual mínima.
+- [Escopo de codificação do MVP](docs/ESCOPO_DE_CODIFICACAO_MVP.md) — decisões fechadas, seeds, telas, regras e ordem de implementação.
+- [Especificação visual dos assets](docs/ESPECIFICACAO_VISUAL_ASSETS_MVP.md) — posições, âncoras, encaixes e exportação de Egg e Hatchling.
+- [Guia de uso dos assets do MVP](docs/GUIA_DE_USO_ASSETS_MVP.md) — arquivos gerados, gatilhos e colocação de cada imagem nas telas.
+- [Guia de óculos e encaixes](docs/GUIA_OCULOS_E_ENCAIXES.md) — modelos cosméticos, âncoras, camadas e transforms por pose.
+- [Conquistas do MVP](docs/CONQUISTAS_MVP.md) — condições, progressão e idempotência dos desbloqueios.
+- [Ambientes de desenvolvimento e produção](docs/AMBIENTES_DESENVOLVIMENTO_E_PRODUCAO.md) — preparação para Windows e Linux.
+- [Autenticação e segurança](docs/AUTENTICACAO_E_SEGURANCA_MVP.md) — senhas, tokens, cookies, bootstrap e Cloudflare.
+- [Contrato da API](docs/CONTRATO_API_MVP.md) — rotas, erros, paginação, concorrência e idempotência.
 - [Landing page dos alunos](docs/LANDINGPAGE_ALUNOS.md) — página de incentivo para alunos acessarem o BirdLeague e iniciarem o primeiro treino.
 - [Landing page da escola](docs/LANDINGPAGE_ESCOLA.md) — página institucional/comercial para apresentar proposta, funcionamento e diferenciais do BirdLeague.
 - [BlueVerse](docs/BLUEVERSE.md) — visão futura de mundo compartilhado seguro para Bloos, eventos e conquistas coletivas.

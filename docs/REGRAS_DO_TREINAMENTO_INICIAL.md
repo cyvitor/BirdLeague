@@ -60,13 +60,13 @@ Essa composição permite observar diferentes habilidades sem transformar a expe
 
 ## 7. Dificuldade
 
-O treino inicial deve usar dificuldade baixa a média:
+O treino de nascimento deve usar dificuldade baixa a média:
 
 - 4 perguntas fáceis.
 - 2 perguntas médias.
 - 0 perguntas difíceis.
 
-Perguntas difíceis não devem aparecer antes de o aluno entender a dinâmica do produto.
+Perguntas difíceis não aparecem no treino de nascimento. Elas entram na missão `Greetings`, depois que o aluno entende a dinâmica.
 
 ## 8. Rachaduras do ovo
 
@@ -128,20 +128,16 @@ Na interface, o XP pode ser narrado como energia de crescimento ou aprendizado d
 
 ## 11. Repetição do treino inicial
 
-Depois que o Bloo nasce:
-
-- O treino inicial não deve gerar novo nascimento.
-- Pode ser repetido como revisão se necessário.
-- Repetições não devem conceder novamente o XP de nascimento.
-- Acertos em repetição podem gerar XP reduzido ou nenhum XP no MVP.
+Depois que o Bloo nasce, não é possível criar ou repetir uma sessão `FirstHatch`. Questões semelhantes podem reaparecer futuramente em sessões `Review`, sem novo nascimento nem XP do treino inicial.
 
 ## 12. Abandono
 
 Se o aluno sair no meio:
 
-- A sessão registra status `abandoned` se passar muito tempo sem retorno.
-- Ao voltar no mesmo dia, pode continuar de onde parou.
-- Se a implementação ficar mais simples, pode reiniciar a sessão sem prejuízo.
+- A sessão permanece `InProgress` e é retomada da primeira pergunta ainda não respondida.
+- Após 24 horas sem atividade, continua `InProgress`, mas aparece como inativa e retomável.
+- Não se cria outra sessão de nascimento enquanto existir uma sessão retomável.
+- Respostas e rachaduras já registradas são preservadas.
 
 O sistema deve evitar duplicar XP ao reenviar respostas ou recarregar a tela.
 
@@ -156,7 +152,7 @@ O Bloo nasce quando:
 Resultado:
 
 - Bloo muda para Hatchling.
-- Aluno recebe o título `New Hatchling`.
+- Aluno recebe o título equipável e a conquista `New Hatchling`, além da conquista `First Lesson`.
 - Sistema registra um evento de progresso `FirstTrainingCompleted`.
 
 ## 14. Próximo objetivo após o nascimento

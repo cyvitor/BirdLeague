@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "canvas": { "width": 1024, "height": 1024, "colorSpace": "sRGB" },
+  "rendering": { "fit": "contain", "mobileWidthPx": [220, 320], "desktopWidthPx": [320, 440] },
+  "assets": [
+    { "key": "bloo/egg/idle", "file": "egg-idle.png", "groundAnchor": { "x": 0.5, "y": 0.859375 }, "alt": "Ovo azul e laranja do Bloo, ainda inteiro" },
+    { "key": "bloo/egg/crack-1", "file": "egg-crack-1.png", "groundAnchor": { "x": 0.5, "y": 0.859375 }, "alt": "Ovo do Bloo com a primeira rachadura" },
+    { "key": "bloo/egg/crack-2", "file": "egg-crack-2.png", "groundAnchor": { "x": 0.5, "y": 0.859375 }, "alt": "Ovo do Bloo com várias rachaduras" },
+    { "key": "bloo/egg/crack-3", "file": "egg-crack-3.png", "groundAnchor": { "x": 0.5, "y": 0.859375 }, "alt": "Ovo do Bloo quase abrindo e brilhando" },
+    { "key": "bloo/hatch/burst", "file": "hatch-burst.png", "groundAnchor": { "x": 0.5, "y": 0.859375 }, "alt": "Explosão luminosa do nascimento do Bloo" },
+    { "key": "bloo/hatchling/idle", "file": "hatchling-idle.png", "groundAnchor": { "x": 0.5, "y": 0.859375 }, "anchors": { "headCenter": { "x": 0.5, "y": 0.244 }, "eyesCenter": { "x": 0.5, "y": 0.410156 }, "chestCenter": { "x": 0.5, "y": 0.620117 }, "leftHand": { "x": 0.292969, "y": 0.634766 }, "rightHand": { "x": 0.707031, "y": 0.634766 } }, "alt": "Bloo filhote azul e laranja em pose amigável" },
+    { "key": "bloo/hatchling/happy", "file": "hatchling-happy.png", "groundAnchor": { "x": 0.5, "y": 0.859375 }, "alt": "Bloo filhote feliz comemorando um acerto" },
+    { "key": "bloo/hatchling/thinking", "file": "hatchling-thinking.png", "groundAnchor": { "x": 0.5, "y": 0.859375 }, "alt": "Bloo filhote pensando com curiosidade" },
+    { "key": "bloo/hatchling/celebrate", "file": "hatchling-celebrate.png", "groundAnchor": { "x": 0.5, "y": 0.859375 }, "alt": "Bloo filhote celebrando uma conquista" }
+  ]
+}

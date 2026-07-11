@@ -1,658 +1,296 @@
 # Modelo de Dados do MVP — BirdLeague
 
-Este documento detalha os dados mínimos para construir o MVP. Ele complementa a arquitetura técnica e deve orientar as primeiras entidades, migrations e contratos da API.
+Este documento orienta entidades, migrations e contratos. Professor e IA permanecem na visão futura, mas suas entidades não são necessárias no schema inicial do MVP.
 
 ## 1. Convenções
 
-- Todas as entidades principais devem ter `Id`, `CreatedAt`, `UpdatedAt` e, quando fizer sentido, `IsActive`.
-- Datas devem ser salvas em UTC.
-- Exclusões devem ser lógicas quando houver histórico pedagógico ou progresso.
-- Regras de permissão devem considerar a escola (`School`) como limite de dados.
+- Entidades principais têm `Id`, `CreatedAt`, `UpdatedAt` e, quando aplicável, `IsActive`.
+- Datas são UTC; exclusões são lógicas quando existe histórico.
+- `SchoolId` delimita dados e deve participar das validações de autorização.
+- Códigos de seed são estáveis e índices únicos protegem idempotência.
 
-## 2. School
+## 2. Organização e identidade
 
-Representa a escola ou unidade dona dos dados.
+### School
 
-Campos mínimos:
+`Id`, `Name`, `Slug`, `TimeZoneId`, `IsActive`, `CreatedAt`, `UpdatedAt`.
 
-- `Id`
-- `Name`
-- `Slug`
-- `IsActive`
-- `CreatedAt`
-- `UpdatedAt`
+### User
 
-## 3. User
+`Id`, `SchoolId`, `DisplayName`, `Login`, `Email` opcional, `PasswordHash`, `Role`, `MustChangePassword`, `IsActive`, `LastLoginAt`, `CreatedAt`, `UpdatedAt`.
 
-Representa a identidade de login.
+- Login do sistema inteiro: `Login + Password`.
+- Papéis operacionais do MVP: `Admin`, `Student`.
+- `Teacher` fica reservado para pós-MVP.
+- Índice único: `SchoolId + Login`.
+- Redefinição de senha revoga refresh tokens e marca `MustChangePassword`.
+- Política completa em [Autenticação e Segurança](AUTENTICACAO_E_SEGURANCA_MVP.md).
 
-Campos mínimos:
+### StudentProfile
 
-- `Id`
-- `SchoolId`
-- `DisplayName`
-- `Login`
-- `Email`
-- `PasswordHash`
-- `Role`
-- `MustChangePassword`
-- `IsActive`
-- `LastLoginAt`
-- `CreatedAt`
-- `UpdatedAt`
+`Id`, `UserId`, `SchoolId`, `FullName`, `Nickname` opcional, `CreatedAt`, `UpdatedAt`.
 
-Papéis iniciais:
+Data de nascimento e dados de responsável não são necessários para codificar o MVP.
 
-- `Admin`
-- `Teacher`
-- `Student`
+### Language
 
-No MVP, administradores podem cadastrar perguntas e publicar conteúdo.
+`Id`, `SchoolId`, `Name`, `Code`, `IsActive`. Seed: `English/en`.
 
-## 4. StudentProfile
+### Class
 
-Campos mínimos:
+`Id`, `SchoolId`, `LanguageId`, `Name`, `LevelLabel` opcional, `Period`, `IsActive`, `CreatedAt`, `UpdatedAt`.
 
-- `Id`
-- `UserId`
-- `SchoolId`
-- `FullName`
-- `Nickname`
-- `BirthDate`
-- `GuardianName`
-- `GuardianContact`
-- `CreatedAt`
-- `UpdatedAt`
+`LevelLabel` é apenas a nomenclatura usada pela escola. Não controla automaticamente perguntas ou dificuldades. Ao associar um tema, a escola declara que aquela turma já estudou o assunto.
 
-Dados de responsável podem ser opcionais no MVP se a escola controlar fora da plataforma.
+### Enrollment
 
-## 5. TeacherProfile
+`Id`, `SchoolId`, `StudentProfileId`, `ClassId`, `Status`, `StartedAt`, `EndedAt`.
 
-Campos mínimos:
+Status: `Active`, `Paused`, `Finished`, `Canceled`. Índice impede duas matrículas ativas idênticas.
 
-- `Id`
-- `UserId`
-- `SchoolId`
-- `FullName`
-- `CreatedAt`
-- `UpdatedAt`
+## 3. Bloo
 
-## 6. Language
+### Bloo
 
-Campos mínimos:
+`Id`, `SchoolId`, `StudentProfileId`, `LanguageId`, `Name`, `Stage`, `XP`, `CreatedAt`, `UpdatedAt`, `HatchedAt`.
 
-- `Id`
-- `SchoolId`
-- `Name`
-- `Code`
-- `IsActive`
+- Estágios do MVP: `Egg`, `Hatchling`.
+- Índice único: `StudentProfileId + LanguageId`.
+- É criado idempotentemente na primeira matrícula ativa do aluno naquele idioma.
+- O login apenas garante sua existência; não cria duplicata.
 
-Registro inicial:
+Nome do Bloo:
 
-- `English`, código `en`.
+- obrigatório após o nascimento;
+- 2 a 20 caracteres após `trim`;
+- letras Unicode, números, espaço, hífen e apóstrofo;
+- sem espaços repetidos ou apenas números;
+- lista de termos proibidos validada no backend;
+- pode ser alterado pelo aluno no MVP, preservando auditoria básica.
 
-## 7. CourseLevel
+### BlooStageDefinition
 
-Representa o nível usado pela escola ou uma aproximação CEFR.
+`Id`, `LanguageId`, `Stage`, `DisplayName`, `RequiredXP`, `Order`, `AssetKey`, `IsActive`.
 
-Campos mínimos:
+O nascimento depende da conclusão de `FirstHatch`, não de `RequiredXP`.
 
-- `Id`
-- `SchoolId`
-- `LanguageId`
-- `Name`
-- `Code`
-- `Order`
-- `IsActive`
+## 4. Conteúdo pedagógico
 
-Níveis iniciais sugeridos:
+### SkillCategory
 
-- `Starter`
-- `A1`
-- `A2`
-- `B1`
-- `B2`
-- `C1`
+`Id`, `LanguageId`, `Name`, `Code`, `Description`, `IsActive`.
 
-Se a escola usar nomes próprios, eles podem ser cadastrados depois.
+Seeds do MVP: `Vocabulary`, `Grammar`, `Reading`.
 
-## 8. Class
+### Skill
 
-Campos mínimos:
+`Id`, `LanguageId`, `SkillCategoryId`, `Name`, `Code`, `Description`, `IsActive`.
 
-- `Id`
-- `SchoolId`
-- `LanguageId`
-- `CourseLevelId`
-- `Name`
-- `Period`
-- `TeacherId`
-- `IsActive`
-- `CreatedAt`
-- `UpdatedAt`
+O nível CEFR não faz parte da identidade da habilidade no MVP. Para `Greetings`:
 
-## 9. Enrollment
+- `BASIC_GREETINGS`, categoria `Vocabulary`;
+- `GREETING_COMPREHENSION`, categoria `Reading`.
 
-Liga aluno e turma.
+### Theme
 
-Campos mínimos:
+`Id`, `SchoolId`, `LanguageId`, `Code`, `Title`, `Description`, `Status`, `CreatedByUserId`, `PublishedAt`, `CreatedAt`, `UpdatedAt`.
 
-- `Id`
-- `SchoolId`
-- `StudentProfileId`
-- `ClassId`
-- `Status`
-- `StartedAt`
-- `EndedAt`
+Status: `Draft`, `Published`, `Closed`, `Archived`.
 
-O idioma e o nível da matrícula vêm da turma (`Class`). No MVP, não devem ser duplicados diretamente em `Enrollment`, para evitar inconsistência entre aluno, turma e idioma.
+- Tema não possui nível CEFR no MVP.
+- Um tema publicado precisa ter ao menos 5 perguntas publicadas em cada dificuldade habilitada.
+- Não pode voltar para `Draft` depois de usado; pode ser fechado ou arquivado.
 
-Status:
+### ThemeSkill
 
-- `Active`
-- `Paused`
-- `Finished`
-- `Canceled`
+`Id`, `ThemeId`, `SkillId`, `IsPrimary`, `CreatedAt`.
 
-## 10. Bloo
+Permite que um tema desenvolva várias habilidades sem duplicar domínio. Deve existir exatamente uma habilidade principal por tema.
 
-Representa o avatar do aluno em um idioma.
+### ThemeCategory
 
-Campos mínimos:
+`Id`, `ThemeId`, `SkillCategoryId`, `CreatedAt`.
 
-- `Id`
-- `SchoolId`
-- `StudentProfileId`
-- `LanguageId`
-- `Name`
-- `Stage`
-- `XP`
-- `CreatedAt`
-- `UpdatedAt`
-- `HatchedAt`
+Derivável pelas habilidades, mas persistido para filtros e validação editorial.
 
-Estágios iniciais:
+### ThemeDifficulty
 
-- `Egg`
-- `Hatchling`
+`Id`, `ThemeId`, `Difficulty`, `Order`, `IsEnabled`, `QuestionsPerSession`, `CreatedAt`, `UpdatedAt`.
 
-Estágios futuros:
+Dificuldades: `Easy`, `Medium`, `Hard`, `VeryHard`. No seed `Greetings`, todas ficam habilitadas e `QuestionsPerSession = 5`.
 
-- `BabyBloo`
-- `YoungBloo`
-- `AdultBloo`
-- `MasterBloo`
-- `LegendaryBloo`
+### ThemeClass
 
-Regra:
+`Id`, `SchoolId`, `ThemeId`, `ClassId`, `ReleaseMode`, `ReleaseAt`, `DueAt`, `IsActive`, `CreatedAt`, `UpdatedAt`.
 
-- Deve existir apenas um Bloo por aluno e idioma.
+`ReleaseMode`: `Immediate`, `Scheduled`. O agendamento existe apenas aqui; `Theme` não possui estado `Scheduled`.
 
-## 11. BlooStageDefinition
+Validações:
 
-Define estágios e requisitos.
+- tema e turma pertencem à mesma escola e idioma;
+- somente tema `Published` pode ficar disponível;
+- `Scheduled` exige `ReleaseAt` futuro;
+- índice único: `ThemeId + ClassId`.
 
-Campos mínimos:
+### Question
 
-- `Id`
-- `LanguageId`
-- `Stage`
-- `DisplayName`
-- `RequiredXP`
-- `Order`
-- `AssetKey`
-- `IsActive`
+Identidade estável da pergunta: `Id`, `SchoolId`, `LanguageId`, `Code`, `CreatedByUserId`, `IsActive`, `CreatedAt`, `UpdatedAt`.
 
-No MVP, `Egg` e `Hatchling` são obrigatórios.
+### QuestionVersion
 
-## 12. SkillCategory
+Conteúdo imutável de uma versão: `Id`, `QuestionId`, `VersionNumber`, `SkillCategoryId`, `SkillId`, `Type`, `Difficulty`, `Prompt`, `Explanation`, `Status`, `PublishedAt`, `ArchivedAt`, `CreatedByUserId`, `CreatedAt`.
 
-Categoria ampla da pergunta.
+Tipos do MVP: `MultipleChoice`, `FillBlankWithOptions`. `Matching` fica pós-MVP.
 
-Campos mínimos:
+Status: `Draft`, `Published`, `Archived`.
 
-- `Id`
-- `LanguageId`
-- `Name`
-- `Code`
-- `Description`
-- `IsActive`
+Regras editoriais:
 
-Categorias iniciais:
+- rascunho pode ser editado livremente;
+- publicação valida enunciado, explicação, habilidade, dificuldade e exatamente uma opção correta;
+- versão publicada é imutável;
+- editar conteúdo publicado cria nova versão `Draft`;
+- publicar a nova versão arquiva a anterior para novas sessões, preservando o histórico;
+- pergunta usada nunca é apagada fisicamente;
+- troca de idioma cria outra pergunta, não outra versão.
 
-- `Vocabulary`
-- `Grammar`
-- `Reading`
-- `Listening`
-- `Speaking`
-- `Writing`
+### QuestionOption
 
-No MVP, `Speaking` e `Writing` podem existir no cadastro, mas não precisam aparecer no treino inicial.
+`Id`, `QuestionVersionId`, `Text`, `IsCorrect`, `Order`.
 
-## 13. Skill
+Mínimo de 2 opções e exatamente uma correta. Opções de versão publicada são imutáveis.
 
-Habilidade específica dentro de uma categoria.
+### ThemeQuestion
 
-Campos mínimos:
+`Id`, `ThemeId`, `QuestionId`, `Order`, `IsRequired`, `CreatedAt`.
 
-- `Id`
-- `LanguageId`
-- `SkillCategoryId`
-- `CourseLevelId`
-- `Name`
-- `Code`
-- `Description`
-- `IsActive`
+É a única relação pergunta–tema; `Question` não possui `ThemeId`. Ao criar uma sessão, o sistema fixa a versão publicada vigente.
 
-Exemplos:
+- Uma pergunta pode pertencer a vários temas.
+- Índice único: `ThemeId + QuestionId`.
+- `Order` é uma preferência editorial; a seleção da sessão continua seguindo novidade, erros e menor uso.
+- Enunciados iguais ou muito semelhantes geram aviso editorial, mas não bloqueiam salvamento, pois variações intencionais são permitidas.
+- Arquivar um tema bloqueia novas sessões; sessões já iniciadas podem terminar com suas versões fixadas.
 
-- `Basic Greetings`
-- `Colors`
-- `Numbers`
-- `Simple Present`
-- `Verb To Be`
-- `Classroom Objects`
+## 5. Treinamento
 
-## 14. Theme
+### TrainingSession
 
-Representa um tema ou missão pedagógica criada pelo professor para uma ou mais turmas.
+`Id`, `SchoolId`, `StudentProfileId`, `BlooId`, `LanguageId`, `ThemeId` opcional, `Difficulty` opcional, `Type`, `Status`, `StartedAt`, `LastActivityAt`, `CompletedAt`, `AbandonedAt`, `TotalQuestions`, `CorrectAnswers`, `BaseXP`, `BonusXP`, `TotalXP`.
 
-Campos mínimos:
+Tipos: `FirstHatch`, `ThemeMission`, `Review`. Status: `InProgress`, `Completed`, `Abandoned`.
 
-- `Id`
-- `SchoolId`
-- `LanguageId`
-- `CourseLevelId`
-- `Title`
-- `Description`
-- `PrimarySkillId`
-- `Status`
-- `CreatedByUserId`
-- `CreatedAt`
-- `UpdatedAt`
+- `Difficulty` é obrigatória em `ThemeMission` e nula em `FirstHatch`.
+- Sessão retomável permanece `InProgress`; `LastActivityAt` identifica inatividade.
+- Após 24 horas, aparece como inativa, mas continua retomável.
+- `Abandoned` é usado somente quando uma sessão é encerrada definitivamente por regra administrativa; ela não é retomável.
 
-Status:
+### TrainingQuestion
 
-- `Draft`
-- `Scheduled`
-- `Published`
-- `Closed`
-- `Archived`
+`Id`, `TrainingSessionId`, `QuestionId`, `QuestionVersionId`, `Order`, `AnsweredAt`.
 
-Seeds iniciais:
+As perguntas são fixadas na criação da sessão. Índices únicos: `TrainingSessionId + Order` e `TrainingSessionId + QuestionVersionId`.
 
-- `Verb To Be`
-- `Greetings`
-- `Colors`
-- `Simple Present`
-- `Restaurant Vocabulary`
-- `Classroom Objects`
+### TrainingAnswer
 
-## 15. ThemeClass
+`Id`, `TrainingSessionId`, `TrainingQuestionId`, `SelectedOptionId`, `IsCorrect`, `AnsweredAt`, `TimeSpentSeconds`.
 
-Associa um tema a uma turma e controla sua liberação.
+Índice único em `TrainingQuestionId` garante uma resposta válida no MVP. Reenvio retorna o resultado existente.
 
-Campos mínimos:
+## 6. Progresso temático
 
-- `Id`
-- `SchoolId`
-- `ThemeId`
-- `ClassId`
-- `ReleaseMode`
-- `ReleaseAt`
-- `DueAt`
-- `IsActive`
-- `CreatedAt`
-- `UpdatedAt`
+### StudentThemeProgress
 
-`ReleaseMode`:
+`Id`, `SchoolId`, `StudentProfileId`, `BlooId`, `ThemeId`, `Status`, `CurrentDifficulty`, `StartedAt`, `CompletedAt`, `UpdatedAt`.
 
-- `Immediate`
-- `Scheduled`
+Status: `NotStarted`, `InProgress`, `Completed`. Índice único: `StudentProfileId + BlooId + ThemeId`.
 
-## 16. ThemeQuestion
+### StudentThemeDifficultyProgress
 
-Associa perguntas a um tema.
+`Id`, `StudentThemeProgressId`, `ThemeDifficultyId`, `Status`, `SessionsCompleted`, `BestCorrectAnswers`, `BestAccuracy`, `FirstCompletedAt`, `LastCompletedAt`, `UpdatedAt`.
 
-Campos mínimos:
+Status: `Locked`, `Available`, `Completed`.
 
-- `Id`
-- `ThemeId`
-- `QuestionId`
-- `Order`
-- `IsRequired`
-- `CreatedAt`
+- primeira dificuldade começa `Available`;
+- concluir as 5 perguntas marca a etapa `Completed` e libera a seguinte;
+- nota não bloqueia a progressão;
+- repetições atualizam sessões e melhor resultado;
+- concluir todas as etapas marca o tema `Completed`.
 
-## 17. Question
+## 7. Domínio
 
-Campos mínimos:
+### SkillMastery
 
-- `Id`
-- `SchoolId`
-- `LanguageId`
-- `CourseLevelId`
-- `SkillCategoryId`
-- `SkillId`
-- `ThemeId`
-- `Type`
-- `Difficulty`
-- `Prompt`
-- `Explanation`
-- `Status`
-- `GenerationSource`
-- `AiModel`
-- `AiPromptVersion`
-- `CreatedByUserId`
-- `PublishedAt`
-- `CreatedAt`
-- `UpdatedAt`
+`Id`, `SchoolId`, `StudentProfileId`, `LanguageId`, `SkillId`, `Attempts`, `CorrectAnswers`, `DistinctSessions`, `MasteryScore`, `Status`, `LastPracticedAt`.
 
-Tipos:
+Status: `NotStarted`, `Practicing`, `Mastered`.
 
-- `MultipleChoice`
-- `FillBlankWithOptions`
-- `Matching`
+Uma habilidade vira `Mastered` com no mínimo 5 respostas, 2 sessões distintas e 80% de acerto global. Cada pergunta atualiza somente sua própria habilidade.
 
-Dificuldades:
+O tema e a habilidade são conceitos diferentes:
 
-- `Easy`
-- `Medium`
-- `Hard`
-- `VeryHard`
+- progresso temático mede etapas concluídas;
+- domínio mede conhecimento demonstrado nas habilidades;
+- `Greetings Master` usa conclusão temática e desempenho avançado;
+- `Vocabulary Explorer` exige domínio de `BASIC_GREETINGS` e conclusão de todas as etapas.
 
-Status:
+## 8. XP do MVP
 
-- `Draft`
-- `AiGenerated`
-- `Published`
-- `Rejected`
-- `Archived`
+### FirstHatch
 
-Origem da geração:
+- 60 XP pela primeira conclusão;
+- 5 XP por acerto;
+- máximo 90 XP;
+- nunca recompensa novamente.
 
-- `Manual`
-- `AiGenerated`
+### ThemeMission
 
-## 18. QuestionOption
+Na primeira conclusão de cada dificuldade:
 
-Campos mínimos:
+- 25 XP base;
+- 5 XP por acerto entre as 5 perguntas;
+- máximo 50 XP por dificuldade e 200 XP no tema `Greetings`.
 
-- `Id`
-- `QuestionId`
-- `Text`
-- `IsCorrect`
-- `Order`
+Repetições não concedem XP no MVP, mas atualizam domínio e melhor resultado. Isso recompensa avanço e impede cultivo infinito de perguntas fáceis.
 
-No MVP, perguntas objetivas devem ter uma única opção correta.
+## 9. Eventos, títulos e conquistas
 
-## 19. TrainingSession
+### ProgressEvent
 
-Campos mínimos:
+`Id`, `SchoolId`, `StudentProfileId`, `BlooId`, `Type`, `XP`, `SourceId`, `SourceType`, `IdempotencyKey`, `CreatedAt`.
 
-- `Id`
-- `SchoolId`
-- `StudentProfileId`
-- `BlooId`
-- `LanguageId`
-- `ThemeId`
-- `Type`
-- `Status`
-- `StartedAt`
-- `CompletedAt`
-- `AbandonedAt`
-- `TotalQuestions`
-- `CorrectAnswers`
-- `BaseXP`
-- `BonusXP`
-- `TotalXP`
+Tipos: `FirstTrainingCompleted`, `QuestionAnsweredCorrectly`, `ThemeDifficultyCompleted`, `ThemeCompleted`, `BlooHatched`, `BlooPracticedSkill`, `SkillMasteryChanged`, `BlooLearnedSkill`, `AchievementUnlocked`, `TitleUnlocked`.
 
-Tipos:
+Índice único em `IdempotencyKey`.
 
-- `FirstHatch`
-- `ThemeMission`
-- `Practice`
-- `Review`
+### Title e StudentTitle
 
-Status:
+`Title`: `Id`, `LanguageId`, `Name`, `Code`, `Description`, `RequirementType`, `IsActive`.
 
-- `InProgress`
-- `Completed`
-- `Abandoned`
+`StudentTitle`: `Id`, `StudentProfileId`, `BlooId`, `TitleId`, `UnlockedAt`, `IsEquipped`.
 
-## 20. TrainingQuestion
+`New Hatchling` é simultaneamente título equipável e conquista. O evento `BlooHatched` cria ambos, cada um com seu índice único.
 
-Guarda quais perguntas entraram na sessão.
+### Achievement e StudentAchievement
 
-Campos mínimos:
+`Achievement`: `Id`, `LanguageId`, `Name`, `Code`, `Description`, `RequirementType`, `RequirementJson`, `IsActive`.
 
-- `Id`
-- `TrainingSessionId`
-- `QuestionId`
-- `Order`
-- `AnsweredAt`
+`StudentAchievement`: `Id`, `StudentProfileId`, `BlooId`, `AchievementId`, `UnlockedAt`.
 
-## 21. TrainingAnswer
+Índice único: `StudentProfileId + BlooId + AchievementId`. Condições em [Conquistas do MVP](CONQUISTAS_MVP.md).
 
-Campos mínimos:
+## 10. Assets e analytics
 
-- `Id`
-- `TrainingSessionId`
-- `TrainingQuestionId`
-- `QuestionId`
-- `SelectedOptionId`
-- `IsCorrect`
-- `AnsweredAt`
-- `TimeSpentSeconds`
+### Asset
 
-## 22. ProgressEvent
+`Id`, `Key`, `Type`, `Path`, `AltText`, `Width`, `Height`, `IsActive`.
 
-Registra mudanças de progresso.
+### AnalyticsEvent
 
-Campos mínimos:
+`Id`, `SchoolId`, `UserId`, `EventName`, `EntityType`, `EntityId`, `MetadataJson`, `CreatedAt`.
 
-- `Id`
-- `SchoolId`
-- `StudentProfileId`
-- `BlooId`
-- `Type`
-- `XP`
-- `SourceId`
-- `SourceType`
-- `CreatedAt`
+Eventos: login, início/retomada/conclusão de treino, nascimento, resposta, etapa liberada, tema concluído e conquista.
 
-Tipos iniciais:
+## 11. Pós-MVP preservado
 
-- `FirstTrainingCompleted`
-- `QuestionAnsweredCorrectly`
-- `BlooHatched`
-- `BlooPracticedSkill`
-- `BlooLearnedSkill`
-- `TitleUnlocked`
-
-Regra:
-
-- Eventos derivados de uma mesma sessão devem ser idempotentes.
-
-## 23. SkillMastery
-
-Guarda progresso do aluno por habilidade. Na interface do aluno, esse progresso também representa o que o Bloo está aprendendo.
-
-Campos mínimos:
-
-- `Id`
-- `SchoolId`
-- `StudentProfileId`
-- `LanguageId`
-- `SkillId`
-- `Attempts`
-- `CorrectAnswers`
-- `MasteryScore`
-- `Status`
-- `LastPracticedAt`
-
-Status:
-
-- `NotStarted`
-- `Practicing`
-- `Mastered`
-
-Regra inicial:
-
-- Uma habilidade só pode virar `Mastered` após pelo menos 5 respostas em pelo menos 2 sessões diferentes e acerto mínimo de 80%.
-
-Apresentação no app:
-
-- `Practicing` pode aparecer para o aluno como "Bloo está aprendendo".
-- `Mastered` pode aparecer como "Bloo aprendeu" ou "Bloo dominou", conforme a idade e tom escolhido.
-- O modelo não deve criar uma segunda verdade separada para aluno e Bloo no MVP. O aprendizado do Bloo é uma camada narrativa sobre o domínio pedagógico.
-
-## 24. Title
-
-Campos mínimos:
-
-- `Id`
-- `LanguageId`
-- `Name`
-- `Code`
-- `Description`
-- `RequirementType`
-- `IsActive`
-
-Títulos iniciais:
-
-- `New Hatchling`: concedido ao nascer o primeiro Bloo.
-- `Grammar Guardian`: futuro, por domínio de gramática.
-- `Vocabulary Explorer`: futuro, por domínio de vocabulário.
-
-## 25. Achievement
-
-Representa conquistas que podem ser liberadas por nascimento, tema, constância ou domínio.
-
-Campos mínimos:
-
-- `Id`
-- `LanguageId`
-- `Name`
-- `Code`
-- `Description`
-- `RequirementType`
-- `RequirementJson`
-- `IsActive`
-
-Seeds iniciais recomendadas:
-
-- `New Hatchling`: Bloo nasceu.
-- `First Lesson`: primeiro treino concluído.
-- `First Theme`: primeiro tema iniciado.
-- `Theme Explorer`: etapa fácil de um tema concluída.
-- `Bloo Is Learning`: habilidade praticada em um tema.
-- `Skill Learned`: habilidade dominada.
-- `Grammar Guardian`: conjunto de habilidades de gramática dominado.
-- `Vocabulary Explorer`: conjunto de habilidades de vocabulário dominado.
-
-## 26. StudentTitle
-
-Campos mínimos:
-
-- `Id`
-- `StudentProfileId`
-- `BlooId`
-- `TitleId`
-- `UnlockedAt`
-- `IsEquipped`
-
-## 27. StudentAchievement
-
-Campos mínimos:
-
-- `Id`
-- `StudentProfileId`
-- `BlooId`
-- `AchievementId`
-- `UnlockedAt`
-
-## 28. Asset
-
-Campos mínimos:
-
-- `Id`
-- `Key`
-- `Type`
-- `Path`
-- `AltText`
-- `Width`
-- `Height`
-- `IsActive`
-
-Tipos:
-
-- `BlooStage`
-- `Accessory`
-- `Effect`
-- `QuestionImage`
-- `Audio`
-
-## 29. AiProviderSettings
-
-Configuração administrativa do provedor de IA.
-
-Campos mínimos:
-
-- `Id`
-- `SchoolId`
-- `Provider`
-- `ApiKeySecretRef`
-- `Model`
-- `Temperature`
-- `MaxTokens`
-- `IsEnabled`
-- `CreatedAt`
-- `UpdatedAt`
-
-A chave da API não deve ser exposta ao professor.
-
-## 30. AiQuestionGenerationBatch
-
-Registra um lote de perguntas geradas por IA.
-
-Campos mínimos:
-
-- `Id`
-- `SchoolId`
-- `ThemeId`
-- `RequestedByUserId`
-- `Provider`
-- `Model`
-- `PromptVersion`
-- `RequestedCount`
-- `Status`
-- `CreatedAt`
-
-Status:
-
-- `Requested`
-- `Completed`
-- `Failed`
-- `Reviewed`
-
-## 31. AnalyticsEvent
-
-Campos mínimos:
-
-- `Id`
-- `SchoolId`
-- `UserId`
-- `EventName`
-- `EntityType`
-- `EntityId`
-- `MetadataJson`
-- `CreatedAt`
-
-Eventos principais:
-
-- `StudentLoggedIn`
-- `LanguageSelected`
-- `FirstTrainingStarted`
-- `FirstTrainingCompleted`
-- `BlooHatched`
-- `QuestionAnswered`
+Professor, geração por IA, configurações de provedor, lotes gerados, `Matching`, listening, speaking e escrita permanecem na visão do produto, mas não fazem parte das migrations, APIs ou telas iniciais do MVP.

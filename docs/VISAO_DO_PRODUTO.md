@@ -129,7 +129,7 @@ O jogo não deve depender de recompensas constantes e imprevisíveis. O aluno pr
 
 ### 7.1 Entrada
 
-O professor ou administrador cria o aluno, fornece suas credenciais e associa esse aluno a uma turma. Como a turma já possui um idioma definido, no MVP o estudante entra diretamente na experiência daquele idioma, sem precisar escolher Inglês manualmente. Se no futuro o aluno tiver matrículas ativas em mais de um idioma, cada idioma poderá ter seu próprio espaço e seu próprio Bloo independente.
+No MVP, o administrador cria o aluno, fornece suas credenciais e associa esse aluno a uma turma. Como a turma já possui um idioma definido, o estudante entra diretamente na experiência daquele idioma. O perfil de professor poderá executar esse fluxo em uma fase posterior.
 
 ### 7.2 Tutorial
 
@@ -301,11 +301,11 @@ Os treinamentos devem ser curtos, claros e adaptados ao aluno. Eles poderão tra
 
 Cada questão pertence a um idioma, nível, tema, habilidade e dificuldade. O sistema começa com perguntas acessíveis e ajusta gradualmente o desafio conforme o desempenho.
 
-### 9.1 Temas liberados pelo professor
+### 9.1 Temas liberados pela escola
 
-Depois do nascimento do Bloo, a principal unidade de treino deve ser o **tema**. Um tema representa um conteúdo pedagógico que o professor quer trabalhar com uma ou mais turmas, como `Verb To Be`, `Greetings`, `Colors`, `Simple Present`, `Restaurant Vocabulary` ou `Classroom Objects`.
+Depois do nascimento do Bloo, a principal unidade de treino deve ser o **tema**. Um tema representa um conteúdo pedagógico que a escola quer trabalhar com uma ou mais turmas, como `Verb To Be`, `Greetings`, `Colors`, `Simple Present`, `Restaurant Vocabulary` ou `Classroom Objects`.
 
-O professor pode criar temas, associá-los a turmas e escolher se a liberação será imediata ou agendada para uma data futura. Quando o tema fica disponível, ele aparece para o aluno como uma missão para ensinar algo novo ao Bloo.
+No MVP, o administrador cria temas, associa-os a turmas e escolhe liberação imediata ou agendada. O professor assume essa operação em fase posterior.
 
 Um tema pode conter perguntas de diferentes categorias, habilidades e dificuldades. Ele funciona como uma trilha:
 
@@ -314,7 +314,7 @@ Um tema pode conter perguntas de diferentes categorias, habilidades e dificuldad
 3. **Dominar:** perguntas mais exigentes para demonstrar consistência.
 4. **Desafio:** aplicação do conteúdo em contextos mais difíceis ou misturados.
 
-O professor mantém controle pedagógico sobre o que é liberado. O aluno pode revisar temas já liberados, mas não deve avançar livremente para temas que a turma ainda não recebeu.
+A escola mantém controle pedagógico sobre o que é liberado. O aluno pode revisar temas já liberados, mas não deve avançar para temas que a turma ainda não recebeu.
 
 ### 9.2 Autoria de perguntas e apoio de IA
 
@@ -547,8 +547,8 @@ No MVP, as perguntas mais importantes são:
 - Quantos retornam no dia seguinte e na semana seguinte?
 - Quantos treinamentos realizam por semana?
 - Em quais etapas abandonam a experiência?
-- Professores conseguem criar turmas e alunos sem ajuda?
-- Professores consultam o progresso depois de cadastrar a turma?
+- Administradores conseguem criar turmas e alunos sem ajuda?
+- Administradores consultam o progresso depois de cadastrar a turma?
 
 Indicadores de longo prazo incluem:
 
@@ -561,6 +561,8 @@ Indicadores de longo prazo incluem:
 
 ## 18. Limites do MVP
 
+No recorte atual, apenas administradores e alunos são operacionais. As referências a professores e IA nas seções de visão descrevem a evolução posterior do produto.
+
 O primeiro MVP incluirá:
 
 - Administração de idiomas, turmas e alunos.
@@ -572,13 +574,13 @@ O primeiro MVP incluirá:
 - Feedback das respostas.
 - Progresso visual do ovo.
 - Evolução de Egg para Hatchling.
-- Criação de temas pelo professor.
+- Criação de temas pelo administrador.
 - Associação de temas a turmas.
 - Liberação imediata ou agendada de temas.
 - Perguntas associadas aos temas.
-- Geração assistida por IA como rascunho, com revisão humana obrigatória.
+- Versionamento e publicação manual de perguntas pelo administrador.
 - Seeds dos temas iniciais e conquistas iniciais.
-- Visão básica de progresso para professor e aluno.
+- Visão básica de progresso para administrador e aluno.
 
 Não fará parte do primeiro MVP:
 
@@ -590,16 +592,16 @@ Não fará parte do primeiro MVP:
 - Aplicativos nativos separados.
 - Inteligência adaptativa sofisticada.
 - Ranking global.
+- Perfil operacional de professor.
+- Geração assistida por IA.
 
 Esses recursos permanecem na visão, mas só serão construídos depois que o ciclo básico provar que gera retorno e desejo de evolução.
 
 ## 19. Decisões que ainda precisarão ser validadas
 
+Estas decisões não bloqueiam automaticamente a codificação. Para o recorte implementável já fechado, consulte [Escopo de Codificação do MVP](ESCOPO_DE_CODIFICACAO_MVP.md).
+
 - Faixas etárias atendidas inicialmente.
-- Primeiro idioma lançado.
-- Quantidade de perguntas do treinamento inicial.
-- Critérios exatos de XP e evolução.
-- Identidade visual de cada estágio do Bloo.
 - Forma de autoria e revisão pedagógica das questões.
 - Regras para alunos que mudam de turma ou nível.
 - Política de privacidade e participação de responsáveis.

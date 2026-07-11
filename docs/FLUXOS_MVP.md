@@ -1,243 +1,146 @@
 # Fluxos do MVP — BirdLeague
 
-Este documento define os fluxos iniciais que serão construídos no MVP. As decisões abaixo são hipóteses de produto para levar uma primeira versão funcional à escola, validar com uso real e ajustar depois.
+Este documento descreve os fluxos operacionais do administrador e do aluno. No MVP existem somente `Admin` e `Student`; professor e IA ficam para depois.
 
-## 1. Princípio dos fluxos
+## 1. Administrador
 
-O MVP deve provar uma coisa principal: o aluno entende que estudar ensina o Bloo, faz o Bloo nascer e cria vontade de continuar evoluindo junto.
+### 1.1 Login
 
-Por isso, os fluxos devem ser curtos, guiados e com uma ação principal por tela. O aluno não deve precisar entender todas as regras do BirdLeague no primeiro acesso.
+1. Informa login e senha.
+2. O backend valida credenciais, usuário ativo e papel `Admin`.
+3. Entra no dashboard.
 
-## 2. Fluxo do administrador
+Estados: carregando, credenciais inválidas, usuário inativo, sem permissão e indisponibilidade. Recuperação autônoma fica fora do MVP.
 
-### 2.1 Login
+### 1.2 Turma
 
-1. Administrador acessa a plataforma.
-2. Informa e-mail e senha.
-3. Entra no painel administrativo.
+1. Abre “Turmas” e cria uma turma.
+2. Informa nome, idioma, identificação de nível usada pela escola e período.
+3. Salva como ativa ou inativa.
 
-Estados necessários:
+O nível é informativo. A escola decide fora do sistema se a turma está preparada para um tema.
 
-- Credenciais inválidas.
-- Usuário sem permissão administrativa.
-- Esqueci minha senha pode ficar fora do MVP se a redefinição for manual.
+### 1.3 Aluno, matrícula e Bloo
 
-### 2.2 Configuração mínima da escola
+1. Abre “Alunos”.
+2. Informa nome, apelido opcional, login único, senha inicial e turma.
+3. Sistema cria `User`, `StudentProfile` e `Enrollment` numa transação.
+4. Na primeira matrícula ativa em um idioma, cria idempotentemente um Bloo `Egg` para `Aluno + Idioma`.
+5. Outra turma do mesmo idioma reutiliza o mesmo Bloo; outro idioma cria outro Bloo.
 
-No MVP, a escola pode ser criada previamente no banco ou em uma tela simples de configuração. A prioridade é não travar o piloto.
+O administrador pode ativar/desativar aluno, gerir matrículas e redefinir a senha. O login do aluno apenas garante que o Bloo já exista.
 
-Dados mínimos:
+### 1.4 Pergunta nova
 
-- Nome da escola.
-- Idioma inicial: Inglês.
-- Níveis disponíveis.
+1. Abre “Banco de questões” e cria uma pergunta.
+2. Define idioma, categoria, habilidade, dificuldade e tipo.
+3. Informa enunciado, explicação e opções.
+4. Salva como `Draft` ou publica.
 
-### 2.3 Cadastro de turma
+Tipos: `MultipleChoice` e `FillBlankWithOptions`. Publicação exige ao menos duas opções e exatamente uma correta.
 
-1. Administrador abre "Turmas".
-2. Clica em criar turma.
-3. Informa nome, idioma, nível, período e professor responsável quando houver.
-4. Salva.
+### 1.5 Editar pergunta publicada
 
-Dados mínimos:
+1. Administrador abre uma pergunta publicada.
+2. Escolhe “Criar nova versão”.
+3. Sistema copia o conteúdo para um novo `Draft`.
+4. Administrador edita e pré-visualiza.
+5. Ao publicar, a versão anterior deixa de entrar em novas sessões, mas continua ligada às respostas históricas.
 
-- Nome da turma.
-- Idioma.
-- Nível inicial.
-- Período ou ano letivo.
-- Status ativo/inativo.
+Pergunta usada não pode ser apagada fisicamente. Pode ser arquivada. Mudança de idioma exige nova pergunta.
 
-### 2.4 Cadastro de aluno
+### 1.6 Tema
 
-1. Administrador abre "Alunos".
-2. Clica em criar aluno.
-3. Informa nome, usuário de acesso, senha temporária e turma.
-4. Sistema cria o aluno e sua matrícula.
-5. Sistema usa o idioma da turma para criar ou localizar o Bloo correspondente.
-6. Se o aluno ainda não tiver Bloo naquele idioma, o sistema cria automaticamente um Bloo em estágio Egg.
+1. Abre “Temas” e cria um tema `Draft`.
+2. Informa título, idioma, descrição, habilidade principal e demais habilidades/categorias.
+3. Habilita `Easy`, `Medium`, `Hard` e/ou `VeryHard` e define cinco perguntas por sessão.
+4. Associa perguntas publicadas do mesmo idioma às dificuldades correspondentes.
+5. Pré-visualiza cada dificuldade.
+6. Publica quando cada dificuldade habilitada possuir ao menos cinco perguntas válidas.
 
-Dados mínimos:
+A dificuldade é interna ao tema e não representa CEFR. Associar o tema a uma turma declara que a escola já trabalhou aquele conteúdo.
 
-- Nome.
-- Apelido opcional.
-- Identificador de login.
-- Senha temporária.
-- Turma.
+### 1.7 Liberar tema para turma
 
-O idioma não deve ser escolhido diretamente no cadastro do aluno quando a matrícula estiver ligada a uma turma. O idioma vem da própria turma.
+1. Em tema publicado, seleciona uma ou mais turmas do mesmo idioma.
+2. Escolhe liberação imediata ou agenda `ReleaseAt`.
+3. O aluno passa a ver o tema quando a associação estiver ativa e a data chegar.
 
-Regra para múltiplos idiomas:
+Agendamento pertence à associação tema–turma, não ao estado editorial do tema.
 
-- Um aluno pode estar em mais de uma turma.
-- Se as turmas forem de idiomas diferentes, o aluno terá um Bloo para cada idioma.
-- Se o aluno entrar em duas turmas do mesmo idioma, continua tendo apenas um Bloo daquele idioma.
-- O vínculo do Bloo é sempre `Aluno + Idioma`, não `Aluno + Turma`.
+### 1.8 Acompanhamento
 
-### 2.5 Cadastro de perguntas
+Dashboard e detalhe da turma mostram:
 
-1. Administrador abre "Banco de questões".
-2. Clica em criar questão.
-3. Escolhe idioma, nível, categoria, habilidade, dificuldade e tipo.
-4. Escreve enunciado, alternativas, resposta correta e explicação.
-5. Salva como rascunho ou publica.
+- alunos ativos;
+- não acessou, acessou, treino iniciado, Bloo nasceu;
+- etapa atual e conclusão de `Greetings`;
+- melhor resultado por dificuldade;
+- habilidades praticadas/dominadas;
+- XP e conquistas.
 
-No MVP, usuários administradores podem cadastrar e publicar perguntas. Um fluxo de revisão formal pode entrar depois.
+## 2. Aluno
 
-## 3. Fluxo do professor
+### 2.1 Login e entrada
 
-No MVP, o professor pode usar as mesmas telas administrativas com permissões reduzidas. Se a escola ainda não definir professores, o papel pode existir tecnicamente, mas o piloto pode operar só com administradores.
+1. Informa login e senha.
+2. Sistema localiza matrículas ativas e garante o Bloo por idioma.
+3. No MVP em inglês, abre diretamente a home do Bloo.
 
-Fluxos mínimos:
+Se existirem duas turmas do mesmo idioma, temas disponíveis são unidos sem duplicar o mesmo `ThemeId`.
 
-- Ver turmas.
-- Ver alunos da turma.
-- Ver quem iniciou, quem concluiu o primeiro treino e quem fez o Bloo nascer.
-- Cadastrar perguntas se tiver permissão.
-- Criar temas de treino.
-- Associar temas a turmas.
-- Liberar temas imediatamente ou agendar uma data de liberação.
-- Revisar perguntas geradas por IA antes da publicação, quando a geração estiver ativa.
+### 2.2 Egg e tutorial
 
-### 3.1 Criação e liberação de tema
+Home mostra Egg, texto de orientação, progresso `0/6` e “Ensinar meu Bloo”. Antes do primeiro treino, apresenta até três passos explicando que respostas ensinam o Bloo e erros não impedem o nascimento.
 
-1. Professor abre "Temas".
-2. Clica em criar tema.
-3. Informa nome, idioma, nível, descrição, habilidade principal e categorias envolvidas.
-4. Associa o tema a uma ou mais turmas.
-5. Escolhe liberação imediata ou data de liberação.
-6. Cria perguntas manualmente, seleciona perguntas existentes ou solicita geração por IA.
-7. Revisa as perguntas do tema.
-8. Publica ou agenda o tema.
+### 2.3 FirstHatch
 
-Dados mínimos do tema:
+1. Backend cria ou retoma a única sessão `FirstHatch` pendente.
+2. Fixa seis perguntas: quatro `Easy` e duas `Medium`.
+3. Aluno responde uma por tela e recebe feedback e explicação.
+4. Cada resposta avança as rachaduras, acertando ou errando.
+5. `LastActivityAt` é atualizado.
+6. Após seis respostas, a transação conclui sessão, concede 60 + 5 por acerto, faz o Bloo nascer e cria título e conquista `New Hatchling` e conquista `First Lesson`.
 
-- Nome.
-- Idioma.
-- Nível.
-- Habilidade principal.
-- Categorias envolvidas.
-- Turmas associadas.
-- Data de liberação.
-- Status: rascunho, agendado, publicado, encerrado ou arquivado.
+Reenvios retornam o resultado existente. Uma sessão inativa por 24 horas continua retomável da primeira pergunta não respondida.
 
-### 3.2 Geração de perguntas por IA
+### 2.4 Nomeação
 
-1. Professor abre um tema.
-2. Clica em "Gerar 5 perguntas".
-3. Sistema envia ao provedor de IA o contexto do tema, nível, habilidade, categorias, dificuldades desejadas e formato esperado.
-4. Sistema recebe perguntas estruturadas.
-5. Perguntas entram como rascunho gerado por IA.
-6. Professor aprova, edita ou recusa cada pergunta.
-7. Professor pode gerar mais 5 perguntas até ter volume suficiente.
+Após o nascimento, o aluno informa um nome de 2–20 caracteres conforme as regras do modelo. Só depois segue para a home Hatchling.
 
-Perguntas geradas por IA nunca devem ser publicadas automaticamente.
+### 2.5 Greetings
 
-## 4. Fluxo do aluno
+1. Home mostra `Greetings` se o tema estiver liberado para alguma matrícula ativa.
+2. `Easy` começa disponível; demais etapas ficam bloqueadas.
+3. Ao iniciar, recebe cinco perguntas fixadas para a sessão, sem repetição.
+4. Seleção prioriza nunca vistas, depois erradas e depois menos usadas; empates são embaralhados e persistidos na sessão.
+5. Responde, recebe feedback e conclui independentemente da nota.
+6. Primeira conclusão concede 25 XP + 5 por acerto e libera a próxima dificuldade.
+7. Repetições priorizam aprendizado e melhor resultado, mas não concedem XP no MVP.
 
-### 4.1 Login
+Após `VeryHard`, o tema fica concluído. Domínio das habilidades é calculado separadamente pelas respostas.
 
-1. Aluno acessa a plataforma.
-2. Informa usuário e senha temporária.
-3. Entra diretamente na home do idioma associado à sua turma principal.
+### 2.6 Conquistas
 
-No MVP, a troca obrigatória de senha pode ser adiada se a escola controlar as credenciais. Para turmas com alunos mais velhos, pode ser adicionada depois.
+- Nascimento: `New Hatchling` e `First Lesson`.
+- Início de `Greetings/Easy`: `First Theme`.
+- Conclusão de `Easy`: `Theme Explorer`.
+- Cinco respostas da mesma habilidade em duas sessões: `Bloo Is Learning`.
+- Cinco respostas, duas sessões e ≥80% na habilidade: `Skill Learned`.
+- Conclusão até `Hard`: `Greetings Climber`.
+- Quatro dificuldades + ≥80% em uma sessão Hard/VeryHard: `Greetings Master`.
+- Todas as dificuldades + domínio de `BASIC_GREETINGS`: `Vocabulary Explorer`.
 
-### 4.2 Entrada no idioma da turma
+Conquistas aparecem no resumo e não interrompem uma pergunta.
 
-1. O sistema identifica a matrícula ativa do aluno.
-2. Usa o idioma da turma para abrir o Bloo correspondente.
-3. Se o aluno ainda não tiver Bloo naquele idioma, o sistema cria automaticamente um Bloo em estágio Egg.
-4. O aluno vê diretamente a home daquele idioma.
+## 3. Estados de erro essenciais
 
-No primeiro MVP, o idioma principal será Inglês e o aluno não precisa escolher o idioma manualmente. Uma seleção entre idiomas só será necessária quando o aluno tiver matrículas ativas em mais de um idioma ou quando a escola quiser oferecer essa navegação explicitamente.
+- tema removido/fechado durante sessão: sessão iniciada pode terminar usando as versões fixadas;
+- pergunta arquivada durante sessão: versão fixada continua válida;
+- matrícula desativada: novas sessões são bloqueadas; histórico é preservado;
+- concorrência/reenvio: índices únicos e transações retornam o resultado já criado;
+- falha ao concluir: XP, estágio, progresso e conquistas são confirmados juntos ou revertidos juntos.
 
-### 4.3 Home do idioma antes do nascimento
+## 4. Fora do MVP
 
-Elementos principais:
-
-- Ovo em destaque.
-- Nome provisório: "Seu Bloo".
-- Texto curto: "Complete o primeiro treino para ensinar seu Bloo e descobrir quem está no ovo."
-- Botão principal: "Ensinar meu Bloo".
-- Indicador de progresso: 0/6 etapas.
-
-### 4.4 Tutorial curto
-
-O tutorial acontece antes ou dentro do primeiro treino. Deve ter no máximo três telas curtas:
-
-1. "Este ovo guarda seu Bloo de Inglês."
-2. "Cada resposta ensina um pouco ao seu Bloo."
-3. "Erros trazem dicas. Vocês aprendem juntos."
-
-Depois disso, o aluno começa a responder.
-
-### 4.5 Primeiro treino
-
-1. Sistema apresenta uma pergunta por tela.
-2. Aluno escolhe uma resposta.
-3. Sistema mostra feedback imediato.
-4. Bloo reage ao feedback, mesmo ainda dentro do ovo.
-5. Ovo ganha uma rachadura ou avança a animação.
-6. Sistema registra a habilidade praticada como aprendizado em andamento do Bloo.
-7. Aluno toca em continuar.
-8. Ao terminar, o ovo se abre.
-
-### 4.6 Nascimento do Bloo
-
-1. Tela mostra o ovo abrindo.
-2. Bloo filhote aparece.
-3. Mensagem de conquista.
-4. Aluno escolhe o nome do Bloo.
-5. Sistema concede o título inicial `New Hatchling`.
-6. Tela mostra o que o Bloo aprendeu no primeiro treino.
-7. Aluno vai para a home do idioma.
-
-### 4.7 Home do idioma depois do nascimento
-
-Elementos principais:
-
-- Bloo filhote em destaque.
-- Nome escolhido.
-- Estágio: Hatchling.
-- Progresso para o próximo estágio, mesmo que ainda seja simbólico.
-- Botão principal: "Fazer novo treino" ou "Continuar estudando".
-- Resumo: último treino, acertos, habilidades praticadas e o que o Bloo está aprendendo.
-- Missões/temas disponíveis liberados pelo professor.
-- Revisões de temas já liberados.
-
-## 5. Fluxo de abandono e retorno
-
-Se o aluno sair antes de concluir o primeiro treino:
-
-- A sessão fica como abandonada ou em andamento.
-- Ao voltar, o sistema oferece "Continuar treino".
-- O progresso visual das rachaduras pode ser retomado.
-- Se houver dúvida técnica, é aceitável reiniciar o treino, mas sem duplicar XP.
-
-## 6. Fluxo mínimo de relatórios
-
-O painel do professor/administrador deve mostrar:
-
-- Total de alunos da turma.
-- Quantos fizeram primeiro acesso.
-- Quantos iniciaram o treino.
-- Quantos concluíram o treino.
-- Quantos fizeram o Bloo nascer.
-- Lista de alunos com status simples.
-
-Status sugeridos:
-
-- Não acessou.
-- Acessou.
-- Treino iniciado.
-- Bloo nasceu.
-
-## 7. Fora do fluxo do MVP
-
-- Loja de itens.
-- PvP.
-- Ranking entre alunos.
-- Boss raids.
-- Chat.
-- Customização avançada.
-- Aplicativo nativo.
+Professor, IA, importação por planilha, `Matching`, listening, speaking, escrita aberta, ranking, PvP, bosses, loja, chat e aplicativo nativo.

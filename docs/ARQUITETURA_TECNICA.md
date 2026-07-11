@@ -10,7 +10,7 @@ As decisões podem ser revistas com dados reais, mas mudanças devem ser registr
 
 O MVP será uma aplicação web responsiva composta por:
 
-- Um portal administrativo para professores e administradores.
+- Um portal administrativo para administradores no MVP, extensível a professores posteriormente.
 - Uma experiência de aluno otimizada para celular.
 - Uma API central responsável pelas regras e pelos dados.
 - Um banco de dados relacional.
@@ -33,6 +33,8 @@ Uma aplicação web responsiva reduz o custo inicial, funciona em computadores e
 - **Testes:** xUnit para testes unitários e de integração.
 
 .NET oferece boa segurança de tipos, ferramentas maduras para autenticação e dados e uma evolução natural para recursos em tempo real por meio de SignalR quando as batalhas chegarem.
+
+O desenho de cookies, rotação de refresh token, bootstrap e proxy Cloudflare está em [Autenticação e Segurança do MVP](AUTENTICACAO_E_SEGURANCA_MVP.md). Os contratos HTTP estão em [Contrato da API](CONTRATO_API_MVP.md).
 
 ### 3.2 Frontend web
 
@@ -72,10 +74,10 @@ Módulos iniciais:
 
 - **Identidade:** login, credenciais, papéis e sessões.
 - **Organização escolar:** escola, idiomas, turmas, matrículas e períodos.
-- **Conteúdo:** temas, banco de questões, alternativas, explicações, geração assistida por IA e assets.
+- **Conteúdo:** temas, versões de questões, alternativas, explicações e assets. Geração por IA entra posteriormente.
 - **Treinamento:** sessões, seleção de questões, respostas, feedback e reações do Bloo.
 - **Progressão:** Bloos, XP, estágios, domínio, aprendizado do Bloo e conquistas.
-- **Relatórios:** visões de progresso para professor e aluno.
+- **Relatórios:** visões de progresso para administrador e aluno no MVP.
 
 Módulos futuros:
 
@@ -93,12 +95,14 @@ Microserviços não são recomendados no início. Partes específicas podem ser 
 ### Administrador
 
 - Configura a escola.
-- Gerencia professores, idiomas, turmas e alunos.
+- Gerencia turmas, alunos, temas e perguntas no MVP.
 - Acessa relatórios gerais.
 - Gerencia regras e períodos.
 - Pode importar e exportar dados autorizados.
 
 ### Professor
+
+Pós-MVP:
 
 - Visualiza e gerencia suas turmas.
 - Cadastra ou recomenda conteúdos conforme permissão.
@@ -122,9 +126,9 @@ Permissões devem ser verificadas no backend. Ocultar um botão no frontend não
 - **School:** organização proprietária dos dados.
 - **User:** identidade usada para autenticação.
 - **StudentProfile:** informações do aluno associadas ao usuário.
-- **TeacherProfile:** informações do professor associadas ao usuário.
+- **TeacherProfile:** entidade futura para informações do professor.
 - **Language:** idioma oferecido pela escola.
-- **Class:** turma, período, professor e idioma principal.
+- **Class:** turma, período, identificação de nível usada pela escola e idioma.
 - **Enrollment:** associação entre aluno e turma.
 
 Um aluno poderá possuir várias matrículas. O vínculo do Bloo será com aluno e idioma, não apenas com a turma. Assim, uma troca de turma não apaga a evolução conquistada naquele idioma.
@@ -132,15 +136,18 @@ Um aluno poderá possuir várias matrículas. O vínculo do Bloo será com aluno
 ### Entidades pedagógicas
 
 - **Skill:** habilidade específica dentro de um idioma e nível.
-- **Question:** enunciado, tipo, dificuldade e explicação.
-- **QuestionOption:** alternativas quando aplicável.
+- **Question:** identidade estável da questão.
+- **QuestionVersion:** conteúdo editorial imutável depois de publicado.
+- **QuestionOption:** alternativas ligadas à versão.
 - **QuestionAsset:** áudio, imagem ou outro material.
-- **Theme:** tema ou missão pedagógica criada pelo professor.
+- **Theme:** tema ou missão pedagógica criada pelo administrador no MVP.
 - **ThemeClass:** associação do tema com turmas e datas de liberação.
 - **ThemeQuestion:** associação entre tema e perguntas.
 - **TrainingSession:** início, fim, objetivo e estado de um treino.
 - **TrainingAnswer:** resposta, resultado, tempo e feedback apresentado.
 - **SkillMastery:** progresso do aluno em determinada habilidade, apresentado na experiência como aprendizado do Bloo.
+- **StudentThemeProgress:** conclusão do tema e dificuldade atual.
+- **StudentThemeDifficultyProgress:** desbloqueio, sessões e melhor resultado por dificuldade.
 
 ### Entidades de progressão
 
@@ -203,26 +210,21 @@ No MVP, ainda é aceitável usar imagens fixas para Egg, rachaduras e Hatchling.
 Cada questão deve registrar, no mínimo:
 
 - Idioma.
-- Nível de proficiência.
-- Tema associado, quando fizer parte de uma missão.
-- Tema e habilidade.
+- Habilidade e categoria.
 - Tipo de questão.
 - Dificuldade.
 - Enunciado.
 - Resposta correta ou critérios de correção.
 - Explicação pedagógica.
 - Estado editorial: rascunho, em revisão, publicada ou arquivada.
-- Origem: manual ou gerada por IA.
-- Modelo e versão de prompt quando gerada por IA.
-- Autor e revisor.
+- Autor e número da versão.
 - Data de criação e alteração.
 
 Tipos iniciais recomendados:
 
 - Múltipla escolha.
 - Completar lacuna com opções.
-- Associação simples.
-- Compreensão de áudio com múltipla escolha.
+- Associação simples e compreensão de áudio ficam para depois do MVP.
 
 Respostas abertas, pronúncia avaliada automaticamente e correção por inteligência artificial devem vir depois. Elas exigem critérios de avaliação, tratamento de incerteza, custo e revisão de privacidade.
 
@@ -233,7 +235,7 @@ Questões já respondidas podem reaparecer em variações e revisões espaçadas
 O motor inicial pode usar regras determinísticas e compreensíveis:
 
 1. Selecionar o idioma e o objetivo da sessão.
-2. Priorizar questões adequadas ao nível atribuído ao aluno.
+2. Usar questões do tema associado pela escola, progredindo pela dificuldade interna do tema.
 3. Misturar conteúdo novo com revisão.
 4. Evitar repetição imediata da mesma questão.
 5. Registrar respostas e apresentar feedback.
@@ -241,7 +243,7 @@ O motor inicial pode usar regras determinísticas e compreensíveis:
 
 No treinamento de nascimento, a sequência pode ser predefinida por nível e idioma. A evolução para Hatchling ocorre pela conclusão. O desempenho é armazenado para orientar treinos seguintes e alimentar a narrativa do que o Bloo está aprendendo, mas não bloqueia o nascimento.
 
-Depois do nascimento, o motor deve priorizar missões de tema liberadas pelo professor para a turma do aluno. Se não houver tema novo, o aluno pode revisar temas já liberados, sem acessar conteúdos que a turma ainda não recebeu.
+Depois do nascimento, o motor usa missões liberadas pelo administrador para a turma. A associação declara que o conteúdo já foi trabalhado em sala. O aluno pode revisar temas liberados, sem acessar conteúdos não associados.
 
 Uma adaptação mais sofisticada deve ser introduzida apenas depois de haver volume de respostas suficiente para avaliar suas decisões.
 
@@ -285,7 +287,7 @@ O portal será desenhado para uso em desktop e tablet, com navegação lateral.
 ### Turmas
 
 - Criar e editar turma.
-- Definir idioma, nível, período e professores.
+- Definir idioma, identificação de nível e período.
 - Matricular ou remover alunos.
 - Visualizar progresso agregado.
 
@@ -305,19 +307,19 @@ O portal será desenhado para uso em desktop e tablet, com navegação lateral.
 - Pré-visualização como aluno.
 - Fluxo simples de revisão e publicação.
 - Arquivamento sem apagar o histórico de respostas.
-- Geração de perguntas por IA a partir de um tema, sempre com aprovação humana.
+- Criação de nova versão ao editar uma pergunta publicada.
 
 ### Temas
 
 - Criar e editar tema.
-- Definir idioma, nível, habilidade principal e categorias envolvidas.
+- Definir idioma, habilidades, categorias e dificuldades internas.
 - Associar tema a uma ou mais turmas.
 - Liberar imediatamente ou agendar data de liberação.
-- Definir dificuldade máxima para a turma quando necessário.
+- Associar perguntas publicadas a cada dificuldade.
 - Associar perguntas existentes.
-- Gerar lotes de 5 perguntas por IA, revisar, editar, aprovar ou recusar.
+- Pré-visualizar e publicar quando cada dificuldade tiver conteúdo suficiente.
 
-### Configurações de IA
+### Configurações de IA — pós-MVP
 
 - Provedor, inicialmente DeepInfra.
 - Chave da API armazenada como segredo.
@@ -360,7 +362,7 @@ A interface será mobile-first, com botões grandes, textos curtos e foco em uma
 - Progresso para o próximo objetivo.
 - Botão principal de treinamento.
 - Missão ou orientação atual.
-- Temas liberados pelo professor.
+- Temas liberados pelo administrador para a turma.
 - Revisões de temas já liberados.
 - Resumo curto de sequência e habilidades.
 
@@ -460,7 +462,7 @@ O fluxo crítico automatizado será:
 3. Sistema abre o idioma associado à turma do aluno.
 4. Aluno conclui tutorial e treinamento.
 5. O ovo se transforma em Hatchling.
-6. Professor visualiza a conclusão.
+6. Administrador visualiza a conclusão.
 
 ## 17. Preparação para funcionalidades futuras
 
@@ -481,6 +483,8 @@ O histórico de respostas já será armazenado de forma estruturada. Isso permit
 O monólito modular poderá ter múltiplas instâncias. Cache, filas e serviços especializados serão adicionados com base em gargalos medidos, não antecipados.
 
 ## 18. Decisões pendentes antes da implementação
+
+As decisões necessárias para iniciar foram consolidadas em [Escopo de Codificação do MVP](ESCOPO_DE_CODIFICACAO_MVP.md). A lista abaixo passa a representar decisões para homologação, piloto ou evolução quando já estiver fechada naquele documento.
 
 - Provedor de hospedagem e orçamento mensal.
 - Faixa etária inicial e regras de credencial.
