@@ -127,7 +127,7 @@ Para o MVP, este conteúdo é considerado aprovado para seed. Ajustes específic
 
 ## Conjunto recomendado para o primeiro treino
 
-O primeiro treino deve selecionar 6 perguntas a partir das 18 marcadas como `FirstHatch`, mantendo esta composição:
+O primeiro treino deve selecionar 6 perguntas a partir das 24 marcadas como `FirstHatch`, mantendo esta composição:
 
 | Ordem | Categoria | Dificuldade | Sugestões |
 | --- | --- | --- | --- |

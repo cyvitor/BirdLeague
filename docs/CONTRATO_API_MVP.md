@@ -86,6 +86,7 @@ O servidor persiste escola, usuário, rota, chave, hash do payload, status e res
 ### Administração
 
 - `/admin/classes`
+- `GET /admin/classes/{id}/students-status`
 - `/admin/students`
 - `/admin/students/{id}/enrollments`
 - `/admin/students/{id}/reset-password`
@@ -96,9 +97,10 @@ O servidor persiste escola, usuário, rota, chave, hash do payload, status e res
 - `/admin/themes/{id}/classes`
 - `/admin/questions`
 - `/admin/questions/{id}/versions`
-- `/admin/reports/classes/{id}`
 
 Cada coleção suporta somente os verbos necessários. Publicação é ação explícita: `POST .../{id}/publish`; arquivamento: `POST .../{id}/archive`.
+
+`/admin/themes/{id}/questions` associa `questionVersionId`, nunca apenas `questionId`. Atualizar uma pergunta publicada não altera o tema até uma substituição editorial explícita.
 
 ### Aluno
 
@@ -115,6 +117,8 @@ Cada coleção suporta somente os verbos necessários. Publicação é ação ex
 - `GET /student/achievements`
 - `GET /student/progress`
 
+`PATCH /student/bloo/name` aceita um nome válido ou a ação `useDefaultName`, que restaura `Bloo` e `hasCustomName = false`.
+
 ## 7. Estado da sessão
 
 O contrato da sessão devolve perguntas sem `isCorrect`. Após responder, devolve `isCorrect`, opção correta, explicação, progresso visual e conquistas pendentes para o resumo.
@@ -127,6 +131,8 @@ InProgress → Abandoned (somente ação administrativa futura)
 ```
 
 Uma sessão concluída não aceita novas respostas. A conclusão retorna snapshot de XP, progresso temático, estágio do Bloo, títulos e conquistas.
+
+`POST /student/first-hatch/sessions` usa internamente o template `FIRST_HATCH_EN`. A resposta informa a sessão existente quando houver uma `InProgress`, evitando dois nascimentos concorrentes.
 
 ## 8. Segurança e cache
 

@@ -13,11 +13,11 @@ O projeto está na fase de concepção e planejamento do MVP. A primeira versão
 - [Visão geral do produto](docs/VISAO_DO_PRODUTO.md) — propósito, público, princípios, experiência, progressão, competições e visão de longo prazo.
 - [Documentação técnica](docs/ARQUITETURA_TECNICA.md) — tecnologias, arquitetura, dados, segurança e interfaces administrativa e do aluno.
 - [Roadmap](docs/ROADMAP.md) — etapas do MVP, critérios de conclusão e evoluções posteriores.
-- [Fluxos do MVP](docs/FLUXOS_MVP.md) — telas e caminhos principais para administrador, professor e aluno.
+- [Fluxos do MVP](docs/FLUXOS_MVP.md) — telas e caminhos principais para administrador e aluno.
 - [Regras do treinamento inicial](docs/REGRAS_DO_TREINAMENTO_INICIAL.md) — quantidade de perguntas, XP, rachaduras, feedback e nascimento do Bloo.
 - [Modelo de dados do MVP](docs/MODELO_DE_DADOS_MVP.md) — entidades, campos mínimos e regras de domínio.
 - [Conteúdo pedagógico inicial](docs/CONTEUDO_PEDAGOGICO_INICIAL.md) — classificação das perguntas, habilidades, níveis e banco mínimo.
-- [Banco de perguntas inicial](docs/BANCO_DE_PERGUNTAS_INICIAL.md) — 60 perguntas de Inglês classificadas para o piloto e primeiro treino.
+- [Banco de perguntas inicial](docs/BANCO_DE_PERGUNTAS_INICIAL.md) — 100 perguntas de Inglês, incluindo o primeiro treino e a missão `Greetings`.
 - [Tom de voz e UI](docs/TOM_DE_VOZ_E_UI.md) — linguagem, mensagens, paleta e política visual mínima.
 - [Escopo de codificação do MVP](docs/ESCOPO_DE_CODIFICACAO_MVP.md) — decisões fechadas, seeds, telas, regras e ordem de implementação.
 - [Especificação visual dos assets](docs/ESPECIFICACAO_VISUAL_ASSETS_MVP.md) — posições, âncoras, encaixes e exportação de Egg e Hatchling.

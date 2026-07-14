@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Greetings Climber</title>
+  <desc id="desc">Four steps with speech bubbles climbing upward.</desc>
+  <circle cx="128" cy="128" r="112" fill="#F28A4B"/>
+  <circle cx="128" cy="128" r="98" fill="#F6FAFD" stroke="#075A9A" stroke-width="10"/>
+  <path d="M57 184h36v-31h36v-31h36V91h36" fill="none" stroke="#075A9A" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="53" y="177" width="42" height="16" rx="8" fill="#59B7E8"/>
+  <rect x="89" y="146" width="42" height="16" rx="8" fill="#59B7E8"/>
+  <rect x="125" y="115" width="42" height="16" rx="8" fill="#59B7E8"/>
+  <rect x="161" y="84" width="42" height="16" rx="8" fill="#59B7E8"/>
+  <path d="M64 74h54c13 0 23 9 23 21s-10 21-23 21H94l-21 17 5-17H64c-13 0-23-9-23-21s10-21 23-21z" fill="#FFFFFF" stroke="#075A9A" stroke-width="7" stroke-linejoin="round"/>
+  <path d="M147 45h39c12 0 21 8 21 19s-9 19-21 19h-16l-18 15 4-15h-9c-12 0-21-8-21-19s9-19 21-19z" fill="#F7C948" stroke="#C96B35" stroke-width="7" stroke-linejoin="round"/>
+  <path d="M69 95h44M151 64h32" stroke="#087CC1" stroke-width="7" stroke-linecap="round"/>
+</svg>

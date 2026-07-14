@@ -9,7 +9,7 @@ Este documento é a fonte de verdade para iniciar a implementação. Quando houv
 ## 2. Decisões fechadas
 
 - Aplicação web responsiva, com portal administrativo e experiência mobile-first do aluno.
-- Backend em .NET 10, ASP.NET Core Web API, Entity Framework Core e MySQL.
+- Backend em Node.js 24 LTS, NestJS, TypeScript, Prisma ORM e MySQL.
 - Frontend em Next.js, React, TypeScript e Tailwind CSS.
 - Primeiro idioma: Inglês.
 - O idioma e a identificação pedagógica são definidos pela turma. Ao associar um tema, a escola declara que o conteúdo já foi trabalhado; as dificuldades são etapas internas do tema e não níveis CEFR.
@@ -27,7 +27,7 @@ Este documento é a fonte de verdade para iniciar a implementação. Quando houv
 
 O seed deve criar escola `Bluebird`, idioma `English` (`en`), catálogo de níveis, habilidades, categorias, conquistas, perguntas do nascimento, tema `Greetings` e suas perguntas.
 
-Também deve criar, em qualquer ambiente e somente quando nenhum administrador existir, o login bootstrap `vh` com senha inicial `123456`. A senha usa hash do ASP.NET Core Identity e exige troca no primeiro acesso; até a troca, nenhuma função administrativa fica disponível. Em produção, a implantação não é considerada concluída enquanto a credencial inicial continuar válida.
+Também deve criar, em qualquer ambiente e somente quando nenhum administrador existir, o login bootstrap `vh` com senha inicial `123456`. A senha usa Argon2id e exige troca no primeiro acesso; até a troca, nenhuma função administrativa fica disponível. Em produção, a implantação não é considerada concluída enquanto a credencial inicial continuar válida.
 
 O seed será idempotente e não duplicará registros ao ser executado novamente.
 
@@ -44,7 +44,7 @@ O administrador poderá:
 - redefinir a senha do aluno;
 - administrar temas e perguntas;
 - associar um tema a turmas e liberá-lo imediatamente ou em data agendada;
-- consultar o status do aluno e suas conclusões e conquistas.
+- consultar o status operacional do aluno: acesso, nascimento e etapa atual do tema.
 
 Não haverá cadastro ou fluxo de professor no MVP.
 
@@ -56,13 +56,14 @@ Não haverá cadastro ou fluxo de professor no MVP.
 - Cada pergunta respondida avança o ovo, independentemente de acerto.
 - Conclusão concede 60 XP; cada acerto concede 5 XP; máximo de 90 XP.
 - O nascimento depende da conclusão, não da pontuação.
-- Ao concluir, o Bloo passa de `Egg` para `Hatchling`, o aluno escolhe seu nome e recebe `New Hatchling` e `First Lesson`.
+- As perguntas vêm do template seed `FIRST_HATCH_EN`, com 24 versões elegíveis e cotas de dificuldade.
+- Ao concluir, o Bloo passa de `Egg` para `Hatchling`, recebe `New Hatchling` e `First Lesson` e mantém o nome padrão `Bloo` até o aluno decidir personalizá-lo.
 
 ## 6. Abandono e retomada
 
 - Uma sessão `InProgress` é retomada da primeira pergunta ainda não respondida.
 - O progresso respondido e o estado visual do ovo são preservados.
-- Após 24 horas sem atividade, a sessão pode ser marcada `Abandoned`, mas continua retomável.
+- Após 24 horas sem atividade, a sessão continua `InProgress`, mas aparece como inativa e retomável.
 - Não será criada uma nova sessão `FirstHatch` enquanto existir outra retomável.
 - Respostas, XP, nascimento e conquistas serão idempotentes.
 
@@ -96,13 +97,11 @@ Na primeira conclusão de cada dificuldade, a missão concede 25 XP base + 5 por
 ### Administração
 
 1. Login.
-2. Dashboard resumido.
-3. Lista e formulário de turmas.
-4. Lista e formulário de alunos.
-5. Matrículas do aluno.
-6. Lista e formulário de temas.
-7. Lista, formulário e pré-visualização de perguntas.
-8. Progresso por turma e aluno.
+2. Lista e formulário de turmas com status operacional dos alunos.
+3. Lista e formulário de alunos.
+4. Matrículas do aluno.
+5. Lista e formulário de temas.
+6. Lista, formulário e pré-visualização de perguntas.
 
 ### Aluno
 
@@ -110,7 +109,7 @@ Na primeira conclusão de cada dificuldade, a missão concede 25 XP base + 5 por
 2. Tutorial de até três passos.
 3. Home com Egg.
 4. Pergunta, resposta e feedback.
-5. Nascimento e nomeação do Bloo.
+5. Nascimento e nomeação opcional do Bloo.
 6. Home com Hatchling e missão `Greetings`.
 7. Etapa de dificuldade disponível.
 8. Resumo da missão e conquistas.
@@ -147,6 +146,7 @@ Esses itens podem bloquear a operação real, mas não a construção com dados 
 - Importação por planilha.
 - Geração de perguntas por IA.
 - Recuperação autônoma de senha por e-mail.
+- Dashboard analítico e relatórios pedagógicos detalhados.
 - Listening, speaking e respostas abertas.
 - PWA, aplicativo nativo, rankings, PvP, guerras, bosses e loja.
 
@@ -159,5 +159,5 @@ Esses itens podem bloquear a operação real, mas não a construção com dados 
 5. Treino idempotente e retomável.
 6. Jornada Egg → Hatchling.
 7. `Greetings`, dificuldades e conquistas.
-8. Dashboard e acompanhamento.
+8. Acompanhamento operacional mínimo nas listas administrativas.
 9. Testes, acessibilidade, observabilidade e homologação.

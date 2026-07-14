@@ -22,17 +22,17 @@ Uma aplicação web responsiva reduz o custo inicial, funciona em computadores e
 
 ### 3.1 Backend
 
-- **Plataforma:** .NET 10 com ASP.NET Core Web API.
-- **Linguagem:** C#.
-- **Acesso a dados:** Entity Framework Core.
+- **Plataforma:** Node.js 24 LTS com NestJS.
+- **Linguagem:** TypeScript em modo estrito.
+- **Acesso a dados:** Prisma ORM e Prisma Migrate.
 - **Banco de dados:** MySQL.
-- **Autenticação:** ASP.NET Core Identity com tokens de acesso e renovação.
-- **Validação:** validação explícita na camada de aplicação.
-- **Documentação da API:** OpenAPI.
+- **Autenticação:** módulo próprio com Argon2id, access token JWT e refresh token opaco rotativo.
+- **Validação:** DTOs e validação explícita na camada de aplicação.
+- **Documentação da API:** OpenAPI com `@nestjs/swagger`.
 - **Tarefas em segundo plano:** começar com serviços internos simples; adotar uma fila somente quando houver necessidade comprovada.
-- **Testes:** xUnit para testes unitários e de integração.
+- **Testes:** Vitest para testes unitários, Supertest para integração e Playwright ponta a ponta.
 
-.NET oferece boa segurança de tipos, ferramentas maduras para autenticação e dados e uma evolução natural para recursos em tempo real por meio de SignalR quando as batalhas chegarem.
+NestJS mantém uma arquitetura modular, injeção de dependência e guards de autorização. Prisma fornece migrations SQL versionadas, cliente tipado e transações para progresso, XP e conquistas. Para recursos em tempo real futuros, o NestJS oferece WebSocket Gateways; Redis e filas só entram quando houver necessidade comprovada.
 
 O desenho de cookies, rotação de refresh token, bootstrap e proxy Cloudflare está em [Autenticação e Segurança do MVP](AUTENTICACAO_E_SEGURANCA_MVP.md). Os contratos HTTP estão em [Contrato da API](CONTRATO_API_MVP.md).
 
@@ -70,6 +70,19 @@ O provedor de nuvem não precisa ser definido antes de conhecer orçamento, regi
 
 O backend começará como um monólito modular. Um único deploy é mais simples para o MVP, enquanto módulos bem definidos evitam que as regras se misturem.
 
+O repositório usará monorepo com pnpm workspaces:
+
+```text
+apps/
+  api/       # NestJS e Prisma
+  web/       # Next.js
+packages/
+  contracts/ # cliente e tipos gerados do OpenAPI
+  config/    # configurações compartilhadas de TypeScript e lint
+```
+
+API e web são processos e imagens separados. Não compartilham diretamente modelos internos do Prisma; o contrato entre elas é o OpenAPI, evitando acoplamento do frontend ao banco.
+
 Módulos iniciais:
 
 - **Identidade:** login, credenciais, papéis e sessões.
@@ -77,7 +90,7 @@ Módulos iniciais:
 - **Conteúdo:** temas, versões de questões, alternativas, explicações e assets. Geração por IA entra posteriormente.
 - **Treinamento:** sessões, seleção de questões, respostas, feedback e reações do Bloo.
 - **Progressão:** Bloos, XP, estágios, domínio, aprendizado do Bloo e conquistas.
-- **Relatórios:** visões de progresso para administrador e aluno no MVP.
+- **Acompanhamento operacional:** status mínimo de acesso, nascimento e etapa atual. Relatórios detalhados entram depois do MVP.
 
 Módulos futuros:
 
@@ -96,7 +109,7 @@ Microserviços não são recomendados no início. Partes específicas podem ser 
 
 - Configura a escola.
 - Gerencia turmas, alunos, temas e perguntas no MVP.
-- Acessa relatórios gerais.
+- Consulta status operacional mínimo nas turmas.
 - Gerencia regras e períodos.
 - Pode importar e exportar dados autorizados.
 
@@ -329,7 +342,7 @@ O portal será desenhado para uso em desktop e tablet, com navegação lateral.
 - Status ativo/inativo.
 - Versão do prompt de geração de perguntas.
 
-### Relatórios
+### Relatórios — pós-MVP
 
 - Participação por turma.
 - Conclusão do tutorial e primeiro treino.
@@ -468,7 +481,7 @@ O fluxo crítico automatizado será:
 
 ### Tempo real
 
-SignalR poderá suportar presença, estado de partida e eventos de batalha. Isso só deve ser introduzido com regras de jogo maduras e protótipos validados.
+WebSocket Gateways do NestJS poderão suportar presença, estado de partida e eventos de batalha. Isso só deve ser introduzido com regras de jogo maduras e protótipos validados.
 
 ### Eventos e filas
 

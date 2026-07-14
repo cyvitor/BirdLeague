@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">First Theme</title>
+  <desc id="desc">A learning trail map with the first marker highlighted.</desc>
+  <circle cx="128" cy="128" r="112" fill="#F28A4B"/>
+  <circle cx="128" cy="128" r="98" fill="#F6FAFD" stroke="#075A9A" stroke-width="10"/>
+  <path d="M64 171c24-45 54 18 82-24 16-24 2-51 46-66" fill="none" stroke="#075A9A" stroke-width="11" stroke-linecap="round" stroke-dasharray="2 19"/>
+  <path d="M72 74c-21 0-38 17-38 38 0 33 38 70 38 70s38-37 38-70c0-21-17-38-38-38z" fill="#F7C948" stroke="#C96B35" stroke-width="8" stroke-linejoin="round"/>
+  <circle cx="72" cy="112" r="15" fill="#087CC1"/>
+  <circle cx="190" cy="80" r="18" fill="#FFFFFF" stroke="#075A9A" stroke-width="8"/>
+  <circle cx="151" cy="148" r="14" fill="#FFFFFF" stroke="#075A9A" stroke-width="7"/>
+</svg>

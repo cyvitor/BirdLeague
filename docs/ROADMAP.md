@@ -171,11 +171,11 @@ Entregar o primeiro ciclo completo e emocionalmente satisfatório.
 - Um Bloo de um idioma não interfere em outro.
 - O aluno entende o que fazer depois do nascimento.
 
-## 8. Fase 6 — Progresso e acompanhamento
+## 8. Fase 6 — Progresso e acompanhamento operacional
 
 ### Objetivo
 
-Dar significado ao uso para aluno e administrador e medir o piloto.
+Dar significado ao uso do aluno e permitir operação básica do piloto.
 
 ### Entregas
 
@@ -183,18 +183,16 @@ Dar significado ao uso para aluno e administrador e medir o piloto.
 - Estágio e progresso atual.
 - Histórico resumido de treinamentos.
 - Habilidades em desenvolvimento apresentadas como aprendizados do Bloo.
-- Painel do administrador por turma.
+- Status operacional na lista da turma.
 - Indicadores de primeiro acesso e conclusão.
-- Participação recente.
-- Desempenho inicial por habilidade.
 - Eventos analíticos do funil principal.
 
 ### Critérios de conclusão
 
-- Administrador identifica quem iniciou e quem concluiu.
+- Administrador identifica quem acessou, iniciou, fez o Bloo nascer e a etapa atual do tema.
 - Aluno visualiza claramente seu progresso.
 - A equipe mede início, abandono, conclusão e retorno.
-- Relatórios respeitam as permissões e não expõem dados indevidos.
+- Eventos preservam os dados necessários para relatórios futuros sem expor dados indevidos.
 
 ### Último passo antes do piloto
 

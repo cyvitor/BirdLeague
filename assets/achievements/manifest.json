@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "basePath": "assets/achievements",
+  "format": "svg",
+  "fallbackSize": 256,
+  "style": {
+    "frame": "circular-medal",
+    "safeAreaPx": 24,
+    "primaryBlue": "#087CC1",
+    "darkBlue": "#075A9A",
+    "lightBlue": "#59B7E8",
+    "orange": "#F28A4B",
+    "gold": "#F7C948"
+  },
+  "achievements": [
+    {
+      "code": "NEW_HATCHLING",
+      "name": "New Hatchling",
+      "assetKey": "achievements/new-hatchling",
+      "file": "new-hatchling.svg",
+      "altText": "Ovo aberto com a cabeca do Bloo aparecendo."
+    },
+    {
+      "code": "FIRST_LESSON",
+      "name": "First Lesson",
+      "assetKey": "achievements/first-lesson",
+      "file": "first-lesson.svg",
+      "altText": "Livro aberto com uma estrela."
+    },
+    {
+      "code": "FIRST_THEME",
+      "name": "First Theme",
+      "assetKey": "achievements/first-theme",
+      "file": "first-theme.svg",
+      "altText": "Mapa de trilha com o primeiro marcador destacado."
+    },
+    {
+      "code": "THEME_EXPLORER",
+      "name": "Theme Explorer",
+      "assetKey": "achievements/theme-explorer",
+      "file": "theme-explorer.svg",
+      "altText": "Bussola sobre um livro aberto."
+    },
+    {
+      "code": "BLOO_IS_LEARNING",
+      "name": "Bloo Is Learning",
+      "assetKey": "achievements/bloo-is-learning",
+      "file": "bloo-is-learning.svg",
+      "altText": "Bloo pensando com uma lampada acesa."
+    },
+    {
+      "code": "SKILL_LEARNED",
+      "name": "Skill Learned",
+      "assetKey": "achievements/skill-learned",
+      "file": "skill-learned.svg",
+      "altText": "Cerebro estilizado com marca de confirmacao."
+    },
+    {
+      "code": "GREETINGS_CLIMBER",
+      "name": "Greetings Climber",
+      "assetKey": "achievements/greetings-climber",
+      "file": "greetings-climber.svg",
+      "altText": "Degraus subindo com baloes de fala."
+    },
+    {
+      "code": "GREETINGS_MASTER",
+      "name": "Greetings Master",
+      "assetKey": "achievements/greetings-master",
+      "file": "greetings-master.svg",
+      "altText": "Dois baloes de fala com uma coroa de dominio."
+    },
+    {
+      "code": "VOCABULARY_EXPLORER",
+      "name": "Vocabulary Explorer",
+      "assetKey": "achievements/vocabulary-explorer",
+      "file": "vocabulary-explorer.svg",
+      "altText": "Bussola formada por blocos de aprendizado."
+    }
+  ]
+}

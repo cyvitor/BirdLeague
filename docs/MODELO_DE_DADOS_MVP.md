@@ -26,6 +26,22 @@ Este documento orienta entidades, migrations e contratos. Professor e IA permane
 - Redefinição de senha revoga refresh tokens e marca `MustChangePassword`.
 - Política completa em [Autenticação e Segurança](AUTENTICACAO_E_SEGURANCA_MVP.md).
 
+### RefreshToken
+
+`Id`, `UserId`, `FamilyId`, `TokenHash`, `ParentTokenId` opcional, `ReplacedByTokenId` opcional, `CreatedAt`, `ExpiresAt`, `RevokedAt` opcional, `RevocationReason` opcional, `CreatedByIpHash` opcional, `UserAgentHash` opcional.
+
+- O token puro existe apenas no cookie; o banco armazena somente o hash.
+- Índices em `UserId + ExpiresAt` e `FamilyId`; `TokenHash` é único.
+- Cada renovação revoga o token usado e cria seu sucessor na mesma família.
+- Reutilizar token já rotacionado revoga toda a família.
+- Troca de senha, redefinição, desativação e logout global revogam todos os tokens ativos do usuário.
+
+### LoginAttempt
+
+`Id`, `SchoolId` opcional, `NormalizedLoginHash`, `IpHash` opcional, `Succeeded`, `FailureReason` opcional, `CreatedAt`.
+
+Índices em `NormalizedLoginHash + CreatedAt` e `IpHash + CreatedAt`. Dados são retidos somente pelo período necessário para rate limiting e auditoria de segurança.
+
 ### StudentProfile
 
 `Id`, `UserId`, `SchoolId`, `FullName`, `Nickname` opcional, `CreatedAt`, `UpdatedAt`.
@@ -42,17 +58,29 @@ Data de nascimento e dados de responsável não são necessários para codificar
 
 `LevelLabel` é apenas a nomenclatura usada pela escola. Não controla automaticamente perguntas ou dificuldades. Ao associar um tema, a escola declara que aquela turma já estudou o assunto.
 
+Ao desativar uma turma:
+
+- novas matrículas e novas sessões são bloqueadas;
+- matrículas e histórico são preservados;
+- sessões já iniciadas podem ser concluídas;
+- temas deixam de aparecer para novos inícios por meio daquela turma;
+- reativar a turma restaura as associações ainda ativas.
+
 ### Enrollment
 
 `Id`, `SchoolId`, `StudentProfileId`, `ClassId`, `Status`, `StartedAt`, `EndedAt`.
 
 Status: `Active`, `Paused`, `Finished`, `Canceled`. Índice impede duas matrículas ativas idênticas.
 
+- Pausar, finalizar ou cancelar bloqueia novas sessões por aquela matrícula.
+- Sessão já iniciada pode terminar com o conteúdo fixado.
+- No MySQL, a unicidade de matrícula ativa será protegida por transação e chave lógica, pois índice parcial não está disponível como em alguns outros bancos.
+
 ## 3. Bloo
 
 ### Bloo
 
-`Id`, `SchoolId`, `StudentProfileId`, `LanguageId`, `Name`, `Stage`, `XP`, `CreatedAt`, `UpdatedAt`, `HatchedAt`.
+`Id`, `SchoolId`, `StudentProfileId`, `LanguageId`, `Name`, `HasCustomName`, `Stage`, `XP`, `CreatedAt`, `UpdatedAt`, `HatchedAt`.
 
 - Estágios do MVP: `Egg`, `Hatchling`.
 - Índice único: `StudentProfileId + LanguageId`.
@@ -61,12 +89,14 @@ Status: `Active`, `Paused`, `Finished`, `Canceled`. Índice impede duas matrícu
 
 Nome do Bloo:
 
-- obrigatório após o nascimento;
+- valor padrão: `Bloo`, com `HasCustomName = false`;
+- nome personalizado é opcional após o nascimento;
 - 2 a 20 caracteres após `trim`;
 - letras Unicode, números, espaço, hífen e apóstrofo;
 - sem espaços repetidos ou apenas números;
 - lista de termos proibidos validada no backend;
-- pode ser alterado pelo aluno no MVP, preservando auditoria básica.
+- o aluno pode pular a nomeação e continuar usando `Bloo`;
+- pode personalizar ou alterar depois, preservando auditoria básica.
 
 ### BlooStageDefinition
 
@@ -100,6 +130,9 @@ Status: `Draft`, `Published`, `Closed`, `Archived`.
 - Tema não possui nível CEFR no MVP.
 - Um tema publicado precisa ter ao menos 5 perguntas publicadas em cada dificuldade habilitada.
 - Não pode voltar para `Draft` depois de usado; pode ser fechado ou arquivado.
+- `Closed`: bloqueia novas sessões, permanece visível no histórico e pode ser reaberto pelo administrador.
+- `Archived`: não aparece para novos usos nem para o aluno, não pode ser reaberto no MVP e permanece no histórico.
+- Sessões iniciadas antes de fechar ou arquivar podem terminar com suas versões fixadas.
 
 ### ThemeSkill
 
@@ -124,6 +157,8 @@ Dificuldades: `Easy`, `Medium`, `Hard`, `VeryHard`. No seed `Greetings`, todas f
 `Id`, `SchoolId`, `ThemeId`, `ClassId`, `ReleaseMode`, `ReleaseAt`, `DueAt`, `IsActive`, `CreatedAt`, `UpdatedAt`.
 
 `ReleaseMode`: `Immediate`, `Scheduled`. O agendamento existe apenas aqui; `Theme` não possui estado `Scheduled`.
+
+`DueAt` é apenas uma orientação de prazo no MVP: pode ser exibido ao aluno, mas não bloqueia início, conclusão ou revisão depois da data.
 
 Validações:
 
@@ -162,25 +197,46 @@ Mínimo de 2 opções e exatamente uma correta. Opções de versão publicada s�
 
 ### ThemeQuestion
 
-`Id`, `ThemeId`, `QuestionId`, `Order`, `IsRequired`, `CreatedAt`.
+`Id`, `ThemeId`, `QuestionVersionId`, `Order`, `IsRequired`, `CreatedAt`.
 
-É a única relação pergunta–tema; `Question` não possui `ThemeId`. Ao criar uma sessão, o sistema fixa a versão publicada vigente.
+É a única relação pergunta–tema; `Question` não possui `ThemeId`. Um tema publicado aponta para versões específicas e imutáveis, portanto uma nova versão de pergunta não altera temas existentes silenciosamente.
 
-- Uma pergunta pode pertencer a vários temas.
-- Índice único: `ThemeId + QuestionId`.
+- Uma versão pode pertencer a vários temas.
+- Índice único: `ThemeId + QuestionVersionId`.
 - `Order` é uma preferência editorial; a seleção da sessão continua seguindo novidade, erros e menor uso.
 - Enunciados iguais ou muito semelhantes geram aviso editorial, mas não bloqueiam salvamento, pois variações intencionais são permitidas.
 - Arquivar um tema bloqueia novas sessões; sessões já iniciadas podem terminar com suas versões fixadas.
+- Para usar uma versão nova, o administrador cria uma revisão do tema, substitui a associação e republica; sessões antigas continuam com a versão anterior.
 
 ## 5. Treinamento
 
+### TrainingTemplate
+
+`Id`, `SchoolId`, `LanguageId`, `Code`, `Type`, `TotalQuestions`, `IsActive`, `CreatedAt`, `UpdatedAt`.
+
+Seed do MVP: `FIRST_HATCH_EN`, tipo `FirstHatch`, total 6. Índice único: `SchoolId + Code`.
+
+### TrainingTemplateDifficulty
+
+`Id`, `TrainingTemplateId`, `Difficulty`, `QuestionCount`.
+
+Seed: `Easy = 4`, `Medium = 2`. Índice único: `TrainingTemplateId + Difficulty`.
+
+### TrainingTemplateQuestion
+
+`Id`, `TrainingTemplateId`, `QuestionVersionId`, `IsActive`, `CreatedAt`.
+
+Representa o conjunto elegível do treino. O seed associa as 24 versões `FirstHatch` publicadas. Índice único: `TrainingTemplateId + QuestionVersionId`.
+
 ### TrainingSession
 
-`Id`, `SchoolId`, `StudentProfileId`, `BlooId`, `LanguageId`, `ThemeId` opcional, `Difficulty` opcional, `Type`, `Status`, `StartedAt`, `LastActivityAt`, `CompletedAt`, `AbandonedAt`, `TotalQuestions`, `CorrectAnswers`, `BaseXP`, `BonusXP`, `TotalXP`.
+`Id`, `SchoolId`, `StudentProfileId`, `BlooId`, `LanguageId`, `TrainingTemplateId` opcional, `ThemeId` opcional, `Difficulty` opcional, `Type`, `Status`, `ActiveSessionKey` opcional, `StartedAt`, `LastActivityAt`, `CompletedAt`, `AbandonedAt`, `TotalQuestions`, `CorrectAnswers`, `BaseXP`, `BonusXP`, `TotalXP`.
 
 Tipos: `FirstHatch`, `ThemeMission`, `Review`. Status: `InProgress`, `Completed`, `Abandoned`.
 
 - `Difficulty` é obrigatória em `ThemeMission` e nula em `FirstHatch`.
+- `TrainingTemplateId` é obrigatório em `FirstHatch`.
+- `ActiveSessionKey` é único enquanto a sessão está `InProgress` e vira nulo ao encerrar. Para o nascimento usa `FIRST_HATCH:{BlooId}`, impedindo duas sessões pendentes no MySQL.
 - Sessão retomável permanece `InProgress`; `LastActivityAt` identifica inatividade.
 - Após 24 horas, aparece como inativa, mas continua retomável.
 - `Abandoned` é usado somente quando uma sessão é encerrada definitivamente por regra administrativa; ela não é retomável.
@@ -196,6 +252,8 @@ As perguntas são fixadas na criação da sessão. Índices únicos: `TrainingSe
 `Id`, `TrainingSessionId`, `TrainingQuestionId`, `SelectedOptionId`, `IsCorrect`, `AnsweredAt`, `TimeSpentSeconds`.
 
 Índice único em `TrainingQuestionId` garante uma resposta válida no MVP. Reenvio retorna o resultado existente.
+
+Criação de sessão, resposta e conclusão usam transações curtas. A conclusão verifica novamente estado, quantidade de respostas e eventos existentes antes de atualizar XP, estágio, domínio e conquistas. Conflitos serializáveis são repetidos com limite controlado; chamadas HTTP continuam protegidas por `IdempotencyRecord`.
 
 ## 6. Progresso temático
 
@@ -280,6 +338,21 @@ Tipos: `FirstTrainingCompleted`, `QuestionAnsweredCorrectly`, `ThemeDifficultyCo
 Índice único: `StudentProfileId + BlooId + AchievementId`. Condições em [Conquistas do MVP](CONQUISTAS_MVP.md).
 
 ## 10. Assets e analytics
+
+### IdempotencyRecord
+
+`Id`, `SchoolId`, `UserId`, `Route`, `IdempotencyKey`, `RequestHash`, `ResponseStatus`, `ResponseJson`, `CreatedAt`, `ExpiresAt`.
+
+- Índice único: `SchoolId + UserId + Route + IdempotencyKey`.
+- Mesma chave e mesmo payload retornam a resposta armazenada.
+- Mesma chave com payload diferente retorna conflito.
+- Retenção mínima de 24 horas; índices de domínio continuam sendo a proteção permanente.
+
+### AuditLog
+
+`Id`, `SchoolId` opcional, `ActorUserId` opcional, `Action`, `EntityType` opcional, `EntityId` opcional, `MetadataJson` opcional, `IpHash` opcional, `CreatedAt`.
+
+Registra login, troca/redefinição de senha, revogação, criação/desativação de usuário, alterações de matrícula, publicação/versionamento/arquivamento de perguntas e temas. É separado de analytics e progresso e não contém senhas, tokens ou respostas sensíveis.
 
 ### Asset
 

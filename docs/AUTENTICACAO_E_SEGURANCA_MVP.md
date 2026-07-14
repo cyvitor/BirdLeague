@@ -5,7 +5,7 @@
 Todo acesso usa `Login + Senha`. E-mail não é necessário para autenticação.
 
 - Login único dentro da escola, comparado sem diferença entre maiúsculas e minúsculas.
-- Senhas armazenadas somente pelo `PasswordHasher` do ASP.NET Core Identity.
+- Senhas armazenadas somente com Argon2id por biblioteca Node.js mantida e parâmetros versionados.
 - Nunca registrar senha, token, cookie ou hash em logs.
 - Administrador define a senha inicial do aluno e ela é exibida uma única vez na resposta de criação/redefinição.
 - A API nunca permite consultar a senha novamente.

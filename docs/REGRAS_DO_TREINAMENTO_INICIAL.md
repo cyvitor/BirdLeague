@@ -41,9 +41,8 @@ Tipos permitidos no MVP:
 
 - Múltipla escolha.
 - Completar lacuna com opções.
-- Associação simples.
 
-Listening pode entrar depois do primeiro teste se a escola tiver áudio pronto. Speaking e escrita aberta ficam fora do MVP.
+Associação simples, listening, speaking e escrita aberta ficam fora do MVP.
 
 ## 6. Composição recomendada
 
@@ -154,6 +153,7 @@ Resultado:
 - Bloo muda para Hatchling.
 - Aluno recebe o título equipável e a conquista `New Hatchling`, além da conquista `First Lesson`.
 - Sistema registra um evento de progresso `FirstTrainingCompleted`.
+- Personagem mantém o nome padrão `Bloo`; personalizar o nome é opcional e pode acontecer agora ou depois.
 
 ## 14. Próximo objetivo após o nascimento
 

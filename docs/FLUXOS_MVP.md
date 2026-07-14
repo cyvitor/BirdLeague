@@ -8,7 +8,7 @@ Este documento descreve os fluxos operacionais do administrador e do aluno. No M
 
 1. Informa login e senha.
 2. O backend valida credenciais, usuário ativo e papel `Admin`.
-3. Entra no dashboard.
+3. Entra na área administrativa, com atalhos para turmas, alunos, temas e perguntas.
 
 Estados: carregando, credenciais inválidas, usuário inativo, sem permissão e indisponibilidade. Recuperação autônoma fica fora do MVP.
 
@@ -20,6 +20,8 @@ Estados: carregando, credenciais inválidas, usuário inativo, sem permissão e 
 
 O nível é informativo. A escola decide fora do sistema se a turma está preparada para um tema.
 
+Ao desativar uma turma, novas sessões e matrículas são bloqueadas, o histórico é preservado e sessões já iniciadas podem terminar.
+
 ### 1.3 Aluno, matrícula e Bloo
 
 1. Abre “Alunos”.
@@ -29,6 +31,8 @@ O nível é informativo. A escola decide fora do sistema se a turma está prepar
 5. Outra turma do mesmo idioma reutiliza o mesmo Bloo; outro idioma cria outro Bloo.
 
 O administrador pode ativar/desativar aluno, gerir matrículas e redefinir a senha. O login do aluno apenas garante que o Bloo já exista.
+
+Pausar/finalizar uma matrícula bloqueia novas sessões por ela, sem apagar Bloo, XP, respostas ou conquistas. Redefinir a senha revoga todas as sessões de autenticação e exige troca no próximo acesso.
 
 ### 1.4 Pergunta nova
 
@@ -45,9 +49,11 @@ Tipos: `MultipleChoice` e `FillBlankWithOptions`. Publicação exige ao menos du
 2. Escolhe “Criar nova versão”.
 3. Sistema copia o conteúdo para um novo `Draft`.
 4. Administrador edita e pré-visualiza.
-5. Ao publicar, a versão anterior deixa de entrar em novas sessões, mas continua ligada às respostas históricas.
+5. Ao publicar, a versão anterior deixa de entrar em novas associações, mas continua ligada às respostas históricas e aos temas que a fixaram.
 
 Pergunta usada não pode ser apagada fisicamente. Pode ser arquivada. Mudança de idioma exige nova pergunta.
+
+Uma versão nova não altera temas publicados automaticamente. O administrador precisa revisar o tema, substituir a versão associada e republicar a revisão.
 
 ### 1.6 Tema
 
@@ -68,16 +74,16 @@ A dificuldade é interna ao tema e não representa CEFR. Associar o tema a uma t
 
 Agendamento pertence à associação tema–turma, não ao estado editorial do tema.
 
-### 1.8 Acompanhamento
+`DueAt` é apenas prazo informativo e não bloqueia o aluno. Tema `Closed` bloqueia novas sessões e permanece no histórico; `Archived` deixa de aparecer para novos usos. Sessões já iniciadas podem terminar.
 
-Dashboard e detalhe da turma mostram:
+### 1.8 Acompanhamento operacional mínimo
 
-- alunos ativos;
+O MVP não terá módulo analítico detalhado. A lista de alunos/turma mostra apenas o necessário para operar e validar o piloto:
+
 - não acessou, acessou, treino iniciado, Bloo nasceu;
-- etapa atual e conclusão de `Greetings`;
-- melhor resultado por dificuldade;
-- habilidades praticadas/dominadas;
-- XP e conquistas.
+- etapa atual ou conclusão de `Greetings`.
+
+Relatórios de melhor resultado, habilidades, XP consolidado, conquistas por turma e análises pedagógicas ficam pós-MVP. Eventos continuam sendo registrados para viabilizá-los depois.
 
 ## 2. Aluno
 
@@ -95,8 +101,8 @@ Home mostra Egg, texto de orientação, progresso `0/6` e “Ensinar meu Bloo”
 
 ### 2.3 FirstHatch
 
-1. Backend cria ou retoma a única sessão `FirstHatch` pendente.
-2. Fixa seis perguntas: quatro `Easy` e duas `Medium`.
+1. Backend cria ou retoma a única sessão `FirstHatch` pendente usando o template `FIRST_HATCH_EN`.
+2. O template seleciona e fixa seis versões: quatro `Easy` e duas `Medium`, a partir das 24 elegíveis.
 3. Aluno responde uma por tela e recebe feedback e explicação.
 4. Cada resposta avança as rachaduras, acertando ou errando.
 5. `LastActivityAt` é atualizado.
@@ -104,9 +110,9 @@ Home mostra Egg, texto de orientação, progresso `0/6` e “Ensinar meu Bloo”
 
 Reenvios retornam o resultado existente. Uma sessão inativa por 24 horas continua retomável da primeira pergunta não respondida.
 
-### 2.4 Nomeação
+### 2.4 Nomeação opcional
 
-Após o nascimento, o aluno informa um nome de 2–20 caracteres conforme as regras do modelo. Só depois segue para a home Hatchling.
+Após o nascimento, o personagem já se chama `Bloo`. O aluno pode informar um nome de 2–20 caracteres ou tocar em “Agora não”. Em ambos os casos segue para a home Hatchling e pode personalizar o nome depois.
 
 ### 2.5 Greetings
 
@@ -119,6 +125,8 @@ Após o nascimento, o aluno informa um nome de 2–20 caracteres conforme as reg
 7. Repetições priorizam aprendizado e melhor resultado, mas não concedem XP no MVP.
 
 Após `VeryHard`, o tema fica concluído. Domínio das habilidades é calculado separadamente pelas respostas.
+
+A home separa “Trilha do tema” de “O que seu Bloo está aprendendo”. Concluir uma dificuldade libera a próxima; dominar uma habilidade depende de prática em duas sessões e acertos. Quando faltar domínio, a interface oferece revisão opcional sem retirar a conclusão já obtida.
 
 ### 2.6 Conquistas
 
@@ -133,6 +141,8 @@ Após `VeryHard`, o tema fica concluído. Domínio das habilidades é calculado 
 
 Conquistas aparecem no resumo e não interrompem uma pergunta.
 
+Conquistas de jornada (`New Hatchling`, `First Lesson`, `First Theme`, `Theme Explorer`, `Greetings Climber`) reconhecem participação/conclusão e não exigem nota. Conquistas de domínio (`Skill Learned`, `Greetings Master`, `Vocabulary Explorer`) exigem acertos conforme suas regras. `Bloo Is Learning` reconhece prática em duas sessões, mesmo antes do domínio.
+
 ## 3. Estados de erro essenciais
 
 - tema removido/fechado durante sessão: sessão iniciada pode terminar usando as versões fixadas;
@@ -140,6 +150,10 @@ Conquistas aparecem no resumo e não interrompem uma pergunta.
 - matrícula desativada: novas sessões são bloqueadas; histórico é preservado;
 - concorrência/reenvio: índices únicos e transações retornam o resultado já criado;
 - falha ao concluir: XP, estágio, progresso e conquistas são confirmados juntos ou revertidos juntos.
+- cada operação crítica usa `Idempotency-Key`; mesma chave e payload retornam a resposta anterior, payload diferente gera conflito;
+- duas requisições concorrentes são contidas por transação e índices únicos;
+- se o nascimento concluir e o aluno fechar antes de nomear, o Bloo permanece `Hatchling` com o nome padrão `Bloo`;
+- falha antes do commit não concede parte do XP, estágio ou conquista; a tentativa pode ser reenviada com a mesma chave.
 
 ## 4. Fora do MVP
 

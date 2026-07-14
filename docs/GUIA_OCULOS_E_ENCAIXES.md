@@ -18,7 +18,7 @@ Os acessórios usam a mesma prancheta transparente de 1024 × 1024 do Bloo. O ce
 
 ```txt
 eyes_center de referência = (512, 420)
-encaixe visual do Hatchling = aproximadamente (528, 420)
+encaixe visual do Hatchling = aproximadamente (518, 420)
 ```
 
 O frontend deve sobrepor a imagem do acessório à imagem do personagem sem aplicar recorte ou `object-fit` diferente. Como as duas camadas têm a mesma prancheta, o encaixe básico é direto:
@@ -44,7 +44,7 @@ Na pose `thinking`, a asa próxima ao rosto deveria aparecer parcialmente à fre
 
 ## Compatibilidade de poses e ângulos
 
-As quatro poses atuais do Hatchling são essencialmente frontais e usam o encaixe visual `(528, 420)`, ligeiramente à direita da âncora geométrica por causa da perspectiva 3/4 do rosto. Não espelhar armações assimétricas.
+As quatro poses atuais do Hatchling usam o encaixe visual aproximado `(518, 420)`, levemente à direita da âncora geométrica. Não espelhar armações assimétricas.
 
 A arquitetura prevê os ângulos `front`, `right-3q` e `left-3q`. Este pack entrega `front`, suficiente para as poses atuais. Quando uma futura pose girar a cabeça de forma perceptível:
 
@@ -64,7 +64,7 @@ A arquitetura prevê os ângulos `front`, `right-3q` e `left-3q`. Este pack entr
 
 ## Validação visual
 
-Os três PNGs foram validados em RGBA, 1024 × 1024, sRGB, com cantos transparentes. O encaixe foi ajustado visualmente para a perspectiva do Hatchling: centros entre `x=527.5–530.5`, com `y=420.5`. As larguras finais são 525 px (`classic`), 545 px (`bold`) e 515 px (`scholar`), dimensionadas para envolver integralmente os dois olhos.
+Os três PNGs foram validados em RGBA, 1024 × 1024, sRGB, com cantos transparentes. O encaixe foi ajustado visualmente para a perspectiva do Hatchling: centros entre `x=517–520`, com `y=420`. As larguras finais são 570 px (`classic`), 590 px (`bold`) e 560 px (`scholar`).
 
 Antes do piloto, conferir as composições em 220 px e 320 px de largura. Aprovar quando a ponte estiver centralizada, os aros cobrirem os olhos de forma equilibrada e não houver halo magenta.
 

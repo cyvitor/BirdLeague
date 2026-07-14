@@ -25,6 +25,21 @@
 
 `Greetings Climber` e `Greetings Master` são conquistas específicas do primeiro tema. `Vocabulary Explorer` é uma conquista de categoria e poderá exigir outras habilidades no futuro; no MVP sua condição reduzida fica explícita no seed e na descrição.
 
+### Participação versus domínio
+
+Conquistas de jornada não exigem acerto mínimo:
+
+- `New Hatchling`, `First Lesson`, `First Theme`, `Theme Explorer` e `Greetings Climber`.
+
+Elas reconhecem participação e conclusão, garantindo que errar não impeça o nascimento nem o avanço pela trilha.
+
+Conquistas ligadas ao conhecimento exigem acertos:
+
+- `Skill Learned`: pelo menos 80% global na habilidade, 5 respostas e 2 sessões;
+- `Greetings Master`: concluir todas as dificuldades e obter pelo menos 80% em uma sessão `Hard` ou `VeryHard`;
+- `Vocabulary Explorer`: concluir todas as dificuldades e dominar `BASIC_GREETINGS` com pelo menos 80%;
+- `Bloo Is Learning` reconhece prática em 2 sessões, mas ainda não declara domínio.
+
 ### Texto apresentado ao aluno
 
 | Código | Nome principal | Tradução auxiliar | Descrição curta |
@@ -78,7 +93,7 @@ Cada conquista deve ter `RequirementType` e `RequirementJson` versionados. Exemp
 {
   "version": 1,
   "event": "SkillMasteryChanged",
-  "skillCode": "GREETINGS",
+  "skillCode": "BASIC_GREETINGS",
   "minimumAttempts": 5,
   "minimumSessions": 2,
   "minimumAccuracy": 0.8
@@ -96,3 +111,10 @@ Cada conquista deve ter `RequirementType` e `RequirementJson` versionados. Exemp
 ## 7. Apresentação
 
 Ao desbloquear, mostrar nome, descrição curta, ícone e botão “Continuar”. A celebração não deve interromper uma pergunta; aparece após o feedback ou no resumo. Conquistas já obtidas ficam no perfil com data de desbloqueio.
+
+A interface separa:
+
+- **Trilha do tema:** etapas concluídas e próxima dificuldade;
+- **O que seu Bloo está aprendendo:** `NotStarted`, `Practicing` ou `Mastered` por habilidade.
+
+Durante `Practicing`, mostrar orientação como “Pratique esta habilidade em mais um treino” ou “Vamos revisar algumas respostas?”. Nunca retirar uma etapa temática já concluída porque o domínio ainda não foi alcançado.

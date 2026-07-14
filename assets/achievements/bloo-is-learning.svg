@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Bloo Is Learning</title>
+  <desc id="desc">A thoughtful Bloo head with a small light bulb.</desc>
+  <circle cx="128" cy="128" r="112" fill="#F7C948"/>
+  <circle cx="128" cy="128" r="98" fill="#F6FAFD" stroke="#075A9A" stroke-width="10"/>
+  <circle cx="122" cy="134" r="55" fill="#087CC1" stroke="#075A9A" stroke-width="9"/>
+  <path d="M78 120c17-37 64-47 95-10-28-16-63-16-95 10z" fill="#59B7E8"/>
+  <circle cx="104" cy="128" r="6" fill="#1F2933"/>
+  <circle cx="137" cy="128" r="6" fill="#1F2933"/>
+  <path d="M108 153c11-8 25-8 36 0" fill="none" stroke="#1F2933" stroke-width="7" stroke-linecap="round"/>
+  <path d="M169 61c0-16 13-29 29-29s29 13 29 29c0 10-5 18-13 24-5 4-7 9-7 15h-18c0-6-2-11-7-15-8-6-13-14-13-24z" fill="#F7C948" stroke="#C96B35" stroke-width="7" stroke-linejoin="round"/>
+  <path d="M188 112h20M191 127h14" stroke="#075A9A" stroke-width="7" stroke-linecap="round"/>
+</svg>
