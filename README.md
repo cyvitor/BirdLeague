@@ -14,6 +14,7 @@ O projeto está na fase de concepção e planejamento do MVP. A primeira versão
 - [Documentação técnica](docs/ARQUITETURA_TECNICA.md) — tecnologias, arquitetura, dados, segurança e interfaces administrativa e do aluno.
 - [Roadmap](docs/ROADMAP.md) — etapas do MVP, critérios de conclusão e evoluções posteriores.
 - [Fluxos do MVP](docs/FLUXOS_MVP.md) — telas e caminhos principais para administrador e aluno.
+- [Planejamento de telas do MVP](docs/PLANEJAMENTO_DE_TELAS_MVP.md) — inventário, estados, APIs, acessibilidade e critérios de aceite das interfaces.
 - [Regras do treinamento inicial](docs/REGRAS_DO_TREINAMENTO_INICIAL.md) — quantidade de perguntas, XP, rachaduras, feedback e nascimento do Bloo.
 - [Modelo de dados do MVP](docs/MODELO_DE_DADOS_MVP.md) — entidades, campos mínimos e regras de domínio.
 - [Conteúdo pedagógico inicial](docs/CONTEUDO_PEDAGOGICO_INICIAL.md) — classificação das perguntas, habilidades, níveis e banco mínimo.

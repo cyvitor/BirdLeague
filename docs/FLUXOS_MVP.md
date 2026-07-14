@@ -57,22 +57,26 @@ Uma versão nova não altera temas publicados automaticamente. O administrador p
 
 ### 1.6 Tema
 
-1. Abre “Temas” e cria um tema `Draft`.
+1. Abre “Temas” e cria a identidade do tema com sua primeira revisão `Draft`.
 2. Informa título, idioma, descrição, habilidade principal e demais habilidades/categorias.
 3. Habilita `Easy`, `Medium`, `Hard` e/ou `VeryHard` e define cinco perguntas por sessão.
 4. Associa perguntas publicadas do mesmo idioma às dificuldades correspondentes.
 5. Pré-visualiza cada dificuldade.
-6. Publica quando cada dificuldade habilitada possuir ao menos cinco perguntas válidas.
+6. Publica a revisão quando cada dificuldade habilitada possuir ao menos cinco perguntas válidas; ela se torna imutável e passa a ser a versão publicada atual.
 
 A dificuldade é interna ao tema e não representa CEFR. Associar o tema a uma turma declara que a escola já trabalhou aquele conteúdo.
 
+Para editar conteúdo publicado, o administrador cria uma nova revisão `Draft`, ajusta e publica. A revisão não troca automaticamente a versão das turmas. Depois da primeira liberação, mudanças estruturais de dificuldades exigem duplicar o tema; revisões permanecem compatíveis com o progresso existente.
+
 ### 1.7 Liberar tema para turma
 
-1. Em tema publicado, seleciona uma ou mais turmas do mesmo idioma.
+1. Em uma revisão publicada, seleciona uma ou mais turmas do mesmo idioma.
 2. Escolhe liberação imediata ou agenda `ReleaseAt`.
 3. O aluno passa a ver o tema quando a associação estiver ativa e a data chegar.
 
 Agendamento pertence à associação tema–turma, não ao estado editorial do tema.
+
+A associação fixa `ThemeVersionId`. Quando houver revisão nova, o administrador vê quais turmas usam versão anterior e decide quando atualizá-las. Novas sessões usam a versão atualizada; sessões em andamento terminam na versão original, sem perder dificuldades já concluídas.
 
 `DueAt` é apenas prazo informativo e não bloqueia o aluno. Tema `Closed` bloqueia novas sessões e permanece no histórico; `Archived` deixa de aparecer para novos usos. Sessões já iniciadas podem terminar.
 
@@ -93,7 +97,7 @@ Relatórios de melhor resultado, habilidades, XP consolidado, conquistas por tur
 2. Sistema localiza matrículas ativas e garante o Bloo por idioma.
 3. No MVP em inglês, abre diretamente a home do Bloo.
 
-Se existirem duas turmas do mesmo idioma, temas disponíveis são unidos sem duplicar o mesmo `ThemeId`.
+Se existirem duas turmas do mesmo idioma, temas disponíveis são unidos sem duplicar o mesmo `ThemeId`. Se as turmas fixarem revisões diferentes, prevalece a maior versão publicada compatível para novas sessões.
 
 ### 2.2 Egg e tutorial
 

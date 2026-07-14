@@ -123,38 +123,51 @@ O nível CEFR não faz parte da identidade da habilidade no MVP. Para `Greetings
 
 ### Theme
 
-`Id`, `SchoolId`, `LanguageId`, `Code`, `Title`, `Description`, `Status`, `CreatedByUserId`, `PublishedAt`, `CreatedAt`, `UpdatedAt`.
+Identidade estável do tema: `Id`, `SchoolId`, `LanguageId`, `Code`, `Status`, `CurrentPublishedVersionId` opcional, `CreatedByUserId`, `CreatedAt`, `UpdatedAt`.
 
-Status: `Draft`, `Published`, `Closed`, `Archived`.
+Status operacional: `Active`, `Closed`, `Archived`.
 
 - Tema não possui nível CEFR no MVP.
-- Um tema publicado precisa ter ao menos 5 perguntas publicadas em cada dificuldade habilitada.
-- Não pode voltar para `Draft` depois de usado; pode ser fechado ou arquivado.
+- `CurrentPublishedVersionId` aponta para a revisão usada em novas associações e deve pertencer ao próprio tema.
 - `Closed`: bloqueia novas sessões, permanece visível no histórico e pode ser reaberto pelo administrador.
 - `Archived`: não aparece para novos usos nem para o aluno, não pode ser reaberto no MVP e permanece no histórico.
 - Sessões iniciadas antes de fechar ou arquivar podem terminar com suas versões fixadas.
 
+### ThemeVersion
+
+Conteúdo editorial versionado: `Id`, `ThemeId`, `VersionNumber`, `Title`, `Description`, `Status`, `CreatedByUserId`, `PublishedAt`, `ArchivedAt`, `CreatedAt`, `UpdatedAt`.
+
+Status editorial: `Draft`, `Published`, `Archived`. Índice único: `ThemeId + VersionNumber`.
+
+- Apenas o único `Draft` corrente pode ser editado.
+- Publicar valida a revisão inteira, torna seu conteúdo imutável e atualiza `Theme.CurrentPublishedVersionId` na mesma transação.
+- Uma revisão publicada precisa ter exatamente uma habilidade principal e ao menos 5 perguntas publicadas em cada dificuldade habilitada.
+- “Criar nova revisão” copia a versão publicada para o próximo `VersionNumber` em estado `Draft`.
+- Publicar uma revisão não modifica `ThemeClass`, sessões ou respostas existentes automaticamente.
+- Após a primeira liberação do tema, revisões podem alterar título, descrição e substituir/adicionar perguntas sem mudar dificuldades habilitadas, ordem ou `QuestionsPerSession`. Mudança estrutural exige duplicar o tema no MVP.
+- Uma versão publicada nunca é apagada fisicamente.
+
 ### ThemeSkill
 
-`Id`, `ThemeId`, `SkillId`, `IsPrimary`, `CreatedAt`.
+`Id`, `ThemeVersionId`, `SkillId`, `IsPrimary`, `CreatedAt`.
 
 Permite que um tema desenvolva várias habilidades sem duplicar domínio. Deve existir exatamente uma habilidade principal por tema.
 
 ### ThemeCategory
 
-`Id`, `ThemeId`, `SkillCategoryId`, `CreatedAt`.
+`Id`, `ThemeVersionId`, `SkillCategoryId`, `CreatedAt`.
 
 Derivável pelas habilidades, mas persistido para filtros e validação editorial.
 
 ### ThemeDifficulty
 
-`Id`, `ThemeId`, `Difficulty`, `Order`, `IsEnabled`, `QuestionsPerSession`, `CreatedAt`, `UpdatedAt`.
+`Id`, `ThemeVersionId`, `Difficulty`, `Order`, `IsEnabled`, `QuestionsPerSession`, `CreatedAt`, `UpdatedAt`.
 
 Dificuldades: `Easy`, `Medium`, `Hard`, `VeryHard`. No seed `Greetings`, todas ficam habilitadas e `QuestionsPerSession = 5`.
 
 ### ThemeClass
 
-`Id`, `SchoolId`, `ThemeId`, `ClassId`, `ReleaseMode`, `ReleaseAt`, `DueAt`, `IsActive`, `CreatedAt`, `UpdatedAt`.
+`Id`, `SchoolId`, `ThemeId`, `ThemeVersionId`, `ClassId`, `ReleaseMode`, `ReleaseAt`, `DueAt`, `IsActive`, `CreatedAt`, `UpdatedAt`.
 
 `ReleaseMode`: `Immediate`, `Scheduled`. O agendamento existe apenas aqui; `Theme` não possui estado `Scheduled`.
 
@@ -163,9 +176,11 @@ Dificuldades: `Easy`, `Medium`, `Hard`, `VeryHard`. No seed `Greetings`, todas f
 Validações:
 
 - tema e turma pertencem à mesma escola e idioma;
-- somente tema `Published` pode ficar disponível;
+- somente uma `ThemeVersion` publicada, pertencente a um tema `Active`, pode ficar disponível;
 - `Scheduled` exige `ReleaseAt` futuro;
 - índice único: `ThemeId + ClassId`.
+
+`ThemeVersionId` fica fixado na associação. Uma revisão nova só chega à turma por uma ação explícita de “Atualizar versão”. A atualização afeta novas sessões; sessões em andamento preservam seu snapshot. Dificuldades já concluídas continuam concluídas, e sessões futuras usam as perguntas da nova revisão. Se a turma já iniciou o tema, a API rejeita revisão estrutural com `409 theme_revision_incompatible`.
 
 ### Question
 
@@ -197,16 +212,16 @@ Mínimo de 2 opções e exatamente uma correta. Opções de versão publicada s�
 
 ### ThemeQuestion
 
-`Id`, `ThemeId`, `QuestionVersionId`, `Order`, `IsRequired`, `CreatedAt`.
+`Id`, `ThemeVersionId`, `QuestionVersionId`, `Order`, `IsRequired`, `CreatedAt`.
 
-É a única relação pergunta–tema; `Question` não possui `ThemeId`. Um tema publicado aponta para versões específicas e imutáveis, portanto uma nova versão de pergunta não altera temas existentes silenciosamente.
+É a única relação pergunta–tema; `Question` não possui `ThemeId`. Uma revisão publicada aponta para versões específicas e imutáveis, portanto uma nova versão de pergunta não altera temas existentes silenciosamente.
 
 - Uma versão pode pertencer a vários temas.
-- Índice único: `ThemeId + QuestionVersionId`.
+- Índice único: `ThemeVersionId + QuestionVersionId`.
 - `Order` é uma preferência editorial; a seleção da sessão continua seguindo novidade, erros e menor uso.
 - Enunciados iguais ou muito semelhantes geram aviso editorial, mas não bloqueiam salvamento, pois variações intencionais são permitidas.
 - Arquivar um tema bloqueia novas sessões; sessões já iniciadas podem terminar com suas versões fixadas.
-- Para usar uma versão nova, o administrador cria uma revisão do tema, substitui a associação e republica; sessões antigas continuam com a versão anterior.
+- Para usar uma versão nova de pergunta, o administrador cria uma revisão do tema, substitui a associação e publica; depois atualiza explicitamente as turmas desejadas. Sessões antigas continuam com a versão anterior.
 
 ## 5. Treinamento
 
@@ -230,11 +245,12 @@ Representa o conjunto elegível do treino. O seed associa as 24 versões `FirstH
 
 ### TrainingSession
 
-`Id`, `SchoolId`, `StudentProfileId`, `BlooId`, `LanguageId`, `TrainingTemplateId` opcional, `ThemeId` opcional, `Difficulty` opcional, `Type`, `Status`, `ActiveSessionKey` opcional, `StartedAt`, `LastActivityAt`, `CompletedAt`, `AbandonedAt`, `TotalQuestions`, `CorrectAnswers`, `BaseXP`, `BonusXP`, `TotalXP`.
+`Id`, `SchoolId`, `StudentProfileId`, `BlooId`, `LanguageId`, `TrainingTemplateId` opcional, `ThemeId` opcional, `ThemeVersionId` opcional, `Difficulty` opcional, `Type`, `Status`, `ActiveSessionKey` opcional, `StartedAt`, `LastActivityAt`, `CompletedAt`, `AbandonedAt`, `TotalQuestions`, `CorrectAnswers`, `BaseXP`, `BonusXP`, `TotalXP`.
 
 Tipos: `FirstHatch`, `ThemeMission`, `Review`. Status: `InProgress`, `Completed`, `Abandoned`.
 
 - `Difficulty` é obrigatória em `ThemeMission` e nula em `FirstHatch`.
+- `ThemeVersionId` é obrigatório em `ThemeMission` e fixa a revisão usada até o fim da sessão.
 - `TrainingTemplateId` é obrigatório em `FirstHatch`.
 - `ActiveSessionKey` é único enquanto a sessão está `InProgress` e vira nulo ao encerrar. Para o nascimento usa `FIRST_HATCH:{BlooId}`, impedindo duas sessões pendentes no MySQL.
 - Sessão retomável permanece `InProgress`; `LastActivityAt` identifica inatividade.
@@ -265,7 +281,9 @@ Status: `NotStarted`, `InProgress`, `Completed`. Índice único: `StudentProfile
 
 ### StudentThemeDifficultyProgress
 
-`Id`, `StudentThemeProgressId`, `ThemeDifficultyId`, `Status`, `SessionsCompleted`, `BestCorrectAnswers`, `BestAccuracy`, `FirstCompletedAt`, `LastCompletedAt`, `UpdatedAt`.
+`Id`, `StudentThemeProgressId`, `Difficulty`, `LastThemeVersionId`, `Status`, `SessionsCompleted`, `BestCorrectAnswers`, `BestAccuracy`, `FirstCompletedAt`, `LastCompletedAt`, `UpdatedAt`.
+
+Índice único: `StudentThemeProgressId + Difficulty`. O progresso usa a dificuldade estável, e não o ID de uma configuração versionada; assim, uma revisão compatível não remove etapas concluídas. `LastThemeVersionId` registra a revisão da sessão mais recente para auditoria.
 
 Status: `Locked`, `Available`, `Completed`.
 

@@ -58,7 +58,7 @@ Filtros são explícitos; ordenação usa `sort=createdAt:desc`. Busca livre tem
 
 ## 4. Concorrência
 
-Recursos administrativos mutáveis expõem `version`/ETag. Atualização envia `If-Match`; versão divergente retorna `409 concurrency_conflict`. Versões publicadas de perguntas são imutáveis.
+Recursos administrativos mutáveis expõem `version`/ETag. Atualização envia `If-Match`; versão divergente retorna `409 concurrency_conflict`. Versões publicadas de perguntas e temas são imutáveis.
 
 ## 5. Idempotência
 
@@ -91,16 +91,21 @@ O servidor persiste escola, usuário, rota, chave, hash do payload, status e res
 - `/admin/students/{id}/enrollments`
 - `/admin/students/{id}/reset-password`
 - `/admin/themes`
-- `/admin/themes/{id}/skills`
-- `/admin/themes/{id}/difficulties`
-- `/admin/themes/{id}/questions`
+- `/admin/themes/{id}/versions`
+- `/admin/themes/{id}/versions/{versionId}/skills`
+- `/admin/themes/{id}/versions/{versionId}/difficulties`
+- `/admin/themes/{id}/versions/{versionId}/questions`
 - `/admin/themes/{id}/classes`
 - `/admin/questions`
 - `/admin/questions/{id}/versions`
 
 Cada coleção suporta somente os verbos necessários. Publicação é ação explícita: `POST .../{id}/publish`; arquivamento: `POST .../{id}/archive`.
 
-`/admin/themes/{id}/questions` associa `questionVersionId`, nunca apenas `questionId`. Atualizar uma pergunta publicada não altera o tema até uma substituição editorial explícita.
+`POST /admin/themes/{id}/versions` cria uma revisão `Draft` copiando a publicada atual. `POST /admin/themes/{id}/versions/{versionId}/publish` publica a revisão e atualiza o ponteiro atual do tema, sem alterar turmas automaticamente.
+
+`.../versions/{versionId}/questions` associa `questionVersionId`, nunca apenas `questionId`. Atualizar uma pergunta publicada não altera nenhuma revisão do tema até uma substituição editorial explícita.
+
+`POST /admin/themes/{id}/classes/{classId}/upgrade-version` recebe `themeVersionId` publicado. Retorna `409 theme_revision_incompatible` se a revisão mudar a estrutura depois de a turma iniciar o tema.
 
 ### Aluno
 

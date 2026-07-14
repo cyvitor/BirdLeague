@@ -154,8 +154,9 @@ Um aluno poderá possuir várias matrículas. O vínculo do Bloo será com aluno
 - **QuestionOption:** alternativas ligadas à versão.
 - **QuestionAsset:** áudio, imagem ou outro material.
 - **Theme:** tema ou missão pedagógica criada pelo administrador no MVP.
-- **ThemeClass:** associação do tema com turmas e datas de liberação.
-- **ThemeQuestion:** associação entre tema e perguntas.
+- **ThemeVersion:** revisão editorial imutável do tema depois de publicada.
+- **ThemeClass:** associação que fixa uma revisão do tema para a turma e suas datas de liberação.
+- **ThemeQuestion:** associação entre uma revisão do tema e versões publicadas de perguntas.
 - **TrainingSession:** início, fim, objetivo e estado de um treino.
 - **TrainingAnswer:** resposta, resultado, tempo e feedback apresentado.
 - **SkillMastery:** progresso do aluno em determinada habilidade, apresentado na experiência como aprendizado do Bloo.
