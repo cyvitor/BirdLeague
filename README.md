@@ -6,7 +6,47 @@ O propósito do projeto é transformar o estudo frequente em uma jornada de cuid
 
 ## Estado do projeto
 
-O projeto está na fase de concepção e planejamento do MVP. A primeira versão será concentrada no cadastro de turmas e alunos, treinamento inicial e evolução do ovo para o primeiro Bloo.
+O MVP navegável está implementado em um monorepo com frontend Next.js, API NestJS e schema MySQL/Prisma. A demonstração cobre a landing do aluno, os dois perfis de acesso, o ciclo `Egg → FirstHatch → Hatchling`, a missão `Greetings`, progresso, conquistas e acompanhamento administrativo.
+
+O frontend possui um modo de demonstração local persistente para validação imediata da experiência. A API expõe o contrato do ciclo principal e uma implementação em memória para testes; o schema e o seed Prisma preparam a persistência MySQL da implantação.
+
+## Executar localmente
+
+Requisitos: Node.js 22+ (24 LTS recomendado), pnpm 10+ e Docker para o MySQL.
+
+```bash
+pnpm install
+pnpm dev:web
+```
+
+Acesse `http://localhost:3000`. No modo demonstração:
+
+- aluno: qualquer login e senha;
+- administrador: login `vh` e qualquer senha.
+
+Para executar também a API e o MySQL:
+
+```bash
+docker compose up -d mysql
+cp .env.example .env
+pnpm db:generate
+pnpm db:migrate
+pnpm db:seed
+pnpm dev
+```
+
+- Web: `http://localhost:3000`
+- API: `http://localhost:3001/api/v1`
+- OpenAPI: `http://localhost:3001/api/docs`
+
+## Verificação
+
+```bash
+pnpm build
+pnpm test
+```
+
+Os testes da API validam que o nascimento depende da conclusão, não dos acertos, e que repetir uma conclusão não duplica XP.
 
 ## Documentação
 

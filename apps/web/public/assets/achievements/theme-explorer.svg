@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Theme Explorer</title>
+  <desc id="desc">A compass resting on an open book.</desc>
+  <circle cx="128" cy="128" r="112" fill="#087CC1"/>
+  <circle cx="128" cy="128" r="98" fill="#F6FAFD" stroke="#075A9A" stroke-width="10"/>
+  <path d="M52 141c28-12 52-8 76 9v43c-24-17-50-22-76-10z" fill="#FFFFFF" stroke="#075A9A" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M204 141c-28-12-52-8-76 9v43c24-17 50-22 76-10z" fill="#FFFFFF" stroke="#075A9A" stroke-width="8" stroke-linejoin="round"/>
+  <circle cx="128" cy="96" r="50" fill="#FFFFFF" stroke="#075A9A" stroke-width="9"/>
+  <path d="M143 78l-15 57-15-39 39-15z" fill="#F28A4B" stroke="#C96B35" stroke-width="7" stroke-linejoin="round"/>
+  <circle cx="128" cy="96" r="7" fill="#075A9A"/>
+  <path d="M128 48v13M128 131v13M80 96h13M163 96h13" stroke="#59B7E8" stroke-width="7" stroke-linecap="round"/>
+</svg>

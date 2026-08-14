@@ -1,0 +1,482 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  Admin
+  Student
+}
+enum BlooStage {
+  Egg
+  Hatchling
+}
+enum EnrollmentStatus {
+  Active
+  Paused
+  Finished
+  Canceled
+}
+enum ThemeStatus {
+  Active
+  Closed
+  Archived
+}
+enum EditorialStatus {
+  Draft
+  Published
+  Archived
+}
+enum Difficulty {
+  Easy
+  Medium
+  Hard
+  VeryHard
+}
+enum QuestionType {
+  MultipleChoice
+  FillBlankWithOptions
+}
+enum TrainingType {
+  FirstHatch
+  ThemeMission
+  Review
+}
+enum TrainingStatus {
+  InProgress
+  Completed
+  Abandoned
+}
+enum ProgressStatus {
+  NotStarted
+  InProgress
+  Completed
+}
+enum DifficultyStatus {
+  Locked
+  Available
+  Completed
+}
+enum MasteryStatus {
+  NotStarted
+  Practicing
+  Mastered
+}
+enum ReleaseMode {
+  Immediate
+  Scheduled
+}
+
+model School {
+  id String @id @default(uuid()) @db.Char(36)
+  name String @db.VarChar(120)
+  slug String @unique @db.VarChar(80)
+  timeZoneId String @default("America/Sao_Paulo") @db.VarChar(80)
+  isActive Boolean @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model User {
+  id String @id @default(uuid()) @db.Char(36)
+  schoolId String @db.Char(36)
+  displayName String @db.VarChar(120)
+  login String @db.VarChar(80)
+  normalizedLogin String @db.VarChar(80)
+  email String? @db.VarChar(190)
+  passwordHash String @db.VarChar(255)
+  role UserRole
+  mustChangePassword Boolean @default(true)
+  isActive Boolean @default(true)
+  lastLoginAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@unique([schoolId, normalizedLogin])
+  @@index([schoolId, role, isActive])
+}
+
+model RefreshToken {
+  id String @id @default(uuid()) @db.Char(36)
+  userId String @db.Char(36)
+  familyId String @db.Char(36)
+  tokenHash String @unique @db.Char(64)
+  parentTokenId String? @db.Char(36)
+  replacedByTokenId String? @db.Char(36)
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+  revokedAt DateTime?
+  revocationReason String? @db.VarChar(100)
+  createdByIpHash String? @db.Char(64)
+  userAgentHash String? @db.Char(64)
+  @@index([userId, expiresAt])
+  @@index([familyId])
+}
+
+model StudentProfile {
+  id String @id @default(uuid()) @db.Char(36)
+  userId String @unique @db.Char(36)
+  schoolId String @db.Char(36)
+  fullName String @db.VarChar(160)
+  nickname String? @db.VarChar(80)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@index([schoolId, fullName])
+}
+
+model Language {
+  id String @id @default(uuid()) @db.Char(36)
+  schoolId String @db.Char(36)
+  name String @db.VarChar(80)
+  code String @db.VarChar(12)
+  isActive Boolean @default(true)
+  @@unique([schoolId, code])
+}
+
+model Class {
+  id String @id @default(uuid()) @db.Char(36)
+  schoolId String @db.Char(36)
+  languageId String @db.Char(36)
+  name String @db.VarChar(120)
+  levelLabel String? @db.VarChar(40)
+  period String @db.VarChar(60)
+  version Int @default(1)
+  isActive Boolean @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@index([schoolId, isActive, name])
+}
+
+model Enrollment {
+  id String @id @default(uuid()) @db.Char(36)
+  schoolId String @db.Char(36)
+  studentProfileId String @db.Char(36)
+  classId String @db.Char(36)
+  status EnrollmentStatus @default(Active)
+  activeKey String? @unique @db.VarChar(90)
+  startedAt DateTime @default(now())
+  endedAt DateTime?
+  @@index([schoolId, classId, status])
+  @@index([studentProfileId, status])
+}
+
+model Bloo {
+  id String @id @default(uuid()) @db.Char(36)
+  schoolId String @db.Char(36)
+  studentProfileId String @db.Char(36)
+  languageId String @db.Char(36)
+  name String @default("Bloo") @db.VarChar(20)
+  hasCustomName Boolean @default(false)
+  stage BlooStage @default(Egg)
+  xp Int @default(0)
+  hatchedAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@unique([studentProfileId, languageId])
+  @@index([schoolId, stage])
+}
+
+model SkillCategory {
+  id String @id @default(uuid()) @db.Char(36)
+  languageId String @db.Char(36)
+  name String @db.VarChar(80)
+  code String @db.VarChar(50)
+  description String? @db.VarChar(500)
+  isActive Boolean @default(true)
+  @@unique([languageId, code])
+}
+
+model Skill {
+  id String @id @default(uuid()) @db.Char(36)
+  languageId String @db.Char(36)
+  skillCategoryId String @db.Char(36)
+  name String @db.VarChar(100)
+  code String @db.VarChar(60)
+  description String? @db.VarChar(500)
+  isActive Boolean @default(true)
+  @@unique([languageId, code])
+}
+
+model Theme {
+  id String @id @default(uuid()) @db.Char(36)
+  schoolId String @db.Char(36)
+  languageId String @db.Char(36)
+  code String @db.VarChar(60)
+  status ThemeStatus @default(Active)
+  currentPublishedVersionId String? @db.Char(36)
+  createdByUserId String @db.Char(36)
+  version Int @default(1)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@unique([schoolId, code])
+}
+
+model ThemeVersion {
+  id String @id @default(uuid()) @db.Char(36)
+  themeId String @db.Char(36)
+  versionNumber Int
+  title String @db.VarChar(120)
+  description String @db.VarChar(800)
+  status EditorialStatus @default(Draft)
+  createdByUserId String @db.Char(36)
+  publishedAt DateTime?
+  archivedAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@unique([themeId, versionNumber])
+}
+
+model ThemeSkill {
+  id String @id @default(uuid()) @db.Char(36)
+  themeVersionId String @db.Char(36)
+  skillId String @db.Char(36)
+  isPrimary Boolean @default(false)
+  createdAt DateTime @default(now())
+  @@unique([themeVersionId, skillId])
+}
+
+model ThemeDifficulty {
+  id String @id @default(uuid()) @db.Char(36)
+  themeVersionId String @db.Char(36)
+  difficulty Difficulty
+  order Int
+  isEnabled Boolean @default(true)
+  questionsPerSession Int @default(5)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@unique([themeVersionId, difficulty])
+}
+
+model ThemeClass {
+  id String @id @default(uuid()) @db.Char(36)
+  schoolId String @db.Char(36)
+  themeId String @db.Char(36)
+  themeVersionId String @db.Char(36)
+  classId String @db.Char(36)
+  releaseMode ReleaseMode
+  releaseAt DateTime?
+  dueAt DateTime?
+  isActive Boolean @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@unique([themeId, classId])
+  @@index([schoolId, classId, isActive])
+}
+
+model Question {
+  id String @id @default(uuid()) @db.Char(36)
+  schoolId String @db.Char(36)
+  languageId String @db.Char(36)
+  code String @db.VarChar(80)
+  createdByUserId String @db.Char(36)
+  isActive Boolean @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@unique([schoolId, code])
+}
+
+model QuestionVersion {
+  id String @id @default(uuid()) @db.Char(36)
+  questionId String @db.Char(36)
+  versionNumber Int
+  skillCategoryId String @db.Char(36)
+  skillId String @db.Char(36)
+  type QuestionType
+  difficulty Difficulty
+  prompt String @db.VarChar(600)
+  explanation String @db.VarChar(600)
+  status EditorialStatus @default(Draft)
+  publishedAt DateTime?
+  archivedAt DateTime?
+  createdByUserId String @db.Char(36)
+  createdAt DateTime @default(now())
+  @@unique([questionId, versionNumber])
+  @@index([skillId, difficulty, status])
+}
+
+model QuestionOption {
+  id String @id @default(uuid()) @db.Char(36)
+  questionVersionId String @db.Char(36)
+  text String @db.VarChar(300)
+  isCorrect Boolean @default(false)
+  order Int
+  @@unique([questionVersionId, order])
+}
+
+model ThemeQuestion {
+  id String @id @default(uuid()) @db.Char(36)
+  themeVersionId String @db.Char(36)
+  questionVersionId String @db.Char(36)
+  order Int
+  isRequired Boolean @default(false)
+  createdAt DateTime @default(now())
+  @@unique([themeVersionId, questionVersionId])
+}
+
+model TrainingTemplate {
+  id String @id @default(uuid()) @db.Char(36)
+  schoolId String @db.Char(36)
+  languageId String @db.Char(36)
+  code String @db.VarChar(60)
+  type TrainingType
+  totalQuestions Int
+  isActive Boolean @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@unique([schoolId, code])
+}
+
+model TrainingSession {
+  id String @id @default(uuid()) @db.Char(36)
+  schoolId String @db.Char(36)
+  studentProfileId String @db.Char(36)
+  blooId String @db.Char(36)
+  languageId String @db.Char(36)
+  trainingTemplateId String? @db.Char(36)
+  themeId String? @db.Char(36)
+  themeVersionId String? @db.Char(36)
+  difficulty Difficulty?
+  type TrainingType
+  status TrainingStatus @default(InProgress)
+  activeSessionKey String? @unique @db.VarChar(100)
+  startedAt DateTime @default(now())
+  lastActivityAt DateTime @default(now())
+  completedAt DateTime?
+  abandonedAt DateTime?
+  totalQuestions Int
+  correctAnswers Int @default(0)
+  baseXP Int @default(0)
+  bonusXP Int @default(0)
+  totalXP Int @default(0)
+  @@index([studentProfileId, status, lastActivityAt])
+}
+
+model TrainingQuestion {
+  id String @id @default(uuid()) @db.Char(36)
+  trainingSessionId String @db.Char(36)
+  questionId String @db.Char(36)
+  questionVersionId String @db.Char(36)
+  order Int
+  answeredAt DateTime?
+  @@unique([trainingSessionId, order])
+  @@unique([trainingSessionId, questionVersionId])
+}
+
+model TrainingAnswer {
+  id String @id @default(uuid()) @db.Char(36)
+  trainingSessionId String @db.Char(36)
+  trainingQuestionId String @unique @db.Char(36)
+  selectedOptionId String @db.Char(36)
+  isCorrect Boolean
+  answeredAt DateTime @default(now())
+  timeSpentSeconds Int?
+}
+
+model StudentThemeProgress {
+  id String @id @default(uuid()) @db.Char(36)
+  schoolId String @db.Char(36)
+  studentProfileId String @db.Char(36)
+  blooId String @db.Char(36)
+  themeId String @db.Char(36)
+  status ProgressStatus @default(NotStarted)
+  currentDifficulty Difficulty @default(Easy)
+  startedAt DateTime?
+  completedAt DateTime?
+  updatedAt DateTime @updatedAt
+  @@unique([studentProfileId, blooId, themeId])
+}
+
+model StudentThemeDifficultyProgress {
+  id String @id @default(uuid()) @db.Char(36)
+  studentThemeProgressId String @db.Char(36)
+  difficulty Difficulty
+  lastThemeVersionId String? @db.Char(36)
+  status DifficultyStatus @default(Locked)
+  sessionsCompleted Int @default(0)
+  bestCorrectAnswers Int @default(0)
+  bestAccuracy Decimal @default(0) @db.Decimal(5,4)
+  firstCompletedAt DateTime?
+  lastCompletedAt DateTime?
+  updatedAt DateTime @updatedAt
+  @@unique([studentThemeProgressId, difficulty])
+}
+
+model SkillMastery {
+  id String @id @default(uuid()) @db.Char(36)
+  schoolId String @db.Char(36)
+  studentProfileId String @db.Char(36)
+  languageId String @db.Char(36)
+  skillId String @db.Char(36)
+  attempts Int @default(0)
+  correctAnswers Int @default(0)
+  distinctSessions Int @default(0)
+  masteryScore Decimal @default(0) @db.Decimal(5,4)
+  status MasteryStatus @default(NotStarted)
+  lastPracticedAt DateTime?
+  @@unique([studentProfileId, skillId])
+}
+
+model Achievement {
+  id String @id @default(uuid()) @db.Char(36)
+  languageId String @db.Char(36)
+  name String @db.VarChar(100)
+  code String @db.VarChar(60)
+  description String @db.VarChar(300)
+  requirementType String @db.VarChar(60)
+  requirementJson Json
+  isActive Boolean @default(true)
+  @@unique([languageId, code])
+}
+
+model StudentAchievement {
+  id String @id @default(uuid()) @db.Char(36)
+  studentProfileId String @db.Char(36)
+  blooId String @db.Char(36)
+  achievementId String @db.Char(36)
+  unlockedAt DateTime @default(now())
+  @@unique([studentProfileId, blooId, achievementId])
+}
+
+model IdempotencyRecord {
+  id String @id @default(uuid()) @db.Char(36)
+  schoolId String @db.Char(36)
+  userId String @db.Char(36)
+  route String @db.VarChar(180)
+  idempotencyKey String @db.Char(36)
+  requestHash String @db.Char(64)
+  responseStatus Int
+  responseJson Json
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+  @@unique([schoolId, userId, route, idempotencyKey])
+  @@index([expiresAt])
+}
+
+model ProgressEvent {
+  id String @id @default(uuid()) @db.Char(36)
+  schoolId String @db.Char(36)
+  studentProfileId String @db.Char(36)
+  blooId String @db.Char(36)
+  type String @db.VarChar(70)
+  xp Int @default(0)
+  sourceId String @db.Char(36)
+  sourceType String @db.VarChar(60)
+  idempotencyKey String @unique @db.VarChar(160)
+  createdAt DateTime @default(now())
+}
+
+model AuditLog {
+  id String @id @default(uuid()) @db.Char(36)
+  schoolId String? @db.Char(36)
+  actorUserId String? @db.Char(36)
+  action String @db.VarChar(80)
+  entityType String? @db.VarChar(60)
+  entityId String? @db.Char(36)
+  metadataJson Json?
+  ipHash String? @db.Char(64)
+  createdAt DateTime @default(now())
+  @@index([schoolId, createdAt])
+}

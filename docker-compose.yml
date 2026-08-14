@@ -1,0 +1,21 @@
+services:
+  mysql:
+    image: mysql:8.4
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: birdleague
+      MYSQL_USER: birdleague
+      MYSQL_PASSWORD: birdleague
+      MYSQL_ROOT_PASSWORD: local-root-only
+    ports:
+      - "3306:3306"
+    volumes:
+      - birdleague_mysql:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-ubirdleague", "-pbirdleague"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  birdleague_mysql:

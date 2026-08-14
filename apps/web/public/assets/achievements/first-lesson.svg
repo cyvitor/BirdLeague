@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">First Lesson</title>
+  <desc id="desc">An open book with a star above it.</desc>
+  <circle cx="128" cy="128" r="112" fill="#59B7E8"/>
+  <circle cx="128" cy="128" r="98" fill="#F6FAFD" stroke="#075A9A" stroke-width="10"/>
+  <path d="M50 82c34-11 58-3 78 15v83c-23-17-48-23-78-14z" fill="#FFFFFF" stroke="#075A9A" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M206 82c-34-11-58-3-78 15v83c23-17 48-23 78-14z" fill="#FFFFFF" stroke="#075A9A" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M128 97v83" stroke="#075A9A" stroke-width="7" stroke-linecap="round"/>
+  <path d="M73 113h32M73 136h32M151 113h32M151 136h32" stroke="#59B7E8" stroke-width="7" stroke-linecap="round"/>
+  <path d="M128 35l12 24 27 4-20 19 5 27-24-13-24 13 5-27-20-19 27-4z" fill="#F7C948" stroke="#C96B35" stroke-width="7" stroke-linejoin="round"/>
+</svg>

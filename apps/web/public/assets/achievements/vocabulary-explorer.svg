@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Vocabulary Explorer</title>
+  <desc id="desc">A compass made of simple learning blocks.</desc>
+  <circle cx="128" cy="128" r="112" fill="#59B7E8"/>
+  <circle cx="128" cy="128" r="98" fill="#F6FAFD" stroke="#075A9A" stroke-width="10"/>
+  <circle cx="128" cy="128" r="62" fill="#FFFFFF" stroke="#075A9A" stroke-width="9"/>
+  <path d="M148 93l-20 85-20-50 50-20z" fill="#F28A4B" stroke="#C96B35" stroke-width="7" stroke-linejoin="round"/>
+  <circle cx="128" cy="128" r="8" fill="#075A9A"/>
+  <rect x="74" y="54" width="28" height="28" rx="7" fill="#F7C948" stroke="#C96B35" stroke-width="6"/>
+  <rect x="154" y="54" width="28" height="28" rx="7" fill="#F7C948" stroke="#C96B35" stroke-width="6"/>
+  <rect x="74" y="174" width="28" height="28" rx="7" fill="#087CC1" stroke="#075A9A" stroke-width="6"/>
+  <rect x="154" y="174" width="28" height="28" rx="7" fill="#087CC1" stroke="#075A9A" stroke-width="6"/>
+  <path d="M87 68h2M167 68h2M87 188h2M167 188h2" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round"/>
+</svg>
