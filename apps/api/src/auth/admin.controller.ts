@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post, Req, UseGuards } from "@nestjs/common";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { AdminGuard, AuthGuard, AuthRequest } from "./auth.guard";
-import { CreateStudentDto } from "./auth.dto";
+import { CreateAdminDto, CreateStudentDto } from "./auth.dto";
 import { AuthService } from "./auth.service";
 
 @ApiTags("Administration")
@@ -12,4 +12,6 @@ export class AdminController {
   constructor(private readonly auth: AuthService) {}
   @Get("students") students(@Req() request: AuthRequest) { return this.auth.listStudents(request.user!); }
   @Post("students") createStudent(@Req() request: AuthRequest, @Body() body: CreateStudentDto) { return this.auth.createStudent(request.user!, body.fullName, body.login, body.password); }
+  @Get("admins") admins(@Req() request: AuthRequest) { return this.auth.listAdmins(request.user!); }
+  @Post("admins") createAdmin(@Req() request: AuthRequest, @Body() body: CreateAdminDto) { return this.auth.createAdmin(request.user!, body.fullName, body.login, body.password); }
 }

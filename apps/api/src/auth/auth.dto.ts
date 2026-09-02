@@ -16,3 +16,9 @@ export class CreateStudentDto {
   @ApiProperty() @IsString() @IsNotEmpty() @MaxLength(80) login: string;
   @ApiProperty() @IsString() @MinLength(8) @MaxLength(128) password: string;
 }
+
+export class CreateAdminDto {
+  @ApiProperty() @IsString() @IsNotEmpty() @MaxLength(160) fullName: string;
+  @ApiProperty() @IsString() @IsNotEmpty() @MaxLength(80) login: string;
+  @ApiProperty() @IsString() @Length(12, 128) password: string;
+}

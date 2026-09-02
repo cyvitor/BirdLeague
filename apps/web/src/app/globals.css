@@ -145,6 +145,12 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .student-form { padding: 22px; margin-bottom: 18px; display: grid; grid-template-columns: 1.3fr 1fr 1fr auto; gap: 14px; align-items: end; }
 .student-form .field { margin: 0; }
 .student-form > p { grid-column: 1 / -1; margin: 0; }
+.admin-user-form { padding: 24px; margin-bottom: 18px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px 18px; }
+.admin-user-form .field { margin: 0; }
+.form-note { margin: 0; color: var(--muted); display: flex; align-items: center; gap: 8px; font-size: .84rem; }
+.form-note svg { color: var(--blue); }
+.form-error { margin: 0; color: var(--red); font-size: .86rem; }
+.form-actions { grid-column: 1 / -1; display: flex; justify-content: flex-end; gap: 10px; }
 
 @media (max-width: 900px) {
   .hero, .login-wrap { grid-template-columns: 1fr; }.hero { text-align:center;padding-top:45px }.hero-copy { margin-inline:auto }.hero-actions,.hero-proof { justify-content:center }.hero-visual { min-height:430px }.egg-stage { max-width:420px }.login-scene { min-height:320px }.login-copy { width:min(470px,62%);margin-top:45px }.login-scene h1 { font-size:2.7rem;margin:12px 0 }.login-scene p { font-size:.95rem }.login-scene img { width:270px;max-height:90%;bottom:-45px;opacity:.9 }.admin { grid-template-columns: 76px 1fr }.sidebar { padding:20px 10px }.sidebar .brand span,.side-link span { display:none }.side-link { justify-content:center;padding:0 }.admin-content { padding-inline:18px }.admin-stats { grid-template-columns:repeat(2,1fr) }.admin-two { grid-template-columns:1fr }.sidebar .brand { margin-inline:auto;justify-content:center }
@@ -153,6 +159,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 @media (max-width: 640px) {
   .topbar .pill { display:none }.hero h1 { font-size:3.2rem }.hero-visual { min-height:360px }.floating-note { font-size:.75rem;padding:10px }.note-one { left:-5px }.note-two { right:-5px }.login-scene { display:none }.login-wrap { display:block }.login-panel { min-height:100vh;padding:24px }.bloo-home { grid-template-columns:1fr;text-align:center }.bloo-home > div:first-child { order:2 }.bloo-image { max-height:290px }.mission-card { align-items:flex-start;flex-wrap:wrap }.mission-card .btn { width:100%;margin:5px 0 0 }.stats-grid { grid-template-columns:1fr }.student-nav { width:calc(100% - 20px);bottom:10px }.nav-item { min-width:0;flex:1;font-size:.76rem;flex-direction:column;gap:2px }.learning-grid,.achievement-grid { grid-template-columns:1fr }.quiz-head { grid-template-columns:auto 1fr }.quiz-head .pill { grid-column:1/-1;justify-self:center }.admin-content { padding-inline:12px }.admin-stats { grid-template-columns:1fr 1fr }.admin-stat { padding:15px }.admin-title { align-items:flex-start;flex-direction:column }.admin-title .btn { width:100% }
   .student-form { grid-template-columns: 1fr; }
+  .admin-user-form { grid-template-columns: 1fr; }
+  .form-actions { grid-column: 1; }
 }
 @media (prefers-reduced-motion: reduce) { *,*::before,*::after { scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important } }
 

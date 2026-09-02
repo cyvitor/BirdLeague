@@ -9,6 +9,7 @@ export type AuthUser = {
 
 export type AuthSession = { accessToken: string; expiresIn: number; user: AuthUser };
 export type StudentRecord = { id: string; fullName: string; login: string; isActive: boolean; lastLoginAt?: string | null; createdAt: string };
+export type AdminRecord = StudentRecord & { mustChangePassword: boolean };
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "/api/v1";
 
@@ -31,4 +32,6 @@ export const api = {
   changePassword: (token: string, currentPassword: string, newPassword: string) => request<{ changed: true }>("/auth/change-password", { method: "POST", body: JSON.stringify({ currentPassword, newPassword }) }, token),
   listStudents: (token: string) => request<{ items: StudentRecord[]; totalItems: number }>("/admin/students", {}, token),
   createStudent: (token: string, data: { fullName: string; login: string; password: string }) => request<StudentRecord>("/admin/students", { method: "POST", body: JSON.stringify(data) }, token),
+  listAdmins: (token: string) => request<{ items: AdminRecord[]; totalItems: number }>("/admin/admins", {}, token),
+  createAdmin: (token: string, data: { fullName: string; login: string; password: string }) => request<AdminRecord>("/admin/admins", { method: "POST", body: JSON.stringify(data) }, token),
 };

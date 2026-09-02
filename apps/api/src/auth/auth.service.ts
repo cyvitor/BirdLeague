@@ -80,6 +80,27 @@ export class AuthService implements OnModuleInit {
     return { items: users.map(user => ({ id: user.id, fullName: user.displayName, login: user.login, isActive: user.isActive, lastLoginAt: user.lastLoginAt, createdAt: user.createdAt })), page: 1, pageSize: users.length, totalItems: users.length, totalPages: users.length ? 1 : 0 };
   }
 
+  async createAdmin(actor: AuthUser, fullNameInput: string, loginInput: string, password: string) {
+    const fullName = fullNameInput.trim();
+    const login = loginInput.trim();
+    const normalizedLogin = this.normalize(login);
+    if (!fullName) throw new UnprocessableEntityException("invalid_full_name");
+    this.validatePassword(password, login, 12);
+    if (!/^[a-zA-Z0-9._-]{3,80}$/.test(login)) throw new UnprocessableEntityException("invalid_login");
+    const duplicate = await this.prisma.user.findFirst({ where: { schoolId: actor.schoolId, normalizedLogin } });
+    if (duplicate) throw new ConflictException("login_already_exists");
+    return this.prisma.$transaction(async tx => {
+      const user = await tx.user.create({ data: { schoolId: actor.schoolId, displayName: fullName, login, normalizedLogin, passwordHash: await argon2.hash(password, { type: argon2.argon2id }), role: UserRole.Admin, mustChangePassword: true } });
+      await tx.auditLog.create({ data: { schoolId: actor.schoolId, actorUserId: actor.id, action: "admin.created", entityType: "User", entityId: user.id, metadataJson: { login: normalizedLogin } } });
+      return { id: user.id, fullName: user.displayName, login: user.login, isActive: user.isActive, mustChangePassword: user.mustChangePassword, lastLoginAt: user.lastLoginAt, createdAt: user.createdAt };
+    });
+  }
+
+  async listAdmins(actor: AuthUser) {
+    const users = await this.prisma.user.findMany({ where: { schoolId: actor.schoolId, role: UserRole.Admin }, orderBy: { createdAt: "asc" } });
+    return { items: users.map(user => ({ id: user.id, fullName: user.displayName, login: user.login, isActive: user.isActive, mustChangePassword: user.mustChangePassword, lastLoginAt: user.lastLoginAt, createdAt: user.createdAt })), page: 1, pageSize: users.length, totalItems: users.length, totalPages: users.length ? 1 : 0 };
+  }
+
   private validatePassword(password: string, login: string, min: number) {
     const lowered = password.toLocaleLowerCase("pt-BR");
     if (password.length < min || password.length > 128 || lowered === this.normalize(login) || COMMON_PASSWORDS.has(lowered)) throw new UnprocessableEntityException("weak_password");
