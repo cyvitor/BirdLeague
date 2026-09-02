@@ -2,18 +2,20 @@
 
 import Image from "next/image";
 import {
-  ArrowLeft, ArrowRight, Award, BarChart3, Bird, BookOpen, Check, CheckCircle2,
-  ChevronRight, CircleHelp, Clock3, Database, Egg, GraduationCap, Home, Layers3,
-  LockKeyhole, LogOut, Menu, Plus, Search, Settings2, Sparkles, Star, Trophy,
+  ArrowLeft, ArrowRight, Bird, BookOpen, Check, CheckCircle2,
+  ChevronRight, CircleHelp, Database, Egg, GraduationCap, Home, Layers3,
+  LockKeyhole, LogOut, Plus, Sparkles, Trophy,
   UserRound, UsersRound, X, Zap,
 } from "lucide-react";
 import { FormEvent, useEffect, useMemo, useState } from "react";
-import { achievements, classes, Difficulty, firstHatchQuestions, greetingQuestions, Question, students } from "@/lib/demo-data";
+import { achievements, Difficulty, firstHatchQuestions, greetingQuestions, Question } from "@/lib/learning-content";
+import { api, AuthSession } from "@/lib/api";
+import SecureAdminApp from "@/components/admin-app";
 
 const blooPath = "/assets/bloo/";
 const achievementPath = "/assets/achievements/";
 
-type Screen = "landing" | "login" | "tutorial" | "student" | "quiz" | "hatch" | "name" | "admin";
+type Screen = "landing" | "login" | "changePassword" | "tutorial" | "student" | "quiz" | "hatch" | "name" | "admin";
 type StudentTab = "home" | "learning" | "achievements";
 type AdminTab = "overview" | "classes" | "students" | "themes" | "questions";
 type DemoProgress = {
@@ -37,24 +39,48 @@ export default function Page() {
   const [quizType, setQuizType] = useState<"first" | "theme">("first");
   const [difficulty, setDifficulty] = useState<Difficulty>("Easy");
   const [ready, setReady] = useState(false);
+  const [session, setSession] = useState<AuthSession | null>(null);
 
   useEffect(() => {
-    const saved = window.localStorage.getItem("birdleague-demo");
-    if (saved) setProgress(JSON.parse(saved));
-    setReady(true);
+    const token = window.sessionStorage.getItem("birdleague-access-token");
+    if (!token) return setReady(true);
+    api.me(token).then(user => {
+      const restored = { accessToken: token, expiresIn: 600, user };
+      setSession(restored);
+      if (user.role === "Student") {
+        const saved = window.localStorage.getItem(`birdleague-progress:${user.id}`);
+        if (saved) setProgress(JSON.parse(saved));
+      }
+      setScreen(user.mustChangePassword ? "changePassword" : user.role === "Admin" ? "admin" : "student");
+    }).catch(() => window.sessionStorage.removeItem("birdleague-access-token")).finally(() => setReady(true));
   }, []);
 
   useEffect(() => {
-    if (ready) window.localStorage.setItem("birdleague-demo", JSON.stringify(progress));
-  }, [progress, ready]);
+    if (ready && session?.user.role === "Student") window.localStorage.setItem(`birdleague-progress:${session.user.id}`, JSON.stringify(progress));
+  }, [progress, ready, session]);
+
+  function authenticated(next: AuthSession) {
+    setSession(next);
+    window.sessionStorage.setItem("birdleague-access-token", next.accessToken);
+    let nextProgress = initialProgress;
+    if (next.user.role === "Student") {
+      const saved = window.localStorage.getItem(`birdleague-progress:${next.user.id}`);
+      nextProgress = saved ? JSON.parse(saved) : initialProgress;
+      setProgress(nextProgress);
+    }
+    setScreen(next.user.mustChangePassword ? "changePassword" : next.user.role === "Admin" ? "admin" : (nextProgress.hatched ? "student" : "tutorial"));
+  }
+
+  function logout() { window.sessionStorage.removeItem("birdleague-access-token"); setSession(null); setProgress(initialProgress); setScreen("login"); }
 
   const startFirst = () => { setQuizType("first"); setScreen("quiz"); };
   const startTheme = (level: Difficulty) => { setDifficulty(level); setQuizType("theme"); setScreen("quiz"); };
-  const reset = () => { setProgress(initialProgress); window.localStorage.removeItem("birdleague-demo"); setScreen("landing"); };
+  const reset = () => { setProgress(initialProgress); if (session) window.localStorage.removeItem(`birdleague-progress:${session.user.id}`); setScreen("student"); };
 
   if (!ready) return <div className="player-bg" />;
   if (screen === "landing") return <Landing onEnter={() => setScreen("login")} />;
-  if (screen === "login") return <Login onBack={() => setScreen("landing")} onStudent={() => setScreen(progress.hatched ? "student" : "tutorial")} onAdmin={() => setScreen("admin")} />;
+  if (screen === "login") return <Login onBack={() => setScreen("landing")} onAuthenticated={authenticated} />;
+  if (screen === "changePassword" && session) return <ChangePassword session={session} onChanged={() => { const updated = { ...session, user: { ...session.user, mustChangePassword: false } }; setSession(updated); setScreen(session.user.role === "Admin" ? "admin" : "student"); }} />;
   if (screen === "tutorial") return <Tutorial onDone={() => setScreen("student")} />;
   if (screen === "quiz") return <Quiz type={quizType} difficulty={difficulty} onExit={() => setScreen("student")} onComplete={(correct) => {
     if (quizType === "first") {
@@ -77,8 +103,8 @@ export default function Page() {
   }} />;
   if (screen === "hatch") return <Hatch xp={60 + progress.firstCorrect * 5} onContinue={() => setScreen("name")} />;
   if (screen === "name") return <NameBloo onSave={(name) => { setProgress(p => ({ ...p, hatched: true, blooName: name || "Bloo" })); setScreen("student"); }} />;
-  if (screen === "admin") return <AdminApp onLogout={() => setScreen("login")} />;
-  return <StudentApp progress={progress} onStartFirst={startFirst} onStartTheme={startTheme} onLogout={() => setScreen("login")} onReset={reset} />;
+  if (screen === "admin" && session) return <SecureAdminApp token={session.accessToken} user={session.user} onLogout={logout} />;
+  return <StudentApp progress={progress} onStartFirst={startFirst} onStartTheme={startTheme} onLogout={logout} onReset={reset} />;
 }
 
 function Landing({ onEnter }: { onEnter: () => void }) {
@@ -111,18 +137,24 @@ function Landing({ onEnter }: { onEnter: () => void }) {
   </main>;
 }
 
-function Login({ onBack, onStudent, onAdmin }: { onBack: () => void; onStudent: () => void; onAdmin: () => void }) {
-  const [login, setLogin] = useState(""); const [password, setPassword] = useState(""); const [error, setError] = useState("");
-  function submit(e: FormEvent) { e.preventDefault(); if (!login || !password) return setError("Preencha seu login e sua senha."); login.toLowerCase() === "vh" ? onAdmin() : onStudent(); }
+function Login({ onBack, onAuthenticated }: { onBack: () => void; onAuthenticated: (session: AuthSession) => void }) {
+  const [login, setLogin] = useState(""); const [password, setPassword] = useState(""); const [error, setError] = useState(""); const [loading, setLoading] = useState(false);
+  async function submit(e: FormEvent) { e.preventDefault(); if (!login || !password) return setError("Preencha seu login e sua senha."); setLoading(true); setError(""); try { onAuthenticated(await api.login(login, password)); } catch { setError("Login ou senha inválidos."); } finally { setLoading(false); } }
   return <main className="login-wrap">
     <section className="login-scene"><Brand /><div className="login-copy"><div className="eyebrow" style={{ color: "#9edbfa" }}>Seu companheiro espera por você</div><h1>Vamos ensinar algo novo hoje?</h1><p>Cada treino fortalece suas habilidades e ajuda seu Bloo a descobrir um mundo maior.</p></div><Image src={`${blooPath}hatchling-happy.png`} alt="Bloo filhote feliz" width={1024} height={1024} /></section>
     <section className="login-panel"><form className="login-form" onSubmit={submit}><button type="button" onClick={onBack} className="btn btn-ghost btn-small" style={{ marginBottom: 32 }}><ArrowLeft size={17} /> Voltar</button><h2>Boas-vindas!</h2><p>Entre com os dados que você recebeu da escola.</p>
       <div className="field"><label htmlFor="login">Seu login</label><input className="input" id="login" autoComplete="username" value={login} onChange={e => setLogin(e.target.value)} placeholder="ex.: lia.martins" /></div>
       <div className="field"><label htmlFor="password">Sua senha</label><input className="input" id="password" type="password" autoComplete="current-password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Digite sua senha" /></div>
-      {error && <p role="alert" style={{ color: "var(--red)", fontSize: ".86rem" }}>{error}</p>}<button className="btn btn-blue" type="submit">Entrar <ArrowRight size={19} /></button>
-      <div className="demo-box"><strong>Modo demonstração</strong><br />Aluno: use qualquer login e senha.<br />Admin: use <strong>vh</strong> e qualquer senha.</div>
+      {error && <p role="alert" style={{ color: "var(--red)", fontSize: ".86rem" }}>{error}</p>}<button className="btn btn-blue" type="submit" disabled={loading}>{loading ? "Validando..." : "Entrar"} <ArrowRight size={19} /></button>
+      <p className="login-help">Estudantes recebem suas credenciais diretamente da escola.</p>
     </form></section>
   </main>;
+}
+
+function ChangePassword({ session, onChanged }: { session: AuthSession; onChanged: () => void }) {
+  const [currentPassword, setCurrentPassword] = useState(""); const [newPassword, setNewPassword] = useState(""); const [confirm, setConfirm] = useState(""); const [error, setError] = useState(""); const [loading, setLoading] = useState(false);
+  async function submit(e: FormEvent) { e.preventDefault(); if (newPassword !== confirm) return setError("A confirmação não corresponde à nova senha."); if (newPassword.length < 12) return setError("Use pelo menos 12 caracteres."); setLoading(true); setError(""); try { await api.changePassword(session.accessToken, currentPassword, newPassword); onChanged(); } catch { setError("Não foi possível alterar. Confira a senha atual e escolha uma senha mais forte."); } finally { setLoading(false); } }
+  return <main className="login-wrap"><section className="login-scene"><Brand /><div className="login-copy"><div className="eyebrow" style={{ color: "#9edbfa" }}>Primeiro acesso</div><h1>Proteja sua conta.</h1><p>A senha provisória só pode ser usada até esta troca.</p></div><Image src={`${blooPath}hatchling-thinking.png`} alt="Bloo cuidando da segurança" width={1024} height={1024} /></section><section className="login-panel"><form className="login-form" onSubmit={submit}><h2>Crie sua nova senha</h2><p>Use pelo menos 12 caracteres. Evite seu login e senhas comuns.</p><div className="field"><label htmlFor="current-password">Senha provisória</label><input className="input" id="current-password" type="password" autoComplete="current-password" value={currentPassword} onChange={e => setCurrentPassword(e.target.value)} /></div><div className="field"><label htmlFor="new-password">Nova senha</label><input className="input" id="new-password" type="password" autoComplete="new-password" value={newPassword} onChange={e => setNewPassword(e.target.value)} /></div><div className="field"><label htmlFor="confirm-password">Confirmar nova senha</label><input className="input" id="confirm-password" type="password" autoComplete="new-password" value={confirm} onChange={e => setConfirm(e.target.value)} /></div>{error && <p role="alert" style={{ color: "var(--red)", fontSize: ".86rem" }}>{error}</p>}<button className="btn btn-blue" disabled={loading}>{loading ? "Alterando..." : "Alterar senha e continuar"}</button></form></section></main>;
 }
 
 function Tutorial({ onDone }: { onDone: () => void }) {
@@ -159,7 +191,7 @@ function Learning({ progress, onStartTheme }: { progress: DemoProgress; onStartT
 }
 
 function Achievements({ unlocked, onReset }: { unlocked: string[]; onReset: () => void }) {
-  return <><div className="eyebrow">Momentos especiais</div><h1 style={{ fontSize: "2.5rem", margin: "8px 0" }}>Conquistas</h1><p style={{ color: "var(--muted)" }}>{unlocked.length} de {achievements.length} desbloqueadas</p><div className="achievement-grid" style={{ marginTop: 24 }}>{achievements.map(([code, name, translation, desc]) => <article key={code} className={`card achievement ${unlocked.includes(code) ? "" : "locked"}`}><Image src={`${achievementPath}${code.toLowerCase().replaceAll("_", "-")}.svg`} alt={`Medalha ${translation}`} width={256} height={256} /><div><h3>{name}</h3><p><strong>{translation}</strong><br />{unlocked.includes(code) ? desc : "Continue treinando para descobrir."}</p></div></article>)}</div><button onClick={onReset} className="btn btn-ghost btn-small" style={{ marginTop: 30 }}>Reiniciar demonstração</button></>;
+  return <><div className="eyebrow">Momentos especiais</div><h1 style={{ fontSize: "2.5rem", margin: "8px 0" }}>Conquistas</h1><p style={{ color: "var(--muted)" }}>{unlocked.length} de {achievements.length} desbloqueadas</p><div className="achievement-grid" style={{ marginTop: 24 }}>{achievements.map(([code, name, translation, desc]) => <article key={code} className={`card achievement ${unlocked.includes(code) ? "" : "locked"}`}><Image src={`${achievementPath}${code.toLowerCase().replaceAll("_", "-")}.svg`} alt={`Medalha ${translation}`} width={256} height={256} /><div><h3>{name}</h3><p><strong>{translation}</strong><br />{unlocked.includes(code) ? desc : "Continue treinando para descobrir."}</p></div></article>)}</div><button onClick={onReset} className="btn btn-ghost btn-small" style={{ marginTop: 30 }}>Reiniciar minha jornada</button></>;
 }
 
 function eggAsset(answered: number) { if (answered === 0) return "egg-idle.png"; if (answered <= 2) return "egg-crack-1.png"; if (answered <= 4) return "egg-crack-2.png"; return "egg-crack-3.png"; }
@@ -186,26 +218,4 @@ function Hatch({ xp, onContinue }: { xp: number; onContinue: () => void }) {
 function NameBloo({ onSave }: { onSave: (name: string) => void }) {
   const [name, setName] = useState(""); const valid = !name || (/^(?!\d+$)[\p{L}\d][\p{L}\d '\-]{1,19}$/u.test(name.trim()));
   return <main className="celebrate player-bg"><div className="celebrate-content card" style={{ padding: "22px 38px 38px" }}><Image src={`${blooPath}hatchling-idle.png`} alt="Seu novo Bloo filhote" width={1024} height={1024} /><h1 style={{ fontSize: "2.5rem" }}>Como vamos chamá-lo?</h1><p>Você pode escolher agora ou continuar usando Bloo.</p><div className="field" style={{ textAlign: "left", margin: "22px auto", maxWidth: 370 }}><label htmlFor="bloo-name">Nome do seu Bloo</label><input autoFocus id="bloo-name" maxLength={20} className="input" placeholder="Bloo" value={name} onChange={e => setName(e.target.value)} />{!valid && <small style={{ color: "var(--red)" }}>Use de 2 a 20 caracteres, e não apenas números.</small>}</div><button disabled={!valid} className="btn btn-primary" onClick={() => onSave(name.trim())}>{name ? `Continuar com ${name}` : "Continuar com Bloo"} <ArrowRight size={19} /></button></div></main>;
-}
-
-function AdminApp({ onLogout }: { onLogout: () => void }) {
-  const [tab, setTab] = useState<AdminTab>("overview");
-  const menu: [AdminTab, typeof Home, string][] = [["overview", Home, "Início"], ["classes", Layers3, "Turmas"], ["students", UsersRound, "Alunos"], ["themes", BookOpen, "Temas"], ["questions", Database, "Banco de questões"]];
-  return <main className="admin"><aside className="sidebar"><Brand /> <nav className="side-nav">{menu.map(([id, Icon, label]) => <button key={id} className={`side-link ${tab === id ? "active" : ""}`} onClick={() => setTab(id)}><Icon size={19} /><span>{label}</span></button>)}</nav><button className="side-link" style={{ position: "absolute", bottom: 25, left: 18, right: 18 }} onClick={onLogout}><LogOut size={19} /><span>Sair</span></button></aside><section className="admin-content"><header className="admin-head"><div><strong>Bluebird Idiomas</strong><small>Portal administrativo</small></div><span className="pill"><UserRound size={16} /> Vitor · Admin</span></header><div className="admin-main">{tab === "overview" ? <AdminOverview setTab={setTab} /> : <AdminList tab={tab} />}</div></section></main>;
-}
-
-function AdminOverview({ setTab }: { setTab: (tab: AdminTab) => void }) {
-  return <><div className="admin-title"><div><h1>Bom dia, Vitor.</h1><p>Acompanhe o que está acontecendo na escola.</p></div><button className="btn btn-blue btn-small" onClick={() => setTab("students")}><Plus size={17} /> Novo aluno</button></div><div className="admin-stats">{[[UsersRound,"Alunos ativos","46","+8 neste período"],[Layers3,"Turmas","3","Todas ativas"],[Bird,"Bloos nascidos","31","67% dos alunos"],[BookOpen,"Temas publicados","1","Greetings · v1"]].map(([Icon,label,value,trend]) => { const C=Icon as typeof UsersRound; return <div className="admin-stat" key={label as string}><div className="admin-stat-top"><span>{label as string}</span><C size={18} /></div><strong>{value as string}</strong><span className="trend">{trend as string}</span></div>})}</div><div className="admin-two"><section className="admin-card"><div className="admin-card-head"><h2>Status dos alunos</h2><button className="btn btn-ghost btn-small" onClick={() => setTab("students")}>Ver todos</button></div><div className="table-wrap"><table><thead><tr><th>Aluno</th><th>Turma</th><th>Etapa atual</th></tr></thead><tbody>{students.slice(0,4).map(s=><tr key={s.login}><td><strong>{s.name}</strong><br/><span style={{color:"var(--muted)"}}>{s.login}</span></td><td>{s.className}</td><td><Status value={s.status}/></td></tr>)}</tbody></table></div></section><section className="admin-card"><div className="admin-card-head"><h2>Atividade recente</h2></div><div className="activity">{[[Bird,"Theo fez seu Bloo nascer","há 12 min"],[Award,"Lia concluiu Greetings · Easy","há 38 min"],[UsersRound,"Nina acessou pela primeira vez","há 1 h"],[BookOpen,"Greetings v1 foi liberado","ontem"]].map(([Icon,text,time])=>{const C=Icon as typeof Bird;return <div className="activity-item" key={text as string}><span className="activity-icon"><C size={17}/></span><div><p>{text as string}</p><time>{time as string}</time></div></div>})}</div></section></div></>;
-}
-
-function Status({ value }: { value: string }) { const cls = value === "Não acessou" ? "gray" : value === "Treino iniciado" ? "orange" : value.includes("Greetings") ? "blue" : ""; return <span className={`status ${cls}`}>{value}</span>; }
-
-function AdminList({ tab }: { tab: Exclude<AdminTab, "overview"> }) {
-  const config = {
-    classes: ["Turmas", "Organize alunos, idiomas e temas liberados.", "Nova turma"],
-    students: ["Alunos", "Gerencie acessos, matrículas e progresso operacional.", "Novo aluno"],
-    themes: ["Temas", "Crie missões, publique revisões e libere para turmas.", "Novo tema"],
-    questions: ["Banco de questões", "Edite, publique e reutilize questões pedagógicas.", "Nova questão"],
-  }[tab];
-  return <><div className="admin-title"><div><h1>{config[0]}</h1><p>{config[1]}</p></div><button className="btn btn-blue btn-small"><Plus size={17}/>{config[2]}</button></div><div className="searchbar"><div style={{position:"relative",width:"100%"}}><Search size={17} style={{position:"absolute",left:14,top:14,color:"var(--muted)"}}/><input className="input" style={{paddingLeft:42}} placeholder={`Buscar em ${config[0].toLowerCase()}...`}/></div><button className="btn btn-ghost btn-small"><Settings2 size={17}/> Filtros</button></div><section className="admin-card"><div className="table-wrap">{tab === "classes" && <table><thead><tr><th>Turma</th><th>Nível</th><th>Período</th><th>Alunos</th><th>Estado</th></tr></thead><tbody>{classes.map(c=><tr key={c.name}><td><strong>{c.name}</strong></td><td>{c.level}</td><td>{c.period}</td><td>{c.active} ativos de {c.students}</td><td><span className="status">Ativa</span></td></tr>)}</tbody></table>}{tab === "students" && <table><thead><tr><th>Aluno</th><th>Login</th><th>Turma</th><th>Progresso</th></tr></thead><tbody>{students.map(s=><tr key={s.login}><td><strong>{s.name}</strong></td><td>{s.login}</td><td>{s.className}</td><td><Status value={s.status}/></td></tr>)}</tbody></table>}{tab === "themes" && <table><thead><tr><th>Tema</th><th>Revisão</th><th>Idioma</th><th>Questões</th><th>Estado</th></tr></thead><tbody><tr><td><strong>Greetings</strong><br/><span style={{color:"var(--muted)"}}>Cumprimentos e apresentações</span></td><td>v1</td><td>English</td><td>40 · 4 dificuldades</td><td><span className="status">Publicado</span></td></tr></tbody></table>}{tab === "questions" && <table><thead><tr><th>Código</th><th>Enunciado</th><th>Habilidade</th><th>Dificuldade</th><th>Estado</th></tr></thead><tbody>{[...firstHatchQuestions,...greetingQuestions.Easy].map(q=><tr key={q.id}><td>{q.id.toUpperCase()}</td><td><strong>{q.prompt}</strong></td><td>{q.skill}</td><td>{q.difficulty}</td><td><span className="status">Publicado</span></td></tr>)}</tbody></table>}</div></section></>;
 }

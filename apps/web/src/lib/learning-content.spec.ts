@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { firstHatchQuestions, greetingQuestions } from "./demo-data";
+import { firstHatchQuestions, greetingQuestions } from "./learning-content";
 
 describe("conteúdo jogável do MVP", () => {
   it("mantém o FirstHatch com quatro perguntas Easy e duas Medium", () => {
@@ -8,10 +8,11 @@ describe("conteúdo jogável do MVP", () => {
     expect(firstHatchQuestions.filter(q => q.difficulty === "Medium")).toHaveLength(2);
   });
 
-  it("oferece cinco perguntas em cada etapa demonstrável de Greetings", () => {
+  it("oferece cinco perguntas em cada etapa de Greetings", () => {
     expect(Object.values(greetingQuestions).map(questions => questions.length)).toEqual([5, 5, 5, 5]);
     for (const questions of Object.values(greetingQuestions)) {
       for (const question of questions) expect(question.options[question.correct]).toBeTruthy();
     }
   });
 });
+

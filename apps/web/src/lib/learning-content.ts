@@ -61,16 +61,3 @@ export const achievements = [
   ["VOCABULARY_EXPLORER", "Vocabulary Explorer", "Explorador de Vocabulário", "Seu Bloo dominou seus primeiros cumprimentos."],
 ] as const;
 
-export const classes = [
-  { name: "Starter — Manhã", level: "Starter", period: "2026.2", students: 18, active: 16 },
-  { name: "A1 — Terça e Quinta", level: "A1", period: "2026.2", students: 22, active: 19 },
-  { name: "A2 — Sábado", level: "A2", period: "2026.2", students: 14, active: 11 },
-];
-
-export const students = [
-  { name: "Lia Martins", login: "lia.martins", className: "Starter — Manhã", status: "Greetings: Easy" },
-  { name: "Theo Almeida", login: "theo.almeida", className: "Starter — Manhã", status: "Bloo nasceu" },
-  { name: "Nina Costa", login: "nina.costa", className: "A1 — Terça e Quinta", status: "Treino iniciado" },
-  { name: "Caio Rocha", login: "caio.rocha", className: "A2 — Sábado", status: "Não acessou" },
-  { name: "Maya Santos", login: "maya.santos", className: "A1 — Terça e Quinta", status: "Greetings: Hard" },
-];

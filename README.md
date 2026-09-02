@@ -6,9 +6,9 @@ O propósito do projeto é transformar o estudo frequente em uma jornada de cuid
 
 ## Estado do projeto
 
-O MVP navegável está implementado em um monorepo com frontend Next.js, API NestJS e schema MySQL/Prisma. A demonstração cobre a landing do aluno, os dois perfis de acesso, o ciclo `Egg → FirstHatch → Hatchling`, a missão `Greetings`, progresso, conquistas e acompanhamento administrativo.
+O MVP navegável está implementado em um monorepo com frontend Next.js, API NestJS e MySQL/Prisma. Ele cobre a landing do aluno, autenticação dos dois perfis, gestão de estudantes pelo administrador, troca obrigatória da senha bootstrap, o ciclo `Egg → FirstHatch → Hatchling`, a missão `Greetings`, progresso e conquistas.
 
-O frontend possui um modo de demonstração local persistente para validação imediata da experiência. A API expõe o contrato do ciclo principal e uma implementação em memória para testes; o schema e o seed Prisma preparam a persistência MySQL da implantação.
+Credenciais são validadas pela API e armazenadas somente como hash Argon2id. Um estudante só consegue entrar depois que o administrador cria seu acesso. O progresso pedagógico inicial permanece isolado por estudante no navegador enquanto a persistência completa das atividades é concluída.
 
 ## Executar localmente
 
@@ -19,10 +19,7 @@ pnpm install
 pnpm dev:web
 ```
 
-Acesse `http://localhost:3000`. No modo demonstração:
-
-- aluno: qualquer login e senha;
-- administrador: login `vh` e qualquer senha.
+Acesse `http://localhost:3000`. O bootstrap cria o administrador inicial definido por `INITIAL_ADMIN_LOGIN` e `INITIAL_ADMIN_PASSWORD` e exige a troca da senha no primeiro acesso.
 
 Para executar também a API e o MySQL:
 
@@ -36,6 +33,7 @@ pnpm dev
 ```
 
 - Web: `http://localhost:3000`
+- Landing institucional: `http://localhost:3000/escolas`
 - API: `http://localhost:3001/api/v1`
 - OpenAPI: `http://localhost:3001/api/docs`
 

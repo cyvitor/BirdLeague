@@ -82,7 +82,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .input { width: 100%; min-height: 50px; padding: 0 15px; border: 1.5px solid #cfdde7; border-radius: 13px; color: var(--ink); background: white; }
 .input:focus { border-color: var(--blue); box-shadow: 0 0 0 4px rgba(8,124,193,.1); outline: 0; }
 .login-form .btn { width: 100%; margin-top: 8px; }
-.demo-box { margin-top: 25px; border-radius: 15px; padding: 14px; background: #f1f8fc; color: var(--muted); font-size: .84rem; line-height: 1.55; }
+.login-help { margin-top: 25px; border-radius: 15px; padding: 14px; background: #f1f8fc; color: var(--muted); font-size: .84rem; line-height: 1.55; }
 
 .student-shell { min-height: 100vh; padding-bottom: 96px; }
 .student-head { height: 76px; display: flex; align-items: center; justify-content: space-between; }
@@ -142,11 +142,48 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .admin-two { display: grid; grid-template-columns: 1.6fr 1fr; gap: 16px; margin-top: 18px; }.activity { padding: 18px 20px; display: grid; gap: 15px; }.activity-item { display: grid; grid-template-columns: 36px 1fr; gap: 12px; align-items: start; }.activity-icon { width: 36px; height: 36px; border-radius: 10px; background: #edf7fd; color: var(--blue); display:grid;place-items:center; }.activity-item p { margin:0;font-size:.83rem }.activity-item time { color:var(--muted);font-size:.72rem }
 .searchbar { display:flex;gap:10px;margin-bottom:16px }.searchbar .input { min-height:44px; max-width:340px }
 .empty-state { padding: 60px 20px; text-align:center;color:var(--muted) }
+.student-form { padding: 22px; margin-bottom: 18px; display: grid; grid-template-columns: 1.3fr 1fr 1fr auto; gap: 14px; align-items: end; }
+.student-form .field { margin: 0; }
+.student-form > p { grid-column: 1 / -1; margin: 0; }
 
 @media (max-width: 900px) {
   .hero, .login-wrap { grid-template-columns: 1fr; }.hero { text-align:center;padding-top:45px }.hero-copy { margin-inline:auto }.hero-actions,.hero-proof { justify-content:center }.hero-visual { min-height:430px }.egg-stage { max-width:420px }.login-scene { min-height:320px }.login-copy { width:min(470px,62%);margin-top:45px }.login-scene h1 { font-size:2.7rem;margin:12px 0 }.login-scene p { font-size:.95rem }.login-scene img { width:270px;max-height:90%;bottom:-45px;opacity:.9 }.admin { grid-template-columns: 76px 1fr }.sidebar { padding:20px 10px }.sidebar .brand span,.side-link span { display:none }.side-link { justify-content:center;padding:0 }.admin-content { padding-inline:18px }.admin-stats { grid-template-columns:repeat(2,1fr) }.admin-two { grid-template-columns:1fr }.sidebar .brand { margin-inline:auto;justify-content:center }
+  .student-form { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 640px) {
   .topbar .pill { display:none }.hero h1 { font-size:3.2rem }.hero-visual { min-height:360px }.floating-note { font-size:.75rem;padding:10px }.note-one { left:-5px }.note-two { right:-5px }.login-scene { display:none }.login-wrap { display:block }.login-panel { min-height:100vh;padding:24px }.bloo-home { grid-template-columns:1fr;text-align:center }.bloo-home > div:first-child { order:2 }.bloo-image { max-height:290px }.mission-card { align-items:flex-start;flex-wrap:wrap }.mission-card .btn { width:100%;margin:5px 0 0 }.stats-grid { grid-template-columns:1fr }.student-nav { width:calc(100% - 20px);bottom:10px }.nav-item { min-width:0;flex:1;font-size:.76rem;flex-direction:column;gap:2px }.learning-grid,.achievement-grid { grid-template-columns:1fr }.quiz-head { grid-template-columns:auto 1fr }.quiz-head .pill { grid-column:1/-1;justify-self:center }.admin-content { padding-inline:12px }.admin-stats { grid-template-columns:1fr 1fr }.admin-stat { padding:15px }.admin-title { align-items:flex-start;flex-direction:column }.admin-title .btn { width:100% }
+  .student-form { grid-template-columns: 1fr; }
 }
 @media (prefers-reduced-motion: reduce) { *,*::before,*::after { scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important } }
+
+.school-landing { background: #f8fbfd; min-height: 100vh; color: var(--ink); }
+.school-nav { width: min(1180px, calc(100% - 36px)); height: 82px; margin: auto; display: flex; align-items: center; justify-content: space-between; }
+.school-nav nav { display: flex; align-items: center; gap: 25px; }
+.school-nav nav > a:not(.btn) { color: var(--muted); font-weight: 800; font-size: .9rem; text-decoration: none; }
+.school-hero { width: min(1180px, calc(100% - 36px)); min-height: 680px; margin: auto; display: grid; grid-template-columns: 1.08fr .92fr; align-items: center; gap: 70px; padding: 55px 0 90px; }
+.school-hero h1 { margin: 17px 0 24px; font-size: clamp(3.3rem, 6.2vw, 5.7rem); letter-spacing: -.065em; line-height: .96; }
+.school-hero h1 em { font-style: normal; color: var(--blue); }
+.school-hero > div:first-child > p { color: var(--muted); font-size: 1.17rem; line-height: 1.7; max-width: 660px; }
+.institution-proof { display: flex; flex-wrap: wrap; gap: 19px; margin-top: 35px; color: var(--muted); font-size: .82rem; font-weight: 900; }
+.institution-proof span { display: flex; align-items: center; gap: 6px; }.institution-proof svg { width: 17px; color: var(--green); }
+.school-visual { min-height: 540px; border-radius: 44% 56% 48% 52%; position: relative; display: grid; place-items: center; background: radial-gradient(circle at 50% 44%, white 0 26%, #dff4ff 27% 57%, #c8ebfa 58% 70%, transparent 71%); }
+.school-visual img { width: 84%; height: 84%; object-fit: contain; filter: drop-shadow(0 25px 30px rgba(17,72,112,.2)); }
+.school-orbit { position: absolute; z-index: 2; padding: 10px 15px; border: 1px solid var(--line); border-radius: 999px; background: white; box-shadow: var(--shadow); color: var(--blue-dark); font-size: .79rem; font-weight: 1000; text-transform: uppercase; letter-spacing: .08em; }
+.orbit-one { left: -4%; top: 22%; }.orbit-two { right: -3%; top: 40%; }.orbit-three { left: 8%; bottom: 13%; }
+.school-section { width: min(1120px, calc(100% - 36px)); margin: auto; padding: 110px 0; }
+.school-section h2, .school-cta h2 { font-size: clamp(2.3rem, 4.4vw, 4rem); line-height: 1.05; letter-spacing: -.055em; margin: 14px 0 20px; }
+.section-lead { max-width: 760px; margin: 0; color: var(--muted); font-size: 1.08rem; line-height: 1.75; }
+.intro-section { text-align: center; }.intro-section .section-lead { margin-inline: auto; }
+.benefit-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 52px; text-align: left; }
+.benefit-grid article { padding: 31px; background: white; border: 1px solid var(--line); border-radius: 23px; box-shadow: 0 15px 35px rgba(17,72,112,.07); }
+.benefit-grid article > span { width: 52px; height: 52px; display: grid; place-items: center; border-radius: 16px; color: var(--blue); background: #e8f6fe; }
+.benefit-grid h3 { margin: 23px 0 10px; font-size: 1.13rem; }.benefit-grid p { margin: 0; color: var(--muted); line-height: 1.65; }
+.pedagogy-section { display: grid; grid-template-columns: .88fr 1.12fr; gap: 90px; align-items: center; }
+.pedagogy-image { min-height: 500px; display: grid; place-items: center; border-radius: 45px; background: linear-gradient(145deg, #e5f6ff, #fff3e9); }.pedagogy-image img { width: 88%; height: 460px; object-fit: contain; }
+.pedagogy-section ol { margin: 35px 0 0; padding: 0; list-style: none; counter-reset: steps; display: grid; gap: 24px; }.pedagogy-section li { counter-increment: steps; display: grid; grid-template-columns: 48px 1fr; gap: 4px 16px; align-items: center; }.pedagogy-section li::before { content: counter(steps); grid-row: 1 / 3; width: 45px; height: 45px; display: grid; place-items: center; border-radius: 14px; color: white; background: var(--blue); font-weight: 1000; }.pedagogy-section li span { color: var(--muted); line-height: 1.5; }
+.control-section { display: grid; grid-template-columns: .9fr 1.1fr; gap: 80px; align-items: center; }.control-cards { display: grid; gap: 13px; }.control-cards article { display: grid; grid-template-columns: 48px 1fr; gap: 3px 16px; padding: 22px; background: white; border: 1px solid var(--line); border-radius: 18px; }.control-cards svg { grid-row: 1 / 3; width: 48px; height: 48px; padding: 12px; border-radius: 14px; color: var(--orange-dark); background: #fff1e7; }.control-cards span { color: var(--muted); line-height: 1.45; }
+.mvp-section { padding: 75px; display: grid; grid-template-columns: 1fr 1fr; gap: 70px; border-radius: 36px; color: white; background: linear-gradient(145deg, #075a9a, #087cc1); }.mvp-section .eyebrow { color: #a7e0ff; }.mvp-section p { color: #d9f2ff; line-height: 1.7; }.mvp-section ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 15px; align-content: center; }.mvp-section li { display: flex; gap: 10px; align-items: center; font-weight: 850; }.mvp-section svg { width: 19px; color: var(--gold); }
+.school-cta { width: min(960px, calc(100% - 36px)); margin: 120px auto; padding: 80px; border-radius: 35px; text-align: center; background: #fff4e9; }.school-cta > svg { width: 45px; height: 45px; color: var(--orange); }.school-cta p { color: var(--muted); margin: 0 auto 30px; }
+.school-footer { width: min(1180px, calc(100% - 36px)); margin: auto; padding: 35px 0 50px; border-top: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; gap: 20px; }.school-footer p { color: var(--muted); font-size: .85rem; }
+@media (max-width: 900px) { .school-nav nav > a:not(.btn) { display: none; }.school-hero, .pedagogy-section, .control-section, .mvp-section { grid-template-columns: 1fr; }.school-hero { text-align: center; gap: 20px; }.school-hero .hero-actions, .institution-proof { justify-content: center; }.school-visual { min-height: 450px; }.benefit-grid { grid-template-columns: 1fr; }.pedagogy-section, .control-section { gap: 45px; }.mvp-section { padding: 50px; } }
+@media (max-width: 640px) { .school-nav nav { gap: 8px; }.school-nav .btn { padding-inline: 12px; }.school-hero h1 { font-size: 3.15rem; }.school-visual { min-height: 340px; }.school-section { padding: 75px 0; }.pedagogy-image { min-height: 360px; }.pedagogy-image img { height: 330px; }.mvp-section, .school-cta { padding: 35px 25px; }.school-footer { align-items: flex-start; flex-direction: column; } }
