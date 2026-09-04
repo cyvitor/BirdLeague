@@ -45,7 +45,7 @@ export class AuthService implements OnModuleInit {
     this.failures.delete(failureKey);
     await this.prisma.user.update({ where: { id: user.id }, data: { lastLoginAt: new Date() } });
     const authUser = this.publicUser({ id: user.id, schoolId: user.schoolId, displayName: user.displayName, login: user.login, role: user.role, mustChangePassword: user.mustChangePassword });
-    return { accessToken: await this.jwt.signAsync({ sub: user.id, schoolId: user.schoolId, role: user.role }), expiresIn: 600, user: authUser };
+    return { accessToken: await this.jwt.signAsync({ sub: user.id, schoolId: user.schoolId, role: user.role, authVersion: user.authVersion }), expiresIn: 600, user: authUser };
   }
 
   async changePassword(user: AuthUser, currentPassword: string, newPassword: string) {
@@ -54,13 +54,13 @@ export class AuthService implements OnModuleInit {
     this.validatePassword(newPassword, record.login, record.role === UserRole.Admin ? 12 : 8);
     if (await argon2.verify(record.passwordHash, newPassword)) throw new UnprocessableEntityException("password_must_be_different");
     await this.prisma.$transaction([
-      this.prisma.user.update({ where: { id: user.id }, data: { passwordHash: await argon2.hash(newPassword, { type: argon2.argon2id }), mustChangePassword: false } }),
+      this.prisma.user.update({ where: { id: user.id }, data: { passwordHash: await argon2.hash(newPassword, { type: argon2.argon2id }), mustChangePassword: false, authVersion: { increment: 1 } } }),
       this.prisma.refreshToken.updateMany({ where: { userId: user.id, revokedAt: null }, data: { revokedAt: new Date(), revocationReason: "password_changed" } }),
     ]);
     return { changed: true };
   }
 
-  async createStudent(admin: AuthUser, fullNameInput: string, loginInput: string, password: string) {
+  async createStudent(admin: AuthUser, fullNameInput: string, loginInput: string, password: string, classId?: string) {
     const fullName = fullNameInput.trim();
     const login = loginInput.trim();
     const normalizedLogin = this.normalize(login);
@@ -68,9 +68,12 @@ export class AuthService implements OnModuleInit {
     if (!/^[a-zA-Z0-9._-]{3,80}$/.test(login)) throw new UnprocessableEntityException("invalid_login");
     const duplicate = await this.prisma.user.findFirst({ where: { schoolId: admin.schoolId, normalizedLogin } });
     if (duplicate) throw new ConflictException("login_already_exists");
+    const group=classId?await this.prisma.class.findFirst({where:{id:classId,schoolId:admin.schoolId,isActive:true}}):null;
+    if(classId&&!group)throw new UnprocessableEntityException("class_not_found");
     return this.prisma.$transaction(async tx => {
       const user = await tx.user.create({ data: { schoolId: admin.schoolId, displayName: fullName, login, normalizedLogin, passwordHash: await argon2.hash(password, { type: argon2.argon2id }), role: UserRole.Student, mustChangePassword: false } });
-      await tx.studentProfile.create({ data: { userId: user.id, schoolId: admin.schoolId, fullName } });
+      const profile=await tx.studentProfile.create({ data: { userId: user.id, schoolId: admin.schoolId, fullName } });
+      if(group){await tx.enrollment.create({data:{schoolId:admin.schoolId,studentProfileId:profile.id,classId:group.id,activeKey:`${profile.id}:${group.id}`}});await tx.bloo.create({data:{schoolId:admin.schoolId,studentProfileId:profile.id,languageId:group.languageId}});}
       return { id: user.id, fullName, login: user.login, isActive: user.isActive, createdAt: user.createdAt };
     });
   }

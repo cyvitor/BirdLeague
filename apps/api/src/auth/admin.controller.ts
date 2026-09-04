@@ -11,7 +11,7 @@ import { AuthService } from "./auth.service";
 export class AdminController {
   constructor(private readonly auth: AuthService) {}
   @Get("students") students(@Req() request: AuthRequest) { return this.auth.listStudents(request.user!); }
-  @Post("students") createStudent(@Req() request: AuthRequest, @Body() body: CreateStudentDto) { return this.auth.createStudent(request.user!, body.fullName, body.login, body.password); }
+  @Post("students") createStudent(@Req() request: AuthRequest, @Body() body: CreateStudentDto) { return this.auth.createStudent(request.user!, body.fullName, body.login, body.password, body.classId); }
   @Get("admins") admins(@Req() request: AuthRequest) { return this.auth.listAdmins(request.user!); }
   @Post("admins") createAdmin(@Req() request: AuthRequest, @Body() body: CreateAdminDto) { return this.auth.createAdmin(request.user!, body.fullName, body.login, body.password); }
 }

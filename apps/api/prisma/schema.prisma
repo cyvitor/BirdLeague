@@ -89,6 +89,7 @@ model User {
   normalizedLogin String @db.VarChar(80)
   email String? @db.VarChar(190)
   passwordHash String @db.VarChar(255)
+  authVersion Int @default(0)
   role UserRole
   mustChangePassword Boolean @default(true)
   isActive Boolean @default(true)
@@ -352,6 +353,13 @@ model TrainingSession {
   bonusXP Int @default(0)
   totalXP Int @default(0)
   @@index([studentProfileId, status, lastActivityAt])
+}
+
+model TrainingTemplateQuestion {
+  id String @id @default(uuid()) @db.Char(36)
+  trainingTemplateId String @db.Char(36)
+  questionVersionId String @db.Char(36)
+  @@unique([trainingTemplateId, questionVersionId])
 }
 
 model TrainingQuestion {

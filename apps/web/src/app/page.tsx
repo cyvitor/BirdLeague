@@ -8,9 +8,10 @@ import {
   UserRound, UsersRound, X, Zap,
 } from "lucide-react";
 import { FormEvent, useEffect, useMemo, useState } from "react";
-import { achievements, Difficulty, firstHatchQuestions, greetingQuestions, Question } from "@/lib/learning-content";
-import { api, AuthSession } from "@/lib/api";
+import { achievements, Difficulty, firstHatchQuestions, greetingQuestions } from "@/lib/learning-content";
+import { api, AuthSession, GreetingsSession, GreetingsState } from "@/lib/api";
 import SecureAdminApp from "@/components/admin-app";
+import StudentPortal from "@/components/student-portal";
 
 const blooPath = "/assets/bloo/";
 const achievementPath = "/assets/achievements/";
@@ -40,6 +41,11 @@ export default function Page() {
   const [difficulty, setDifficulty] = useState<Difficulty>("Easy");
   const [ready, setReady] = useState(false);
   const [session, setSession] = useState<AuthSession | null>(null);
+  const [themeSession, setThemeSession] = useState<GreetingsSession | null>(null);
+
+  useEffect(() => {
+    const expired=()=>logout();window.addEventListener("birdleague-session-expired",expired);return()=>window.removeEventListener("birdleague-session-expired",expired);
+  }, []);
 
   useEffect(() => {
     const token = window.sessionStorage.getItem("birdleague-access-token");
@@ -49,7 +55,9 @@ export default function Page() {
       setSession(restored);
       if (user.role === "Student") {
         const saved = window.localStorage.getItem(`birdleague-progress:${user.id}`);
-        if (saved) setProgress(JSON.parse(saved));
+        const restoredProgress = saved ? JSON.parse(saved) as DemoProgress : initialProgress;
+        setProgress(restoredProgress);
+        api.greetings(token).then(theme => setProgress(fromTheme(theme, restoredProgress))).catch(() => undefined);
       }
       setScreen(user.mustChangePassword ? "changePassword" : user.role === "Admin" ? "admin" : "student");
     }).catch(() => window.sessionStorage.removeItem("birdleague-access-token")).finally(() => setReady(true));
@@ -67,6 +75,7 @@ export default function Page() {
       const saved = window.localStorage.getItem(`birdleague-progress:${next.user.id}`);
       nextProgress = saved ? JSON.parse(saved) : initialProgress;
       setProgress(nextProgress);
+      api.greetings(next.accessToken).then(theme => setProgress(fromTheme(theme, nextProgress))).catch(() => undefined);
     }
     setScreen(next.user.mustChangePassword ? "changePassword" : next.user.role === "Admin" ? "admin" : (nextProgress.hatched ? "student" : "tutorial"));
   }
@@ -74,37 +83,42 @@ export default function Page() {
   function logout() { window.sessionStorage.removeItem("birdleague-access-token"); setSession(null); setProgress(initialProgress); setScreen("login"); }
 
   const startFirst = () => { setQuizType("first"); setScreen("quiz"); };
-  const startTheme = (level: Difficulty) => { setDifficulty(level); setQuizType("theme"); setScreen("quiz"); };
+  const startTheme = async (level: Difficulty) => {
+    if (!session) return;
+    try {
+      const training = await api.startGreetings(session.accessToken, level);
+      setThemeSession(training); setDifficulty(level); setQuizType("theme"); setScreen("quiz");
+    } catch (error) {
+      window.alert(error instanceof Error && error.message === "difficulty_locked" ? "Conclua o nível anterior antes de continuar." : "Não foi possível iniciar o treino agora.");
+    }
+  };
   const reset = () => { setProgress(initialProgress); if (session) window.localStorage.removeItem(`birdleague-progress:${session.user.id}`); setScreen("student"); };
 
   if (!ready) return <div className="player-bg" />;
   if (screen === "landing") return <Landing onEnter={() => setScreen("login")} />;
   if (screen === "login") return <Login onBack={() => setScreen("landing")} onAuthenticated={authenticated} />;
-  if (screen === "changePassword" && session) return <ChangePassword session={session} onChanged={() => { const updated = { ...session, user: { ...session.user, mustChangePassword: false } }; setSession(updated); setScreen(session.user.role === "Admin" ? "admin" : "student"); }} />;
+  if (screen === "changePassword" && session) return <ChangePassword session={session} onChanged={logout} />;
+  if (session?.user.role === "Student" && !session.user.mustChangePassword) return <StudentPortal token={session.accessToken} user={session.user} onLogout={logout} />;
   if (screen === "tutorial") return <Tutorial onDone={() => setScreen("student")} />;
-  if (screen === "quiz") return <Quiz type={quizType} difficulty={difficulty} onExit={() => setScreen("student")} onComplete={(correct) => {
+  if (screen === "quiz") return <Quiz type={quizType} difficulty={difficulty} remoteSession={quizType === "theme" ? themeSession : null} onExit={() => setScreen("student")} onComplete={async (correct, answers) => {
     if (quizType === "first") {
       setProgress(p => ({ ...p, firstCorrect: correct, xp: 60 + correct * 5, unlocked: ["NEW_HATCHLING", "FIRST_LESSON"] }));
       setScreen("hatch");
-    } else {
-      setProgress(p => {
-        const firstCompletion = !p.completed.includes(difficulty);
-        const completed = firstCompletion ? [...p.completed, difficulty] : p.completed;
-        const extra = firstCompletion ? 25 + correct * 5 : 0;
-        const nextUnlocked = new Set(p.unlocked);
-        nextUnlocked.add("FIRST_THEME");
-        if (difficulty === "Easy") nextUnlocked.add("THEME_EXPLORER");
-        if (difficulty === "Hard") nextUnlocked.add("GREETINGS_CLIMBER");
-        if (difficulty === "VeryHard" && correct >= 4) nextUnlocked.add("GREETINGS_MASTER");
-        return { ...p, xp: p.xp + extra, completed, unlocked: [...nextUnlocked] };
-      });
-      setScreen("student");
+    } else if (session && themeSession && answers) {
+      const result = await api.completeGreetings(session.accessToken, themeSession.id, answers);
+      setProgress(p => fromTheme(result.theme, p));
+      setThemeSession(null); setScreen("student");
     }
   }} />;
   if (screen === "hatch") return <Hatch xp={60 + progress.firstCorrect * 5} onContinue={() => setScreen("name")} />;
   if (screen === "name") return <NameBloo onSave={(name) => { setProgress(p => ({ ...p, hatched: true, blooName: name || "Bloo" })); setScreen("student"); }} />;
   if (screen === "admin" && session) return <SecureAdminApp token={session.accessToken} user={session.user} onLogout={logout} />;
   return <StudentApp progress={progress} onStartFirst={startFirst} onStartTheme={startTheme} onLogout={logout} onReset={reset} />;
+}
+
+function fromTheme(theme: GreetingsState, current: DemoProgress): DemoProgress {
+  const firstHatchXP = current.hatched ? 60 + current.firstCorrect * 5 : 0;
+  return { ...current, xp: firstHatchXP + theme.bloo.xp, completed: theme.levels.filter(level => level.status === "Completed").map(level => level.difficulty), unlocked: [...new Set([...current.unlocked.filter(code => code === "NEW_HATCHLING" || code === "FIRST_LESSON"), ...theme.achievements])] };
 }
 
 function Landing({ onEnter }: { onEnter: () => void }) {
@@ -153,8 +167,8 @@ function Login({ onBack, onAuthenticated }: { onBack: () => void; onAuthenticate
 
 function ChangePassword({ session, onChanged }: { session: AuthSession; onChanged: () => void }) {
   const [currentPassword, setCurrentPassword] = useState(""); const [newPassword, setNewPassword] = useState(""); const [confirm, setConfirm] = useState(""); const [error, setError] = useState(""); const [loading, setLoading] = useState(false);
-  async function submit(e: FormEvent) { e.preventDefault(); if (newPassword !== confirm) return setError("A confirmação não corresponde à nova senha."); if (newPassword.length < 12) return setError("Use pelo menos 12 caracteres."); setLoading(true); setError(""); try { await api.changePassword(session.accessToken, currentPassword, newPassword); onChanged(); } catch { setError("Não foi possível alterar. Confira a senha atual e escolha uma senha mais forte."); } finally { setLoading(false); } }
-  return <main className="login-wrap"><section className="login-scene"><Brand /><div className="login-copy"><div className="eyebrow" style={{ color: "#9edbfa" }}>Primeiro acesso</div><h1>Proteja sua conta.</h1><p>A senha provisória só pode ser usada até esta troca.</p></div><Image src={`${blooPath}hatchling-thinking.png`} alt="Bloo cuidando da segurança" width={1024} height={1024} /></section><section className="login-panel"><form className="login-form" onSubmit={submit}><h2>Crie sua nova senha</h2><p>Use pelo menos 12 caracteres. Evite seu login e senhas comuns.</p><div className="field"><label htmlFor="current-password">Senha provisória</label><input className="input" id="current-password" type="password" autoComplete="current-password" value={currentPassword} onChange={e => setCurrentPassword(e.target.value)} /></div><div className="field"><label htmlFor="new-password">Nova senha</label><input className="input" id="new-password" type="password" autoComplete="new-password" value={newPassword} onChange={e => setNewPassword(e.target.value)} /></div><div className="field"><label htmlFor="confirm-password">Confirmar nova senha</label><input className="input" id="confirm-password" type="password" autoComplete="new-password" value={confirm} onChange={e => setConfirm(e.target.value)} /></div>{error && <p role="alert" style={{ color: "var(--red)", fontSize: ".86rem" }}>{error}</p>}<button className="btn btn-blue" disabled={loading}>{loading ? "Alterando..." : "Alterar senha e continuar"}</button></form></section></main>;
+  async function submit(e: FormEvent) { e.preventDefault(); const minimum=session.user.role==="Admin"?12:8; if (newPassword !== confirm) return setError("A confirmação não corresponde à nova senha."); if (newPassword.length < minimum) return setError(`Use pelo menos ${minimum} caracteres.`); setLoading(true); setError(""); try { await api.changePassword(session.accessToken, currentPassword, newPassword); onChanged(); } catch { setError("Não foi possível alterar. Confira a senha atual e escolha uma senha mais forte."); } finally { setLoading(false); } }
+  return <main className="login-wrap"><section className="login-scene"><Brand /><div className="login-copy"><div className="eyebrow" style={{ color: "#9edbfa" }}>Primeiro acesso</div><h1>Proteja sua conta.</h1><p>A senha provisória só pode ser usada até esta troca.</p></div><Image src={`${blooPath}hatchling-thinking.png`} alt="Bloo cuidando da segurança" width={1024} height={1024} /></section><section className="login-panel"><form className="login-form" onSubmit={submit}><h2>Crie sua nova senha</h2><p>Use pelo menos {session.user.role === "Admin" ? 12 : 8} caracteres. Evite seu login e senhas comuns.</p><div className="field"><label htmlFor="current-password">Senha provisória</label><input className="input" id="current-password" type="password" autoComplete="current-password" value={currentPassword} onChange={e => setCurrentPassword(e.target.value)} /></div><div className="field"><label htmlFor="new-password">Nova senha</label><input className="input" id="new-password" type="password" autoComplete="new-password" value={newPassword} onChange={e => setNewPassword(e.target.value)} /></div><div className="field"><label htmlFor="confirm-password">Confirmar nova senha</label><input className="input" id="confirm-password" type="password" autoComplete="new-password" value={confirm} onChange={e => setConfirm(e.target.value)} /></div>{error && <p role="alert" style={{ color: "var(--red)", fontSize: ".86rem" }}>{error}</p>}<button className="btn btn-blue" disabled={loading}>{loading ? "Alterando..." : "Alterar senha"}</button></form></section></main>;
 }
 
 function Tutorial({ onDone }: { onDone: () => void }) {
@@ -196,18 +210,19 @@ function Achievements({ unlocked, onReset }: { unlocked: string[]; onReset: () =
 
 function eggAsset(answered: number) { if (answered === 0) return "egg-idle.png"; if (answered <= 2) return "egg-crack-1.png"; if (answered <= 4) return "egg-crack-2.png"; return "egg-crack-3.png"; }
 
-function Quiz({ type, difficulty, onExit, onComplete }: { type: "first" | "theme"; difficulty: Difficulty; onExit: () => void; onComplete: (correct: number) => void }) {
-  const questions = type === "first" ? firstHatchQuestions : greetingQuestions[difficulty];
-  const [index, setIndex] = useState(0), [selected, setSelected] = useState<number | null>(null), [answered, setAnswered] = useState(false), [correct, setCorrect] = useState(0);
+function Quiz({ type, difficulty, remoteSession, onExit, onComplete }: { type: "first" | "theme"; difficulty: Difficulty; remoteSession?: GreetingsSession | null; onExit: () => void; onComplete: (correct: number, answers?: { questionId: string; selectedOptionId: string }[]) => void | Promise<void> }) {
+  const questions = type === "first" ? firstHatchQuestions : remoteSession ? remoteSession.questions.map(question => ({ id: question.id, prompt: question.prompt, options: question.options.map(option => option.text), correct: question.options.findIndex(option => option.id === question.correctOptionId), explanation: question.explanation, difficulty: question.difficulty, skill: question.skill })) : greetingQuestions[difficulty];
+  const [index, setIndex] = useState(0), [selected, setSelected] = useState<number | null>(null), [answered, setAnswered] = useState(false), [correct, setCorrect] = useState(0), [answers, setAnswers] = useState<{ questionId: string; selectedOptionId: string }[]>([]), [finishing, setFinishing] = useState(false), [finishError, setFinishError] = useState("");
   const q = questions[index]; const isCorrect = selected === q.correct;
-  function check() { if (selected === null) return; setAnswered(true); if (selected === q.correct) setCorrect(c => c + 1); }
-  function next() { if (index === questions.length - 1) onComplete(correct + (answered && isCorrect ? 0 : 0)); else { setIndex(i => i + 1); setSelected(null); setAnswered(false); } }
+  function check() { if (selected === null) return; setAnswered(true); if (selected === q.correct) setCorrect(c => c + 1); if (remoteSession) setAnswers(current => [...current, { questionId: q.id, selectedOptionId: remoteSession.questions[index].options[selected].id }]); }
+  async function next() { if (index === questions.length - 1) { setFinishing(true); setFinishError(""); try { await onComplete(correct, remoteSession ? answers : undefined); } catch { setFinishError("Não foi possível salvar o treino. Tente concluir novamente."); } finally { setFinishing(false); } } else { setIndex(i => i + 1); setSelected(null); setAnswered(false); } }
   return <main className="player-bg" style={{ minHeight: "100vh" }}><div className="quiz"><div className="quiz-head"><button className="btn btn-ghost btn-small" onClick={onExit} aria-label="Sair do treino"><X size={18} /></button><div className="progress-track"><span style={{ width: `${((index + (answered ? 1 : 0)) / questions.length) * 100}%` }} /></div><span className="pill">{index + 1} de {questions.length}</span></div><section className="card quiz-card">
     <span className="pill" style={{ display: "flex", width: "fit-content", margin: "0 auto" }}>{type === "first" ? "Nascimento" : `Greetings · ${difficulty}`}</span>
     <Image className="quiz-bloo" src={`${blooPath}${type === "first" ? eggAsset(index + (answered ? 1 : 0)) : answered ? (isCorrect ? "hatchling-happy.png" : "hatchling-thinking.png") : "hatchling-idle.png"}`} alt={type === "first" ? "Ovo do Bloo progredindo" : "Bloo acompanhando o treino"} width={1024} height={1024} />
     <div className="eyebrow" style={{ textAlign: "center" }}>{q.skill} · {q.difficulty}</div><h1>{q.prompt}</h1><div className="options">{q.options.map((option, i) => { let state = selected === i ? "selected" : ""; if (answered && i === q.correct) state = "correct"; if (answered && selected === i && i !== q.correct) state = "wrong"; return <button disabled={answered} key={option} className={`option ${state}`} onClick={() => setSelected(i)}><span className="option-key">{String.fromCharCode(65 + i)}</span>{option}{answered && i === q.correct && <CheckCircle2 style={{ marginLeft: "auto" }} size={20} />}</button>; })}</div>
     {answered && <div className={`feedback ${isCorrect ? "good" : "try"}`} role="status">{isCorrect ? <CheckCircle2 /> : <Sparkles />}<div><strong>{isCorrect ? "Boa! Você acertou." : "Quase! Vamos olhar a dica."}</strong><br />{q.explanation}</div></div>}
-    <div className="quiz-action">{!answered ? <button className="btn btn-blue" disabled={selected === null} style={{ opacity: selected === null ? .45 : 1 }} onClick={check}>Conferir resposta</button> : <button className="btn btn-primary" onClick={next}>{index === questions.length - 1 ? "Concluir treino" : "Continuar"} <ArrowRight size={19} /></button>}</div>
+    {finishError && <p role="alert" style={{ color: "var(--red)", textAlign: "center" }}>{finishError}</p>}
+    <div className="quiz-action">{!answered ? <button className="btn btn-blue" disabled={selected === null} style={{ opacity: selected === null ? .45 : 1 }} onClick={check}>Conferir resposta</button> : <button className="btn btn-primary" disabled={finishing} onClick={next}>{finishing ? "Salvando..." : index === questions.length - 1 ? "Concluir treino" : "Continuar"} {!finishing && <ArrowRight size={19} />}</button>}</div>
   </section></div></main>;
 }
 

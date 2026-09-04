@@ -10,6 +10,7 @@ export type AuthUser = {
 };
 
 export type AccessPayload = {
+  authVersion?: number;
   sub: string;
   schoolId: string;
   role: UserRole;
