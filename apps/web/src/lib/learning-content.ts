@@ -59,5 +59,12 @@ export const achievements = [
   ["GREETINGS_CLIMBER", "Greetings Climber", "Escalando Greetings", "Você avançou de Easy até Hard em Greetings."],
   ["GREETINGS_MASTER", "Greetings Master", "Mestre de Greetings", "Você concluiu todos os desafios de Greetings."],
   ["VOCABULARY_EXPLORER", "Vocabulary Explorer", "Explorador de Vocabulário", "Seu Bloo dominou seus primeiros cumprimentos."],
+  ["ROUTINE_STARTER", "Routine Starter", "Começando a Rotina", "Você concluiu os primeiros passos de uma rotina em inglês."],
+  ["HABIT_BUILDER", "Habit Builder", "Criador de Hábitos", "Você avançou de Easy até Hard em Daily Routines."],
+  ["ROUTINE_MASTER", "Routine Master", "Mestre das Rotinas", "Você concluiu todos os desafios de Daily Routines."],
+  ["CONSISTENCY_EXPERT", "Consistency Expert", "Especialista em Consistência", "Seu Bloo dominou formas, frequência e compreensão de rotinas."],
+  ["ACTION_SPOTTER", "Action Spotter", "Observador de Ações", "Você reconheceu suas primeiras ações acontecendo agora."],
+  ["ING_CLIMBER", "-ing Climber", "Escalando o -ing", "Você avançou de Easy até Hard em What’s Happening Now?."],
+  ["ACTION_MASTER", "Action Master", "Mestre das Ações", "Você concluiu todos os desafios de What’s Happening Now?."],
+  ["NOW_EXPERT", "Now Expert", "Especialista no Agora", "Seu Bloo dominou forma, contexto e contraste das ações em progresso."],
 ] as const;
-

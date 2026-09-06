@@ -22,8 +22,16 @@
 | `GREETINGS_CLIMBER` | Greetings Climber | Concluir `Easy`, `Medium` e `Hard` de `Greetings` | Conclusão de `Hard` |
 | `GREETINGS_MASTER` | Greetings Master | Concluir as quatro dificuldades e obter ≥ 80% em uma sessão `Hard` ou `VeryHard` | Conclusão da sessão |
 | `VOCABULARY_EXPLORER` | Vocabulary Explorer | Dominar `Greetings` e concluir as quatro dificuldades do tema | Recalcular domínio ou concluir tema |
+| `ROUTINE_STARTER` | Routine Starter | Concluir `Easy` de `Daily Routines` | Conclusão de `Easy` |
+| `HABIT_BUILDER` | Habit Builder | Concluir `Easy`, `Medium` e `Hard` de `Daily Routines` | Conclusão de `Hard` |
+| `ROUTINE_MASTER` | Routine Master | Concluir as quatro dificuldades e obter ≥ 80% em `Hard` ou `VeryHard` | Conclusão da sessão |
+| `CONSISTENCY_EXPERT` | Consistency Expert | Dominar as três habilidades de `Daily Routines` | Recalcular domínio |
+| `ACTION_SPOTTER` | Action Spotter | Concluir `Easy` de `What’s Happening Now?` | Conclusão de `Easy` |
+| `ING_CLIMBER` | -ing Climber | Concluir `Easy`, `Medium` e `Hard` de `What’s Happening Now?` | Conclusão de `Hard` |
+| `ACTION_MASTER` | Action Master | Concluir as quatro dificuldades e obter ≥ 80% em `Hard` ou `VeryHard` | Conclusão da sessão |
+| `NOW_EXPERT` | Now Expert | Dominar as três habilidades de `What’s Happening Now?` | Recalcular domínio |
 
-`Greetings Climber` e `Greetings Master` são conquistas específicas do primeiro tema. `Vocabulary Explorer` é uma conquista de categoria e poderá exigir outras habilidades no futuro; no MVP sua condição reduzida fica explícita no seed e na descrição.
+As conquistas específicas de tema usam regras genéricas persistidas no banco. `Vocabulary Explorer` é uma conquista de categoria; `Consistency Expert` e `Now Expert` exigem domínio de todas as habilidades declaradas na revisão do respectivo tema.
 
 ### Participação versus domínio
 

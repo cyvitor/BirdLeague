@@ -120,7 +120,7 @@ export class JourneyService {
    if(s.status==="Completed")return {xp:s.totalXP,correct:s.correctAnswers,total:s.totalQuestions,hatched:s.type==="FirstHatch",newlyUnlocked:[]};
    const answers=await tx.trainingAnswer.findMany({where:{trainingSessionId:id}});
    if(answers.length!==s.totalQuestions)throw new ConflictException("answer_all_questions");
-   const correct=answers.filter(a=>a.isCorrect).length;let xp=0;const codes:string[]=[];
+   const correct=answers.filter(a=>a.isCorrect).length;let xp=0;const codes:string[]=[];let completedTheme:{id:string;versionId:string}|undefined;
    if(s.type==="FirstHatch"){
     const bloo=await tx.bloo.findUniqueOrThrow({where:{id:s.blooId}});xp=bloo.stage==="Egg"?60+correct*5:0;
     await tx.bloo.update({where:{id:s.blooId},data:{stage:"Hatchling",hatchedAt:bloo.hatchedAt??new Date()}});codes.push("NEW_HATCHLING","FIRST_LESSON");
@@ -137,20 +137,14 @@ export class JourneyService {
     if(next)await tx.studentThemeDifficultyProgress.upsert({where:{studentThemeProgressId_difficulty:{studentThemeProgressId:p.id,difficulty:next.difficulty}},update:{status:"Available"},create:{studentThemeProgressId:p.id,difficulty:next.difficulty,status:"Available"}});
     await tx.studentThemeProgress.update({where:{id:p.id},data:{status:next?"InProgress":"Completed",currentDifficulty:next?.difficulty??s.difficulty!,completedAt:next?null:(p.completedAt??new Date())}});
     if(s.difficulty===enabled[0]?.difficulty)codes.push("THEME_EXPLORER");
-    if(theme.code==="GREETINGS"){
-     if(["Easy","Medium","Hard"].every(d=>done.some(x=>x.difficulty===d)))codes.push("GREETINGS_CLIMBER");
-     if(!next&&done.some(d=>(d.difficulty==="Hard"||d.difficulty==="VeryHard")&&Number(d.bestAccuracy)>=0.8))codes.push("GREETINGS_MASTER");
-    }
+    completedTheme={id:theme.id,versionId:s.themeVersionId!};
    }
    await tx.trainingSession.update({where:{id},data:{status:"Completed",activeSessionKey:null,completedAt:new Date(),lastActivityAt:new Date(),correctAnswers:correct,totalXP:xp,baseXP:xp?(s.type==="FirstHatch"?60:25):0,bonusXP:xp?correct*5:0}});
    if(xp){await tx.bloo.update({where:{id:s.blooId},data:{xp:{increment:xp}}});await tx.progressEvent.create({data:{schoolId:user.schoolId,studentProfileId:ctx.student.id,blooId:s.blooId,type:"TRAINING_COMPLETED",xp,sourceId:id,sourceType:"TrainingSession",idempotencyKey:`training:${id}`}});}
    const mastery=await this.mastery(tx,ctx);
    if(mastery.some(m=>m.attempts>=5&&m.distinctSessions>=2))codes.push("BLOO_IS_LEARNING");
    if(mastery.some(m=>m.status==="Mastered"))codes.push("SKILL_LEARNED");
-   const greetings=await tx.theme.findFirst({where:{schoolId:user.schoolId,code:"GREETINGS"}});
-   const gp=greetings?await tx.studentThemeProgress.findFirst({where:{studentProfileId:ctx.student.id,themeId:greetings.id,status:"Completed"}}):null;
-   const basic=await tx.skill.findFirst({where:{languageId:ctx.language.id,code:"BASIC_GREETINGS"}});
-   if(gp&&mastery.some(m=>m.skillId===basic?.id&&m.status==="Mastered"))codes.push("VOCABULARY_EXPLORER");
+   if(completedTheme)codes.push(...await this.themeAchievementCodes(tx,ctx,completedTheme.id,completedTheme.versionId,mastery));
    const newlyUnlocked=await this.unlock(tx,ctx,codes);
    return {xp,correct,total:s.totalQuestions,hatched:s.type==="FirstHatch",newlyUnlocked};
   });
@@ -168,6 +162,38 @@ export class JourneyService {
    const values={attempts,correctAnswers,distinctSessions,masteryScore:score,status,lastPracticedAt:new Date()};
    await tx.skillMastery.upsert({where:{studentProfileId_skillId:{studentProfileId:ctx.student.id,skillId}},update:values,create:{schoolId:ctx.student.schoolId,studentProfileId:ctx.student.id,languageId:ctx.language.id,skillId,...values}});result.push({skillId,...values});
   }return result;
+ }
+ private async themeAchievementCodes(tx:Tx,ctx:Awaited<ReturnType<JourneyService["context"]>>,themeId:string,themeVersionId:string,mastery:Awaited<ReturnType<JourneyService["mastery"]>>){
+  const theme=await tx.theme.findUniqueOrThrow({where:{id:themeId}});
+  const progress=await tx.studentThemeProgress.findUniqueOrThrow({where:{studentProfileId_blooId_themeId:{studentProfileId:ctx.student.id,blooId:ctx.bloo.id,themeId}}});
+  const completed=await tx.studentThemeDifficultyProgress.findMany({where:{studentThemeProgressId:progress.id,sessionsCompleted:{gt:0}}});
+  const completedDifficulties=new Set(completed.map(item=>item.difficulty));
+  const themeSkills=await tx.themeSkill.findMany({where:{themeVersionId}});
+  const skills=await tx.skill.findMany({where:{id:{in:themeSkills.map(item=>item.skillId)}}});
+  const skillByCode=new Map(skills.map(skill=>[skill.code,skill.id]));
+  const achievements=await tx.achievement.findMany({where:{languageId:ctx.language.id,isActive:true}});
+  const codes:string[]=[];
+  for(const achievement of achievements){
+   const rule=achievement.requirementJson as unknown as Record<string,unknown>;
+   if(rule.themeCode!==theme.code)continue;
+   const required=Array.isArray(rule.requiredDifficulties)?rule.requiredDifficulties.filter((item):item is string=>typeof item==="string"):[];
+   const hasRequired=required.every(difficulty=>completedDifficulties.has(difficulty as Difficulty));
+   if(achievement.requirementType==="ThemeDifficultyCompleted"&&required.length&&hasRequired)codes.push(achievement.code);
+   if(achievement.requirementType==="ThemeMastered"&&required.length&&hasRequired){
+    const threshold=typeof rule.minimumAdvancedAccuracy==="number"?rule.minimumAdvancedAccuracy:0;
+    const advancedOk=!threshold||completed.some(item=>(item.difficulty==="Hard"||item.difficulty==="VeryHard")&&Number(item.bestAccuracy)>=threshold);
+    if(progress.status==="Completed"&&advancedOk)codes.push(achievement.code);
+   }
+   if(achievement.requirementType==="ThemeSkillsMastered"&&Array.isArray(rule.skillCodes)){
+    const requiredSkillIds=rule.skillCodes.filter((item):item is string=>typeof item==="string").map(code=>skillByCode.get(code));
+    if(requiredSkillIds.length&&requiredSkillIds.every(skillId=>skillId&&mastery.some(item=>item.skillId===skillId&&item.status==="Mastered")))codes.push(achievement.code);
+   }
+   if(achievement.requirementType==="CategoryMastered"&&typeof rule.skillCode==="string"){
+    const skillId=skillByCode.get(rule.skillCode);const threshold=typeof rule.minimumAccuracy==="number"?rule.minimumAccuracy:0;
+    if(progress.status==="Completed"&&skillId&&mastery.some(item=>item.skillId===skillId&&item.status==="Mastered"&&Number(item.masteryScore)>=threshold))codes.push(achievement.code);
+   }
+  }
+  return codes;
  }
  private async unlock(tx:Tx,ctx:Awaited<ReturnType<JourneyService["context"]>>,codes:string[]){
   const achievements=await tx.achievement.findMany({where:{languageId:ctx.language.id,code:{in:codes},isActive:true}});const unlocked=[];
